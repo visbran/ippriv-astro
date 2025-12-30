@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import BreadcrumbSchema from '../../components/BreadcrumbSchema.astro';
 import TableOfContents from '../../components/blog/TableOfContents';
 import RelatedPosts from '../../components/blog/RelatedPosts';
 import Breadcrumbs from '../../components/blog/Breadcrumbs';
@@ -34,10 +36,20 @@ const relatedPosts = getRelatedPosts(post, allPosts, 3);
 const readingTime = calculateReadingTime(post.body);
 const tocItems = extractTableOfContents(post.body);
 
+// Current URL
+const currentUrl = `https://www.ippriv.com/blog/${post.slug}`;
+
 // Breadcrumbs data
 const breadcrumbItems = [
   { label: 'Blog', href: '/blog' },
   { label: post.data.title }
+];
+
+// Breadcrumb schema items
+const breadcrumbSchemaItems = [
+  { name: 'Home', url: 'https://www.ippriv.com' },
+  { name: 'Blog', url: 'https://www.ippriv.com/blog' },
+  { name: post.data.title, url: currentUrl }
 ];
 ---
 
@@ -48,6 +60,18 @@ const breadcrumbItems = [
   image={post.data.heroImage}
   type="article"
 >
+  <!-- Structured Data -->
+  <ArticleSchema
+    slot="head"
+    title={post.data.title}
+    description={post.data.description}
+    author={post.data.author}
+    publishedAt={post.data.publishedAt}
+    image={post.data.heroImage}
+    url={currentUrl}
+  />
+  <BreadcrumbSchema slot="head" items={breadcrumbSchemaItems} />
+
   <main class="pt-24 pb-16">
     {/* Hero Image */}
     <div class="relative h-[300px] md:h-[400px] lg:h-[500px] w-full overflow-hidden">

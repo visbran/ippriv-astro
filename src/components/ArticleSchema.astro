@@ -1,0 +1,42 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  author: string;
+  publishedAt: Date;
+  updatedAt?: Date;
+  image: string;
+  url: string;
+}
+
+const { title, description, author, publishedAt, updatedAt, image, url } = Astro.props;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "image": image,
+  "datePublished": publishedAt.toISOString(),
+  "dateModified": (updatedAt || publishedAt).toISOString(),
+  "author": {
+    "@type": "Person",
+    "name": author,
+    "url": "https://brandonvisca.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "IPPriv",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.ippriv.com/logo.svg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": url
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
