@@ -99,6 +99,9 @@ const imageUrl = new URL(image, Astro.site);
     {/* Plausible Analytics */}
     <script is:inline defer data-domain="ippriv.com" src="https://plausible.io/js/script.js"></script>
     
+    {/* Custom head content (structured data, etc.) */}
+    <slot name="head" />
+    
     {/* View Transitions */}
     <ViewTransitions />
   </head>
