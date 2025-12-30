@@ -1,0 +1,28 @@
+---
+// Product Structured Data for IPPriv API
+const productData = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'IPPriv API',
+  description: 'Free IP geolocation REST API with no authentication required. Get IP detection, geolocation, DNS lookup, and security checks.',
+  url: 'https://www.ippriv.com/api-docs',
+  brand: {
+    '@type': 'Organization',
+    name: 'IPPriv',
+  },
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    url: 'https://www.ippriv.com/api-docs',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '127',
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(productData)} />

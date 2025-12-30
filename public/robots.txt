@@ -1,0 +1,21 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.ippriv.com/sitemap.xml
+
+# Block access to API endpoints (already rate-limited)
+Disallow: /api/
+
+# Allow important pages
+Allow: /
+Allow: /ip-lookup
+Allow: /api-docs
+Allow: /about
+Allow: /privacy
+Allow: /terms
+Allow: /contact
+
+# Crawl delay (be nice to crawlers)
+Crawl-delay: 1

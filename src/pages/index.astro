@@ -1,16 +1,25 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/HeroSection';
+import FeaturesSection from '../components/FeaturesSection';
+import HowItWorksSection from '../components/HowItWorksSection';
+import SocialProofSection from '../components/SocialProofSection';
+import CTASection from '../components/CTASection';
+import OrganizationSchema from '../components/OrganizationSchema.astro';
+import WebSiteSchema from '../components/WebSiteSchema.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="IPPriv - Free IP Geolocation API & Privacy Tools"
+  description="Discover your IP address, location, ISP, and security status instantly. Free IP geolocation API with no authentication required. Check VPN, proxy, and Tor detection."
+  keywords="IP address, geolocation, IP lookup, VPN detection, proxy detection, IP API, free IP tools, IP geolocation API, ISP lookup, network security"
+>
+  <OrganizationSchema />
+  <WebSiteSchema />
+  
+  <HeroSection client:load />
+  <FeaturesSection client:visible />
+  <HowItWorksSection client:visible />
+  <SocialProofSection client:visible />
+  <CTASection client:visible />
+</Layout>

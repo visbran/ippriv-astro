@@ -1,0 +1,273 @@
+/* Markdown Content Styles */
+.prose {
+  @apply text-foreground max-w-none;
+}
+
+/* Headings */
+.prose h2 {
+  @apply text-3xl font-bold mt-12 mb-6 scroll-mt-24;
+  @apply text-foreground;
+  @apply border-b border-border/50 pb-3;
+}
+
+.prose h3 {
+  @apply text-2xl font-semibold mt-10 mb-4 scroll-mt-24;
+  @apply text-foreground;
+}
+
+.prose h4 {
+  @apply text-xl font-semibold mt-8 mb-3 scroll-mt-24;
+  @apply text-foreground;
+}
+
+/* Paragraphs */
+.prose p {
+  @apply text-base leading-relaxed mb-6;
+  @apply text-muted-foreground;
+}
+
+/* Links */
+.prose a {
+  @apply text-primary font-medium;
+  @apply underline decoration-primary/30 underline-offset-4;
+  @apply hover:decoration-primary transition-colors;
+}
+
+/* Inline Code */
+.prose code:not(pre code) {
+  @apply bg-muted/80 text-primary;
+  @apply px-2 py-1 rounded-md;
+  @apply text-sm font-mono;
+  @apply border border-border/50;
+}
+
+/* Code Blocks */
+.prose pre {
+  @apply bg-background;
+  @apply m-0 p-0;
+  @apply rounded-xl border border-border shadow-sm;
+  @apply overflow-hidden;
+  @apply my-6;
+}
+
+.prose pre code {
+  @apply block;
+  @apply p-6;
+  @apply text-sm font-mono leading-relaxed;
+  @apply overflow-x-auto;
+  color: hsl(0 0% 20%);
+}
+
+/* Dark mode */
+.dark .prose pre {
+  @apply bg-muted/30;
+}
+
+.dark .prose pre code {
+  color: hsl(0 0% 85%);
+}
+
+/* Code block wrapper (created by CodeCopyButtons) */
+.code-block-wrapper {
+  @apply my-6;
+}
+
+.code-block-wrapper pre {
+  @apply my-0 rounded-none border-0 shadow-none;
+}
+
+/* Code header */
+.code-header {
+  user-select: none;
+}
+
+.dark .code-header {
+  @apply bg-muted/20;
+}
+
+.prose pre code {
+  @apply bg-transparent;
+  @apply p-0 border-0;
+  @apply text-sm font-mono leading-relaxed;
+  @apply block;
+  /* Light mode: dark text for better visibility */
+  color: hsl(0 0% 15%);
+}
+
+/* Dark mode: lighter text for better contrast */
+.dark .prose pre code {
+  color: hsl(0 0% 88%);
+}
+
+/* Syntax highlighting colors - Light mode */
+.prose pre code .token.comment,
+.prose pre code .token.prolog,
+.prose pre code .token.doctype,
+.prose pre code .token.cdata {
+  color: hsl(var(--muted-foreground));
+}
+
+.prose pre code .token.punctuation {
+  color: hsl(var(--foreground) / 0.7);
+}
+
+.prose pre code .token.property,
+.prose pre code .token.tag,
+.prose pre code .token.boolean,
+.prose pre code .token.number,
+.prose pre code .token.constant,
+.prose pre code .token.symbol,
+.prose pre code .token.deleted {
+  color: hsl(var(--primary));
+}
+
+.prose pre code .token.selector,
+.prose pre code .token.attr-name,
+.prose pre code .token.string,
+.prose pre code .token.char,
+.prose pre code .token.builtin,
+.prose pre code .token.inserted {
+  color: hsl(150 60% 40%);
+}
+
+.prose pre code .token.operator,
+.prose pre code .token.entity,
+.prose pre code .token.url,
+.prose pre code .token.variable {
+  color: hsl(var(--primary));
+}
+
+.prose pre code .token.atrule,
+.prose pre code .token.attr-value,
+.prose pre code .token.function,
+.prose pre code .token.class-name {
+  color: hsl(280 60% 50%);
+}
+
+.prose pre code .token.keyword {
+  color: hsl(340 82% 52%);
+}
+
+.prose pre code .token.regex,
+.prose pre code .token.important {
+  color: hsl(30 100% 50%);
+}
+
+/* Dark mode overrides */
+.dark .prose pre code .token.string,
+.dark .prose pre code .token.char {
+  color: hsl(150 60% 60%);
+}
+
+.dark .prose pre code .token.function,
+.dark .prose pre code .token.class-name {
+  color: hsl(280 60% 70%);
+}
+
+.dark .prose pre code .token.keyword {
+  color: hsl(340 82% 65%);
+}
+
+/* Lists */
+.prose ul,
+.prose ol {
+  @apply ml-6 mb-6 space-y-3;
+}
+
+.prose ul {
+  @apply list-disc;
+}
+
+.prose ol {
+  @apply list-decimal;
+}
+
+.prose li {
+  @apply text-muted-foreground leading-relaxed;
+  @apply pl-2;
+}
+
+.prose li::marker {
+  @apply text-primary;
+}
+
+/* Nested lists */
+.prose li > ul,
+.prose li > ol {
+  @apply mt-3 mb-0;
+}
+
+/* Strong */
+.prose strong {
+  @apply font-semibold text-foreground;
+}
+
+/* Emphasis */
+.prose em {
+  @apply italic;
+}
+
+/* Blockquotes */
+.prose blockquote {
+  @apply border-l-4 border-primary;
+  @apply pl-6 py-2 my-8;
+  @apply italic text-muted-foreground;
+  @apply bg-accent/20 rounded-r-lg;
+}
+
+.prose blockquote p {
+  @apply mb-0;
+}
+
+/* Tables */
+.prose table {
+  @apply w-full border-collapse my-8;
+  @apply border border-border rounded-lg overflow-hidden;
+}
+
+.prose thead {
+  @apply bg-muted;
+}
+
+.prose th {
+  @apply px-4 py-3 text-left font-semibold;
+  @apply text-foreground border-b border-border;
+}
+
+.prose td {
+  @apply px-4 py-3;
+  @apply text-muted-foreground border-b border-border/50;
+}
+
+.prose tr:last-child td {
+  @apply border-b-0;
+}
+
+.prose tr:hover {
+  @apply bg-accent/30;
+}
+
+/* Horizontal Rule */
+.prose hr {
+  @apply my-12 border-border/50;
+}
+
+/* Images */
+.prose img {
+  @apply rounded-xl my-8;
+  @apply border border-border/50;
+  @apply shadow-lg;
+}
+
+/* Code Language Label */
+.prose pre[class*="language-"]::before {
+  content: attr(data-language);
+  @apply absolute top-3 right-3;
+  @apply text-xs text-muted-foreground/70;
+  @apply bg-background/50 px-2 py-1 rounded;
+  @apply uppercase tracking-wider;
+}
+
+.prose pre {
+  @apply relative;
+}

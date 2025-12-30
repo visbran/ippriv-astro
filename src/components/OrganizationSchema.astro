@@ -1,0 +1,23 @@
+---
+// Organization Structured Data for IPPriv
+const organizationData = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'IPPriv',
+  url: 'https://www.ippriv.com',
+  logo: 'https://www.ippriv.com/logo.svg',
+  description: 'Free IP geolocation API and privacy tools for developers and users.',
+  foundingDate: '2024',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    email: 'contact@brandonvisca.com',
+    contactType: 'Customer Service',
+  },
+  sameAs: [
+    'https://github.com/visbran',
+    'https://twitter.com/brandonvisca',
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(organizationData)} />

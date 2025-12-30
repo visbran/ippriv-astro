@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ArchiveList from '../../components/blog/ArchiveList';
+import { Archive } from 'lucide-react';
+import { groupPostsByMonth } from '../../utils/blogHelpers';
+
+// Get all blog posts
+const allPosts = await getCollection('blog', ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
+
+// Sort by date descending
+const posts = allPosts.sort((a, b) => 
+  b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+);
+
+// Group posts by month/year
+const archiveGroups = groupPostsByMonth(posts);
+
+// Get total count
+const totalPosts = posts.length;
+---
+
+<Layout
+  title="Blog Archive - IPPriv | All Articles"
+  description="Browse all IPPriv blog articles organized by date. Find insights on IP geolocation, security, privacy, and API development."
+  keywords="blog archive, IP articles, geolocation tutorials, API guides"
+>
+  <main class="pt-24 pb-16">
+    <div class="section-container">
+      {/* Header */}
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full 
+                    bg-accent/50 text-accent-foreground text-sm mb-6">
+          <Archive className="w-4 h-4" />
+          <span>Article Archive</span>
+        </div>
+        
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          Blog Archive
+        </h1>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Browse all {totalPosts} articles organized by date
+        </p>
+      </div>
+
+      {/* Archive Timeline */}
+      <ArchiveList client:load groups={archiveGroups} />
+
+      {/* Back to Blog */}
+      <div class="text-center mt-12">
+        <a 
+          href="/blog"
+          class="inline-flex items-center gap-2 px-8 py-3 rounded-xl 
+                 bg-primary text-primary-foreground font-medium
+                 hover:bg-primary/90 transition-all duration-300 hover:shadow-lg"
+        >
+          View All Articles
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>

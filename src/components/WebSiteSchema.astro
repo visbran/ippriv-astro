@@ -1,0 +1,17 @@
+---
+// WebSite Structured Data for IPPriv
+const websiteData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'IPPriv',
+  url: 'https://www.ippriv.com',
+  description: 'Free IP geolocation API and IP lookup tools. Detect VPN, proxy, and Tor with no authentication required.',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://www.ippriv.com/ip-lookup?q={search_term_string}',
+    'query-input': 'required name=search_term_string',
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(websiteData)} />

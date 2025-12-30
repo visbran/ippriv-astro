@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import IPLookupTool from '../components/IPLookupTool';
+---
+
+<Layout
+  title="IP Lookup Tool - IPPriv | Find IP Location & Security Info"
+  description="Free IP lookup tool. Get detailed information about any IP address including geolocation, DNS records, and security status. Check VPN, proxy, and Tor detection instantly."
+  keywords="IP lookup, IP geolocation, IP address finder, DNS lookup, IP security check, VPN detection, proxy check"
+>
+  <div class="pt-24 pb-16">
+    <IPLookupTool client:load />
+  </div>
+</Layout>

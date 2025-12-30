@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import BlogList from '../../components/blog/BlogList';
+import { BookOpen } from 'lucide-react';
+import { calculateReadingTime } from '../../utils/blog';
+import { getAllTags } from '../../utils/blogHelpers';
+
+// Get all blog posts
+const allPosts = await getCollection('blog', ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
+
+// Sort by date descending
+const posts = allPosts.sort((a, b) => 
+  b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+);
+
+// Calculate reading times
+const readingTimes = Object.fromEntries(
+  posts.map(post => [post.slug, calculateReadingTime(post.body)])
+);
+
+// Get all tags with counts
+const tags = getAllTags(posts);
+---
+
+<Layout
+  title="Blog - IPPriv | IP Geolocation & Security Insights"
+  description="Explore articles about IP geolocation, VPN detection, API security, and privacy-first development. Learn from experts at IPPriv."
+  keywords="IP geolocation blog, VPN detection, API security, privacy development, IP API tutorials"
+>
+  <main class="pt-24 pb-16">
+    <div class="section-container">
+      {/* Header */}
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full 
+                    bg-accent/50 text-accent-foreground text-sm mb-6">
+          <BookOpen className="w-4 h-4" />
+          <span>Insights & Tutorials</span>
+        </div>
+        
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          IPPriv Blog
+        </h1>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Expert insights on IP geolocation, security, privacy, and API development.
+        </p>
+      </div>
+
+      {/* Blog List with Search & Filters */}
+      <BlogList 
+        client:load
+        posts={posts}
+        tags={tags}
+        readingTimes={readingTimes}
+      />
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import APIDocsContent from '../components/APIDocsContent';
+import ProductSchema from '../components/ProductSchema.astro';
+---
+
+<Layout
+  title="API Documentation - IPPriv | Free IP Geolocation API"
+  description="Complete API documentation for IPPriv. Free IP geolocation API with no authentication required. Get IP detection, geolocation, DNS lookup, and security checks with 100 requests per hour."
+  keywords="IP API, geolocation API, free IP API, REST API, IP lookup API, VPN detection API, API documentation"
+>
+  <ProductSchema />
+  <APIDocsContent client:load />
+</Layout>

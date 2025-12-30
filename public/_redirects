@@ -1,0 +1,10 @@
+# Redirects for Cloudflare Pages
+
+# Redirect www to non-www (if applicable)
+# https://www.ippriv.com/* https://ippriv.com/:splat 301
+
+# Redirect old paths (examples - adjust as needed)
+# /old-path /new-path 301
+
+# SPA fallback for 404
+/* /404.html 404

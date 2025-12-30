@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="#0066FF" />
+  
+  <!-- IP Icon - Network Node -->
+  <g fill="white">
+    <!-- Central Node -->
+    <circle cx="100" cy="100" r="16" />
+    
+    <!-- Top Node -->
+    <circle cx="100" cy="50" r="10" />
+    <line x1="100" y1="60" x2="100" y2="84" stroke="white" stroke-width="6" stroke-linecap="round" />
+    
+    <!-- Right Node -->
+    <circle cx="140" cy="100" r="10" />
+    <line x1="116" y1="100" x2="130" y2="100" stroke="white" stroke-width="6" stroke-linecap="round" />
+    
+    <!-- Bottom Node -->
+    <circle cx="100" cy="150" r="10" />
+    <line x1="100" y1="116" x2="100" y2="140" stroke="white" stroke-width="6" stroke-linecap="round" />
+    
+    <!-- Left Node -->
+    <circle cx="60" cy="100" r="10" />
+    <line x1="70" y1="100" x2="84" y2="100" stroke="white" stroke-width="6" stroke-linecap="round" />
+  </g>
+  
+  <!-- Privacy Shield Overlay -->
+  <g opacity="0.3">
+    <path d="M 130 70 L 100 60 L 70 70 L 70 90 Q 70 120 100 140 Q 130 120 130 90 Z" 
+          fill="white" stroke="white" stroke-width="2" />
+  </g>
+</svg>

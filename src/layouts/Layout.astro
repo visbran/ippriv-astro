@@ -1,0 +1,113 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+  type?: 'website' | 'article';
+}
+
+const {
+  title = 'IPPriv - Free IP Geolocation API & Privacy Tools',
+  description = 'Discover your IP address, location, ISP, and security status instantly. Free IP geolocation API with no authentication required. Check VPN, proxy, and Tor detection.',
+  keywords = 'IP address, geolocation, IP lookup, VPN detection, proxy detection, IP API, free IP tools, IP geolocation API, ISP lookup, network security',
+  image = '/og-image.svg',
+  type = 'website'
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = new URL(image, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    
+    {/* Primary Meta Tags */}
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Brandon Visca" />
+    <link rel="canonical" href={canonicalURL} />
+
+    {/* Open Graph / Facebook */}
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:site_name" content="IPPriv" />
+    <meta property="og:locale" content="en_US" />
+
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:creator" content="@brandonvisca" />
+
+    {/* Additional SEO tags */}
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="rating" content="General" />
+
+    {/* Geo tags */}
+    <meta name="geo.region" content="FR" />
+    <meta name="geo.placename" content="Bordeaux" />
+
+    {/* Mobile */}
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="IPPriv" />
+
+    {/* Theme Color */}
+    <meta name="theme-color" content="#0066FF" />
+    <meta name="msapplication-TileColor" content="#0066FF" />
+
+    {/* Favicons */}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    {/* Fonts */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    {/* Preload critical font */}
+    <link 
+      rel="preload" 
+      as="font" 
+      href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2"
+      type="font/woff2"
+      crossorigin
+    />
+
+    {/* Plausible Analytics */}
+    <script is:inline defer data-domain="ippriv.com" src="https://plausible.io/js/script.js"></script>
+    
+    {/* View Transitions */}
+    <ViewTransitions />
+  </head>
+
+  <body class="min-h-screen bg-background">
+    <Header client:idle />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

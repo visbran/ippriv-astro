@@ -1,0 +1,140 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import TableOfContents from '../../components/blog/TableOfContents';
+import RelatedPosts from '../../components/blog/RelatedPosts';
+import Breadcrumbs from '../../components/blog/Breadcrumbs';
+import CodeCopyButtons from '../../components/blog/CodeCopyButtons';
+import { Badge } from '../../components/ui/badge';
+import { Clock, Calendar, User, ArrowLeft } from 'lucide-react';
+import { calculateReadingTime, formatDate, extractTableOfContents } from '../../utils/blog';
+import { getRelatedPosts } from '../../utils/blogHelpers';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+// Get all posts for related posts
+const allPosts = await getCollection('blog');
+const relatedPosts = getRelatedPosts(post, allPosts, 3);
+
+// Calculate reading time and TOC
+const readingTime = calculateReadingTime(post.body);
+const tocItems = extractTableOfContents(post.body);
+
+// Breadcrumbs data
+const breadcrumbItems = [
+  { label: 'Blog', href: '/blog' },
+  { label: post.data.title }
+];
+---
+
+<Layout
+  title={`${post.data.title} - IPPriv Blog`}
+  description={post.data.description}
+  keywords={post.data.tags.join(', ')}
+  image={post.data.heroImage}
+  type="article"
+>
+  <main class="pt-24 pb-16">
+    {/* Hero Image */}
+    <div class="relative h-[300px] md:h-[400px] lg:h-[500px] w-full overflow-hidden">
+      <img
+        src={post.data.heroImage}
+        alt={post.data.title}
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+    </div>
+
+    <div class="section-container -mt-32 relative z-10">
+      {/* Breadcrumbs */}
+      <div class="mb-6">
+        <Breadcrumbs client:load items={breadcrumbItems} />
+      </div>
+      
+      <div class="flex flex-col lg:flex-row gap-8">
+        {/* Main Content */}
+        <article class="flex-1 min-w-0">
+          <div class="glass-card rounded-xl p-6 md:p-8 lg:p-10">
+            {/* Tags */}
+            <div class="flex flex-wrap gap-2 mb-4">
+              {post.data.tags.map((tag: string) => (
+                <a href={`/blog?tag=${tag}`}>
+                  <Badge 
+                    variant="secondary" 
+                    className="capitalize hover:bg-primary hover:text-primary-foreground transition-colors"
+                  >
+                    {tag}
+                  </Badge>
+                </a>
+              ))}
+            </div>
+
+            {/* Title */}
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+              {post.data.title}
+            </h1>
+
+            {/* Meta */}
+            <div class="flex flex-wrap items-center gap-3 text-sm text-muted-foreground mb-8 pb-6 border-b border-border">
+              <div class="flex items-center gap-1.5">
+                <User class="w-3.5 h-3.5" />
+                <span>{post.data.author}</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <Calendar class="w-3.5 h-3.5" />
+                <span>{formatDate(post.data.publishedAt)}</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <Clock class="w-3.5 h-3.5" />
+                <span>{readingTime} min read</span>
+              </div>
+            </div>
+
+            {/* Content with prose styles */}
+            <div class="prose">
+              <Content />
+            </div>
+
+            {/* Code Copy Buttons */}
+            <CodeCopyButtons client:load />
+
+            {/* Back to Blog */}
+            <div class="mt-12 pt-8 border-t border-border">
+              <a 
+                href="/blog"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-card/80 backdrop-blur-sm 
+                       border border-border/50 hover:border-primary/50 hover:bg-card hover:shadow-lg 
+                       transition-all duration-300 text-foreground font-medium"
+              >
+                <ArrowLeft class="w-4 h-4" />
+                Back to Blog
+              </a>
+            </div>
+          </div>
+
+          {/* Related Posts */}
+          <RelatedPosts client:load posts={relatedPosts} />
+        </article>
+
+        {/* Sidebar */}
+        <aside class="w-full lg:w-72 shrink-0">
+          <TableOfContents client:load items={tocItems} />
+        </aside>
+      </div>
+    </div>
+  </main>
+</Layout>

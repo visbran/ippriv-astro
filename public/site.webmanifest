@@ -1,0 +1,41 @@
+{
+  "name": "IPPriv - IP Geolocation & Privacy Tools",
+  "short_name": "IPPriv",
+  "description": "Free IP lookup, geolocation, and privacy analysis tools. No tracking, no ads.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0066FF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["utilities", "productivity"],
+  "shortcuts": [
+    {
+      "name": "IP Lookup",
+      "short_name": "Lookup",
+      "description": "Look up any IP address",
+      "url": "/ip-lookup",
+      "icons": []
+    },
+    {
+      "name": "API Docs",
+      "short_name": "API",
+      "description": "View API documentation",
+      "url": "/api-docs",
+      "icons": []
+    }
+  ]
+}
