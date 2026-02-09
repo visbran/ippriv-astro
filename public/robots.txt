@@ -16,6 +16,7 @@ Allow: /about
 Allow: /privacy
 Allow: /terms
 Allow: /contact
+Allow: /blog
 
 # Crawl delay (be nice to crawlers)
 Crawl-delay: 1
