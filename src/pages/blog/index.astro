@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import BlogList from '../../components/blog/BlogList';
+import BreadcrumbSchema from '../../components/BreadcrumbSchema.astro';
 import { BookOpen } from 'lucide-react';
 import { calculateReadingTime } from '../../utils/blog';
 import { getAllTags } from '../../utils/blogHelpers';
@@ -26,25 +27,29 @@ const tags = getAllTags(posts);
 ---
 
 <Layout
-  title="Blog - IPPriv | IP Geolocation & Security Insights"
-  description="Explore articles about IP geolocation, VPN detection, API security, and privacy-first development. Learn from experts at IPPriv."
-  keywords="IP geolocation blog, VPN detection, API security, privacy development, IP API tutorials"
+  title="IP Lookup Blog — Geolocation, VPN & Privacy Guides | IPPriv"
+  description="Expert articles on IP geolocation, VPN detection, API security, and privacy-first development. Tutorials and guides for developers."
+  keywords="ip lookup blog, ip geolocation, VPN detection, API security, privacy development, ip address guides, ip API tutorials"
 >
+  <BreadcrumbSchema items={[
+    { name: 'Home', url: 'https://www.ippriv.com/' },
+    { name: 'Blog', url: 'https://www.ippriv.com/blog/' },
+  ]} />
   <main class="pt-24 pb-16">
     <div class="section-container">
       {/* Header */}
       <div class="text-center mb-12">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full 
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full
                     bg-accent/50 text-accent-foreground text-sm mb-6">
           <BookOpen className="w-4 h-4" />
           <span>Insights & Tutorials</span>
         </div>
-        
+
         <h1 class="text-4xl md:text-5xl font-bold mb-4">
-          IPPriv Blog
+          IP Lookup & Privacy Blog
         </h1>
         <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Expert insights on IP geolocation, security, privacy, and API development.
+          Expert guides on IP geolocation, VPN detection, API security, and privacy-first development.
         </p>
       </div>
 
