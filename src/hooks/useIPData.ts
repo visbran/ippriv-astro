@@ -32,10 +32,9 @@ export function useIPData() {
         
         if (!isMounted) return;
         
-        // Handle localhost fallback (for development)
-        let displayIP = ipData.ipv4;
-        if (displayIP === '::1' || displayIP === '127.0.0.1' || displayIP === 'Unknown') {
-          displayIP = '5.50.177.22'; // Brandon's IP for demo
+        const displayIP = ipData.ipv4;
+        if (!displayIP || displayIP === '::1' || displayIP === '127.0.0.1' || displayIP === 'Unknown') {
+          throw new Error('Unable to detect your public IP address');
         }
 
         // Step 2: Fetch all data in parallel
