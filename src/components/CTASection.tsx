@@ -17,7 +17,7 @@ const CTASection = () => {
         >
           {/* Content */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Start Using IPPriv Today
+            Start Your Free IP Lookup Today
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
             Free to use, no account required. Start looking up IP addresses in seconds.

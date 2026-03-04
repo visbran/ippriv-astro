@@ -8,8 +8,8 @@ const steps = [
   },
   {
     number: '02',
-    title: 'Get instant results',
-    description: 'Receive detailed geolocation and network information in milliseconds.',
+    title: 'Get instant IP information',
+    description: 'Receive detailed geolocation and network information on any IP address in milliseconds.',
   },
   {
     number: '03',
@@ -31,7 +31,7 @@ const HowItWorksSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            How it works
+            How Our IP Lookup Works
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Get started in seconds. No account required.

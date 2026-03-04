@@ -5,7 +5,7 @@ const stats = [
   {
     icon: TrendingUp,
     value: '50,000+',
-    label: 'Lookups performed',
+    label: 'IP Lookups performed',
   },
   {
     icon: Users,

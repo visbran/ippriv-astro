@@ -5,7 +5,7 @@ const features = [
   {
     icon: MapPin,
     title: 'Instant IP Lookup',
-    description: 'Get detailed information about any IP address in milliseconds. Location, ISP, timezone, and more.',
+    description: 'Get complete information on any IP address in milliseconds — location, ISP, timezone, and more.',
   },
   {
     icon: Shield,
@@ -32,10 +32,10 @@ const FeaturesSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            Everything you need
+            Everything You Need for IP Lookup
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Simple, fast, and privacy-respecting tools for all your IP lookup needs.
+            Simple, fast, and privacy-respecting IP address information tools.
           </p>
         </motion.div>
 
