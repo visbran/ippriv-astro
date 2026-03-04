@@ -1,6 +1,34 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import IPLookupTool from '../components/IPLookupTool';
+import FAQSchema from '../components/FAQSchema.astro';
+
+const ipLookupFAQs = [
+  {
+    question: "How do I look up an IP address?",
+    answer: "Enter any IPv4 or IPv6 address in the search field and click Look Up. IPPriv will instantly return the geolocation, ISP, DNS hostname, and security status for that IP.",
+  },
+  {
+    question: "How accurate is IP geolocation?",
+    answer: "IP geolocation accuracy varies by level: country-level is typically 95–99% accurate, region/state-level around 55–80%, and city-level around 50–75%. Results depend on how ISPs register their IP blocks.",
+  },
+  {
+    question: "What is a reverse DNS lookup?",
+    answer: "A reverse DNS lookup queries the PTR record of an IP address to find the hostname associated with it. This helps identify the owner or purpose of an IP — for example, a datacenter, ISP, or corporate network.",
+  },
+  {
+    question: "What does it mean if an IP is flagged as a VPN?",
+    answer: "An IP flagged as a VPN belongs to a known VPN provider's infrastructure. This means the real user's location and identity may be masked. IPPriv detects VPN IPs by cross-referencing known VPN IP ranges and hosting providers.",
+  },
+  {
+    question: "Can I look up my own IP address?",
+    answer: "Yes. Open the IP Lookup tool without entering any IP address and IPPriv will automatically detect and display information about your current public IP address.",
+  },
+  {
+    question: "What is the difference between IPv4 and IPv6?",
+    answer: "IPv4 uses 32-bit addresses (e.g. 192.168.1.1) and supports about 4.3 billion unique addresses. IPv6 uses 128-bit addresses (e.g. 2001:db8::1) and supports virtually unlimited addresses. Both are supported by IPPriv.",
+  },
+];
 ---
 
 <Layout
@@ -8,6 +36,7 @@ import IPLookupTool from '../components/IPLookupTool';
   description="Free IP lookup tool. Get detailed information about any IP address including geolocation, DNS records, and security status. Check VPN, proxy, and Tor detection instantly."
   keywords="IP lookup, IP geolocation, IP address finder, DNS lookup, IP security check, VPN detection, proxy check"
 >
+  <FAQSchema faqs={ipLookupFAQs} />
   <div class="pt-24 pb-16">
     <IPLookupTool client:load />
   </div>
