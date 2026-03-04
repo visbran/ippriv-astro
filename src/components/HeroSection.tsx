@@ -106,7 +106,7 @@ const HeroSection = () => {
             {/* Data Display */}
             {data && !isLoading && !error && (
               <>
-                <div className="text-2xl sm:text-3xl font-mono font-semibold text-foreground mb-4">
+                <div className={`font-mono font-semibold text-foreground mb-4 break-all ${data.ipv4.includes(':') ? 'text-base sm:text-lg' : 'text-2xl sm:text-3xl'}`}>
                   {data.ipv4}
                 </div>
 
