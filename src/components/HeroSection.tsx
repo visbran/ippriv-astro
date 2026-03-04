@@ -1,12 +1,19 @@
 import { motion } from 'framer-motion';
 import { Copy, Check, MapPin, Globe, Loader2 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LocationMap from './LocationMap';
 import { useIPData } from '@/hooks/useIPData';
 
 const HeroSection = () => {
   const [copied, setCopied] = useState(false);
+  const [isAtTop, setIsAtTop] = useState(true);
   const { data, isLoading, error, locationString } = useIPData();
+
+  useEffect(() => {
+    const onScroll = () => setIsAtTop(window.scrollY < 50);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const handleCopy = () => {
     if (!data?.ipv4) return;
@@ -163,6 +170,21 @@ const HeroSection = () => {
         </div>
       </div>
 
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isAtTop ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="hidden md:flex fixed bottom-8 left-1/2 -translate-x-1/2 pointer-events-none z-10"
+      >
+        <div className="w-6 h-10 rounded-full border-2 border-border flex items-start justify-center p-2">
+          <motion.div
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            className="w-1.5 h-1.5 rounded-full bg-primary"
+          />
+        </div>
+      </motion.div>
     </section>
   );
 };
