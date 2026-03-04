@@ -23,7 +23,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16 pb-24 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center pt-24 pb-24 overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 geometric-pattern" />
       <div className="absolute inset-0 grid-pattern opacity-40" />
