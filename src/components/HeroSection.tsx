@@ -45,8 +45,8 @@ const HeroSection = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 tracking-tight text-balance"
           >
-            Know Your IP.{' '}
-            <span className="gradient-text">Protect Your Privacy.</span>
+            Free IP Lookup Tool.{' '}
+            <span className="gradient-text">Know Your IP Address.</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -56,7 +56,7 @@ const HeroSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
           >
-            Fast, private, and accurate IP tools. No tracking, no ads, no BS.
+            Instant IP address information — geolocation, ISP, VPN detection, and more. No tracking, no ads.
           </motion.p>
 
           {/* IP Display Card */}
