@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
 import { Shield, Lock, Eye, Users } from 'lucide-react';
 
 const values = [
@@ -28,9 +29,13 @@ const values = [
 
 <Layout
   title="About IPPriv - Privacy-Focused IP Tools & Digital Privacy Solutions"
-  description="Learn about IPPriv's mission to provide privacy-focused IP lookup and geolocation tools. Discover our commitment to user privacy and data protection since 2024."
+  description="Learn about IPPriv — free IP lookup and geolocation tools built with privacy in mind. Our mission, values, and commitment to data protection."
   keywords="about IPPriv, privacy tools, IP lookup company, digital privacy, mission values"
 >
+  <BreadcrumbSchema items={[
+    { name: 'Home', url: 'https://www.ippriv.com/' },
+    { name: 'About', url: 'https://www.ippriv.com/about/' },
+  ]} />
   <div class="pt-24 pb-16">
     <div class="container mx-auto px-4 max-w-4xl">
       <article class="animate-fade-in">

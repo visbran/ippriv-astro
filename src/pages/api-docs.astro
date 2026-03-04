@@ -2,13 +2,30 @@
 import Layout from '../layouts/Layout.astro';
 import APIDocsContent from '../components/APIDocsContent';
 import ProductSchema from '../components/ProductSchema.astro';
+import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
 ---
 
 <Layout
-  title="API Documentation - IPPriv | Free IP Geolocation API"
-  description="Complete API documentation for IPPriv. Free IP geolocation API with no authentication required. Get IP detection, geolocation, DNS lookup, and security checks with 100 requests per hour."
-  keywords="IP API, geolocation API, free IP API, REST API, IP lookup API, VPN detection API, API documentation"
+  title="Free IP Geolocation API — IP Lookup, DNS & VPN Detection | IPPriv"
+  description="Free IP geolocation API. IP lookup, DNS records, and VPN/proxy detection with no authentication required. 100 req/hour, CORS enabled."
+  keywords="ip api, ip geolocation api, free ip api, ip lookup api, ip address api, VPN detection API, DNS lookup API, REST API"
 >
   <ProductSchema />
+  <BreadcrumbSchema items={[
+    { name: 'Home', url: 'https://www.ippriv.com/' },
+    { name: 'API Documentation', url: 'https://www.ippriv.com/api-docs/' },
+  ]} />
+
+  <!-- Static intro for SEO -->
+  <div class="pt-24 pb-4">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Free IP Geolocation API</h1>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        IP lookup, DNS records, and VPN/proxy detection — free, no authentication required.
+        Integrate IP address information into your app in minutes.
+      </p>
+    </div>
+  </div>
+
   <APIDocsContent client:load />
 </Layout>
