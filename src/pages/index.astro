@@ -7,6 +7,30 @@ import SocialProofSection from '../components/SocialProofSection';
 import CTASection from '../components/CTASection';
 import OrganizationSchema from '../components/OrganizationSchema.astro';
 import WebSiteSchema from '../components/WebSiteSchema.astro';
+import FAQSchema from '../components/FAQSchema.astro';
+
+const homeFAQs = [
+  {
+    question: "What is IPPriv?",
+    answer: "IPPriv is a free IP geolocation and privacy tool that lets you instantly look up any IP address to get its location, ISP, DNS records, and security status including VPN, proxy, and Tor detection — no account or API key required.",
+  },
+  {
+    question: "Is IPPriv free to use?",
+    answer: "Yes, IPPriv is completely free. You can look up any IP address and access the full geolocation API without registration or authentication.",
+  },
+  {
+    question: "What information can I get from an IP address?",
+    answer: "With IPPriv you can retrieve the country, region, city, latitude/longitude, timezone, ISP, hostname via reverse DNS lookup, and security flags such as whether the IP is a VPN, proxy, Tor exit node, or hosting provider.",
+  },
+  {
+    question: "Can IPPriv detect VPNs and proxies?",
+    answer: "Yes. IPPriv's security check analyzes each IP address and returns flags for VPN usage, proxy servers, Tor exit nodes, and hosting/datacenter IPs in real time.",
+  },
+  {
+    question: "Do I need an API key to use the IPPriv API?",
+    answer: "No API key is required. The IPPriv API is open and free — simply send a GET request to api.ippriv.com with the IP address you want to look up.",
+  },
+];
 ---
 
 <Layout
@@ -16,6 +40,7 @@ import WebSiteSchema from '../components/WebSiteSchema.astro';
 >
   <OrganizationSchema />
   <WebSiteSchema />
+  <FAQSchema faqs={homeFAQs} />
   
   <HeroSection client:load />
   <FeaturesSection client:visible />
