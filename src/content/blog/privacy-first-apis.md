@@ -45,7 +45,7 @@ Give users control over their data:
 
 ### No Authentication Required
 
-Design APIs that work without requiring user accounts:
+Design APIs that work without requiring user accounts. For example, the [IPPriv API](/api-docs) provides IP lookup, geolocation, and security data entirely without registration:
 
 ```javascript
 // Public IP lookup - no auth needed
@@ -109,4 +109,4 @@ res.setHeader('Strict-Transport-Security', 'max-age=31536000');
 
 ## Conclusion
 
-Privacy-first APIs build trust and ensure long-term sustainability. Start with these principles and adapt them to your specific needs.
+Privacy-first APIs build trust and ensure long-term sustainability. Start with these principles and adapt them to your specific needs. For a real-world example of these principles in practice, explore the [IPPriv API documentation](/api-docs) or learn more about [our privacy values](/about). For implementation details, see our guide on [IP API integration best practices](/blog/ip-api-integration).

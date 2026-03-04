@@ -176,4 +176,4 @@ const API_KEY = process.env.IP_API_KEY;
 
 ## Conclusion
 
-With proper integration techniques, IP geolocation APIs can significantly enhance your application's functionality while maintaining performance and security.
+With proper integration techniques, IP geolocation APIs can significantly enhance your application's functionality while maintaining performance and security. Review the [IPPriv API documentation](/api-docs) for endpoint details and response schemas, and read our comparison of [free vs paid IP geolocation APIs](/blog/ip-geolocation-api-free-vs-paid) to choose the right solution for your use case.

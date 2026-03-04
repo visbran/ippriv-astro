@@ -66,6 +66,8 @@ Meet regulatory requirements for user verification.
 
 ### API Integration
 
+The [IPPriv API](/api-docs) returns proxy detection flags alongside VPN and hosting information in a single request:
+
 ```javascript
 async function detectProxy(ip) {
   const response = await fetch(
@@ -81,4 +83,4 @@ Process detection results with appropriate actions based on confidence scores.
 
 ## Conclusion
 
-Proxy detection is essential for maintaining platform integrity while respecting legitimate use cases.
+Proxy detection is essential for maintaining platform integrity while respecting legitimate use cases. Use our [free IP lookup tool](/ip-lookup) to check proxy status on any IP address, or read about [VPN detection techniques](/blog/vpn-detection-explained) which complement proxy detection in a comprehensive security strategy.

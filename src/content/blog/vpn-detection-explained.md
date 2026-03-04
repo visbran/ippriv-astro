@@ -47,7 +47,7 @@ Organizations need to track VPN usage to maintain network security policies.
 
 ### API Integration
 
-Use specialized APIs that maintain updated databases of VPN IP ranges:
+Use specialized APIs that maintain updated databases of VPN IP ranges. The [IPPriv API](/api-docs) provides a dedicated security endpoint for VPN detection with no authentication required:
 
 ```javascript
 async function checkVPN(ip) {
@@ -71,4 +71,4 @@ While VPN detection is useful, respect user privacy:
 
 ## Conclusion
 
-VPN detection balances security needs with user privacy. Implement it thoughtfully to maintain trust while protecting your platform.
+VPN detection balances security needs with user privacy. Implement it thoughtfully to maintain trust while protecting your platform. You can verify VPN status for any IP address using our [free IP lookup tool](/ip-lookup), or check how [datacenter IP addresses](/blog/what-is-a-datacenter-ip-address) relate to VPN detection. For users looking to mask their own IP, see our guide on [how to hide your IP address](/blog/hide-your-ip-address).

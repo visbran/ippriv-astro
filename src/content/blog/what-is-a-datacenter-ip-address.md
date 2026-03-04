@@ -60,7 +60,7 @@ Detection relies on a few core techniques:
 
 ## Using IPPriv to Detect Datacenter IPs
 
-IPPriv provides a dedicated security endpoint that returns hosting detection information for any IP address. A simple GET request to `/api/security/:ip` returns a JSON response that includes an `isHosting` flag:
+IPPriv provides a dedicated security endpoint that returns hosting detection information for any IP address. Check the [API documentation](/api-docs) for the full response schema. A simple GET request to `/api/security/:ip` returns a JSON response that includes an `isHosting` flag:
 
 ```javascript
 async function checkIfDatacenter(ip) {
@@ -85,4 +85,4 @@ It is worth noting that not all datacenter traffic is malicious. Legitimate serv
 
 ## Conclusion
 
-A datacenter IP address identifies traffic originating from hosting infrastructure rather than a real user's home or office connection. Understanding this distinction allows developers and security teams to make better decisions about how to handle incoming requests. Whether you are fighting bots, detecting VPNs, or preventing fraud, datacenter IP lookup is a foundational technique — and with a free tool like IPPriv, it takes just one API call to get the information you need.
+A datacenter IP address identifies traffic originating from hosting infrastructure rather than a real user's home or office connection. Understanding this distinction allows developers and security teams to make better decisions about how to handle incoming requests. Whether you are fighting bots, detecting VPNs, or preventing fraud, datacenter IP lookup is a foundational technique — and with a free tool like IPPriv, it takes just one API call to get the information you need. [Look up any IP address now](/ip-lookup), or explore related topics: [VPN detection explained](/blog/vpn-detection-explained) and [Tor exit node detection](/blog/tor-exit-node-detection).
