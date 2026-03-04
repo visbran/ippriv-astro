@@ -88,7 +88,7 @@ Outside the EU, legal protections vary considerably. In the United States, there
 
 ## What Your IP Address Reveals — Check It Yourself
 
-If you want to see exactly what information is publicly associated with your current IP address, visit [IPPriv](https://ippriv.com). The tool performs a live ip lookup and shows you:
+If you want to see exactly what information is publicly associated with your current IP address, use our [free IP lookup tool](/ip-lookup). The tool performs a live ip lookup and shows you:
 
 - Your current IP address (IPv4 or IPv6)
 - Approximate geographic location (country, region, city)
@@ -102,7 +102,7 @@ This is the same category of information that every website you visit can access
 
 While you cannot eliminate your IP address from internet traffic, you can take steps to limit how much information it reveals.
 
-**Use a VPN (Virtual Private Network).** A VPN routes your traffic through a server operated by the VPN provider. Websites see the VPN server's IP address instead of yours. This obscures your true IP address and the location and ISP information associated with it. The effectiveness of this approach depends entirely on the trustworthiness of the VPN provider — your ISP no longer sees your browsing, but the VPN provider does.
+**Use a VPN (Virtual Private Network).** A VPN routes your traffic through a server operated by the VPN provider. Websites see the VPN server's IP address instead of yours. See our full guide on [how to hide your IP address](/blog/hide-your-ip-address) for a comparison of all available methods. This obscures your true IP address and the location and ISP information associated with it. The effectiveness of this approach depends entirely on the trustworthiness of the VPN provider — your ISP no longer sees your browsing, but the VPN provider does.
 
 **Use the Tor Browser.** Tor routes your traffic through multiple relays operated by volunteers worldwide before it reaches its destination. Each relay only knows the previous hop, not your original IP address. This provides strong IP address anonymization but comes with significant speed penalties. Tor is also actively blocked by some services.
 

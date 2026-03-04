@@ -212,4 +212,4 @@ curl -6 https://api.ippriv.com/api/ip
 
 ## Conclusion
 
-IPv6 adoption is growing, but IPv4 will remain relevant for years. Build applications that seamlessly support both protocols for maximum compatibility and future-proofing.
+IPv6 adoption is growing, but IPv4 will remain relevant for years. Build applications that seamlessly support both protocols for maximum compatibility and future-proofing. Use our [IP lookup tool](/ip-lookup) to instantly see which version your current IP address is, or check the [IPPriv API documentation](/api-docs) — it supports both IPv4 and IPv6 lookups. For more context, read our guide on [what is an IP address](/blog/what-is-an-ip-address).

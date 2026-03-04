@@ -103,7 +103,7 @@ Static IP addresses, by contrast, tend to produce more reliable and consistent l
 
 **Method 1: Check with your ISP.** The simplest approach is to ask your internet provider whether your plan includes a static or dynamic IP address. Most consumer plans use dynamic IPs; most business plans can provide static IPs.
 
-**Method 2: Compare your IP over time.** Visit [IPPriv](https://ippriv.com) and note your current public IP address. Check again a week later and after restarting your router. If the address changes, you have a dynamic IP.
+**Method 2: Compare your IP over time.** Visit our [IP lookup tool](/ip-lookup) and note your current public IP address. Check again a week later and after restarting your router. If the address changes, you have a dynamic IP.
 
 **Method 3: Check your router settings.** Log in to your router's admin interface (usually at `192.168.1.1` or `192.168.0.1`) and look at the WAN or internet connection settings. If the connection type shows "DHCP" or "Automatic," you have a dynamic IP. If it shows a specific IP address configured manually, you likely have a static IP.
 
@@ -115,4 +115,4 @@ The static vs. dynamic distinction applies to both private network IPs (assigned
 
 Your router may assign a static private IP address (via DHCP reservation) to your home server while your ISP still provides a dynamic public IP address for your internet connection. The public IP address is what changes and what an ip lookup tool like IPPriv will detect. The private IP address is invisible outside your local network.
 
-Understanding both layers helps you make the right decisions about network architecture and avoid confusion when troubleshooting connectivity or access issues.
+Understanding both layers helps you make the right decisions about network architecture and avoid confusion when troubleshooting connectivity or access issues. For more context on how ISPs manage address pools and what this means for lookup accuracy, read [how ISPs assign IP addresses](/blog/how-isps-assign-ip-addresses). To check your current IP address and whether it appears static or dynamic, [use the IP lookup tool](/ip-lookup).

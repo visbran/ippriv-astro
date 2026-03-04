@@ -38,7 +38,7 @@ Several methods are used to identify Tor exit node IP addresses:
 
 **Tor Project's public exit node list.** The most reliable detection method is querying the Tor Project's own directory of exit nodes at `check.torproject.org` or via the DNS-based exit list at `exitlist.torproject.org`. This list is updated every 30 minutes and reflects the currently active exit nodes. Providing the destination IP and port, the DNS query returns whether a given IP is a Tor exit node capable of reaching that destination.
 
-**IP reputation databases.** Commercial threat intelligence providers and IP lookup services like IPPriv maintain continuously updated databases of Tor exit node IP addresses. These databases aggregate the Tor Project's official list with additional intelligence about Tor-adjacent infrastructure and historically known exit IPs.
+**IP reputation databases.** Commercial threat intelligence providers and IP lookup services like IPPriv maintain continuously updated databases of Tor exit node IP addresses. You can [look up any IP address](/ip-lookup) to check its Tor status instantly. These databases aggregate the Tor Project's official list with additional intelligence about Tor-adjacent infrastructure and historically known exit IPs.
 
 **Behavioral analysis.** Tor traffic exhibits certain characteristics — unusual connection patterns, access from many different geographic Tor exit IPs over short periods, and common Tor browser fingerprints. These signals complement IP lookup when building a detection pipeline.
 
@@ -103,4 +103,4 @@ If you are building an application that needs to handle Tor traffic, here are pr
 
 ## Conclusion
 
-Tor exit node detection works because exit node IP addresses are publicly documented and visible to destination servers. The Tor Project's own exit list, combined with commercial IP lookup databases, makes it reliable to identify when a connection is coming through the Tor network. Whether to block that traffic depends on your use case, risk tolerance, and the needs of your user base. With a tool like IPPriv, checking the `isTor` flag takes one API call — the policy decision is what requires careful thought.
+Tor exit node detection works because exit node IP addresses are publicly documented and visible to destination servers. The Tor Project's own exit list, combined with commercial IP lookup databases, makes it reliable to identify when a connection is coming through the Tor network. Whether to block that traffic depends on your use case, risk tolerance, and the needs of your user base. With a tool like IPPriv, checking the `isTor` flag takes one API call — the policy decision is what requires careful thought. See the [IPPriv API documentation](/api-docs) for the full security endpoint reference, or read [how to hide your IP address](/blog/hide-your-ip-address) to understand Tor from the user's perspective.

@@ -22,7 +22,7 @@ There are legitimate and common reasons why people choose to obscure or replace 
 
 **Preventing tracking.** Advertisers, analytics platforms, and data brokers use IP addresses as one signal for tracking behavior across the web. Masking your IP address reduces — though does not eliminate — this type of tracking.
 
-Before hiding your IP address, you should know what it currently reveals. Visit [IPPriv](https://ippriv.com) to perform a free ip lookup and see your current location, ISP, and connection information. Then use one of the methods below and check again to confirm the change.
+Before hiding your IP address, you should know what it currently reveals. Use our [free IP lookup tool](/ip-lookup) to see your current location, ISP, and connection information. Then use one of the methods below and check again to confirm the change.
 
 ## Method 1: VPN (Virtual Private Network)
 
@@ -49,7 +49,7 @@ A VPN is the most widely used method for hiding an IP address. When you connect 
 
 Tor is a free, open-source anonymity network that routes your traffic through at least three volunteer-operated relay nodes before it reaches its destination. Each relay only knows the address of the previous and next hop — no single relay knows both your real IP address and what you are accessing.
 
-**How it works:** The Tor Browser encrypts your traffic in multiple layers (like the layers of an onion) and routes it through a series of relays. The final relay (the exit node) makes the request to the destination server, which only sees the exit node's IP address — not yours.
+**How it works:** The Tor Browser encrypts your traffic in multiple layers (like the layers of an onion) and routes it through a series of relays. The final relay (the exit node) makes the request to the destination server, which only sees the exit node's IP address — not yours. Read more about [how Tor exit node detection works](/blog/tor-exit-node-detection) and why some sites block Tor traffic.
 
 **Advantages:**
 - Strong anonymization — no single point knows your full connection path
@@ -139,7 +139,7 @@ Switching from Wi-Fi to your smartphone's mobile data connection changes your pu
 
 After setting up any of the methods above, you should confirm that your visible IP address has actually changed before relying on the method for privacy. The verification process is simple:
 
-**Step 1: Check your current IP address before enabling any privacy tool.** Visit [IPPriv](https://ippriv.com) and note your IP address, ISP, and location.
+**Step 1: Check your current IP address before enabling any privacy tool.** Visit our [IP lookup tool](/ip-lookup) and note your IP address, ISP, and location.
 
 **Step 2: Enable your VPN, proxy, or Tor connection.**
 
@@ -157,4 +157,4 @@ IPPriv also indicates whether the detected IP address belongs to a known VPN or 
 - **Use HTTPS everywhere.** Regardless of what IP masking method you use, HTTPS encrypts the content of your communications. Without HTTPS, Tor exit nodes, proxy operators, and others can see unencrypted traffic.
 - **Verify after every change.** Any time you switch networks, update your VPN app, or change configuration, re-verify your visible IP address using an ip lookup tool.
 
-Hiding your IP address is a practical and achievable privacy measure. The right method depends on your specific needs — everyday privacy, high-security anonymization, bypassing regional restrictions, or application-specific routing. Use IPPriv to measure your starting point and verify the results at [ippriv.com](https://ippriv.com).
+Hiding your IP address is a practical and achievable privacy measure. The right method depends on your specific needs — everyday privacy, high-security anonymization, bypassing regional restrictions, or application-specific routing. Use our [IP lookup tool](/ip-lookup) to measure your starting point and verify the results. Also read [VPN detection explained](/blog/vpn-detection-explained) to understand how websites detect the methods described here.
