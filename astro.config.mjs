@@ -6,29 +6,45 @@ import sitemap from '@astrojs/sitemap';
 
 import tailwindcss from '@tailwindcss/vite';
 
+const SITE = 'https://www.ippriv.com';
+
+// Priorités par page
+const PAGE_PRIORITIES = {
+  [`${SITE}/`]: { priority: 1.0, changefreq: 'daily' },
+  [`${SITE}/ip-lookup/`]: { priority: 0.9, changefreq: 'weekly' },
+  [`${SITE}/blog/`]: { priority: 0.8, changefreq: 'weekly' },
+  [`${SITE}/api-docs/`]: { priority: 0.7, changefreq: 'monthly' },
+  [`${SITE}/about/`]: { priority: 0.5, changefreq: 'monthly' },
+  [`${SITE}/contact/`]: { priority: 0.4, changefreq: 'monthly' },
+  [`${SITE}/privacy/`]: { priority: 0.3, changefreq: 'yearly' },
+  [`${SITE}/terms/`]: { priority: 0.3, changefreq: 'yearly' },
+};
+
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.ippriv.com',
+  site: SITE,
   output: 'static', // SSG mode
-  
+
   integrations: [
     react(),
     sitemap({
-      // Configuration du sitemap
-      filter: (page) => 
-        // Exclure les pages API
-        !page.includes('/api/'),
-      
-      // Personnaliser les priorités et fréquences
-      changefreq: 'weekly',
-      priority: 0.7,
-      
-      // Configuration personnalisée pour les pages importantes
-      customPages: [
-        'https://www.ippriv.com/',
-        'https://www.ippriv.com/ip-lookup',
-        'https://www.ippriv.com/blog'
-      ]
+      filter: (page) => !page.includes('/api/') && !page.includes('/blog/archive'),
+      serialize(item) {
+        const custom = PAGE_PRIORITIES[item.url];
+        if (custom) {
+          item.priority = custom.priority;
+          item.changefreq = custom.changefreq;
+        } else if (item.url.includes('/blog/')) {
+          // Articles de blog
+          item.priority = 0.7;
+          item.changefreq = 'monthly';
+        } else {
+          item.priority = 0.5;
+          item.changefreq = 'monthly';
+        }
+        item.lastmod = new Date().toISOString().split('T')[0];
+        return item;
+      },
     })
   ],
 
