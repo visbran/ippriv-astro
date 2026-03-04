@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import IPLookupTool from '../components/IPLookupTool';
 import FAQSchema from '../components/FAQSchema.astro';
+import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
 
 const ipLookupFAQs = [
   {
@@ -32,12 +33,69 @@ const ipLookupFAQs = [
 ---
 
 <Layout
-  title="IP Lookup Tool - IPPriv | Find IP Location & Security Info"
-  description="Free IP lookup tool. Get detailed information about any IP address including geolocation, DNS records, and security status. Check VPN, proxy, and Tor detection instantly."
-  keywords="IP lookup, IP geolocation, IP address finder, DNS lookup, IP security check, VPN detection, proxy check"
+  title="IP Lookup — Free IP Address Information Tool | IPPriv"
+  description="Free IP lookup tool. Enter any IP address for instant geolocation, ISP, DNS records, and VPN/proxy detection. No account required."
+  keywords="ip lookup, ip address, ip, ip address information, ip address lookup, free ip lookup, ip geolocation, DNS lookup, VPN detection, proxy check"
 >
   <FAQSchema faqs={ipLookupFAQs} />
+  <BreadcrumbSchema items={[
+    { name: 'Home', url: 'https://www.ippriv.com/' },
+    { name: 'IP Lookup', url: 'https://www.ippriv.com/ip-lookup/' },
+  ]} />
+
   <div class="pt-24 pb-16">
     <IPLookupTool client:load />
   </div>
+
+  <!-- Static content for SEO -->
+  <section class="py-16 bg-secondary/30">
+    <div class="container mx-auto px-4 max-w-4xl space-y-12">
+
+      <div>
+        <h2 class="text-2xl font-bold text-foreground mb-4">What is an IP Lookup?</h2>
+        <p class="text-muted-foreground leading-relaxed">
+          An IP lookup is a query that retrieves information associated with a specific IP address.
+          Every device connected to the internet has a public IP address — a unique identifier that
+          reveals details about its network, location, and ISP. With IPPriv's free IP lookup tool,
+          you can instantly access this information for any IPv4 or IPv6 address, with no account required.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-foreground mb-4">What IP Address Information Can You Find?</h2>
+        <p class="text-muted-foreground leading-relaxed mb-4">
+          A single IP lookup can return a wide range of information about an IP address:
+        </p>
+        <ul class="space-y-2 text-muted-foreground list-disc list-inside leading-relaxed">
+          <li><strong class="text-foreground">Geolocation</strong> — country, region, city, latitude and longitude</li>
+          <li><strong class="text-foreground">Network information</strong> — ISP, organization, and timezone</li>
+          <li><strong class="text-foreground">DNS records</strong> — hostname and PTR records via reverse DNS lookup</li>
+          <li><strong class="text-foreground">Security status</strong> — VPN, proxy, Tor exit node, or hosting/datacenter detection</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-foreground mb-4">Why Use a Free IP Lookup Tool?</h2>
+        <p class="text-muted-foreground leading-relaxed">
+          IP address information is essential for developers debugging network issues, security analysts
+          investigating suspicious traffic, and businesses verifying user locations. IPPriv provides
+          accurate, real-time IP lookup data through a clean interface and a free API — no API key,
+          no rate limits on basic usage, and no data logging.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-foreground mb-6">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {ipLookupFAQs.map((faq) => (
+            <div>
+              <h3 class="font-semibold text-foreground mb-2">{faq.question}</h3>
+              <p class="text-muted-foreground leading-relaxed">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
 </Layout>
