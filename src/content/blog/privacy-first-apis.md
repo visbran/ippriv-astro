@@ -26,12 +26,12 @@ Practical data minimization looks like this:
 - Truncate or anonymize identifiers before logging. A full IP address in a log file is personal data in many jurisdictions. The first three octets retain geolocation signal while protecting the individual.
 - Set automatic expiration on any data you collect. If you are storing IP lookups for analytics, define a retention period and enforce it.
 
-```javascript
-// Bad: collecting and returning everything
+```text
+# Bad: collecting and returning everything
 GET /api/user-data
 → { name, email, ip, location, device, browser, history... }
 
-// Good: return only what the caller requested
+# Good: return only what the caller requested
 GET /api/geo?fields=country,city
 → { country: "France", city: "Paris" }
 ```
