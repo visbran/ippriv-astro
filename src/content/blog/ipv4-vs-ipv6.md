@@ -19,12 +19,7 @@ IPv4 was defined in 1981 and has been the foundation of internet addressing ever
 
 ### Address Structure
 
-An IPv4 address consists of 32 bits, written as four groups of decimal numbers separated by dots:
-
-```text
-192.168.1.1
-203.0.113.42
-```
+An IPv4 address consists of 32 bits, written as four groups of decimal numbers separated by dots: `192.168.1.1` or `203.0.113.42`.
 
 Each group (called an octet) represents 8 bits and can range from 0 to 255. The 32-bit address space provides approximately 4.3 billion unique addresses — a number that seemed enormous in 1981 and became severely inadequate by the 2010s.
 
@@ -38,11 +33,9 @@ The workarounds developed to cope with IPv4 exhaustion — Network Address Trans
 
 Not all IPv4 addresses route on the public internet. Three ranges are reserved for private network use:
 
-```text
-10.0.0.0    – 10.255.255.255    (10.x.x.x)
-172.16.0.0  – 172.31.255.255   (172.16-31.x.x)
-192.168.0.0 – 192.168.255.255  (192.168.x.x)
-```
+- `10.0.0.0` – `10.255.255.255` (10.x.x.x)
+- `172.16.0.0` – `172.31.255.255` (172.16–31.x.x)
+- `192.168.0.0` – `192.168.255.255` (192.168.x.x)
 
 These addresses are invisible on the public internet. Your home router assigns private addresses to your devices (typically `192.168.x.x`) while presenting a single public IPv4 address to the outside world — the NAT mechanism that stretches the IPv4 address pool.
 
@@ -52,17 +45,9 @@ IPv6 was designed in the 1990s specifically to solve IPv4's address exhaustion p
 
 ### Address Structure
 
-An IPv6 address consists of 128 bits, written as eight groups of four hexadecimal digits separated by colons:
+An IPv6 address consists of 128 bits, written as eight groups of four hexadecimal digits separated by colons: `2001:0db8:85a3:0000:0000:8a2e:0370:7334`
 
-```text
-2001:0db8:85a3:0000:0000:8a2e:0370:7334
-```
-
-Leading zeros within each group can be omitted, and one consecutive sequence of all-zero groups can be replaced with `::`:
-
-```text
-2001:db8:85a3::8a2e:370:7334
-```
+Leading zeros within each group can be omitted, and one consecutive sequence of all-zero groups can be replaced with `::`: `2001:db8:85a3::8a2e:370:7334`
 
 The `::` shorthand can appear only once in an address. `::1` is the IPv6 loopback address (equivalent to `127.0.0.1` in IPv4).
 

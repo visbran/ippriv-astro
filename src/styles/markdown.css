@@ -43,7 +43,7 @@
 
 /* Code Blocks */
 .prose pre {
-  @apply bg-background;
+  @apply bg-muted/40;
   @apply m-0 p-0;
   @apply rounded-xl border border-border shadow-sm;
   @apply overflow-hidden;
@@ -53,18 +53,10 @@
 .prose pre code {
   @apply block;
   @apply p-6;
+  @apply bg-transparent;
   @apply text-sm font-mono leading-relaxed;
   @apply overflow-x-auto;
-  color: hsl(0 0% 20%);
-}
-
-/* Dark mode */
-.dark .prose pre {
-  @apply bg-muted/30;
-}
-
-.dark .prose pre code {
-  color: hsl(0 0% 85%);
+  @apply text-foreground;
 }
 
 /* Code block wrapper (created by CodeCopyButtons) */
@@ -79,24 +71,6 @@
 /* Code header */
 .code-header {
   user-select: none;
-}
-
-.dark .code-header {
-  @apply bg-muted/20;
-}
-
-.prose pre code {
-  @apply bg-transparent;
-  @apply p-0 border-0;
-  @apply text-sm font-mono leading-relaxed;
-  @apply block;
-  /* Light mode: dark text for better visibility */
-  color: hsl(0 0% 15%);
-}
-
-/* Dark mode: lighter text for better contrast */
-.dark .prose pre code {
-  color: hsl(0 0% 88%);
 }
 
 /* Syntax highlighting colors - Light mode */
