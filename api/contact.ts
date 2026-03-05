@@ -124,7 +124,7 @@ export default async function handler(req: any, res: any) {
   try {
     const { error } = await resend.emails.send({
       from: 'IPPriv Contact <contact@mxtoolbox.eu>',
-      to: ['support@ippriv.com'],
+      to: ['ippriv@visbran.mozmail.com'],
       replyTo: email.trim(),
       subject: `[Contact] ${subject.trim()}`,
       html: buildEmailHtml({
