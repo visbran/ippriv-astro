@@ -18,6 +18,7 @@ const PAGE_PRIORITIES = {
   [`${SITE}/contact/`]: { priority: 0.4, changefreq: 'monthly' },
   [`${SITE}/privacy/`]: { priority: 0.3, changefreq: 'yearly' },
   [`${SITE}/terms/`]: { priority: 0.3, changefreq: 'yearly' },
+  [`${SITE}/legal/`]: { priority: 0.3, changefreq: 'yearly' },
 };
 
 // https://astro.build/config
