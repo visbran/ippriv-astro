@@ -23,7 +23,11 @@ export default function BlogCard({ post, readingTime }: BlogCardProps) {
           <img
             src={post.data.heroImage}
             alt={post.data.title}
-            className="w-full h-full object-cover transition-transform duration-500 
+            width="800"
+            height="450"
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover transition-transform duration-500
                        group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent 
