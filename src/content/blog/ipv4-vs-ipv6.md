@@ -21,7 +21,7 @@ IPv4 was defined in 1981 and has been the foundation of internet addressing ever
 
 An IPv4 address consists of 32 bits, written as four groups of decimal numbers separated by dots:
 
-```
+```text
 192.168.1.1
 203.0.113.42
 ```
@@ -38,7 +38,7 @@ The workarounds developed to cope with IPv4 exhaustion — Network Address Trans
 
 Not all IPv4 addresses route on the public internet. Three ranges are reserved for private network use:
 
-```
+```text
 10.0.0.0    – 10.255.255.255    (10.x.x.x)
 172.16.0.0  – 172.31.255.255   (172.16-31.x.x)
 192.168.0.0 – 192.168.255.255  (192.168.x.x)
@@ -54,13 +54,13 @@ IPv6 was designed in the 1990s specifically to solve IPv4's address exhaustion p
 
 An IPv6 address consists of 128 bits, written as eight groups of four hexadecimal digits separated by colons:
 
-```
+```text
 2001:0db8:85a3:0000:0000:8a2e:0370:7334
 ```
 
 Leading zeros within each group can be omitted, and one consecutive sequence of all-zero groups can be replaced with `::`:
 
-```
+```text
 2001:db8:85a3::8a2e:370:7334
 ```
 
