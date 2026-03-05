@@ -1,4 +1,4 @@
-import { Shield, Github, Twitter } from 'lucide-react';
+import { Shield, Github } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -51,22 +51,13 @@ const Footer = () => {
           {/* Social Links */}
           <div className="flex items-center gap-3">
             <a
-              href="https://github.com"
+              href="https://github.com/visbran"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors"
               aria-label="GitHub"
             >
               <Github className="w-4 h-4 text-muted-foreground hover:text-foreground" />
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors"
-              aria-label="Twitter"
-            >
-              <Twitter className="w-4 h-4 text-muted-foreground hover:text-foreground" />
             </a>
           </div>
         </div>
