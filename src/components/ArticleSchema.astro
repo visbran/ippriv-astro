@@ -13,7 +13,7 @@ const { title, description, author, publishedAt, updatedAt, image, url } = Astro
 
 const articleSchema = {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "BlogPosting",
   "headline": title,
   "description": description,
   "image": image,
@@ -32,6 +32,7 @@ const articleSchema = {
       "url": "https://www.ippriv.com/logo.svg"
     }
   },
+  "url": url,
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": url
