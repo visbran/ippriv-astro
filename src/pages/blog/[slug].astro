@@ -14,7 +14,9 @@ import { calculateReadingTime, formatDate, extractTableOfContents } from '../../
 import { getRelatedPosts } from '../../utils/blogHelpers';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getCollection('blog', ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true;
+  });
   return posts.map(post => ({
     params: { slug: post.slug },
     props: { post },
@@ -29,7 +31,9 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 
 // Get all posts for related posts
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection('blog', ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
 const relatedPosts = getRelatedPosts(post, allPosts, 3);
 
 // Calculate reading time and TOC

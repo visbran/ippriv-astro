@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Send, Mail, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -16,6 +16,7 @@ interface ContactFormData {
 export default function ContactForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const honeypotRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
@@ -73,17 +74,42 @@ export default function ContactForm() {
     }
 
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    toast({
-      title: 'Message sent!',
-      description: "We'll get back to you as soon as possible.",
-    });
-    
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    setIsSubmitting(false);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          honeypot: honeypotRef.current?.value ?? '',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast({
+          title: 'Error',
+          description: data.error || 'Failed to send message. Please try again.',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      toast({
+        title: 'Message sent!',
+        description: "We'll get back to you as soon as possible.",
+      });
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch {
+      toast({
+        title: 'Error',
+        description: 'Network error. Please check your connection and try again.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -116,7 +142,7 @@ export default function ContactForm() {
       {/* Contact Form */}
       <div className="glass-card p-8 rounded-2xl">
         <h2 className="text-2xl font-semibold mb-6 text-center">Send us a Message</h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="relative space-y-6">
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="name">Name</Label>
@@ -172,6 +198,19 @@ export default function ContactForm() {
             {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
           </div>
           
+          {/* Honeypot — invisible to humans, bots fill it in */}
+          <div className="absolute -top-96 left-0 h-0 w-0 overflow-hidden" aria-hidden="true">
+            <label htmlFor="website">Website</label>
+            <input
+              ref={honeypotRef}
+              id="website"
+              name="website"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
+
           <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
             {isSubmitting ? (
               'Sending...'
