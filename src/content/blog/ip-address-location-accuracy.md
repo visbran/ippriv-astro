@@ -54,6 +54,8 @@ This is intentional for users seeking privacy, but it means that geolocation dat
 
 Mobile networks present a particular challenge for IP geolocation. Mobile carriers often use Carrier-Grade NAT (CGNAT), a technique that allows thousands of customers to share a single public IP address. The IP address associated with a mobile connection typically maps to the carrier's regional infrastructure hub rather than to any specific user's location.
 
+For more on connection types and how they affect IP lookups, read our guide on [residential IP addresses](/blog/what-is-a-residential-ip-address).
+
 A mobile user in a small town might appear to be in the nearest major city, or even in the city where the carrier's regional gateway is located — which could be hundreds of kilometers away. This is not a flaw in the geolocation database; it accurately reflects where the IP address is registered. The problem is that CGNAT creates a layer of abstraction between the IP address and the physical user.
 
 ### ISP Registration Practices

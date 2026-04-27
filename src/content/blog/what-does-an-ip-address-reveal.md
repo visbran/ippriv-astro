@@ -100,6 +100,8 @@ This is useful for several reasons:
 - You can check whether your IP is flagged as a proxy or datacenter IP
 - You can confirm your rDNS hostname
 
+To understand how VPN detection works and what techniques websites use to identify VPN users, read our guide on [VPN detection explained](/blog/vpn-detection-explained).
+
 Running this check before and after enabling a VPN shows you concretely how much your apparent location and identity change.
 
 ## Privacy Implications and What You Can Do
