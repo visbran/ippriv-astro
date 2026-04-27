@@ -5,7 +5,7 @@ publishedAt: 2026-04-28
 author: 'Brandon Visca'
 heroImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop'
 tags: ['vpn detection', 'privacy', 'ip address', 'proxy detection']
-draft: true
+draft: false
 ---
 
 ## Introduction: What Is VPN Detection?
