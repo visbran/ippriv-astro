@@ -5,7 +5,7 @@ publishedAt: 2026-03-12
 author: 'Brandon Visca'
 heroImage: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=600&fit=crop'
 tags: ['ip address', 'networking', 'privacy']
-draft: true
+draft: false
 ---
 
 ## What is a Residential IP Address?
