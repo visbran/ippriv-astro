@@ -1,10 +1,11 @@
 ---
-title: 'Understanding IPv4 vs IPv6: What Developers Need to Know'
+title: 'Understanding IPv4 vs IPv6: A Developer Guide'
 description: 'A comprehensive guide to the differences between IPv4 and IPv6, and how to handle both in your applications.'
 publishedAt: 2024-11-01
 author: 'Brandon Visca'
 heroImage: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1200&h=600&fit=crop'
 tags: ['networking', 'tutorial', 'IPv6']
+draft: false
 ---
 
 ## The IP Address Evolution
