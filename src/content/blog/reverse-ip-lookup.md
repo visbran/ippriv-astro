@@ -113,4 +113,4 @@ When you perform a reverse lookup on an IP address, here is how to read the resu
 
 Reverse IP lookup bridges the gap between raw IP address numbers and the human-readable hostnames that make networks easier to understand. Whether you are filtering spam, auditing server connections, or simply curious about who owns an IP address, PTR records and reverse DNS give you a critical layer of information that forward lookups alone cannot provide.
 
-Use [IPPriv](https://ippriv.com) to perform instant reverse IP lookups alongside full geolocation and ISP information for any IP address worldwide.
+Use [IPPriv](https://ippriv.com) to perform instant reverse IP lookups alongside full geolocation and ISP information for any IP address worldwide. For more on IP lookup tools, see our [free IP address lookup guide](/blog/free-ip-address-lookup).

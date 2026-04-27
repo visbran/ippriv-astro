@@ -107,4 +107,4 @@ When you perform an ip lookup and see location information, keep the following i
 
 The most effective approach to IP geolocation is to use it as one layer of information among several, rather than as a standalone truth. Combined with user-provided information, device signals, and behavioral data, IP-derived location becomes a useful and reliable input for a wide range of applications.
 
-For the most accurate ip lookup results available, [IPPriv](https://ippriv.com) combines multiple database sources and provides confidence indicators alongside location data, so you can make informed decisions about how much weight to give the results.
+For the most accurate ip lookup results available, [IPPriv](https://ippriv.com) combines multiple database sources and provides confidence indicators alongside location data, so you can make informed decisions about how much weight to give the results. To understand how IP lookup data is collected and what sources inform it, read our guide on [understanding IP geolocation](/blog/understanding-ip-geolocation).

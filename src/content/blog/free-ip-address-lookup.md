@@ -203,3 +203,5 @@ A WHOIS lookup queries official IP registration databases for ownership and admi
 A free IP address lookup is one of the most useful and accessible tools available for understanding internet traffic. Whether you are investigating a security incident, building a localization feature, checking the quality of ad traffic, or simply curious about where a connection is coming from, a free IP lookup delivers immediate, actionable information.
 
 [IPPriv](https://ippriv.com) provides all of this — geolocation, ISP, ASN, DNS, and security flags — for free, with no account required. Use the web tool at [ippriv.com/ip-lookup](https://ippriv.com/ip-lookup) for quick lookups, or integrate the free API directly into your application for automated IP intelligence at scale.
+
+To understand what an IP address actually reveals about you, read our guide on [what does an IP address reveal](/blog/what-does-an-ip-address-reveal).

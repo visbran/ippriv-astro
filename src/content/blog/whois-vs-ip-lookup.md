@@ -114,3 +114,5 @@ IPPriv's CORS-enabled API makes it easy to integrate IP lookup directly into web
 ## Conclusion
 
 WHOIS and IP lookup are complementary tools that answer different questions. WHOIS tells you who registered a domain or IP block and provides official contact information. IP lookup tells you where an IP address is operating right now, who the ISP is, and what security characteristics the address has. Security researchers benefit most from using both: WHOIS for the registration record and IP lookup for real-time network intelligence. Together, they give you the complete picture of any internet resource you are investigating.
+
+To try IP lookup for yourself, visit our [IP lookup tool](/ip-lookup) or explore the [API documentation](/api-docs) for programmatic access.
