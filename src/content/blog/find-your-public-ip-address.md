@@ -22,6 +22,8 @@ When most people ask "what is my IP address," they are asking about their public
 
 The simplest way to find your public IP address is to visit [ippriv.com](https://ippriv.com). The tool detects your IP address automatically the moment you load the page — no input, no registration, no setup required.
 
+For a more detailed analysis of your connection, including VPN, proxy, and Tor detection, check out our [IP lookup tool](/ip-lookup).
+
 IPPriv displays your current public IP address along with additional information about your connection:
 
 - Whether you have an IPv4 or IPv6 address (or both)
@@ -141,3 +143,5 @@ If you are a developer integrating IP lookup into an application, make sure your
 | Mobile browser | Phones and tablets | Browser app |
 
 No matter which method you use, knowing your public IP address is the first step toward understanding your internet footprint. Use [IPPriv](https://ippriv.com) for the fastest, most informative ip lookup available.
+
+For a deeper dive into how IP addresses work and what they reveal, read our guide on [what is an IP address](/blog/what-is-an-ip-address).

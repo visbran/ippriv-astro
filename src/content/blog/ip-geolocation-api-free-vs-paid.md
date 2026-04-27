@@ -145,4 +145,4 @@ For backend use cases, the same pattern applies in Node.js, Python, Go, or any l
 
 The simplest way to decide: start with a free IP lookup API and upgrade only when you hit a real constraint. If you are building a side project, in early development, or your traffic is genuinely low, a free service handles the job. When you need higher request volumes, city-level accuracy for business-critical decisions, or security intelligence data for fraud prevention, the cost of a paid service is quickly justified by the functionality it provides.
 
-For developers who want to prototype without commitment, IPPriv's free API is a practical starting point — no API key, no credit card, CORS enabled, and a response format that covers the most common IP geolocation use cases.
+For developers who want to prototype without commitment, IPPriv's free API is a practical starting point — no API key, no credit card, CORS enabled, and a response format that covers the most common IP geolocation use cases. Try it at [ippriv.com/ip-lookup](/ip-lookup) or read the [API documentation](/api-docs) to get started.
