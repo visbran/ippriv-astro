@@ -2,6 +2,8 @@
 import { ViewTransitions } from 'astro:transitions';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import WebSiteSchema from '../components/WebSiteSchema.astro';
+import OrganizationSchema from '../components/OrganizationSchema.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -109,7 +111,14 @@ const imageUrl = image.startsWith('http') ? image : new URL(image, Astro.site).t
 
     {/* Plausible Analytics */}
     <script is:inline defer data-domain="ippriv.com" src="https://plausible.io/js/script.js"></script>
-    
+
+    {/* Sitemap */}
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {/* Schema.org structured data */}
+    <WebSiteSchema />
+    <OrganizationSchema />
+
     {/* Custom head content (structured data, etc.) */}
     <slot name="head" />
     
