@@ -1,10 +1,11 @@
 ---
-title: 'How to Hide Your IP Address — 5 Proven Methods'
-description: 'Learn the 5 best methods to hide your IP address and protect your privacy online. Compare VPNs, proxies, Tor, and more.'
+title: 'How to Hide Your IP Address: 5 Proven Methods (2026)'
+description: 'The complete guide to hiding your IP address in 2026. Compare VPNs, Tor, proxies, SOCKS5 and mobile data — with step-by-step verification.'
 publishedAt: 2025-03-10
+updatedAt: 2026-05-03
 author: 'Brandon Visca'
 heroImage: 'https://images.unsplash.com/photo-1510511459019-5dda7724fd87?w=1200&h=600&fit=crop'
-tags: ['privacy', 'VPN', 'ip address']
+tags: ['privacy', 'VPN', 'ip address', 'Tor']
 draft: false
 ---
 

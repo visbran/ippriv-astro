@@ -1,7 +1,8 @@
 ---
-title: 'How to Find Your Public IP Address (4 Easy Methods)'
-description: 'Learn how to find your public IP address in seconds using a browser tool, terminal commands, or the IPPriv API. Works on any device.'
+title: 'Find Your Public IP Address: 4 Quick Methods (Any Device)'
+description: 'Find your public IP address in seconds. Methods: browser tool, curl terminal command, dev tools, and mobile. Includes IPv4 vs IPv6 guide.'
 publishedAt: 2025-02-10
+updatedAt: 2026-05-03
 author: 'Brandon Visca'
 heroImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=600&fit=crop'
 tags: ['ip address', 'ip lookup', 'tutorial']

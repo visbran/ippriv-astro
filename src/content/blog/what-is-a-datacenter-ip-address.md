@@ -1,10 +1,11 @@
 ---
-title: 'What is a Datacenter IP Address? (And How to Detect One)'
-description: 'Learn what datacenter IP addresses are, how they differ from residential IPs, and how websites use them to detect bots, VPNs, and proxies.'
+title: 'Datacenter IP Address: Detection & vs Residential IP (2026)'
+description: 'What is a datacenter IP? Learn how to detect datacenter IPs, why they matter for security, and how websites use them to flag bots and VPNs.'
 publishedAt: 2025-03-17
+updatedAt: 2026-05-03
 author: 'Brandon Visca'
 heroImage: 'https://images.unsplash.com/photo-1597239450996-ea7c2c564412?w=1200&h=600&fit=crop'
-tags: ['ip address', 'security', 'VPN']
+tags: ['ip address', 'security', 'VPN', 'datacenter']
 draft: false
 ---
 

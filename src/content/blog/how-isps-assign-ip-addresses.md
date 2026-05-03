@@ -1,10 +1,11 @@
 ---
-title: 'How ISPs Assign IP Addresses to Their Customers'
-description: 'Learn how Internet Service Providers assign IP addresses using DHCP, NAT, and IP pools — and what this means for IP lookup accuracy.'
+title: 'How ISPs Assign IP Addresses: DHCP, NAT & IP Pools Explained'
+description: 'Learn exactly how ISPs assign IP addresses through DHCP, NAT, and IP pools. Understand dynamic vs static IPs and CGNAT in plain English.'
 publishedAt: 2025-04-14
+updatedAt: 2026-05-03
 author: 'Brandon Visca'
 heroImage: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&h=600&fit=crop'
-tags: ['ip address', 'ISP', 'networking']
+tags: ['ip address', 'ISP', 'networking', 'DHCP']
 draft: false
 ---
 

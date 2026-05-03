@@ -46,5 +46,16 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    { "source": "/blog/:slug/", "destination": "/blog/:slug", "permanent": true },
+    { "source": "/ip-lookup/",  "destination": "/ip-lookup",  "permanent": true },
+    { "source": "/about/",     "destination": "/about",     "permanent": true },
+    { "source": "/contact/",   "destination": "/contact",   "permanent": true },
+    { "source": "/api-docs/",  "destination": "/api-docs",  "permanent": true },
+    { "source": "/privacy/",   "destination": "/privacy",   "permanent": true },
+    { "source": "/terms/",     "destination": "/terms",     "permanent": true },
+    { "source": "/legal/",     "destination": "/legal",     "permanent": true },
+    { "source": "/blog/",     "destination": "/blog",     "permanent": true }
   ]
 }
