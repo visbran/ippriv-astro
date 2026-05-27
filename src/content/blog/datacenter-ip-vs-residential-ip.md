@@ -2,6 +2,7 @@
 title: 'Datacenter IP vs Residential IP: What Is the Difference?'
 description: 'Compare datacenter IPs and residential IPs — how they are assigned, how they are detected, and why the distinction matters for privacy, scraping, and online security in 2026.'
 publishedAt: 2026-05-27
+heroImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop'
 author: 'Brandon Visca'
 tags: ['datacenter IP', 'residential IP', 'IP detection', 'web scraping', 'proxy']
 draft: false
