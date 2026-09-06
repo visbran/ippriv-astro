@@ -138,7 +138,7 @@ function detectFonts() {
 }
 ```
 
-This is the kind of data that runs无声地 in the background on many sites. Now let us look at how websites actually use it.
+This is the kind of data that runs silently in the background on many sites. Now let us look at how websites actually use it.
 
 ## How Websites and Advertisers Use Fingerprinting
 

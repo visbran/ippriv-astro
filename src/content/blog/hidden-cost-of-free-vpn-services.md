@@ -64,7 +64,7 @@ Common limitations:
 - **Speed throttling**: free connections limited to 1–5 Mbps, making streaming unusable
 - **Server restrictions**: only a handful of servers available to free users
 - **Ad injection**: ads injected into HTTP pages visited through the VPN
-- **Forced wait times**: 被迫观看广告 before connecting
+- **Forced wait times**: mandatory ad viewing before connecting
 - **Session timeouts**: connections cut every 15–30 minutes
 
 These providers still pose risks: ad injection requires intercepting your HTTP traffic, which means they have the technical capability to modify any unencrypted page you visit.

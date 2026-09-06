@@ -128,7 +128,7 @@ A DNS leak test works by querying DNS servers you control, or by using a known t
 // Simplified DNS leak test (browser-side)
 async function checkDnsLeak() {
   const testDomain = 'dnsleaktest.ippriv.com';
-  const testIp = '203.0.113.50'; // Our контрольный IP
+  const testIp = '203.0.113.50'; // Our test IP
 
   try {
     // Make a request that forces a DNS lookup

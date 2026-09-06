@@ -23,7 +23,7 @@ Normally, your device sends DNS requests to your **Internet Service Provider's (
 Even if your VPN hides your IP address, your ISP can still see:
 
 - Every domain you visit
-- The times you访问 certain sites
+- The times you visit certain sites
 - Your general browsing patterns
 
 This defeats much of the purpose of using a VPN for privacy. For journalists, researchers, or anyone operating under restrictive networks, a DNS leak can be dangerous.
