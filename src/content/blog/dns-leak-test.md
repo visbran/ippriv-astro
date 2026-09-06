@@ -14,7 +14,7 @@ In this guide, you'll learn what DNS leaks are, how they happen, how to test for
 
 ## What Is a DNS Leak?
 
-Every time you type a domain name like `google.com`, your browser needs to translate it into an IP address. This translation happens through the **Domain Name System (DNS)**: a distributed database that acts as the internet's phone book.
+Every time you type a domain name like `google.com`, your browser needs to translate it into an IP address. This translation happens through the **Domain Name System (DNS)**: a distributed database that works like the internet's phone book.
 
 Normally, your device sends DNS requests to your **Internet Service Provider's (ISP)** DNS servers. When you connect to a VPN, these requests should be routed through the VPN tunnel to the provider's DNS servers instead. A **DNS leak** occurs when these requests bypass the VPN and are sent directly to your ISP's servers: leaking information about your browsing activity.
 
@@ -286,9 +286,7 @@ While DNS leaks expose your query history, **WebRTC leaks** expose your real IP 
 - [VPN Detection Explained](/blog/vpn-detection-explained): Understand how websites identify VPN users
 - [IP Address Blacklist Check](/blog/ip-address-blacklist-check): Check if your IP is flagged
 
-## Conclusion
-
-DNS leaks are a subtle but serious privacy threat that can undermine even the best VPN setups. The good news: they're easy to detect with the right tools and straightforward to fix once identified.
+## What to Do Now
 
 Run a DNS leak test before every sensitive browsing session, especially when connecting to a new network or using a new VPN provider. Your privacy depends on every layer of protection working together.
 
@@ -298,5 +296,3 @@ Run a DNS leak test before every sensitive browsing session, especially when con
 - [ ] Manually configure DNS servers to a privacy-focused provider
 - [ ] Test after any network or VPN configuration change
 - [ ] Consider IPv6 disable if your VPN doesn't handle it
-
-Stay safe out there.

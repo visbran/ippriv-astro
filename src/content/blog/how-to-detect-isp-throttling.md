@@ -8,8 +8,6 @@ tags: ['ISP throttling', 'network speed', 'bandwidth', 'internet privacy', 'spee
 draft: false
 ---
 
-## Introduction
-
 You pay for 300 Mbps, but Netflix buffers. You subscribe to a gigabit plan, but your torrents crawl at 2 Mbps. You notice that YouTube loads in 360p on Wi-Fi but streams perfectly over cellular. Sound familiar?
 
 You might be experiencing **ISP throttling**: the practice where your internet service provider deliberately slows down your connection to specific services, protocols, or types of traffic.
@@ -256,7 +254,7 @@ A VPN encrypts all your traffic and routes it through the VPN provider's servers
 
 ### Use a Proxy
 
-For specific applications (torrenting, scraping, streaming), a SOCKS5 proxy can provide similar benefits to a VPN at lower overhead. Note that proxies do not encrypt traffic, so they only bypass throttling, not inspection.
+For specific applications (torrenting, scraping, streaming), a SOCKS5 proxy can provide similar benefits to a VPN at lower overhead. Proxies do not encrypt traffic, so they only bypass throttling, not inspection.
 
 ### Request a Different Plan or Provider
 
@@ -286,11 +284,9 @@ It is important to distinguish throttling from congestion, as the solutions diff
 - [WebRTC IP Leak Explained](/blog/webrtc-ip-leak-explained): Protecting your real IP address
 - [SOCKS5 Proxy vs VPN](/blog/socks5-proxy-vs-vpn): Choosing the right privacy tool
 
-## Conclusion
+## What to Do Now
 
-ISP throttling is a real and widespread practice that quietly degrades your internet experience. The good news: it is detectable with the right tools, and most forms of throttling can be bypassed with a VPN or proxy.
-
-Run the tests described in this guide, document your findings, and take action. Your bandwidth is yours: you paid for it.
+Run the tests described in this guide, document your findings, and take action.
 
 **Quick checklist:**
 - [ ] Run speed tests on multiple services today
@@ -298,5 +294,3 @@ Run the tests described in this guide, document your findings, and take action. 
 - [ ] Check your streaming resolution limits
 - [ ] Read your ISP's acceptable use policy for hidden throttling clauses
 - [ ] Switch providers if throttling is endemic to your plan
-
-Stay fast out there.

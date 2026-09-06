@@ -14,7 +14,7 @@ Every time you visit a website, your browser sends an HTTP request to a web serv
 
 Your IP address is not something you choose to share. It is a technical requirement of how the internet works. For data to be delivered to your device, the server must know where to send it. Your IP address is the return address on every request you make.
 
-This is not inherently sinister. It is simply how the protocol functions. But the fact that your IP address is transmitted with every request means it is also logged, processed, and potentially used in ways you may not be aware of. Understanding what websites know about your IP address (and what they can infer from it) is an important part of understanding your digital privacy.
+This is not inherently sinister. It is how the protocol functions. But the fact that your IP address is transmitted with every request means it is also logged, processed, and potentially used in ways you may not be aware of. Understanding what websites know about your IP address (and what they can infer from it) is an important part of understanding your digital privacy.
 
 ## What Web Servers Log
 

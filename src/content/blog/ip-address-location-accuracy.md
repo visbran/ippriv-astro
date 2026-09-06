@@ -10,7 +10,7 @@ draft: false
 
 ## The Promise and Reality of IP Geolocation
 
-IP address geolocation is one of the most widely used techniques on the internet. Streaming services use it to enforce licensing restrictions. Advertisers use it to target campaigns by region. Security systems use it to flag suspicious logins from unexpected countries. And tools like [IPPriv](https://ippriv.com) use it to give users an instant ip lookup with location information tied to any IP address.
+IP address geolocation is used across the internet. Streaming services use it to enforce licensing restrictions. Advertisers use it to target campaigns by region. Security systems use it to flag suspicious logins from unexpected countries. And tools like [IPPriv](https://ippriv.com) use it to give users an instant ip lookup with location information tied to any IP address.
 
 But how accurate is it, really? The honest answer is: it depends on what level of precision you need. IP geolocation can be remarkably reliable at broad geographic scales and frustratingly imprecise at finer ones. Understanding the difference (and the reasons for it) helps you use geolocation data appropriately and interpret results correctly.
 
@@ -38,7 +38,7 @@ In densely populated regions with many ISPs and well-documented IP allocations, 
 
 ### Street-Level Accuracy: Not Reliable
 
-IP geolocation cannot reliably determine a street address. Any service claiming street-level IP-based location without additional signals (like GPS) is not being honest about its capabilities. IP addresses simply do not carry enough information to pinpoint a location more precisely than a city or metropolitan area, and even that requires favorable conditions.
+IP geolocation cannot reliably determine a street address. Any service claiming street-level IP-based location without additional signals (like GPS) is not being honest about its capabilities. IP addresses do not carry enough information to pinpoint a location more precisely than a city or metropolitan area, and even that requires favorable conditions.
 
 ## Why IP Geolocation Can Be Wrong
 

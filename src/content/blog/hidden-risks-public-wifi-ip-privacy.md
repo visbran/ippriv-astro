@@ -80,11 +80,11 @@ After setting up your defenses, verify them:
 
 If any of these show your real IP or real DNS resolver, your privacy is compromised on that network: even if the connection appears to work.
 
-## The Bottom Line
+## What to Do on an Untrusted Network
 
-Public WiFi is convenient, but convenience has a privacy cost. Every network you join is a potential vector for IP exposure. The good news: a VPN with verified leak protection, combined with smart browsing habits, eliminates most of that risk.
+Public WiFi is convenient, but convenience has a privacy cost. Every network you join is a potential vector for IP exposure. A VPN with verified leak protection, combined with smart browsing habits, eliminates most of that risk.
 
-The key is **verification**: not assumption. Run the tests. Confirm the leaks are closed. Then browse with confidence, even on the most open networks.
+Verify rather than assume. Run the tests. Confirm the leaks are closed. Then browse with confidence, even on the most open networks.
 
 ---
 

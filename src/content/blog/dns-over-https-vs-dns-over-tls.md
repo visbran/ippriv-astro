@@ -8,7 +8,7 @@ tags: ['dns', 'encrypted dns', 'doh', 'dot', 'privacy', 'network security']
 draft: false
 ---
 
-## Introduction: Why Your DNS Queries Are a Privacy Problem
+## Why Your DNS Queries Are a Privacy Problem
 
 Every time you type a website address into your browser, a DNS (Domain Name System) query leaves your device asking "what is the IP address for this domain?" This lookup traverses your network, passes through your ISP's servers, and may be logged, sold, or intercepted before reaching a DNS resolver. While your HTTPS traffic to that website may be encrypted, the DNS lookup itself is often sent in plain text: visible to your ISP, network administrator, and anyone monitoring your connection.
 
@@ -105,7 +105,7 @@ This makes DoH meaningfully more private on monitored networks where port 853 is
 
 ### Trust Models
 
-Both protocols share a fundamental trust assumption: **you are trusting the DoH/DoT provider with your DNS data**. Cloudflare's 1.1.1.1 privacy policy commits to deleting logs within 24 hours. Google logs for 24-48 hours. Quad9 (nonprofit, Swiss-hosted) has the strongest privacy reputation. Choose your resolver provider based on who you trust with a complete list of every domain you resolve.
+Both protocols share a fundamental trust assumption: you are trusting the DoH/DoT provider with your DNS data. Cloudflare's 1.1.1.1 privacy policy commits to deleting logs within 24 hours. Google logs for 24-48 hours. Quad9 (nonprofit, Swiss-hosted) has the strongest privacy reputation. Choose your resolver provider based on who you trust with a complete list of every domain you resolve.
 
 ## Performance: Is There a Real Difference?
 
@@ -211,13 +211,13 @@ upstream_recursive_servers:
 
 Emerging protocols push privacy even further. **Oblivious DNS over HTTPS (ODoH)**, specified in [RFC 9483](https://www.rfc-editor.org/rfc/rfc9483.html), adds a proxy relay between the client and the DoH resolver. The proxy sees the client's IP address but not the query. The resolver sees the query but not the client's IP address. Neither knows both.
 
-**Oblivious DoH** separates identity from query at the protocol level: a fundamentally different trust model than simply choosing a privacy-respecting resolver.
+**Oblivious DoH** separates identity from query at the protocol level: a fundamentally different trust model than choosing a privacy-respecting resolver.
 
 Cloudflare and Google both support ODoH in experimental deployments. Widespread adoption is still maturing, but ODoH represents the direction encrypted DNS is heading.
 
-## Conclusion
+## Which Protocol to Choose
 
-DNS over HTTPS and DNS over TLS both meaningfully improve on plain-text DNS by encrypting your queries and preventing passive surveillance. For most users, **DoH on port 443 is the better default**: it is harder to block, works in more environments, and benefits from ongoing work on ECH to hide even the server hostname.
+DNS over HTTPS and DNS over TLS both meaningfully improve on plain-text DNS by encrypting your queries and preventing passive surveillance. For most users, DoH on port 443 is the better default: it is harder to block, works in more environments, and benefits from ongoing work on ECH to hide even the server hostname.
 
 DoT remains valuable for OS-level enforcement on Android and Linux, where you want all applications to use encrypted DNS without per-app configuration.
 

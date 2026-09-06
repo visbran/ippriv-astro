@@ -7,8 +7,6 @@ heroImage: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&
 tags: ["privacy", "mobile", "Android", "iOS", "IP address"]
 ---
 
-## Introduction
-
 Your smartphone knows more about you than your computer does. It carries your location data, connects to multiple networks daily, and sends your IP address with every request you make. Whether you are on cellular data or Wi-Fi, your real IP address is visible to websites, apps, and network operators.
 
 Hiding your IP address on mobile is just as important as on a desktop, and in many ways more urgent, given how much mobile traffic bypasses traditional security tools. This guide covers the main methods available for Android and iOS, with practical steps you can apply today.
@@ -66,7 +64,7 @@ On iOS:
 3. Scroll to **HTTP Proxy** and select **Manual**.
 4. Enter the proxy server address and port.
 
-Note that proxy configuration on iOS is network-wide and not enforced for all apps: many apps ignore system proxy settings.
+Proxy configuration on iOS is network-wide and not enforced for all apps: many apps ignore system proxy settings.
 
 ### 3. Use Tor on Mobile
 
@@ -159,9 +157,7 @@ Use a site that shows your ISP and approximate location. If the location shown s
 | Tor | Moderate | Very High | High | Maximum anonymity |
 | Network switching | High | Low | None | Quick IP change, not real privacy |
 
-## Conclusion
-
-Your mobile IP address is a persistent identifier that follows you across apps and websites. Hiding it requires choosing the right tool for your threat model: a VPN for convenience and broad protection, a proxy for targeted app routing, or Tor for maximum anonymity.
+## Beyond Hiding Your IP
 
 Beyond hiding your IP, review app permissions, disable Wi-Fi when not needed, and be aware that GPS and location services can expose your real position in ways IP hiding cannot prevent. Privacy on mobile is layered: no single tool makes you anonymous, but combining good practices significantly reduces your attack surface.
 

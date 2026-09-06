@@ -8,7 +8,7 @@ tags: ['browser fingerprinting', 'online privacy', 'tracking', 'anti-fingerprint
 draft: false
 ---
 
-## Introduction: The Tracker You Cannot Delete
+## The Tracker You Cannot Delete
 
 You cleared your cookies. You use a VPN. You disabled JavaScript on a few sites. You feel anonymous, but a website you have never visited before already knows it is you.
 
@@ -100,7 +100,7 @@ HTTP headers sent by your browser include Accept, Accept-Language, Accept-Encodi
 
 The power of fingerprinting comes from combining many low-entropy signals into a high-entropy overall identifier.
 
-Consider: screen resolution alone is not unique. Many users have 1920 x 1080 displays. But add canvas fingerprint, WebGL renderer, installed fonts, timezone, and user agent, and the combination becomes statistically unique.
+Screen resolution alone is not unique. Many users have 1920 x 1080 displays. But add canvas fingerprint, WebGL renderer, installed fonts, timezone, and user agent, and the combination becomes statistically unique.
 
 The math backs this up. EFF's Cover Your Track research found:
 
@@ -147,7 +147,7 @@ webgl.disabled: true
 media.navigator.enabled: false
 ```
 
-Note that `privacy.resistFingerprinting` in Firefox spoofs many attributes to generic values, reducing uniqueness at the cost of some site compatibility.
+`privacy.resistFingerprinting` in Firefox spoofs many attributes to generic values, reducing uniqueness at the cost of some site compatibility.
 
 **Brave Browser** includes built-in fingerprint randomization. Instead of blocking fingerprinting APIs, Brave randomizes their outputs on each site visit, making cross-site tracking unreliable.
 
@@ -188,12 +188,8 @@ Every fingerprinting defense involves a tradeoff between privacy and convenience
 
 Most users will benefit most from Brave's built-in randomization or Firefox with `privacy.resistFingerprinting` enabled, balancing reasonable privacy with everyday usability.
 
-## Conclusion: Invisible and Inescapable, But Manageable
+## What You Can Still Manage
 
-Browser fingerprinting represents a fundamental shift in how tracking works online. It is invisible to the user, leaves no trace on devices, and operates without any user action or consent. The advertising and analytics industries have weaponized browser attributes that were designed for legitimate web functionality.
-
-The good news: awareness is growing, and browser vendors are actively improving built-in protections. Firefox's resistFingerprinting mode, Brave's randomization, and Tor Browser's standardization all represent genuine progress.
+Awareness is growing, and browser vendors are actively improving built-in protections. Firefox's resistFingerprinting mode, Brave's randomization, and Tor Browser's standardization all represent genuine progress.
 
 The practical reality is that most users do not need to eliminate fingerprinting entirely: they need to blend in. Using a privacy-focused browser, keeping extensions minimal, and understanding what signals your browser exposes are the first steps toward a smaller, less distinctive fingerprint.
-
-Privacy online requires ongoing attention. Fingerprinting will continue to evolve, and so must the tools and practices that defend against it.

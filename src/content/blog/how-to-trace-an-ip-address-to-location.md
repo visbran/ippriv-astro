@@ -19,11 +19,11 @@ IP addresses are allocated geographically by regional internet registries (RIRs)
 
 When you trace an IP address to a location, you are querying a database that maps IP ranges to geographic data. These databases are built and maintained by companies that aggregate routing information, ISP allocation records, and other signals. The mapping is not exact: it points to where the IP block was allocated, not where a device is currently sitting.
 
-The key insight: **IP geolocation estimates location based on allocation records, not GPS or cell tower data.** An IP assigned to an ISP in New York might belong to a laptop in Berlin if the user is on a VPN.
+The key insight: IP geolocation estimates location based on allocation records, not GPS or cell tower data. An IP assigned to an ISP in New York might belong to a laptop in Berlin if the user is on a VPN.
 
 ## The Building Blocks: IP Address Structure
 
-Before writing code, it helps to understand what you are actually looking up.
+Before writing code, it helps to understand what you are looking up.
 
 IPv4 addresses are 32-bit numbers written as four octets (0–255) separated by dots: `203.0.113.42`. IPv6 addresses are 128-bit numbers written in hexadecimal groups: `2001:db8::ff00:42:8329`.
 
@@ -216,7 +216,7 @@ def log_error(e):
 
 ## Key Limitations of IP Geolocation
 
-Understanding what IP geolocation **cannot** do is as important as knowing what it can.
+Understanding what IP geolocation cannot do is as important as knowing what it can.
 
 ### VPNs, Proxies, and Tor
 

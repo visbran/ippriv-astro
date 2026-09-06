@@ -8,7 +8,7 @@ tags: ['IP leak', 'privacy', 'VPN', 'DNS leak', 'WebRTC leak', 'online security'
 draft: false
 ---
 
-## Introduction: Your VPN Might Not Be Protecting You
+## Your VPN Might Not Be Protecting You
 
 You activate your VPN, check your IP address, and breathe a sigh of relief: your real location is hidden. But a few minutes later, a website somehow knows where you live. Your ISP name appears in a WHOIS lookup. Your actual ISP is exposed despite the VPN tunnel.
 
@@ -70,7 +70,7 @@ IPv6 leaks are harder to detect because most IP lookup tools default to IPv4 add
 
 ### 4. VPN Split Tunneling Leaks
 
-Split tunneling allows you to route some applications through the VPN while leaving others on your regular internet connection: useful for streaming local content while protecting your browsing. However, misconfigured split tunneling is one of the most common causes of accidental IP leaks.
+Split tunneling routes some applications through the VPN while leaving others on your regular internet connection: useful for streaming local content while protecting your browsing. However, misconfigured split tunneling is one of the most common causes of accidental IP leaks.
 
 If a sensitive application (torrent client, banking app, or messaging tool) is accidentally excluded from the VPN tunnel, it will broadcast your real IP address for that specific connection.
 
@@ -109,7 +109,7 @@ If your ISP's DNS servers appear, you have a DNS leak.
 
 ### Test for General IP Leaks
 
-Simply visit `ipleak.net`: it runs DNS, WebRTC, and IP checks simultaneously and gives you a consolidated result.
+Visit `ipleak.net`: it runs DNS, WebRTC, and IP checks simultaneously and gives you a consolidated result.
 
 ## How to Prevent IP Leaks: 8 Proven Methods
 
@@ -233,7 +233,7 @@ For users who need maximum anonymity, layering Tor over a VPN (or vice versa) pr
 - **VPN → Tor**: Your ISP sees the VPN, the VPN sees the Tor entry node. Best for hiding VPN usage from your ISP.
 - **Tor → VPN**: Your ISP only sees Tor traffic. The VPN provider does not know your real IP. Best for hiding your identity from the VPN provider.
 
-Note that VPN + Tor combinations can reduce speed significantly and are not necessary for most users.
+VPN + Tor combinations can reduce speed significantly and are not necessary for most users.
 
 ## Summary: Preventing IP Leaks Checklist
 
@@ -245,13 +245,11 @@ Note that VPN + Tor combinations can reduce speed significantly and are not nece
 | Split Tunnel | Audit VPN app settings | Route sensitive apps through VPN |
 | Connection Drop | Monitor connection logs | Enable kill switch |
 
-## Conclusion
+## What to Do Now
 
-A VPN is only as good as its leak protection. The most sophisticated encryption and fastest servers mean nothing if your real IP address is silently exposed to trackers, websites, and your ISP through a DNS request, a WebRTC query, or a momentary connection drop.
+IP leaks are almost entirely preventable with the right configuration. Enable your kill switch, fix your DNS settings, disable WebRTC, and test regularly. These steps take under an hour to set up and provide continuous protection every time you go online.
 
-The good news: IP leaks are almost entirely preventable with the right configuration. Enable your kill switch, fix your DNS settings, disable WebRTC, and test regularly. These steps take under an hour to set up and provide continuous protection every time you go online.
-
-Run your first leak test today at [ipleak.net](https://ipleak.net): the results may surprise you.
+Run your first leak test today at [ipleak.net](https://ipleak.net).
 
 ---
 

@@ -177,6 +177,6 @@ Before launching a privacy-first API, verify:
 - [ ] Data subject request procedures exist and are tested
 - [ ] Third-party services that receive user data are documented
 
-## Conclusion
+## Next Steps
 
-Privacy-first APIs build trust and ensure long-term sustainability. Start with these principles and adapt them to your specific needs. For a real-world example of these principles in practice, explore the [IPPriv API documentation](/api-docs) or learn more about [our privacy values](/about). For implementation details, see our guide on [IP API integration best practices](/blog/ip-api-integration).
+Start with these principles and adapt them to your specific needs. For a real-world example of these principles in practice, explore the [IPPriv API documentation](/api-docs) or learn more about [our privacy values](/about). For implementation details, see our guide on [IP API integration best practices](/blog/ip-api-integration).

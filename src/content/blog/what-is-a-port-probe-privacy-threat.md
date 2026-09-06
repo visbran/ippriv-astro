@@ -8,7 +8,7 @@ tags: ['port probe', 'network security', 'privacy', 'fingerprinting', 'VPN']
 draft: false
 ---
 
-## Introduction: The Scan You Never See
+## The Scan You Never See
 
 Every time you connect to a website, your computer opens a communication channel: a port. Most users are aware of this at a surface level: port 443 for HTTPS, port 80 for HTTP, port 25 for email. What fewer people realize is that the server on the other side is also scanning *your* machine, probing which ports are open and how your system responds.
 
@@ -40,7 +40,7 @@ The scanner sends a SYN but never completes the three-way handshake. It sends a 
 
 ### 3. UDP Scan
 
-UDP ports respond differently (or not at all) when probed. An open UDP port may simply ignore the probe. A closed port returns an ICMP Port Unreachable message. This makes UDP scanning slower and less reliable, but it still reveals information about services like DNS (port 53), DHCP (port 67), or VoIP applications.
+UDP ports respond differently (or not at all) when probed. An open UDP port may ignore the probe. A closed port returns an ICMP Port Unreachable message. This makes UDP scanning slower and less reliable, but it still reveals information about services like DNS (port 53), DHCP (port 67), or VoIP applications.
 
 ## What Port Probes Reveal About You
 
@@ -147,14 +147,12 @@ Port probes are part of a broader fingerprinting ecosystem. They are most powerf
 - **TLS handshake signatures**: your TLS version, cipher suites, and certificate chain
 - **TCP/IP stack behavior**: your operating system's network stack fingerprint
 
-A port probe adds a layer that reveals *active network services* on your machine: something that no other fingerprinting technique covers. It tells an observer not just what your browser reports, but what is actually running underneath it.
+A port probe adds a layer that reveals *active network services* on your machine: something that no other fingerprinting technique covers. It tells an observer what is actually running underneath what your browser reports.
 
-## Conclusion: Lock the Door, Not Just the Window
+## Close the Ports You Do Not Need
 
 Most privacy guides focus on IP masking, VPN usage, and browser hardening. These are important, but they are the equivalent of locking your front door while leaving every window in the house open. Port probes operate at a network layer that VPN traffic and browser extensions cannot fully protect.
 
 A determined observer (whether a tracker, a government agency, or a malicious actor) can use port scanning to build a detailed picture of your network setup, identify your VPN usage, enumerate your running applications, and fingerprint your operating system.
 
 The good news is that basic hygiene goes a long way: a properly configured firewall, disabling unnecessary services, and blocking JavaScript port scans on sites you do not trust will stop the majority of casual and mid-level probes. For professional threat models, anti-detect browser environments and network-level isolation provide the next layer of defense.
-
-The internet's default state is openness. Taking control of what your network stack reveals about you is one of the most effective (and most overlooked) steps in a comprehensive privacy strategy.

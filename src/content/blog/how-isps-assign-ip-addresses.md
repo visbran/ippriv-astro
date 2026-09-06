@@ -23,7 +23,7 @@ Most residential customers receive their IP address through DHCP: the Dynamic Ho
 
 The lease duration is key. A DHCP lease is a temporary assignment: the IP address is yours for a defined period, typically 24 hours to several days for residential customers. When the lease expires, your router requests a renewal. If you are actively connected, you will usually receive the same IP address again. But if you disconnect for an extended period, that address may be returned to the pool and assigned to another customer.
 
-This is why residential IP addresses are described as "dynamic": they can and do change. The address you have today may belong to a different household next month. This rotation is not random or malicious; it is simply how ISPs efficiently share a finite pool of IP addresses across a large subscriber base.
+This is why residential IP addresses are described as "dynamic": they can and do change. The address you have today may belong to a different household next month. This rotation is not random or malicious; it is how ISPs efficiently share a finite pool of IP addresses across a large subscriber base.
 
 ## IP Pools and Address Rotation
 
@@ -66,7 +66,7 @@ Understanding how ISPs assign IP addresses explains a lot about why IP lookup re
 
 **City-level accuracy reflects network infrastructure, not home addresses.** An IP lookup on your home IP address will return your ISP and a city, but that city is typically where the ISP has its nearest network hub or DHCP server, not necessarily where you live. In dense urban areas, this is often accurate. In rural areas or regions served by centralized infrastructure, the discrepancy can be significant.
 
-**CGNAT makes individual-level geolocation impossible.** If your ISP uses CGNAT, IP lookup simply cannot identify your location from your public IP address. The public IP belongs to the ISP's gateway, not to you.
+**CGNAT makes individual-level geolocation impossible.** If your ISP uses CGNAT, IP lookup cannot identify your location from your public IP address. The public IP belongs to the ISP's gateway, not to you.
 
 **Dynamic addresses leave stale data.** When an IP address is reassigned to a new customer in a different city, geolocation databases may take days or weeks to reflect the change. During that window, an IP lookup returns the previous customer's approximate location.
 
@@ -87,7 +87,3 @@ console.log(data.country); // e.g., "United States"
 ```
 
 The ISP field is highly reliable: it reflects who owns the IP block and therefore who is providing the internet service. The city field is a best-effort estimate based on network infrastructure location. For most use cases (country detection, ISP identification, and network categorization) IP lookup provides accurate and actionable information. For precise user location, it is better to request location permission through the browser's Geolocation API rather than inferring it from the IP address.
-
-## Conclusion
-
-ISPs assign IP addresses to customers primarily through DHCP leases drawn from address pools, with addresses rotating as customers connect and disconnect. Businesses can pay for static IP addresses that remain fixed. CGNAT further complicates the picture by allowing many users to share a single public IP address. These assignment mechanisms explain why IP lookup accurately identifies the ISP and country but is less precise at the city level: the data reflects ISP infrastructure, not individual user locations. For developers building applications on top of IP address information, understanding this context leads to more realistic expectations and better application design. Use our [IP lookup tool](/ip-lookup) to see what your own ISP assignment currently reveals, and read our guide on [static vs. dynamic IP addresses](/blog/static-vs-dynamic-ip-address) for more on how assignment type affects lookup results.

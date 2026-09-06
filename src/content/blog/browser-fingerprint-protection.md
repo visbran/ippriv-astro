@@ -8,7 +8,7 @@ tags: ['browser fingerprinting', 'online privacy', 'anti-fingerprinting', 'Tor B
 draft: false
 ---
 
-## Introduction: Hiding in a Crowd of One
+## Hiding in a Crowd of One
 
 Your browser is unusually identifiable. Even when you clear cookies, use a VPN, and browse in private mode, websites can still recognize you across sessions by the unique combination of signals your browser exposes. Reducing your fingerprint is harder than clearing cookies, but it is achievable.
 
@@ -24,7 +24,7 @@ The Electronic Frontier Foundation's Cover Your Tracks project found that over 8
 
 Effective protection means either standardizing your fingerprint to match a large group (making you unremarkable) or blocking the JavaScript APIs that collect fingerprint data.
 
-The tradeoff: more blocking means a more unusual fingerprint or broken website functionality.
+The tradeoff is that more blocking means a more unusual fingerprint or broken website functionality.
 
 ## Browser-Level Protections
 
@@ -64,7 +64,7 @@ What Tor Browser does:
 - Spoofs all hardware and timing signals
 - Limits canvas access and forces permission prompts
 
-The tradeoff: some websites break, and performance is slower due to onion routing.
+The tradeoff is that some websites break, and performance is slower due to onion routing.
 
 Tor Browser is the right choice if your threat model requires strong anonymity and you can accept the usability tradeoffs.
 
@@ -123,7 +123,7 @@ NoScript is best suited for technical users willing to whitelist sites manually.
 
 JavaScript is the primary delivery mechanism for fingerprinting scripts. Disabling it entirely eliminates most vectors, but breaks most modern websites.
 
-A practical middle ground: use NoScript or uBlock Origin to block JavaScript on untrusted sites while allowing it on sites that need it.
+A practical middle ground is to use NoScript or uBlock Origin to block JavaScript on untrusted sites while allowing it on sites that need it.
 
 ### Using a Virtual Machine or Tails OS
 
@@ -165,10 +165,10 @@ Run these tests in your target browser configuration to measure improvement.
 | Usability + privacy | Brave with Shields set to Aggressive |
 | Maximum compatibility | Firefox with strict ETP + uBlock Origin |
 
-## Conclusion: Layers, Not Single Solutions
+## Protection Comes in Layers
 
 There is no single setting that makes your browser untrackable. Effective fingerprint protection requires combining multiple methods: browser choice, privacy settings, extensions, and behavioral changes.
 
 Start with Firefox + resistFingerprinting + uBlock Origin. Measure your fingerprint with Cover Your Tracks. Then add layers based on your threat model and tolerance for usability tradeoffs.
 
-The goal is not perfect anonymity: it is raising the cost of identification high enough that you are not worth the effort.
+The goal is to raise the cost of identification high enough that you are not worth the effort.

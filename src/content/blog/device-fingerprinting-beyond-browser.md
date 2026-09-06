@@ -8,7 +8,7 @@ tags: ['device fingerprinting', 'hardware fingerprint', 'OS fingerprint', 'syste
 draft: false
 ---
 
-## Introduction: The Fingerprint Is in the Hardware
+## The Fingerprint Is in the Hardware
 
 Browser fingerprinting is the well-known threat. Far fewer people know that the fingerprinting attack surface extends well beyond the browser: into your operating system, GPU, audio stack, battery sensor, and the firmware running on your hardware itself.
 
@@ -279,12 +279,12 @@ Use these tools to check your current device fingerprint:
 
 Run tests before and after applying privacy configurations to measure actual improvement.
 
-## Conclusion: You Cannot Hide Completely, But You Can Raise the Cost
+## Raising the Cost of Identification
 
-Device fingerprinting is pervasive because it operates below the layers most privacy tools target. VPNs do not stop it. Cookie deletion does not stop it. Incognito mode does not stop it.
+Device fingerprinting is pervasive because it operates below the layers most privacy tools target. VPNs, cookie deletion, and incognito mode do not stop it.
 
-What reduces it: browser-level protections that spoof or block hardware-level APIs, standardized environments like Tor Browser that make you look like everyone else, and OS-level hardening that limits what applications can enumerate.
+Browser-level protections that spoof or block hardware-level APIs, standardized environments like Tor Browser that make you look like everyone else, and OS-level hardening that limits what applications can enumerate all reduce it.
 
-The goal is not invisibility. It is raising the identification cost high enough that your device blends into a sufficiently large crowd that targeted tracking becomes impractical.
+The goal is to raise the identification cost high enough that your device blends into a sufficiently large crowd that targeted tracking becomes impractical.
 
 Start with Firefox + `privacy.resistFingerprinting`. Measure your baseline fingerprint. Then layer in additional protections based on your threat model and tolerance for usability tradeoffs.

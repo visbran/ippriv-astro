@@ -148,7 +148,7 @@ If you're hitting CAPTCHAs frequently, it means your other evasion measures aren
 
 The `robots.txt` file tells crawlers which paths a site owner doesn't want scraped. It's not legally binding, but ignoring it is both unethical and often interpreted as evidence of bad faith if legal issues arise.
 
-More importantly: web scraping can violate the Computer Fraud and Abuse Act (US), the GDPR (EU), or local equivalents depending on what you're collecting, how you're storing it, and how you're using it. If you're scraping personal data, consult a lawyer. For public business data (prices, product listings), you're on safer ground, but safe ground isn't the same as no ground.
+Web scraping can also violate the Computer Fraud and Abuse Act (US), the GDPR (EU), or local equivalents depending on what you're collecting, how you're storing it, and how you're using it. If you're scraping personal data, consult a lawyer. For public business data (prices, product listings), you're on safer ground, but safe ground isn't the same as no ground.
 
 ## Common Mistakes That Get You Blocked Fast
 
@@ -170,12 +170,12 @@ The architecture that works at scale:
 4. **Results aggregator** collects scraped data into a central store
 5. **Health monitor** tracks ban rates per proxy and rotates underperforming exit nodes
 
-This isn't a weekend project: it's a distributed system. For most use cases, managed scraping platforms like ScrapingBee, ScraperAPI, or Bright Data's Scraper APIs handle the infrastructure complexity and let you focus on parsing logic.
+This is a distributed system. For most use cases, managed scraping platforms like ScrapingBee, ScraperAPI, or Bright Data's Scraper APIs handle the infrastructure complexity and let you focus on parsing logic.
 
-## Conclusion
+## Practical Rules
 
-Getting blocked is not a failure of web scraping: it's a feedback signal. Every ban tells you something about what the target's detection system is watching. Treat each block as data, adjust your signals, and iterate.
+Every ban tells you something about what the target's detection system is watching. Treat each block as data, adjust your signals, and iterate.
 
-The fundamentals never change: use residential or mobile proxies, randomize your timing and fingerprints, render JavaScript-heavy pages with a real browser, handle CAPTCHAs as a cost center, and always stay on the right side of the law.
+Use residential or mobile proxies, randomize your timing and fingerprints, render JavaScript-heavy pages with a real browser, handle CAPTCHAs as a cost center, and always stay on the right side of the law.
 
-Start with the basics, scale only when you need to, and remember that the most sophisticated scraping operation is ultimately just a very fast, polite, and slightly paranoid human visitor.
+Start with the basics and scale only when you need to.

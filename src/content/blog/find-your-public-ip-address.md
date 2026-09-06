@@ -106,7 +106,7 @@ Open any browser on your phone and visit [ippriv.com](https://ippriv.com). Your 
 
 **Note about mobile IP addresses:** When connected to Wi-Fi, your phone uses your home or office network's public IP address: the same one your laptop uses. When connected to cellular data (4G or 5G), your phone is assigned an IP address from your mobile carrier's pool. Mobile carriers frequently use Carrier-Grade NAT (CGNAT), which means many customers share a single public IP address and the address displayed may not be uniquely yours.
 
-This distinction matters for geolocation purposes: cellular IP addresses often resolve to your carrier's regional hub rather than your specific city.
+For geolocation, cellular IP addresses often resolve to your carrier's regional hub rather than your specific city.
 
 ## Why Your IP Address Changes
 

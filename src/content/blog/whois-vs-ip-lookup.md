@@ -61,7 +61,7 @@ However, there is a subtle difference in what they show. WHOIS returns the regis
 
 ## When to Use WHOIS
 
-WHOIS is the right tool when your question is fundamentally about registration and ownership:
+WHOIS is the right tool when your question is about registration and ownership:
 
 - You want to know who owns a domain and how to contact them
 - You are investigating an abuse complaint and need official contact information for an IP block
@@ -111,7 +111,7 @@ console.log(data.asn);          // "AS15169"
 
 IPPriv's CORS-enabled API makes it easy to integrate IP lookup directly into web applications, backend services, or security tools: no API key required for standard usage.
 
-## Conclusion
+## Which Tool to Use
 
 WHOIS and IP lookup are complementary tools that answer different questions. WHOIS tells you who registered a domain or IP block and provides official contact information. IP lookup tells you where an IP address is operating right now, who the ISP is, and what security characteristics the address has. Security researchers benefit most from using both: WHOIS for the registration record and IP lookup for real-time network intelligence. Together, they give you the complete picture of any internet resource you are investigating.
 

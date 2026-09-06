@@ -60,9 +60,9 @@ The reasons websites choose to block or challenge Tor traffic vary widely:
 
 Blocking Tor requires careful consideration because the network serves many legitimate and socially valuable purposes:
 
-Journalists in countries with censored internet rely on Tor to access and transmit information securely. Human rights activists use it to organize and communicate under oppressive governments. Whistleblowers use Tor to reach journalists and leak platforms like SecureDrop. Privacy-conscious users simply prefer not to have their browsing activity associated with their IP address.
+Journalists in countries with censored internet rely on Tor to access and transmit information securely. Human rights activists use it to organize and communicate under oppressive governments. Whistleblowers use Tor to reach journalists and leak platforms like SecureDrop. Privacy-conscious users prefer not to have their browsing activity associated with their IP address.
 
-Blanket blocking of all Tor exit nodes will affect these users as well as bad actors. The appropriate response depends on the sensitivity of the service and the context of each request. A financial application may have no choice but to block Tor access entirely, while a general content website might simply trigger additional verification steps.
+Blanket blocking of all Tor exit nodes will affect these users as well as bad actors. The appropriate response depends on the sensitivity of the service and the context of each request. A financial application may have no choice but to block Tor access entirely, while a general content website might trigger additional verification steps.
 
 ## Detecting Tor IPs with IPPriv
 
@@ -101,6 +101,6 @@ If you are building an application that needs to handle Tor traffic, here are pr
 
 **Communicate clearly.** If your application blocks Tor access, display a clear message explaining why rather than a generic error. Users relying on Tor for safety and privacy deserve transparency about access restrictions.
 
-## Conclusion
+## Why Detection Works
 
 Tor exit node detection works because exit node IP addresses are publicly documented and visible to destination servers. The Tor Project's own exit list, combined with commercial IP lookup databases, makes it reliable to identify when a connection is coming through the Tor network. Whether to block that traffic depends on your use case, risk tolerance, and the needs of your user base. With a tool like IPPriv, checking the `isTor` flag takes one API call: the policy decision is what requires careful thought. See the [IPPriv API documentation](/api-docs) for the full security endpoint reference, or read [how to hide your IP address](/blog/hide-your-ip-address) to understand Tor from the user's perspective.

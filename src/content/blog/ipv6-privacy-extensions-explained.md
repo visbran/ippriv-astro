@@ -16,7 +16,7 @@ This is not a theoretical concern. In 2026, IPv6 adoption has crossed 50% global
 
 - **Derived from your MAC address**, making it globally unique and permanently tied to your hardware
 - **Persistent across sessions**: websites see the same IPv6 address every time you visit
-- **Linkable across websites**: the same IPv6 address acts as a supercookie across the entire web
+- **Linkable across websites**: the same IPv6 address is a supercookie across the entire web
 - **Visible even behind a VPN**: IPv6 traffic often bypasses VPN tunnels entirely on dual-stacked networks
 
 IPv6 privacy extensions solve this by generating temporary, random IPv6 addresses that rotate on a schedule, breaking the link between your device and your long-term identity.
@@ -284,7 +284,7 @@ If the external address does not match your MAC-derived link-local or global add
 
 ### Method 2: Visit an IPv6 Leak Test Page
 
-Visit **https://test-ipv6.com** in your browser. The test reports:
+Visit https://test-ipv6.com in your browser. The test reports:
 
 - Your IPv4 address
 - Your IPv6 address
@@ -393,9 +393,7 @@ Privacy extensions significantly reduce IPv6-based tracking but are not a comple
 | **Android 10+** | Enabled on Wi-Fi | `ip -6 addr show wlan0` | Not configurable; relies on system Wi-Fi stack |
 | **iOS** | Limited support | Not easily verifiable | Enable "Limit IP Address Tracking" in Settings → Wi-Fi |
 
-## Conclusion
-
-IPv6 privacy extensions are a powerful, built-in mechanism that every privacy-conscious internet user should understand and enable. By replacing MAC-derived IPv6 addresses with randomly generated, rotating temporary addresses, they break the persistent link between your device hardware and your online identity at the network layer.
+## Why Enable Them
 
 Unlike cookie-based or fingerprint-based tracking, IPv6 address tracking operates at the network level, making it invisible to browser-based privacy tools. Enabling privacy extensions closes a tracking vector that most users are completely unaware of.
 

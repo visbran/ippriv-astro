@@ -124,10 +124,10 @@ Using a VPN replaces your real IP address with one from the VPN provider's serve
 
 Most home internet connections use dynamic IP addresses that change periodically. This means that the same IP address is not permanently linked to you, providing a modest degree of privacy by default.
 
-## Conclusion
+## What It Does and Does Not Reveal
 
 An IP address reveals a meaningful but bounded set of information: your approximate location at the country and city level, your ISP, your ASN, your timezone, and whether you are using anonymizing services like a VPN. What it cannot reveal is your name, your exact address, your browsing history, or any personal account information.
 
-Understanding this distinction matters because both extremes of the common perception are wrong. An IP address is not the harmless number that some assume: it is a real piece of identifying information worth protecting. But it is also not the all-revealing identifier that others fear: it cannot pinpoint your home or expose your identity on its own.
+Both extremes of the common perception are wrong. An IP address is a real piece of identifying information worth protecting, but it cannot pinpoint your home or expose your identity on its own.
 
 To see exactly what your IP address reveals right now, run a free lookup at [ippriv.com](https://ippriv.com) and review the results yourself.

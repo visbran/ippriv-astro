@@ -87,7 +87,7 @@ When building applications that use IP geolocation, a few principles will save y
 
 **Cache results aggressively.** IP address assignments are stable enough that geolocation results for a given IP can be cached for hours or days. Caching reduces latency, lowers API costs, and prevents rate-limiting issues.
 
-**Account for [users who mask their real location](/blog/vpn-detection-explained).** For applications where location accuracy matters, combine geolocation with VPN and proxy detection flags. This tells you not just where the IP appears to be located, but whether that location is likely reliable.
+**Account for [users who mask their real location](/blog/vpn-detection-explained).** For applications where location accuracy matters, combine geolocation with VPN and proxy detection flags. This tells you where the IP appears to be located and whether that location is likely reliable.
 
 **Use country-level data for critical decisions.** If you are making consequential decisions (access control, compliance, fraud scoring) rely on country-level data, which is far more accurate than city-level data.
 
@@ -95,6 +95,6 @@ When building applications that use IP geolocation, a few principles will save y
 
 **Provide an override.** Allow users to manually set their location or language preference. IP geolocation is an inference; users know their own location better than any database does.
 
-## Conclusion
+## What to Expect
 
-IP geolocation is a powerful tool when used responsibly. Understanding its limitations (and building with those limitations in mind) leads to better applications and more realistic expectations. Country-level detection is highly reliable. City-level detection is a useful approximation, not a precise fact. To see geolocation data in action, [try our free IP lookup tool](/ip-lookup) or explore the [IPPriv API documentation](/api-docs) to integrate it into your own application. For a deeper look at accuracy expectations, read our guide on [IP address location accuracy](/blog/ip-address-location-accuracy).
+Country-level detection is highly reliable. City-level detection is a useful approximation, not a precise fact. To see geolocation data in action, [try our free IP lookup tool](/ip-lookup) or explore the [IPPriv API documentation](/api-docs) to integrate it into your own application. For a deeper look at accuracy expectations, read our guide on [IP address location accuracy](/blog/ip-address-location-accuracy).

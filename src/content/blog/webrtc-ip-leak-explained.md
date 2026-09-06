@@ -12,7 +12,7 @@ draft: false
 
 WebRTC (Web Real-Time Communication) is a browser technology that enables direct peer-to-peer communication (video calls, voice chat, file sharing) without requiring plugins or external software. It is built into every modern browser: Chrome, Firefox, Safari, Edge, and Opera.
 
-The problem? WebRTC uses Interactive Connectivity Establishment (ICE) to discover the best path between peers. Part of this process involves gathering **candidate IP addresses** (including your local (private) IP and your **public IP address**) and sharing them with the remote peer. Even if you are connected through a VPN that hides your real IP from websites, WebRTC can **bypass the VPN tunnel entirely** and expose your actual IP address to the websites you visit.
+The problem? WebRTC uses Interactive Connectivity Establishment (ICE) to discover the best path between peers. Part of this process involves gathering **candidate IP addresses** (including your local (private) IP and your **public IP address**) and sharing them with the remote peer. Even if you are connected through a VPN that hides your real IP from websites, WebRTC can bypass the VPN tunnel entirely and expose your actual IP address to the websites you visit.
 
 This is called a **WebRTC IP leak**.
 
@@ -63,11 +63,11 @@ function getPublicIP() {
 }
 ```
 
-This is not hypothetical: this code pattern is actively used.
+This code pattern is actively used.
 
 ## How to Test for a WebRTC IP Leak
 
-The fastest way to check is to use our **[WebRTC Leak Test](/webrtc-leak-test)** tool. It runs entirely in your browser and displays any IP addresses discovered through WebRTC.
+The fastest way to check is to use our [WebRTC Leak Test](/webrtc-leak-test) tool. It runs entirely in your browser and displays any IP addresses discovered through WebRTC.
 
 Manual test steps:
 
@@ -112,7 +112,7 @@ If you are building a real-time application:
 
 ## Does Disabling WebRTC Break Anything?
 
-For most users: **no.** WebRTC is primarily used for video calling apps (Google Meet, Discord, Facebook Messenger), browser-based file transfers, and live streaming. If you do not use any of these features, you can safely disable it.
+For most users: no. WebRTC is primarily used for video calling apps (Google Meet, Discord, Facebook Messenger), browser-based file transfers, and live streaming. If you do not use any of these features, you can safely disable it.
 
 If you rely on real-time communication, use a VPN with built-in WebRTC leak protection, or use browser extensions that block only the leak while allowing legitimate WebRTC traffic.
 
@@ -125,8 +125,6 @@ If you rely on real-time communication, use a VPN with built-in WebRTC leak prot
 - [ ] Verify your VPN has a built-in WebRTC leak blocker
 - [ ] Test again after making changes
 
-## Conclusion
-
-WebRTC IP leaks are a silent but serious threat to anyone relying on a VPN for anonymity or privacy. The technology was designed for functionality, not for privacy by default. Understanding how the leak occurs and taking simple preventive steps closes a significant attack surface: one that most VPN users do not even know exists.
+## Test Your Setup
 
 Run a WebRTC leak test now to see if your current setup is exposing your real IP address.

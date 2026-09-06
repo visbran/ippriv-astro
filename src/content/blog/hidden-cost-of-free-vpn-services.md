@@ -8,11 +8,11 @@ tags: ['VPN', 'privacy', 'free VPN', 'data tracking', 'online security', 'VPN al
 draft: false
 ---
 
-## Introduction: Nothing Is Really Free
+## Nothing Is Really Free
 
 You download a free VPN app, tap "Connect," and browse the web anonymously without spending a cent. Case closed, or so the marketing would have you believe.
 
-The uncomfortable truth: **free VPN providers are running a business**. Someone is paying for the servers, bandwidth, and engineering staff. If you are not handing over your credit card, you are almost certainly handing over something else: your data, your browsing habits, your bandwidth, or your attention.
+Free VPN providers are running a business. Someone is paying for the servers, bandwidth, and engineering staff. If you are not handing over your credit card, you are almost certainly handing over something else: your data, your browsing habits, your bandwidth, or your attention.
 
 This article breaks down exactly how free VPNs make money, what risks they introduce, and how to evaluate whether the trade-off is worth it.
 
@@ -22,9 +22,9 @@ Understanding the business model is essential to understanding the risk.
 
 ### 1. Data Harvesting and Sale
 
-The most invasive revenue model: free VPN apps are built to collect as much data about you as possible, then sell that data to advertisers, data brokers, or analytics companies.
+In the most invasive revenue model, free VPN apps are built to collect as much data about you as possible, then sell that data to advertisers, data brokers, or analytics companies.
 
-Research from Simon Milligan and colleagues at Queen Mary University of London analyzed 283 free VPN apps and found that **over 75% contained tracking libraries** embedded in their code. These trackers were present even when the app was idle, logging your device information, browsing behavior, and app usage patterns.
+Research from Simon Milligan and colleagues at Queen Mary University of London analyzed 283 free VPN apps and found that over 75% contained tracking libraries embedded in their code. These trackers were present even when the app was idle, logging your device information, browsing behavior, and app usage patterns.
 
 Examples of data commonly harvested:
 
@@ -85,7 +85,7 @@ A free VPN that logs your browsing can build a detailed profile of you and sell 
 
 Free VPN apps often lack the engineering resources to properly configure DNS leak protection. Many free providers route DNS requests through your ISP's servers despite the VPN tunnel, defeating the entire purpose of using a VPN.
 
-A 2023 study by Security.org tested 16 popular free VPN apps and found that **11 leaked DNS requests** during normal operation. Users believed they were protected while their ISP was logging every domain they visited.
+A 2023 study by Security.org tested 16 popular free VPN apps and found that 11 leaked DNS requests during normal operation. Users believed they were protected while their ISP was logging every domain they visited.
 
 ### Malware and Tracking Libraries
 
@@ -180,17 +180,15 @@ These are not perfect (the limitations exist to drive upgrades) but they do not 
 | Support | None or automated | Human available |
 | IP pool size | Small (easily blocked) | Large (rotated regularly) |
 
-The math is simple: a premium VPN costs $3–$12/month. A data breach or identity theft incident costs thousands of dollars and countless hours to resolve. The annual cost of a quality VPN is less than a single hour of legal consultation.
+A premium VPN costs $3–$12/month. A data breach or identity theft incident costs thousands of dollars and countless hours to resolve. The annual cost of a quality VPN is less than a single hour of legal consultation.
 
-## Conclusion: You Are the Product
+## You Are the Product
 
 The phrase "if you're not paying for the product, you are the product" predates the VPN industry, but it applies with unusual clarity here. Free VPN providers have built sophisticated infrastructure, employ engineers, and maintain global server networks. None of that is free. Someone is paying, and in the absence of paying customers, your data and bandwidth are the currency.
 
 This is not an argument against free VPNs categorically. Proton VPN's free tier and Windscribe's free plan are legitimate services with genuine privacy commitments. But they are the exception, not the rule.
 
 Before installing any VPN (free or paid) read the privacy policy. Look for the business model. Check whether they have been independently audited. The five minutes of research could prevent years of consequences from a data breach or privacy violation.
-
-Your IP address is one of the most persistent identifiers tied to your identity. Protecting it with a service that sells your identity defeats the purpose entirely.
 
 ---
 

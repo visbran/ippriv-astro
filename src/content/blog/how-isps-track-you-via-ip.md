@@ -10,7 +10,7 @@ draft: false
 
 ## Why Your ISP Is the Most Powerful Observer on Your Network
 
-When you browse the web, your internet service provider sits at the first hop of every connection. Every DNS query, every HTTP request, every peer-to-peer connection: it all flows through their infrastructure first. Your VPN encrypts the content of your traffic, but the **destination IP addresses, connection timing, and metadata** remain visible to your ISP.
+When you browse the web, your internet service provider sits at the first hop of every connection. Every DNS query, every HTTP request, every peer-to-peer connection: it all flows through their infrastructure first. Your VPN encrypts the content of your traffic, but the destination IP addresses, connection timing, and metadata remain visible to your ISP.
 
 Most users assume that browsing in incognito mode or using HTTPS protects them from ISP-level observation. It doesn't. Your ISP can still see which domains you connect to (via DNS queries and SNI fields in TLS), when you connect, for how long, and how much data you transfer.
 
@@ -53,7 +53,7 @@ Data retention laws vary by country, but the general picture is sobering. In the
 | Australia | 2 years | Telecommunications (Interception and Access) Act |
 | Canada | 6–12 months | CRTC guidelines; no mandatory federal law |
 
-Major US carriers including Comcast, AT&T, and Verizon have historically retained connection logs for **6 to 18 months**. Some retain metadata longer for internal business purposes, such as network optimization and billing disputes.
+Major US carriers including Comcast, AT&T, and Verizon have historically retained connection logs for 6 to 18 months. Some retain metadata longer for internal business purposes, such as network optimization and billing disputes.
 
 ## Who Can Access Your ISP's Data?
 
@@ -78,7 +78,7 @@ Beyond legal compliance, ISPs use your data for several commercial purposes:
 ISPs monitor traffic patterns to manage network congestion. Some ISPs have been documented throttling specific types of traffic (peer-to-peer, video streaming) based on deep packet inspection, though this is more common in markets with limited competition.
 
 **2. Advertising and Data Monetization**
-In the United States, the reversal of **FCC privacy rules in 2017** (S.J. Res. 34) removed ISP-specific restrictions on selling browsing data and app usage to advertisers. As a result, major ISPs including AT&T, Comcast, and Verizon have developed programs that monetize anonymized or aggregated browsing data.
+In the United States, the reversal of FCC privacy rules in 2017 (S.J. Res. 34) removed ISP-specific restrictions on selling browsing data and app usage to advertisers. As a result, major ISPs including AT&T, Comcast, and Verizon have developed programs that monetize anonymized or aggregated browsing data.
 
 AT&T's "Powered Up" program and similar initiatives analyze household browsing behavior to serve targeted advertising. The data is typically aggregated or anonymized, but privacy researchers have questioned whether true anonymization is achievable at the granularity of browsing histories.
 
@@ -118,7 +118,7 @@ ECH encrypts the SNI field in TLS handshakes, closing one of the last major plai
 ### 4. Use Tor for Sensitive Threat Models
 Tor routes your traffic through three anonymizing relays, with end-to-end encryption. Your ISP sees you connecting to a Tor relay but cannot determine the destination or content. For high-sensitivity use cases (journalism, activism, security research) Tor provides substantially stronger anonymity than a VPN alone.
 
-The tradeoff: significantly reduced speed and complexity of setup.
+The tradeoff is much slower speed and a more complex setup.
 
 ### 5. Request Your ISP's Data
 Under laws like GDPR (EU) and CCPA (California), you have the right to request a copy of the data your ISP has collected about you. This is both a privacy right and a way to understand exactly what they hold. Several users who have requested their data from major US ISPs have received surprisingly detailed connection logs spanning months or years.
@@ -142,9 +142,7 @@ ISP surveillance is not a static problem. Several developments are reshaping the
 | Data volumes (upload/download) | Yes | N/A | 6–24 months |
 | Physical location | Yes (from IP assignment) | N/A | Indefinite |
 
-## Conclusion
-
-Your ISP is the most persistent observer of your online activity. They see your DNS queries, destination IPs, connection timing, and data volumes, and they retain this data for months or years. In many jurisdictions, law enforcement can access this data with minimal legal process, and in the United States, ISPs can legally monetize this data for advertising.
+## Reducing Your Exposure
 
 Understanding what your ISP logs is the first step toward reducing your exposure. Use encrypted DNS, route traffic through a privacy-respecting VPN, keep your browser updated to benefit from ECH, and exercise your legal rights to see what data your provider holds about you.
 

@@ -30,9 +30,9 @@ PTR records (Pointer records) are the DNS resource records that make reverse loo
 
 For IPv4 addresses, the reverse lookup zone is `in-addr.arpa`. To look up the hostname for the IP address `1.2.3.4`, the DNS system queries for `4.3.2.1.in-addr.arpa`: the octets are written in reverse order. For IPv6, the zone is `ip6.arpa`, and the address is similarly reversed and expanded.
 
-PTR records are typically managed by whoever controls the IP address block (usually the hosting provider or ISP) rather than the domain owner. This means that even if you own a domain and configure its A record to point to an IP address, you cannot set the PTR record yourself unless your hosting provider gives you that ability. This is an important limitation to keep in mind.
+PTR records are typically managed by whoever controls the IP address block (usually the hosting provider or ISP) rather than the domain owner. This means that even if you own a domain and configure its A record to point to an IP address, you cannot set the PTR record yourself unless your hosting provider gives you that ability.
 
-When a PTR record exists and is properly configured, a reverse lookup returns a hostname. When no PTR record exists, the lookup simply fails with an NXDOMAIN (non-existent domain) response.
+When a PTR record exists and is properly configured, a reverse lookup returns a hostname. When no PTR record exists, the lookup fails with an NXDOMAIN (non-existent domain) response.
 
 ## How to Perform a Reverse IP Lookup
 
@@ -111,6 +111,6 @@ When you perform a reverse lookup on an IP address, here is how to read the resu
 
 ## Putting It All Together
 
-Reverse IP lookup bridges the gap between raw IP address numbers and the human-readable hostnames that make networks easier to understand. Whether you are filtering spam, auditing server connections, or simply curious about who owns an IP address, PTR records and reverse DNS give you a critical layer of information that forward lookups alone cannot provide.
+Reverse IP lookup bridges the gap between raw IP address numbers and the human-readable hostnames that make networks easier to understand. Whether you are filtering spam, auditing server connections, or curious about who owns an IP address, PTR records and reverse DNS give you a critical layer of information that forward lookups alone cannot provide.
 
 Use [IPPriv](https://ippriv.com) to perform instant reverse IP lookups alongside full geolocation and ISP information for any IP address worldwide. For more on IP lookup tools, see our [free IP address lookup guide](/blog/free-ip-address-lookup).

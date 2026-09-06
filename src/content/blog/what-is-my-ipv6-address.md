@@ -8,7 +8,7 @@ tags: ['IPv6', 'networking', 'developer guide', 'IP address']
 draft: false
 ---
 
-## Introduction: Why IPv6 Matters Now More Than Ever
+## Why IPv6 Matters Now More Than Ever
 
 The internet is running out of IPv4 addresses. With over 4 billion possible IPv4 addresses, the world collectively assumed that would be enough. It wasn't. The explosion of smartphones, IoT devices, cloud services, and global connectivity has consumed the IPv4 address space to the point of exhaustion. Regional internet registries have been allocating from the final blocks for years, and network engineers have been compensating with NAT, carrier-grade NAT, and IPv6 transition technologies.
 
@@ -335,10 +335,8 @@ ss -tulnp | grep -E ':80|:443'
 # The output should show '::' or '0.0.0.0' for dual-stack
 ```
 
-## Conclusion
+## What This Means for Your Code
 
-Finding and understanding your IPv6 address is the first step in building IPv6-aware applications. The internet is transitioning to IPv6, and while the deadline has been "imminent" for over two decades, real IPv6 adoption is now significant and growing. Major content providers, cloud platforms, and mobile networks carry substantial IPv6 traffic.
-
-The good news for developers: most of your existing code works with IPv6 without modification, as long as you're using hostname-based connections rather than hardcoded IPv4 addresses. The abstractions provided by operating systems, DNS, and programming languages handle the protocol differences in most cases. The cases where they don't (WebRTC leaks, address-family-specific socket bindings, DNS resolution edge cases) are exactly the situations where solid IPv6 knowledge makes the difference between a secure application and a privacy gap.
+Most of your existing code works with IPv6 without modification, as long as you're using hostname-based connections rather than hardcoded IPv4 addresses. The abstractions provided by operating systems, DNS, and programming languages handle the protocol differences in most cases. The cases where they don't (WebRTC leaks, address-family-specific socket bindings, DNS resolution edge cases) are exactly the situations where solid IPv6 knowledge makes the difference between a secure application and a privacy gap.
 
 To see what your IPv6 address looks like in the wild, [use the ippriv.com IP lookup tool](/ip-lookup). For a deeper dive into how IP addresses work across versions, read our guide on [IPv4 vs IPv6: A Developer Guide](/blog/ipv4-vs-ipv6). If you're building applications that need to classify or detect network types from IP addresses, explore the [IPPriv API documentation](/api-docs) for IPv6-enabled endpoints.

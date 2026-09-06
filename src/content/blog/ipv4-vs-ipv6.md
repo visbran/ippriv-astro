@@ -90,7 +90,7 @@ IPv6 adoption is uneven globally. As of 2025, Google reports that roughly 40–4
 
 Major cloud providers (AWS, Google Cloud, Azure), CDNs (Cloudflare, Fastly), and mobile carriers have all made significant IPv6 investments. Most mobile devices in developed markets receive IPv6 addresses from their carriers.
 
-The implication for developers: you cannot assume your users have IPv4-only connections, and you cannot assume they have IPv6 connectivity either. Dual-stack support (handling both protocols simultaneously) is the only correct posture for production applications in 2025.
+For developers, this means you cannot assume your users have IPv4-only connections, and you cannot assume they have IPv6 connectivity either. Dual-stack support (handling both protocols simultaneously) is the only correct posture for production applications in 2025.
 
 ## Handling Both Versions in Your Application
 
@@ -194,6 +194,6 @@ IPv6 can be faster than IPv4 in some configurations. The simplified header reduc
 
 In practice, the performance difference depends heavily on the specific network path. IPv6 routing tables are less optimized in some regions, and misconfigured dual-stack networks can introduce latency through protocol negotiation delays (addressed by the "Happy Eyeballs" algorithm, which tries IPv6 and IPv4 simultaneously and uses whichever connects first).
 
-## Conclusion
+## What to Build For
 
 IPv6 adoption is growing, but IPv4 will remain relevant for years. Build applications that seamlessly support both protocols for maximum compatibility and future-proofing. Use our [IP lookup tool](/ip-lookup) to instantly see which version your current IP address is, or check the [IPPriv API documentation](/api-docs): it supports both IPv4 and IPv6 lookups. For more context on IP addressing fundamentals, read our guide on [what is an IP address](/blog/what-is-an-ip-address).

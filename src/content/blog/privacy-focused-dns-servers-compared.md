@@ -1,6 +1,6 @@
 ---
 title: 'Privacy-Focused DNS Servers Compared: Which Respects Your Privacy in 2026?'
-description: 'Compare the most privacy-conscious DNS resolvers of 2026: DNSCrypt, NextDNS, Quad9, and Cloudflare 1.1.1.1. Learn logging policies, encryption support, speed, and which one truly protects your query data.'
+description: 'Compare the most privacy-conscious DNS resolvers of 2026: DNSCrypt, NextDNS, Quad9, and Cloudflare 1.1.1.1. Learn logging policies, encryption support, speed, and which one protects your query data.'
 publishedAt: 2026-08-08
 author: 'Brandon Visca'
 heroImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop'
@@ -8,7 +8,7 @@ tags: ['DNS privacy', 'privacy DNS', 'DNSCrypt', 'Quad9', 'NextDNS', 'encrypted 
 draft: false
 ---
 
-## Introduction: Your DNS Queries Are Leaking More Than You Think
+## Your DNS Queries Are Leaking More Than You Think
 
 Every time you type a website address into your browser, a DNS (Domain Name System) query leaves your device asking "where can I find example.com?" That query travels across your network, through your ISP, and often to a third-party DNS resolver you have never consciously chosen. By default, that resolver is your ISP's, which means your ISP logs every site you visit, in plain text, indefinitely.
 
@@ -190,8 +190,6 @@ nslookup example.com 2>&1 | grep "Server:"
 
 Run a DNS leak test at [dnsleaktest.com](https://dnsleaktest.com) or [browserleaks.com/dns](https://browserleaks.com/dns) after switching. A successful setup shows the resolver's location, not your ISP's.
 
-## Conclusion
-
-Encrypted DNS is one of the fastest, highest-impact privacy upgrades you can make. It costs nothing, requires minimal setup, and closes a significant surveillance vector that most users never think about. The gap between ISP-level DNS logging and a zero-logging encrypted resolver is enormous, and the solutions to close it are mature and free.
+## Where to Start
 
 Start with Quad9 or Cloudflare 1.1.1.1 for a no-configuration upgrade. Move to NextDNS if you want ad and tracker blocking. DNSCrypt-proxy is there for the technically inclined who want full control. Any of these is orders of magnitude better than default DNS.

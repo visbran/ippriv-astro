@@ -8,11 +8,11 @@ tags: ['ipv6', 'vpn leaks', 'privacy', 'network security']
 draft: false
 ---
 
-## Introduction: The Hidden IPv6 Leak Problem
+## The Hidden IPv6 Leak Problem
 
 You connect to a VPN, check your IP address: it shows the VPN server. You breathe easy. But behind the scenes, something is leaking.
 
-IPv6 adoption has been accelerating. As of 2026, over 45% of internet traffic originates from IPv6-capable networks. Yet the majority of VPN applications (even paid ones) still route **only IPv4 traffic** through the encrypted tunnel. Your IPv6 queries, sent over a completely different network path, expose your real IP address to every server you connect to.
+IPv6 adoption has been accelerating. As of 2026, over 45% of internet traffic originates from IPv6-capable networks. Yet the majority of VPN applications (even paid ones) still route only IPv4 traffic through the encrypted tunnel. Your IPv6 queries, sent over a completely different network path, expose your real IP address to every server you connect to.
 
 This is called an **IPv6 leak**, and it is far more common than most users realize. In a 2025 study, researchers found that over 70% of VPN users on IPv6-capable networks experienced at least one leak during normal browsing.
 
@@ -40,7 +40,7 @@ The entire exchange happens in milliseconds, without any warning from the VPN ap
 
 Many networks today are **dual-stack**: they provide both IPv4 and IPv6 connectivity simultaneously. Your ISP assigns you both an IPv4 address and an IPv6 prefix. Most VPN apps only advertise an IPv4 address to the tunnel, leaving the IPv6 path wide open.
 
-The result: websites that support IPv6 can identify your real location and identity through your IPv6 address, even while your IPv4 address appears correctly masked.
+As a result, websites that support IPv6 can identify your real location and identity through your IPv6 address, even while your IPv4 address appears correctly masked.
 
 ## Real-World Impact
 
@@ -198,10 +198,6 @@ Run through this checklist to verify your IPv6 exposure:
 - [ ] Test after reconnections and network switches
 - [ ] Check that disabling your VPN immediately restores your original IPv6 address (confirming the VPN was handling it)
 
-## Conclusion
+## How to Fix It
 
-IPv6 leaks are a silent, pervasive privacy gap. They require no user error to occur: simply connecting to a VPN on an IPv6-capable network is enough. Unlike DNS leaks, which often produce visible symptoms (blocked sites, slower queries), IPv6 leaks are completely invisible in normal use.
-
-The fix ranges from simply choosing a VPN with proper IPv6 support to disabling IPv6 at the OS or router level. Whichever approach you choose, make IPv6 leak testing part of your standard VPN verification routine: right alongside DNS leak checks and IP address verification.
-
-Your real IP address is worth protecting on both protocols.
+The fix ranges from choosing a VPN with proper IPv6 support to disabling IPv6 at the OS or router level. Whichever approach you choose, make IPv6 leak testing part of your standard VPN verification routine: right alongside DNS leak checks and IP address verification.

@@ -8,7 +8,7 @@ tags: ['browser fingerprinting', 'privacy', 'web security', 'anti-tracking']
 draft: false
 ---
 
-## Introduction: Your Browser Is More Unique Than You Think
+## Your Browser Is More Unique Than You Think
 
 When you visit a website, the server sees far more than just your IP address. Your browser sends a detailed profile of itself: screen resolution, installed fonts, timezone, graphics card details, audio hardware characteristics, and dozens of other signals. Individually, each of these data points seems insignificant. Together, they form a fingerprint that is statistically unique to your device. Research from Princeton's WebTAP project found that the combination of browser attributes alone can identify 90%+ of users across sessions, even when cookies are blocked.
 
@@ -138,7 +138,7 @@ function detectFonts() {
 }
 ```
 
-This is the kind of data that runs silently in the background on many sites. Now let us look at how websites actually use it.
+This is the kind of data that runs silently in the background on many sites. Now let us look at how websites use it.
 
 ## How Websites and Advertisers Use Fingerprinting
 
@@ -247,15 +247,11 @@ add_header Content-Security-Policy "script-src 'self' https://trusted-cdn.com;";
 
 Browser fingerprinting is an arms race. As browsers add built-in protections, fingerprinting techniques grow more sophisticated. Canvas fingerprinting gave way to WebGL fingerprinting, which gave way to audio fingerprinting and font enumeration. The pattern continues.
 
-The most robust defense is a combination of a privacy-focused browser, selective JavaScript blocking, and awareness of which sites you trust. There is no single solution that eliminates fingerprinting entirely: the web itself is built on the APIs that make it possible.
+The strongest defense is a combination of a privacy-focused browser, selective JavaScript blocking, and awareness of which sites you trust. There is no single solution that eliminates fingerprinting entirely: the web itself is built on the APIs that make it possible.
 
-## Conclusion
-
-Browser fingerprinting is a powerful, invisible tracking mechanism that operates independently of cookies, IP addresses, and login state. It is used by advertisers, fraud prevention systems, and trackers to identify and follow users across the web with a precision that IP address alone cannot provide.
+## What You Can Do
 
 Understanding how fingerprinting works is the first step. Using a fingerprint-resistant browser, limiting third-party scripts, and being deliberate about which sites you trust are practical steps any user can take. For developers, applying standard spoofing techniques and using Content Security Policy helps reduce the ecosystem's overall fingerprinting surface area.
-
-Fingerprinting is not going away. But informed users and privacy-conscious developers can meaningfully reduce its effectiveness, and the tracking that depends on it.
 
 ---
 

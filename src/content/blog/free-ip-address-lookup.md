@@ -198,9 +198,7 @@ Private IP addresses (such as `192.168.x.x` or `10.x.x.x`) are internal network 
 
 A WHOIS lookup queries official IP registration databases for ownership and administrative contact information. An IP geolocation lookup uses geolocation databases to return location data. IPPriv combines both types of data in a single response.
 
-## Conclusion
-
-A free IP address lookup is one of the most useful and accessible tools available for understanding internet traffic. Whether you are investigating a security incident, building a localization feature, checking the quality of ad traffic, or simply curious about where a connection is coming from, a free IP lookup delivers immediate, actionable information.
+## Where to Start
 
 [IPPriv](https://ippriv.com) provides all of this (geolocation, ISP, ASN, DNS, and security flags) for free, with no account required. Use the web tool at [ippriv.com/ip-lookup](https://ippriv.com/ip-lookup) for quick lookups, or integrate the free API directly into your application for automated IP intelligence at scale.
 

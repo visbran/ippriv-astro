@@ -18,7 +18,7 @@ Understanding this difference is fundamental for network administrators, develop
 
 A dynamic IP address is one that changes periodically. It is assigned temporarily from a pool of available addresses managed by your Internet Service Provider (ISP) or your local router, using a protocol called DHCP: the Dynamic Host Configuration Protocol.
 
-Here is how it works: when your router connects to your ISP's network, it sends a DHCP request asking for an IP address. The ISP's DHCP server responds by leasing an available IP address from its pool. That lease has an expiration time: it might be 24 hours, a few days, or longer depending on the ISP's configuration. When the lease expires, the address may be renewed as-is, or a different address from the pool may be assigned.
+When your router connects to your ISP's network, it sends a DHCP request asking for an IP address. The ISP's DHCP server responds by leasing an available IP address from its pool. That lease has an expiration time: it might be 24 hours, a few days, or longer depending on the ISP's configuration. When the lease expires, the address may be renewed as-is, or a different address from the pool may be assigned.
 
 Most home and small business internet connections use dynamic IP addresses. From the ISP's perspective, dynamic assignment is efficient: since not all customers are online simultaneously, a pool of IP addresses can serve a much larger customer base than a one-to-one static assignment would allow.
 
@@ -42,7 +42,7 @@ The DHCP process follows a four-step handshake known as DORA:
 3. **Request:** Your device formally requests the offered address.
 4. **Acknowledge:** The DHCP server confirms the assignment. Your device now has an IP address for the lease duration.
 
-This process happens automatically and invisibly in the background every time your device connects to a network. For home networks, your router acts as the DHCP server for local devices while simultaneously receiving a dynamic IP from your ISP.
+This process happens automatically and invisibly in the background every time your device connects to a network. For home networks, your router is the DHCP server for local devices while simultaneously receiving a dynamic IP from your ISP.
 
 ## Pros and Cons of Dynamic IP Addresses
 

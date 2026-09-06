@@ -8,13 +8,13 @@ tags: ['dns leak', 'vpn privacy', 'network security', 'dns security']
 draft: false
 ---
 
-## Introduction: The Privacy Threat Your VPN Cannot Stop
+## The Privacy Threat Your VPN Cannot Stop
 
 You have connected to a VPN. Your IP address is hidden, your traffic is encrypted, and your ISP cannot see which websites you visit. Or so you think.
 
-The reality is more nuanced. Even with a reputable VPN provider, a **DNS leak** can silently expose your browsing activity to your ISP or a third-party DNS resolver: defeating the entire purpose of using a VPN for privacy. DNS leaks are among the most common and overlooked privacy failures on the internet today.
+Even with a reputable VPN provider, a **DNS leak** can silently expose your browsing activity to your ISP or a third-party DNS resolver: defeating the entire purpose of using a VPN for privacy. DNS leaks are among the most common and overlooked privacy failures on the internet today.
 
-The dangerous part? There is no popup, no warning, and no error message. Your VPN appears to work normally while your DNS queries (and therefore your browsing history) leak in plain sight.
+There is no popup, no warning, and no error message. Your VPN appears to work normally while your DNS queries (and therefore your browsing history) leak in plain sight.
 
 This guide covers what DNS leaks are, how to test for them, why they happen, and how to fix them on every major platform.
 
@@ -24,7 +24,7 @@ Every time you type a domain name like `example.com`, your browser needs to find
 
 DNS is essentially the internet's phone book. When you visit a website, your device performs a DNS lookup to find the correct server address before making the connection.
 
-Normally, this lookup is handled by your **ISP's DNS servers** by default. Your ISP can see every domain you request, even if the actual traffic is encrypted. This is why privacy-conscious users route DNS through their VPN tunnel: to prevent the ISP from logging their browsing activity.
+Normally, this lookup is handled by your ISP's DNS servers by default. Your ISP can see every domain you request, even if the actual traffic is encrypted. This is why privacy-conscious users route DNS through their VPN tunnel: to prevent the ISP from logging their browsing activity.
 
 A **DNS leak** occurs when this lookup bypasses your VPN's encrypted tunnel and goes directly to your ISP's DNS servers (or another third-party resolver). Your IP address may stay hidden, but your DNS queries are exposed.
 
