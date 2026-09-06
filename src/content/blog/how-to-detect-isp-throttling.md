@@ -12,7 +12,7 @@ draft: false
 
 You pay for 300 Mbps, but Netflix buffers. You subscribe to a gigabit plan, but your torrents crawl at 2 Mbps. You notice that YouTube loads in 360p on Wi-Fi but streams perfectly over cellular. Sound familiar?
 
-You might be experiencing **ISP throttling** — the practice where your internet service provider deliberately slows down your connection to specific services, protocols, or types of traffic.
+You might be experiencing **ISP throttling**: the practice where your internet service provider deliberately slows down your connection to specific services, protocols, or types of traffic.
 
 Unlike network congestion (which affects everyone equally during peak hours), throttling is targeted. It is also largely invisible to users who do not know what to look for. In 2026, with zero-rating agreements, peer-to-peer targeting, and streaming prioritization becoming industry norm, knowing how to detect throttling is a critical digital literacy skill.
 
@@ -24,24 +24,24 @@ ISP throttling is the intentional reduction of bandwidth or speed for specific t
 
 ### Common Throttling Targets
 
-**Streaming services** — Netflix, YouTube, Disney+, HBO Max, and Twitch are frequent targets. ISPs may slow streaming to push users toward their own bundled services or reduce bandwidth costs.
+**Streaming services**: Netflix, YouTube, Disney+, HBO Max, and Twitch are frequent targets. ISPs may slow streaming to push users toward their own bundled services or reduce bandwidth costs.
 
-**Peer-to-peer (P2P) protocols** — BitTorrent, uTorrent, and other file-sharing protocols are heavily throttled because they consume disproportionate bandwidth with little revenue upside for the ISP.
+**Peer-to-peer (P2P) protocols**: BitTorrent, uTorrent, and other file-sharing protocols are heavily throttled because they consume disproportionate bandwidth with little revenue upside for the ISP.
 
-**VPN traffic** — Some ISPs throttle or block VPN protocols outright. This is especially common in countries with restricted internet, but also occurs in Western markets.
+**VPN traffic**: Some ISPs throttle or block VPN protocols outright. This is especially common in countries with restricted internet, but also occurs in Western markets.
 
-**Encrypted traffic** — Since ISPs cannot inspect the content of HTTPS connections, some resort to throttling all encrypted traffic broadly, assuming it might be circumventing their policies.
+**Encrypted traffic**, Since ISPs cannot inspect the content of HTTPS connections, some resort to throttling all encrypted traffic broadly, assuming it might be circumventing their policies.
 
-**Specific websites** — While less common in transparent markets, some ISPs have historically throttled competing services or sites that criticize them.
+**Specific websites**, While less common in transparent markets, some ISPs have historically throttled competing services or sites that criticize them.
 
 ### Why ISPs Throttle
 
 The motivations vary:
 
-- **Cost management** — Peering agreements with content providers cost money. Throttling is cheaper.
-- **Data cap enforcement** — Throttling encourages users on unlimited plans to use less.
-- **Competitive pressure** — ISPs with their own streaming services may throttle competitors.
-- **Regulatory arbitrage** — In markets without net neutrality protections, throttling is largely unregulated.
+- **Cost management**: Peering agreements with content providers cost money. Throttling is cheaper.
+- **Data cap enforcement**: Throttling encourages users on unlimited plans to use less.
+- **Competitive pressure**: ISPs with their own streaming services may throttle competitors.
+- **Regulatory arbitrage**: In markets without net neutrality protections, throttling is largely unregulated.
 
 ## How to Detect ISP Throttling
 
@@ -50,9 +50,9 @@ The motivations vary:
 The most direct way to spot throttling is to measure your speed to different destinations. If one service is consistently slower while others are fine, throttling is likely the cause.
 
 **Use multiple speed test services:**
-- [Speedtest.net](https://speedtest.net) — Ookla's global network
-- [Fast.com](https://fast.com) — Netflix's testing tool
-- [Cloudflare Speed Test](https://speed.cloudflare.com) — minimal tracking
+- [Speedtest.net](https://speedtest.net): Ookla's global network
+- [Fast.com](https://fast.com): Netflix's testing tool
+- [Cloudflare Speed Test](https://speed.cloudflare.com): minimal tracking
 
 **Run tests targeting specific services:**
 
@@ -149,7 +149,7 @@ if __name__ == "__main__":
 If your ISP throttles specific protocols or services, routing your traffic through a VPN can reveal the difference. VPN traffic is encrypted, making it harder for your ISP to identify the service type.
 
 **Test procedure:**
-1. Run a speed test without VPN — note the result
+1. Run a speed test without VPN: note the result
 2. Connect to a reputable VPN server (preferably one near you)
 3. Run the same speed test with the VPN active
 4. Compare the results
@@ -197,7 +197,7 @@ Get-NetAdapterStatistics | Format-List
 
 Streaming throttling is among the most common. You can test for it systematically:
 
-1. Open a YouTube video in your browser — note the maximum resolution available
+1. Open a YouTube video in your browser: note the maximum resolution available
 2. Connect to a VPN and reload the same video
 3. Compare available resolutions
 
@@ -226,10 +226,10 @@ fetch(`https://youtube.com/api/manifest/dash/id/`)
 
 ISPs sometimes throttle by protocol rather than by service. Common throttling targets:
 
-- **Port 443 (HTTPS)** — Generally not throttled since it would break the web
-- **Port 80 (HTTP)** — Easier to inspect and potentially throttle
-- **BitTorrent ports (6881-6889)** — Frequently throttled
-- **WireGuard/OpenVPN ports** — May be throttled in restrictive regions
+- **Port 443 (HTTPS)**: Generally not throttled since it would break the web
+- **Port 80 (HTTP)**: Easier to inspect and potentially throttle
+- **BitTorrent ports (6881-6889)**: Frequently throttled
+- **WireGuard/OpenVPN ports**: May be throttled in restrictive regions
 
 ```bash
 # Test specific port speeds using iperf3
@@ -260,7 +260,7 @@ For specific applications (torrenting, scraping, streaming), a SOCKS5 proxy can 
 
 ### Request a Different Plan or Provider
 
-If throttling is endemic to your plan, switching to a provider with better traffic policies — or a plan without throttling clauses — may be necessary. In many markets, plans marketed as "unlimited" include hidden throttling language in the fine print. Read the service agreement carefully.
+If throttling is endemic to your plan, switching to a provider with better traffic policies (or a plan without throttling clauses) may be necessary. In many markets, plans marketed as "unlimited" include hidden throttling language in the fine print. Read the service agreement carefully.
 
 ### File a Complaint
 
@@ -280,17 +280,17 @@ It is important to distinguish throttling from congestion, as the solutions diff
 
 ## Related Articles
 
-- [How ISPs Track You Via IP](/blog/how-isps-track-you-via-ip) — Understanding what your ISP already knows
-- [DNS Leak Test](/blog/dns-leak-test) — Another vector for ISP surveillance
-- [VPN Detection Explained](/blog/vpn-detection-explained) — How websites identify VPN users
-- [WebRTC IP Leak Explained](/blog/webrtc-ip-leak-explained) — Protecting your real IP address
-- [SOCKS5 Proxy vs VPN](/blog/socks5-proxy-vs-vpn) — Choosing the right privacy tool
+- [How ISPs Track You Via IP](/blog/how-isps-track-you-via-ip): Understanding what your ISP already knows
+- [DNS Leak Test](/blog/dns-leak-test): Another vector for ISP surveillance
+- [VPN Detection Explained](/blog/vpn-detection-explained): How websites identify VPN users
+- [WebRTC IP Leak Explained](/blog/webrtc-ip-leak-explained): Protecting your real IP address
+- [SOCKS5 Proxy vs VPN](/blog/socks5-proxy-vs-vpn): Choosing the right privacy tool
 
 ## Conclusion
 
 ISP throttling is a real and widespread practice that quietly degrades your internet experience. The good news: it is detectable with the right tools, and most forms of throttling can be bypassed with a VPN or proxy.
 
-Run the tests described in this guide, document your findings, and take action. Your bandwidth is yours — you paid for it.
+Run the tests described in this guide, document your findings, and take action. Your bandwidth is yours: you paid for it.
 
 **Quick checklist:**
 - [ ] Run speed tests on multiple services today

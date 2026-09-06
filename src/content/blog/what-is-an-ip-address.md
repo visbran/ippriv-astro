@@ -10,13 +10,13 @@ draft: false
 
 ## What is an IP Address?
 
-An IP address — short for Internet Protocol address — is a unique numerical label assigned to every device that connects to a network. Whether you are browsing the web on a laptop, streaming video on a smart TV, or sending a message from your phone, your device has an IP address. It is the fundamental identifier that makes communication between devices on the internet possible.
+An IP address (short for Internet Protocol address) is a unique numerical label assigned to every device that connects to a network. Whether you are browsing the web on a laptop, streaming video on a smart TV, or sending a message from your phone, your device has an IP address. It is the fundamental identifier that makes communication between devices on the internet possible.
 
 Think of an IP address the same way you think about a mailing address. Just as the postal system needs a physical address to deliver a letter to the right house, the internet needs an IP address to deliver data to the right device. Without it, routers and servers would have no way of knowing where to send the information you request.
 
 ### The Role of IP Addresses in Networking
 
-When you type a URL into your browser, your device sends a request across the internet to a web server. That request carries your IP address so the server knows where to send the response — the web page you asked for. This back-and-forth exchange happens in milliseconds and relies entirely on IP addresses working correctly at every step.
+When you type a URL into your browser, your device sends a request across the internet to a web server. That request carries your IP address so the server knows where to send the response: the web page you asked for. This back-and-forth exchange happens in milliseconds and relies entirely on IP addresses working correctly at every step.
 
 IP addresses operate at the network layer of the internet protocol suite. They work alongside other protocols like TCP (Transmission Control Protocol) to ensure data packets are sent reliably and arrive at the correct destination.
 
@@ -24,9 +24,9 @@ IP addresses operate at the network layer of the internet protocol suite. They w
 
 There are two versions of IP addresses in active use today: IPv4 and IPv6.
 
-**IPv4** is the original version and uses a 32-bit format, written as four groups of numbers separated by dots — for example, `192.168.1.1`. This format allows for roughly 4.3 billion unique addresses. While that sounds like a lot, the explosive growth of internet-connected devices has exhausted the available IPv4 address pool.
+**IPv4** is the original version and uses a 32-bit format, written as four groups of numbers separated by dots: for example, `192.168.1.1`. This format allows for roughly 4.3 billion unique addresses. While that sounds like a lot, the explosive growth of internet-connected devices has exhausted the available IPv4 address pool.
 
-**IPv6** was developed to solve this limitation. It uses a 128-bit format written in hexadecimal notation, separated by colons — for example, `2001:0db8:85a3:0000:0000:8a2e:0370:7334`. IPv6 provides an astronomically larger address space: approximately 340 undecillion unique addresses (that is 340 followed by 36 zeros), which is more than enough to accommodate every device ever likely to exist.
+**IPv6** was developed to solve this limitation. It uses a 128-bit format written in hexadecimal notation, separated by colons: for example, `2001:0db8:85a3:0000:0000:8a2e:0370:7334`. IPv6 provides an astronomically larger address space: approximately 340 undecillion unique addresses (that is 340 followed by 36 zeros), which is more than enough to accommodate every device ever likely to exist.
 
 Both versions coexist on the modern internet. Most networks and devices support both, a configuration known as dual-stack. You can read a deeper comparison of the two versions in the [IPv4 vs. IPv6 guide](/blog/ipv4-vs-ipv6).
 
@@ -36,13 +36,13 @@ Not all IP addresses are the same. There is an important distinction between pub
 
 ### Public IP Addresses
 
-A public IP address is the address assigned to your network by your Internet Service Provider (ISP). It is visible to the wider internet and is how websites, servers, and online services identify your connection. If you visit [ippriv.com](https://ippriv.com), the IP address displayed is your public IP — the one the rest of the internet sees.
+A public IP address is the address assigned to your network by your Internet Service Provider (ISP). It is visible to the wider internet and is how websites, servers, and online services identify your connection. If you visit [ippriv.com](https://ippriv.com), the IP address displayed is your public IP: the one the rest of the internet sees.
 
 Every household or office that connects to the internet receives at least one public IP address from their ISP.
 
 ### Private IP Addresses
 
-Private IP addresses are used within a local network — your home Wi-Fi network, for example. Your router assigns a private IP address to each device connected to it. These addresses are not routable on the public internet, meaning they only function within your local network.
+Private IP addresses are used within a local network: your home Wi-Fi network, for example. Your router assigns a private IP address to each device connected to it. These addresses are not routable on the public internet, meaning they only function within your local network.
 
 Common private IP address ranges include:
 - `10.0.0.0` to `10.255.255.255`
@@ -59,7 +59,7 @@ IP addresses can also be categorized as dynamic or static, and the difference ha
 
 A dynamic IP address changes periodically. Your ISP assigns a new IP address to your connection each time you reconnect, or on a scheduled rotation. This is the standard arrangement for most home internet connections. Dynamic IP assignment is managed by a protocol called DHCP (Dynamic Host Configuration Protocol).
 
-Dynamic addresses are cost-effective for ISPs because they can reuse addresses across their customer base. For most users, this works perfectly fine — you can browse, stream, and communicate without any issues.
+Dynamic addresses are cost-effective for ISPs because they can reuse addresses across their customer base. For most users, this works perfectly fine: you can browse, stream, and communicate without any issues.
 
 ### Static IP Addresses
 
@@ -87,7 +87,7 @@ IP addresses carry approximate geographic information. Websites and services can
 
 ### Security and Access Control
 
-Network administrators use IP addresses to enforce access control policies — allowing certain IP ranges to access internal resources while blocking others. Firewalls, intrusion detection systems, and security software all rely on IP address monitoring.
+Network administrators use IP addresses to enforce access control policies, allowing certain IP ranges to access internal resources while blocking others. Firewalls, intrusion detection systems, and security software all rely on IP address monitoring.
 
 ### Troubleshooting and Diagnostics
 
@@ -108,6 +108,6 @@ To find your private IP address (the one assigned by your router):
 
 ## Conclusion
 
-An IP address is one of the most fundamental concepts in networking. It is the identifier that makes internet communication possible, allowing data to travel from servers to the right devices across the globe. Understanding the difference between public and private addresses, dynamic and static assignments, and IPv4 versus IPv6 gives you a solid foundation for understanding how the internet works — and how your own connection fits into it.
+An IP address is one of the most fundamental concepts in networking. It is the identifier that makes internet communication possible, allowing data to travel from servers to the right devices across the globe. Understanding the difference between public and private addresses, dynamic and static assignments, and IPv4 versus IPv6 gives you a solid foundation for understanding how the internet works, and how your own connection fits into it.
 
 Whether you are a developer, a business owner, or simply a curious internet user, knowing what an IP address is and what it reveals is increasingly important in a connected world. To see what your own IP address reveals right now, [use our free IP lookup tool](/ip-lookup). You can also read [what an IP address reveals about you](/blog/what-does-an-ip-address-reveal) for a deeper look at the privacy implications.

@@ -9,9 +9,9 @@ tags: ['API', 'privacy', 'development', 'tutorial']
 
 ## The Importance of Privacy-First Design
 
-Building APIs with privacy at their core is not just good ethics — it is increasingly a legal requirement and a competitive advantage. Users are more aware of how their data is used than ever before. Developers who build with privacy as a default constraint, rather than as an afterthought, produce systems that are easier to maintain, easier to comply with, and more trusted by the people who use them.
+Building APIs with privacy at their core is not just good ethics: it is increasingly a legal requirement and a competitive advantage. Users are more aware of how their data is used than ever before. Developers who build with privacy as a default constraint, rather than as an afterthought, produce systems that are easier to maintain, easier to comply with, and more trusted by the people who use them.
 
-A privacy-first API is one that collects only the data it genuinely needs, is transparent about what it does with that data, gives users meaningful control, and minimizes the exposure of personal information at every stage of its lifecycle. These are not lofty ideals — they are engineering decisions that can be made concrete and measurable.
+A privacy-first API is one that collects only the data it genuinely needs, is transparent about what it does with that data, gives users meaningful control, and minimizes the exposure of personal information at every stage of its lifecycle. These are not lofty ideals: they are engineering decisions that can be made concrete and measurable.
 
 ## Core Principles
 
@@ -38,7 +38,7 @@ GET /api/geo?fields=country,city
 
 ### Transparency
 
-Users and integrators should be able to understand exactly what your API collects, how it uses that information, and how long it retains it. This is not just a legal requirement under GDPR and similar regulations — it is a prerequisite for building trust.
+Users and integrators should be able to understand exactly what your API collects, how it uses that information, and how long it retains it. This is not just a legal requirement under GDPR and similar regulations: it is a prerequisite for building trust.
 
 Transparency in API design means:
 
@@ -59,7 +59,7 @@ Where personal data is collected, users should have meaningful control over it. 
 
 ### No Authentication Required for Public Data
 
-One of the most privacy-friendly API designs is one that provides useful functionality without requiring user accounts. When users do not need to authenticate, you cannot build profiles on them — and you remove the incentive to collect personal information in the first place.
+One of the most privacy-friendly API designs is one that provides useful functionality without requiring user accounts. When users do not need to authenticate, you cannot build profiles on them, and you remove the incentive to collect personal information in the first place.
 
 For example, the [IPPriv API](/api-docs) provides IP lookup, geolocation, and security data entirely without registration:
 
@@ -73,7 +73,7 @@ This design means users never hand over an email address or create an account ju
 
 ### Rate Limiting Without Tracking
 
-Rate limiting is necessary to prevent abuse, but it can be implemented without building a tracking profile on individual users. IP-based rate limiting — using a sliding window counter keyed on the IP address — provides abuse protection without requiring persistent user identification.
+Rate limiting is necessary to prevent abuse, but it can be implemented without building a tracking profile on individual users. IP-based rate limiting (using a sliding window counter keyed on the IP address) provides abuse protection without requiring persistent user identification.
 
 ```javascript
 import { RateLimiter } from 'limiter';
@@ -93,11 +93,11 @@ async function handleRequest(req, res) {
 }
 ```
 
-For GDPR compliance, IP-based rate limiting still involves processing an IP address. Implement a short TTL on your rate limit keys — 24 hours is typically sufficient — so you are not retaining IP addresses indefinitely.
+For GDPR compliance, IP-based rate limiting still involves processing an IP address. Implement a short TTL on your rate limit keys (24 hours is typically sufficient) so you are not retaining IP addresses indefinitely.
 
 ### HTTPS Only
 
-Every API endpoint must be served exclusively over HTTPS. This is non-negotiable for privacy. Unencrypted HTTP transmissions expose request parameters, headers, and response data to network observers — ISPs, Wi-Fi operators, and anyone with access to network traffic between the client and your server.
+Every API endpoint must be served exclusively over HTTPS. This is non-negotiable for privacy. Unencrypted HTTP transmissions expose request parameters, headers, and response data to network observers: ISPs, Wi-Fi operators, and anyone with access to network traffic between the client and your server.
 
 Enforce HTTPS at the infrastructure level. Redirect all HTTP requests to HTTPS and return an HTTP Strict Transport Security (HSTS) header to prevent future plaintext connections:
 
@@ -128,7 +128,7 @@ log_format privacy_log '$remote_addr_prefix - [$time_local] "$request_uri_saniti
 
 ### Key Requirements
 
-The GDPR requires that any processing of personal data — including IP addresses, which are explicitly recognized as personal data — has a lawful basis. The most relevant bases for API providers are:
+The GDPR requires that any processing of personal data (including IP addresses, which are explicitly recognized as personal data) has a lawful basis. The most relevant bases for API providers are:
 
 - **Legitimate interest**: Processing that is necessary for your business operations and does not override the rights of the data subject. IP-based rate limiting to prevent abuse typically qualifies.
 - **Contractual necessity**: Processing required to fulfill a service agreement with a user who has consented to your terms.
@@ -142,7 +142,7 @@ Your API infrastructure must be able to respond to data subject requests:
 - **Right to deletion**: Can a user request that you delete their data, and can you execute that request completely?
 - **Right to portability**: Can a user export their data in a machine-readable format?
 
-For APIs that do not create user accounts and do not link IP addresses to persistent identifiers, complying with these rights is straightforward — there is no persistent personal data to provide or delete.
+For APIs that do not create user accounts and do not link IP addresses to persistent identifiers, complying with these rights is straightforward: there is no persistent personal data to provide or delete.
 
 ### Implementation Tips
 

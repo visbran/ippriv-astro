@@ -10,7 +10,7 @@ draft: false
 
 ## Why Your ISP Is the Most Powerful Observer on Your Network
 
-When you browse the web, your internet service provider sits at the first hop of every connection. Every DNS query, every HTTP request, every peer-to-peer connection — it all flows through their infrastructure first. Your VPN encrypts the content of your traffic, but the **destination IP addresses, connection timing, and metadata** remain visible to your ISP.
+When you browse the web, your internet service provider sits at the first hop of every connection. Every DNS query, every HTTP request, every peer-to-peer connection: it all flows through their infrastructure first. Your VPN encrypts the content of your traffic, but the **destination IP addresses, connection timing, and metadata** remain visible to your ISP.
 
 Most users assume that browsing in incognito mode or using HTTPS protects them from ISP-level observation. It doesn't. Your ISP can still see which domains you connect to (via DNS queries and SNI fields in TLS), when you connect, for how long, and how much data you transfer.
 
@@ -24,7 +24,7 @@ Your ISP's vantage point is broader than most users realize. Even with end-to-en
 Your ISP sees every DNS query you make, regardless of encryption. Even if you use DNS-over-HTTPS (DoH) or DNS-over-TLS (DoT), your ISP can observe the IP address of the DoH resolver you're connecting to. If you're using your ISP's default DNS or an unencrypted resolver, they see every domain you resolve in plaintext.
 
 **2. TLS Server Name Indication (SNI)**
-When your browser initiates a TLS handshake, it sends the target hostname in plaintext as part of the ClientHello message. This field — called SNI — is visible to your ISP even when the rest of the connection is encrypted. ESNI (Encrypted SNI) was designed to close this leak but has been largely replaced by ECH (Encrypted Client Hello), which is not yet universally deployed.
+When your browser initiates a TLS handshake, it sends the target hostname in plaintext as part of the ClientHello message. This field (called SNI) is visible to your ISP even when the rest of the connection is encrypted. ESNI (Encrypted SNI) was designed to close this leak but has been largely replaced by ECH (Encrypted Client Hello), which is not yet universally deployed.
 
 **3. Destination IP Addresses**
 Your ISP knows every IP address you connect to. They may not know the specific page you accessed on a website, but they know you connected to that website's IP. Combined with timing and byte counts, this builds a detailed activity profile.
@@ -37,11 +37,11 @@ Beyond addresses, your ISP logs:
 - Which remote servers your traffic terminates at
 
 **5. Encrypted Traffic Volume Analysis**
-Even without decrypting your traffic, your ISP can analyze packet sizes, timing patterns, and throughput to make informed guesses about what you're doing — video streaming, VoIP calls, large file downloads.
+Even without decrypting your traffic, your ISP can analyze packet sizes, timing patterns, and throughput to make informed guesses about what you're doing: video streaming, VoIP calls, large file downloads.
 
 ## How Long Does Your ISP Keep Your Data?
 
-Data retention laws vary by country, but the general picture is sobering. In the United States, there is no federalmandatory data retention law for ISPs — but the pattern of voluntary retention by major carriers is extensive. In the European Union, the **Data Retention Directive (2006/24/EC)** required providers to retain communications data for 6 months to 2 years for serious crime purposes. After the Court of Justice of the EU struck down that directive in 2014, member states adopted varying national laws.
+Data retention laws vary by country, but the general picture is sobering. In the United States, there is no federalmandatory data retention law for ISPs, but the pattern of voluntary retention by major carriers is extensive. In the European Union, the **Data Retention Directive (2006/24/EC)** required providers to retain communications data for 6 months to 2 years for serious crime purposes. After the Court of Justice of the EU struck down that directive in 2014, member states adopted varying national laws.
 
 ### Retention Timelines by Region
 
@@ -61,7 +61,7 @@ The legal mechanisms that compel ISPs to share your data differ significantly be
 
 **United States**
 - **National Security Letters (NSLs)**: The FBI can issue NSLs to ISPs demanding customer data with no judicial review and a gag order preventing the ISP from notifying the user. Tens of thousands are issued annually.
-- **ECPA (Electronic Communications Privacy Act)**: Under this 1986 law, law enforcement can access certain records with a subpoena (no judge required) or a warrant (judicial review required). The threshold depends on the type of data — content vs. metadata.
+- **ECPA (Electronic Communications Privacy Act)**: Under this 1986 law, law enforcement can access certain records with a subpoena (no judge required) or a warrant (judicial review required). The threshold depends on the type of data: content vs. metadata.
 - **CLOUD Act**: Allows US law enforcement to demand data from US-based providers regardless of where the data is stored.
 
 **European Union**
@@ -108,7 +108,7 @@ Instead of your ISP's default DNS, use a privacy-respecting resolver:
 Use DNS-over-HTTPS or DNS-over-TLS to prevent your ISP from reading your DNS queries in plaintext.
 
 ### 2. Route All Traffic Through a VPN
-A VPN encrypts your traffic and routes it through the VPN provider's servers, replacing your ISP's view of your destination IPs with the VPN server's IPs. Your ISP sees only that you're connected to a VPN — not which websites you access.
+A VPN encrypts your traffic and routes it through the VPN provider's servers, replacing your ISP's view of your destination IPs with the VPN server's IPs. Your ISP sees only that you're connected to a VPN: not which websites you access.
 
 **Critical**: Choose a VPN with a no-log policy and is located in a privacy-friendly jurisdiction. A VPN that logs your traffic defeats the purpose.
 
@@ -116,7 +116,7 @@ A VPN encrypts your traffic and routes it through the VPN provider's servers, re
 ECH encrypts the SNI field in TLS handshakes, closing one of the last major plaintext leaks visible to your ISP. Browser vendors including Chrome and Firefox have enabled ECH by default for participating domains. Check that your browser is up to date and that ECH support is active.
 
 ### 4. Use Tor for Sensitive Threat Models
-Tor routes your traffic through three anonymizing relays, with end-to-end encryption. Your ISP sees you connecting to a Tor relay but cannot determine the destination or content. For high-sensitivity use cases — journalism, activism, security research — Tor provides substantially stronger anonymity than a VPN alone.
+Tor routes your traffic through three anonymizing relays, with end-to-end encryption. Your ISP sees you connecting to a Tor relay but cannot determine the destination or content. For high-sensitivity use cases (journalism, activism, security research) Tor provides substantially stronger anonymity than a VPN alone.
 
 The tradeoff: significantly reduced speed and complexity of setup.
 
@@ -144,8 +144,8 @@ ISP surveillance is not a static problem. Several developments are reshaping the
 
 ## Conclusion
 
-Your ISP is the most persistent observer of your online activity. They see your DNS queries, destination IPs, connection timing, and data volumes — and they retain this data for months or years. In many jurisdictions, law enforcement can access this data with minimal legal process, and in the United States, ISPs can legally monetize this data for advertising.
+Your ISP is the most persistent observer of your online activity. They see your DNS queries, destination IPs, connection timing, and data volumes, and they retain this data for months or years. In many jurisdictions, law enforcement can access this data with minimal legal process, and in the United States, ISPs can legally monetize this data for advertising.
 
 Understanding what your ISP logs is the first step toward reducing your exposure. Use encrypted DNS, route traffic through a privacy-respecting VPN, keep your browser updated to benefit from ECH, and exercise your legal rights to see what data your provider holds about you.
 
-For a technical deep-dive on how websites track you through different mechanisms — including IP address logging, canvas fingerprinting, and WebRTC leaks — read our guide on [how websites track your IP address](/blog/how-websites-track-your-ip-address).
+For a technical deep-dive on how websites track you through different mechanisms (including IP address logging, canvas fingerprinting, and WebRTC leaks) read our guide on [how websites track your IP address](/blog/how-websites-track-your-ip-address).

@@ -5,7 +5,7 @@ const features = [
   {
     icon: MapPin,
     title: 'Instant IP Lookup',
-    description: 'Get complete information on any IP address in milliseconds — location, ISP, timezone, and more.',
+    description: 'Get complete information on any IP address in milliseconds: location, ISP, timezone, and more.',
   },
   {
     icon: Shield,

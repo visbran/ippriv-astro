@@ -1,5 +1,5 @@
 ---
-title: 'Static vs Dynamic IP Address — Key Differences Explained'
+title: 'Static vs Dynamic IP Address: Key Differences Explained'
 description: 'Understand the difference between static and dynamic IP addresses, when to use each, and how they affect hosting, security, and IP lookups.'
 publishedAt: 2025-02-24
 author: 'Brandon Visca'
@@ -10,15 +10,15 @@ draft: false
 
 ## Two Kinds of IP Addresses
 
-Every device that connects to the internet is assigned an IP address — a unique numerical identifier that allows data to be routed to the right destination. But not all IP addresses behave the same way. The distinction between a **static IP address** and a **dynamic IP address** affects everything from how you host a website to what an ip lookup reveals about your connection.
+Every device that connects to the internet is assigned an IP address: a unique numerical identifier that allows data to be routed to the right destination. But not all IP addresses behave the same way. The distinction between a **static IP address** and a **dynamic IP address** affects everything from how you host a website to what an ip lookup reveals about your connection.
 
 Understanding this difference is fundamental for network administrators, developers, and anyone who cares about how their internet connection works.
 
 ## What Is a Dynamic IP Address?
 
-A dynamic IP address is one that changes periodically. It is assigned temporarily from a pool of available addresses managed by your Internet Service Provider (ISP) or your local router, using a protocol called DHCP — the Dynamic Host Configuration Protocol.
+A dynamic IP address is one that changes periodically. It is assigned temporarily from a pool of available addresses managed by your Internet Service Provider (ISP) or your local router, using a protocol called DHCP: the Dynamic Host Configuration Protocol.
 
-Here is how it works: when your router connects to your ISP's network, it sends a DHCP request asking for an IP address. The ISP's DHCP server responds by leasing an available IP address from its pool. That lease has an expiration time — it might be 24 hours, a few days, or longer depending on the ISP's configuration. When the lease expires, the address may be renewed as-is, or a different address from the pool may be assigned.
+Here is how it works: when your router connects to your ISP's network, it sends a DHCP request asking for an IP address. The ISP's DHCP server responds by leasing an available IP address from its pool. That lease has an expiration time: it might be 24 hours, a few days, or longer depending on the ISP's configuration. When the lease expires, the address may be renewed as-is, or a different address from the pool may be assigned.
 
 Most home and small business internet connections use dynamic IP addresses. From the ISP's perspective, dynamic assignment is efficient: since not all customers are online simultaneously, a pool of IP addresses can serve a much larger customer base than a one-to-one static assignment would allow.
 
@@ -31,7 +31,7 @@ Static IP addresses can be assigned in two ways:
 1. **Manually configured** at the device or router level. A network administrator sets the specific IP address in the device's network settings, bypassing DHCP entirely.
 2. **Reserved via DHCP** so that the DHCP server always assigns the same address to a specific device based on its MAC address (hardware identifier). This is sometimes called a DHCP reservation and is effectively static from the device's perspective.
 
-For public internet connections, getting a truly static public IP address typically requires requesting one from your ISP — and paying extra for it. Static IPs are standard on business internet plans and available as an add-on for some residential plans.
+For public internet connections, getting a truly static public IP address typically requires requesting one from your ISP, and paying extra for it. Static IPs are standard on business internet plans and available as an add-on for some residential plans.
 
 ## How DHCP Assigns Dynamic IP Addresses
 
@@ -57,7 +57,7 @@ This process happens automatically and invisibly in the background every time yo
 
 - **Not suitable for hosting.** If you run a web server, game server, or any service that others need to reach at a consistent address, a changing IP address makes that impossible without workarounds like dynamic DNS (DDNS) services.
 - **Inconsistent remote access.** If you need to connect to your home network remotely, you must either use a DDNS service that tracks your current IP or ask someone at home to look up the current address before you connect.
-- **Stale lookup data.** Because the address changes, an ip lookup on a dynamic IP may reflect outdated information — the address may have recently been reassigned from a different customer or region.
+- **Stale lookup data.** Because the address changes, an ip lookup on a dynamic IP may reflect outdated information: the address may have recently been reassigned from a different customer or region.
 
 ## Pros and Cons of Static IP Addresses
 
@@ -93,7 +93,7 @@ This process happens automatically and invisibly in the background every time yo
 
 ## How Static vs. Dynamic Status Affects IP Lookup Results
 
-When you perform an ip lookup on a dynamic IP address, the results reflect the current registered information for that address — but that information may be stale. Dynamic IP addresses rotate through customer assignments, and geolocation databases may not update quickly enough to reflect where the address is currently in use.
+When you perform an ip lookup on a dynamic IP address, the results reflect the current registered information for that address, but that information may be stale. Dynamic IP addresses rotate through customer assignments, and geolocation databases may not update quickly enough to reflect where the address is currently in use.
 
 For example, an IP address that was previously assigned to a customer in Chicago might now be assigned to someone in Denver, but the geolocation database still shows Chicago because the database has not yet been updated. This is one of the reasons that city-level IP geolocation is imprecise.
 

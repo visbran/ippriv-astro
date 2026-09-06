@@ -1,6 +1,6 @@
 ---
 title: 'Privacy-Focused DNS Servers Compared: Which Respects Your Privacy in 2026?'
-description: 'Compare the most privacy-conscious DNS resolvers of 2026 — DNSCrypt, NextDNS, Quad9, and Cloudflare 1.1.1.1. Learn logging policies, encryption support, speed, and which one truly protects your query data.'
+description: 'Compare the most privacy-conscious DNS resolvers of 2026: DNSCrypt, NextDNS, Quad9, and Cloudflare 1.1.1.1. Learn logging policies, encryption support, speed, and which one truly protects your query data.'
 publishedAt: 2026-08-08
 author: 'Brandon Visca'
 heroImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop'
@@ -10,7 +10,7 @@ draft: false
 
 ## Introduction: Your DNS Queries Are Leaking More Than You Think
 
-Every time you type a website address into your browser, a DNS (Domain Name System) query leaves your device asking "where can I find example.com?" That query travels across your network, through your ISP, and often to a third-party DNS resolver you have never consciously chosen. By default, that resolver is your ISP's — which means your ISP logs every site you visit, in plain text, indefinitely.
+Every time you type a website address into your browser, a DNS (Domain Name System) query leaves your device asking "where can I find example.com?" That query travels across your network, through your ISP, and often to a third-party DNS resolver you have never consciously chosen. By default, that resolver is your ISP's, which means your ISP logs every site you visit, in plain text, indefinitely.
 
 DNS is the phonebook of the internet, and it is one of the oldest, least-encrypted protocols still in widespread use. Fortunately, encrypted DNS has matured significantly. Today there are multiple privacy-focused DNS services that encrypt your queries, log nothing, and even block malicious domains by default.
 
@@ -23,7 +23,7 @@ When you visit `https://example.com`, your browser first resolves `example.com` 
 - Your ISP sees the query in plain text on port 53/UDP.
 - Any network observer between you and the resolver can see which domains you request.
 - The DNS resolver itself logs your IP address alongside the query.
-- DNS is invisible to most VPN configurations — your VPN may encrypt traffic but your DNS queries may still go to your ISP.
+- DNS is invisible to most VPN configurations: your VPN may encrypt traffic but your DNS queries may still go to your ISP.
 
 Encrypted DNS (via DNS-over-HTTPS (DoH), DNS-over-TLS (DoT), or DNSCrypt) closes all of these leak paths. But not all encrypted DNS providers are equal in what they log and what they do with your data.
 
@@ -31,12 +31,12 @@ Encrypted DNS (via DNS-over-HTTPS (DoH), DNS-over-TLS (DoT), or DNSCrypt) closes
 
 ### 1. Quad9 (quad9.net)
 
-**Founded:** 2017 — non-profit, Swiss-based
+**Founded:** 2017: non-profit, Swiss-based
 **Logging policy:** Zero logging. No personal data collected. IP addresses are never stored.
 **Protocols:** DoH, DoT, DNSCrypt
 **Blocking:** Blocks malicious domains (malware, phishing, spyware) using threat intelligence from 20+ security vendors.
 **Speed:** Generally fast globally. Uses Anycast routing.
-**Privacy jurisdiction:** Switzerland — strong data protection laws.
+**Privacy jurisdiction:** Switzerland: strong data protection laws.
 
 Quad9 is the most privacy-purist choice. It is run by a non-profit foundation with a explicit no-logging policy and a board that includes security researchers. It does not sell data because it has no commercial interest in doing so.
 
@@ -47,18 +47,18 @@ DoH:   https://dns.quad9.net/dns-query
 DNSCrypt: 2.dnscrypt-cert.quad9.net (IP 9.9.9.9)
 ```
 
-Quad9's blocking of malicious domains is a bonus — you get privacy *and* security without installing separate malware protection. The trade-off is that some legitimate domains occasionally get blocked, particularly on corporate networks.
+Quad9's blocking of malicious domains is a bonus: you get privacy *and* security without installing separate malware protection. The trade-off is that some legitimate domains occasionally get blocked, particularly on corporate networks.
 
 ### 2. NextDNS (nextdns.io)
 
-**Founded:** 2019 — commercial, based in Switzerland/US
+**Founded:** 2019: commercial, based in Switzerland/US
 **Logging policy:** Optional logging (default off). When enabled, data is retained for a limited period. Full control via dashboard.
 **Protocols:** DoH, DoT
-**Blocking:** Highly customizable blocking lists — ads, trackers, malware, adult content, specific domains.
+**Blocking:** Highly customizable blocking lists: ads, trackers, malware, adult content, specific domains.
 **Speed:** Fast. Uses global Anycast with 90+ PoWs.
 **Privacy jurisdiction:** Switzerland (data) / US (billing).
 
-NextDNS is the most *configurable* privacy DNS service. It lets you pick exactly what categories to block — ads, trackers, malware — and gives you a personal dashboard to see query logs in real time (which you can turn off). It is not zero-logging by default — the *option* to log exists — but the logging is off by default and fully in your control.
+NextDNS is the most *configurable* privacy DNS service. It lets you pick exactly what categories to block (ads, trackers, malware) and gives you a personal dashboard to see query logs in real time (which you can turn off). It is not zero-logging by default (the *option* to log exists) but the logging is off by default and fully in your control.
 
 This makes NextDNS the best choice for users who want granular blocking *and* privacy. The trade-off is it requires an account for the full feature set, and the free tier is limited to 300,000 queries/month.
 
@@ -70,11 +70,11 @@ DoH:   https://your-id.dns.nextdns.io/dns-query
 
 ### 3. Cloudflare 1.1.1.1 (cloudflare.com/1.1.1.1)
 
-**Founded:** 2018 — Cloudflare Inc., US
+**Founded:** 2018: Cloudflare Inc., US
 **Logging policy:** No persistent logs. 1.1.1.1 does not log IP addresses permanently. However, Cloudflare's broader business routes a huge percentage of global web traffic, and it has had subpoena compliance issues in the past.
 **Protocols:** DoH, DoT
 **Blocking:** WARP mode blocks malware and adult content. Basic 1.1.1.1 resolver does no domain blocking.
-**Speed:** Extremely fast — Cloudflare's network is among the largest in the world.
+**Speed:** Extremely fast: Cloudflare's network is among the largest in the world.
 **Privacy jurisdiction:** United States.
 
 Cloudflare 1.1.1.1 is the fastest encrypted DNS resolver in most regions because of Cloudflare's massive global infrastructure. Its privacy policy states no permanent logging of query data, but Cloudflare is a US company subject to US law. For casual privacy improvement over unencrypted ISP DNS, 1.1.1.1 is an easy upgrade. For high-threat-model privacy, the US jurisdiction is a notable concern.
@@ -88,13 +88,13 @@ DoH:   https://cloudflare-dns.com/dns-query
 ### 4. DNSCrypt-proxy (self-hosted / community)
 
 **Type:** Open-source software, client-side
-**Logging policy:** Zero — client-side only. The servers you choose may have their own policies.
+**Logging policy:** Zero: client-side only. The servers you choose may have their own policies.
 **Protocols:** DNSCrypt (original encrypted DNS protocol, predates DoH/DoT)
 **Blocking:** Depends on server. Servers like `dnscrypt.uk` or `publicarray` offer no-logging policies with optional blocking.
 **Speed:** Varies by server choice and location.
 **Privacy jurisdiction:** Depends on the server operator.
 
-DNSCrypt-proxy is the most technical option — it is open-source software that runs locally and lets you choose from a curated list of DNSCrypt servers. You can chain servers, set fallback, and even run your own resolver. The privacy depends entirely on which server you pick: some servers log everything, others log nothing.
+DNSCrypt-proxy is the most technical option: it is open-source software that runs locally and lets you choose from a curated list of DNSCrypt servers. You can chain servers, set fallback, and even run your own resolver. The privacy depends entirely on which server you pick: some servers log everything, others log nothing.
 
 For maximum privacy, pair DNSCrypt-proxy with a zero-logging server and use `sdns://` with serverID filtering.
 
@@ -157,7 +157,7 @@ iOS supports DoH via Profile or via the **Settings → Privacy & Security → DN
 
 ### In your browser (all platforms)
 
-For maximum granularity, configure DoH directly in your browser — this encrypts DNS even if your OS DNS is not encrypted:
+For maximum granularity, configure DoH directly in your browser: this encrypts DNS even if your OS DNS is not encrypted:
 
 - **Firefox:** Settings → Network Settings → Enable DNS over HTTPS → Choose Custom → Enter DoH URL.
 - **Chrome:** Settings → Privacy & Security → Use secure DNS → Choose a provider or custom.
@@ -192,6 +192,6 @@ Run a DNS leak test at [dnsleaktest.com](https://dnsleaktest.com) or [browserlea
 
 ## Conclusion
 
-Encrypted DNS is one of the fastest, highest-impact privacy upgrades you can make. It costs nothing, requires minimal setup, and closes a significant surveillance vector that most users never think about. The gap between ISP-level DNS logging and a zero-logging encrypted resolver is enormous — and the solutions to close it are mature and free.
+Encrypted DNS is one of the fastest, highest-impact privacy upgrades you can make. It costs nothing, requires minimal setup, and closes a significant surveillance vector that most users never think about. The gap between ISP-level DNS logging and a zero-logging encrypted resolver is enormous, and the solutions to close it are mature and free.
 
 Start with Quad9 or Cloudflare 1.1.1.1 for a no-configuration upgrade. Move to NextDNS if you want ad and tracker blocking. DNSCrypt-proxy is there for the technically inclined who want full control. Any of these is orders of magnitude better than default DNS.

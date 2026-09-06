@@ -1,5 +1,5 @@
 ---
-title: 'WHOIS vs IP Lookup — What is the Difference?'
+title: 'WHOIS vs IP Lookup: What is the Difference?'
 description: 'Understand the difference between WHOIS and IP lookup. Learn what each tool reveals, when to use which, and how to combine them for network research.'
 publishedAt: 2025-03-24
 author: 'Brandon Visca'
@@ -10,7 +10,7 @@ draft: false
 
 ## Two Essential Tools for Network Research
 
-When investigating a domain, a suspicious email, or an unfamiliar IP address, two tools come up repeatedly: WHOIS and IP lookup. Both provide valuable information about internet resources, but they answer different questions, draw from different data sources, and serve different purposes. Understanding when to reach for each one — and how to combine them — is a foundational skill for network researchers, developers, and security professionals.
+When investigating a domain, a suspicious email, or an unfamiliar IP address, two tools come up repeatedly: WHOIS and IP lookup. Both provide valuable information about internet resources, but they answer different questions, draw from different data sources, and serve different purposes. Understanding when to reach for each one (and how to combine them) is a foundational skill for network researchers, developers, and security professionals.
 
 ## What is WHOIS?
 
@@ -18,11 +18,11 @@ WHOIS is a query and response protocol that returns registration information abo
 
 When you run a WHOIS lookup on a domain name like `example.com`, you typically get:
 
-- **Registrar information** — which company the domain was registered through (GoDaddy, Namecheap, Cloudflare, etc.)
-- **Registration and expiry dates** — when the domain was first registered and when it expires
-- **Registrant contact details** — the name, organization, email, and address of the domain owner (though this is frequently redacted under GDPR and privacy protection services)
-- **Name servers** — the DNS servers authoritative for the domain
-- **Domain status codes** — flags like `clientTransferProhibited` that indicate the domain's current state
+- **Registrar information**, which company the domain was registered through (GoDaddy, Namecheap, Cloudflare, etc.)
+- **Registration and expiry dates**, when the domain was first registered and when it expires
+- **Registrant contact details**: the name, organization, email, and address of the domain owner (though this is frequently redacted under GDPR and privacy protection services)
+- **Name servers**: the DNS servers authoritative for the domain
+- **Domain status codes**: flags like `clientTransferProhibited` that indicate the domain's current state
 
 WHOIS records for IP address blocks tell a slightly different story. An IP block WHOIS record shows who the block was allocated to, the organization's name and address, the ASN associated with the block, and contact information for abuse reporting.
 
@@ -32,12 +32,12 @@ An IP lookup is a real-time query against geolocation and network intelligence d
 
 When you perform an IP lookup on an address, the typical response includes:
 
-- **Geolocation data** — country, region, city, and approximate coordinates
-- **ISP and organization** — the internet service provider or company currently using the IP address
-- **ASN information** — the Autonomous System Number and the network it belongs to
-- **Connection type** — whether the IP is residential, business, or datacenter/hosting
-- **Security flags** — whether the IP is associated with a VPN, proxy, Tor exit node, or known malicious activity
-- **Timezone and locale** — useful for localization and user experience decisions
+- **Geolocation data**: country, region, city, and approximate coordinates
+- **ISP and organization**: the internet service provider or company currently using the IP address
+- **ASN information**: the Autonomous System Number and the network it belongs to
+- **Connection type**: whether the IP is residential, business, or datacenter/hosting
+- **Security flags**: whether the IP is associated with a VPN, proxy, Tor exit node, or known malicious activity
+- **Timezone and locale**: useful for localization and user experience decisions
 
 IP lookup data is compiled from multiple sources including network route data (BGP tables), ISP registration records, active probing, and commercial threat intelligence feeds. It is designed to answer the question "who is this IP address right now?" rather than "who registered this resource?"
 
@@ -57,7 +57,7 @@ IP lookup data is compiled from multiple sources including network route data (B
 
 There is one area where WHOIS and IP lookup data intersect: the ASN and organization fields. Both tools can return the Autonomous System Number associated with an IP address and the name of the organization that holds it.
 
-However, there is a subtle difference in what they show. WHOIS returns the registered owner of an IP block — the entity that received the allocation from the RIR. IP lookup tools may show the downstream organization that is actively using the IP address, which can differ from the registered block owner in cases of sub-allocation, leased IP space, or hosting providers assigning addresses to their customers.
+However, there is a subtle difference in what they show. WHOIS returns the registered owner of an IP block: the entity that received the allocation from the RIR. IP lookup tools may show the downstream organization that is actively using the IP address, which can differ from the registered block owner in cases of sub-allocation, leased IP space, or hosting providers assigning addresses to their customers.
 
 ## When to Use WHOIS
 
@@ -109,7 +109,7 @@ console.log(data.isp);          // "Google LLC"
 console.log(data.asn);          // "AS15169"
 ```
 
-IPPriv's CORS-enabled API makes it easy to integrate IP lookup directly into web applications, backend services, or security tools — no API key required for standard usage.
+IPPriv's CORS-enabled API makes it easy to integrate IP lookup directly into web applications, backend services, or security tools: no API key required for standard usage.
 
 ## Conclusion
 

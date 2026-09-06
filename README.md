@@ -1,15 +1,15 @@
 # IPPriv
 
-Frontend for [ippriv.com](https://www.ippriv.com) — privacy-focused IP lookup and geolocation tools built with Astro 5.
+Frontend for [ippriv.com](https://www.ippriv.com): privacy-focused IP lookup and geolocation tools built with Astro 5.
 
 ## Tech Stack
 
-- **[Astro 5](https://astro.build)** — SSG with static output
+- **[Astro 5](https://astro.build)**: SSG with static output
 - **[React 19](https://react.dev)** + **[TypeScript](https://www.typescriptlang.org)**
 - **[Tailwind CSS 4](https://tailwindcss.com)** + **[shadcn/ui](https://ui.shadcn.com)**
-- **[Resend](https://resend.com)** — contact form email
-- **[Plausible](https://plausible.io)** — privacy-friendly analytics
-- **[Vercel](https://vercel.com)** — hosting + serverless functions
+- **[Resend](https://resend.com)**: contact form email
+- **[Plausible](https://plausible.io)**: privacy-friendly analytics
+- **[Vercel](https://vercel.com)**: hosting + serverless functions
 
 ## Project Structure
 
@@ -59,7 +59,7 @@ npm run preview
 | `PUBLIC_SITE_URL` | Public site URL | Yes |
 | `RESEND_API_KEY` | Resend API key for contact form | Yes |
 
-> `RESEND_API_KEY` is server-side only — never prefix with `PUBLIC_`.
+> `RESEND_API_KEY` is server-side only: never prefix with `PUBLIC_`.
 
 ## Blog
 

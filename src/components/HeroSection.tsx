@@ -63,7 +63,7 @@ const HeroSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
           >
-            Instant IP address information — geolocation, ISP, VPN detection, and more. No tracking, no ads.
+            Instant IP address information: geolocation, ISP, VPN detection, and more. No tracking, no ads.
           </motion.p>
 
           {/* IP Display Card */}

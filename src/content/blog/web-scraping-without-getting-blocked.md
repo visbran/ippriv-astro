@@ -10,7 +10,7 @@ draft: false
 
 ## Why Websites Block Scrapers (And How to Avoid It)
 
-Web scraping is one of the most practical ways to collect publicly available data at scale — prices, job listings, reviews, search results. But the moment you send more than a few automated requests to most websites, you hit a wall: CAPTCHAs, IP bans, rate limit errors, or worse — your entire IP range gets soft-blocked.
+Web scraping is one of the most practical ways to collect publicly available data at scale: prices, job listings, reviews, search results. But the moment you send more than a few automated requests to most websites, you hit a wall: CAPTCHAs, IP bans, rate limit errors, or worse, your entire IP range gets soft-blocked.
 
 The difference between a scraping project that works and one that dies in week one comes down to understanding how detection works and building your requests to look human.
 
@@ -22,7 +22,7 @@ Before you can avoid detection, you need to understand the signals you're broadc
 
 ### IP-Based Detection
 
-The first and most common line of defense. Servers track the IP address of every connection. When a single IP makes hundreds of requests in a short window, sends requests at perfectly consistent intervals, or originates from a known datacenter range — flags go up.
+The first and most common line of defense. Servers track the IP address of every connection. When a single IP makes hundreds of requests in a short window, sends requests at perfectly consistent intervals, or originates from a known datacenter range: flags go up.
 
 Datacenter IP addresses are trivially easy to identify. Most anti-bot services maintain real-time blocklists of known datacenter ranges. If you're scraping from a cloud server, the target site already knows.
 
@@ -36,7 +36,7 @@ Human users don't request pages at 9:00 AM exactly, every 3 seconds, for 8 hours
 
 ### Browser Fingerprinting
 
-Modern anti-bot systems don't just look at IP — they profile the browser making the request. They check the User-Agent string, accepted language headers, installed plugins, canvas rendering signatures, WebGL fingerprints, and TLS handshake characteristics.
+Modern anti-bot systems don't just look at IP: they profile the browser making the request. They check the User-Agent string, accepted language headers, installed plugins, canvas rendering signatures, WebGL fingerprints, and TLS handshake characteristics.
 
 A Python script sending a request with a curl User-Agent is immediately identifiable as non-browser traffic.
 
@@ -44,7 +44,7 @@ A Python script sending a request with a curl User-Agent is immediately identifi
 
 ### JavaScript Challenges
 
-Many sites gate their content behind JavaScript-rendered pages. The initial HTML response is nearly empty — the actual content loads via AJAX after JavaScript executes. If your scraper only fetches raw HTML, you'll get nothing useful.
+Many sites gate their content behind JavaScript-rendered pages. The initial HTML response is nearly empty: the actual content loads via AJAX after JavaScript executes. If your scraper only fetches raw HTML, you'll get nothing useful.
 
 **Solution:** Render pages with a headless browser or use services that provide pre-rendered HTML snapshots.
 
@@ -76,7 +76,7 @@ A proxy service that automatically rotates your exit IP with every request (or o
 
 ### Mobile Proxies
 
-Exit IPs from mobile carrier networks (4G/5G). Extremely hard to block — mobile IPs are shared by thousands of real users, and anti-bot systems are reluctant to block entire mobile ranges due to false positive risk.
+Exit IPs from mobile carrier networks (4G/5G). Extremely hard to block: mobile IPs are shared by thousands of real users, and anti-bot systems are reluctant to block entire mobile ranges due to false positive risk.
 
 **Best for:** The most defended targets. Mobile-specific content. Long-running campaigns where consistency matters.
 
@@ -140,7 +140,7 @@ context = browser.new_context(
 
 ### 4. Handle CAPTCHAs Gracefully
 
-CAPTCHAs are the final gatekeeper. Services like 2Captcha, Anti-Captcha, and CapSolver accept CAPTCHA images and return solutions programmatically. Budget this cost into your scraping project — it's a recurring operational expense.
+CAPTCHAs are the final gatekeeper. Services like 2Captcha, Anti-Captcha, and CapSolver accept CAPTCHA images and return solutions programmatically. Budget this cost into your scraping project: it's a recurring operational expense.
 
 If you're hitting CAPTCHAs frequently, it means your other evasion measures aren't working well enough. Fix the signal, not just the symptom.
 
@@ -148,15 +148,15 @@ If you're hitting CAPTCHAs frequently, it means your other evasion measures aren
 
 The `robots.txt` file tells crawlers which paths a site owner doesn't want scraped. It's not legally binding, but ignoring it is both unethical and often interpreted as evidence of bad faith if legal issues arise.
 
-More importantly: web scraping can violate the Computer Fraud and Abuse Act (US), the GDPR (EU), or local equivalents depending on what you're collecting, how you're storing it, and how you're using it. If you're scraping personal data, consult a lawyer. For public business data (prices, product listings), you're on safer ground — but safe ground isn't the same as no ground.
+More importantly: web scraping can violate the Computer Fraud and Abuse Act (US), the GDPR (EU), or local equivalents depending on what you're collecting, how you're storing it, and how you're using it. If you're scraping personal data, consult a lawyer. For public business data (prices, product listings), you're on safer ground, but safe ground isn't the same as no ground.
 
 ## Common Mistakes That Get You Blocked Fast
 
-- **Running requests in tight loops** — The fastest way to get your IP range blocked. Always add randomized delays.
-- **Ignoring rate limit headers** — Many APIs signal throttle limits via `X-RateLimit-Remaining` headers. Respect them.
-- **Using the same User-Agent forever** — Rotate through a realistic distribution of browser versions and OS combinations.
-- **Scraping during off-peak hours only** — Bots do this. Human traffic peaks during business hours. Blend into the pattern.
-- **Skipping TLS fingerprint rotation** — Every request library (curl, Python requests, Playwright) has a slightly different TLS handshake signature. Sophisticated systems profile these. Use a headless browser to get a real browser TLS fingerprint.
+- **Running requests in tight loops**: The fastest way to get your IP range blocked. Always add randomized delays.
+- **Ignoring rate limit headers**: Many APIs signal throttle limits via `X-RateLimit-Remaining` headers. Respect them.
+- **Using the same User-Agent forever**: Rotate through a realistic distribution of browser versions and OS combinations.
+- **Scraping during off-peak hours only**: Bots do this. Human traffic peaks during business hours. Blend into the pattern.
+- **Skipping TLS fingerprint rotation**: Every request library (curl, Python requests, Playwright) has a slightly different TLS handshake signature. Sophisticated systems profile these. Use a headless browser to get a real browser TLS fingerprint.
 
 ## Scaling: When One Machine Isn't Enough
 
@@ -170,11 +170,11 @@ The architecture that works at scale:
 4. **Results aggregator** collects scraped data into a central store
 5. **Health monitor** tracks ban rates per proxy and rotates underperforming exit nodes
 
-This isn't a weekend project — it's a distributed system. For most use cases, managed scraping platforms like ScrapingBee, ScraperAPI, or Bright Data's Scraper APIs handle the infrastructure complexity and let you focus on parsing logic.
+This isn't a weekend project: it's a distributed system. For most use cases, managed scraping platforms like ScrapingBee, ScraperAPI, or Bright Data's Scraper APIs handle the infrastructure complexity and let you focus on parsing logic.
 
 ## Conclusion
 
-Getting blocked is not a failure of web scraping — it's a feedback signal. Every ban tells you something about what the target's detection system is watching. Treat each block as data, adjust your signals, and iterate.
+Getting blocked is not a failure of web scraping: it's a feedback signal. Every ban tells you something about what the target's detection system is watching. Treat each block as data, adjust your signals, and iterate.
 
 The fundamentals never change: use residential or mobile proxies, randomize your timing and fingerprints, render JavaScript-heavy pages with a real browser, handle CAPTCHAs as a cost center, and always stay on the right side of the law.
 

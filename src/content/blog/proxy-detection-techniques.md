@@ -11,9 +11,9 @@ tags: ['security', 'proxy', 'detection']
 
 A proxy server acts as an intermediary between a user's device and the internet. Instead of connecting directly to a website, the user's request travels to the proxy server first, which then forwards it to the destination on the user's behalf. The destination server sees the proxy's IP address, not the user's original IP address.
 
-Proxies are used for a wide range of purposes — some entirely legitimate, others not. Businesses use proxies for network caching, content filtering, and centralized internet access. Individuals use proxies to bypass geographic restrictions, access research data at scale, or add a layer of privacy to their browsing. Automated systems use proxies to conduct web scraping, ad verification, price monitoring, and competitive intelligence gathering. And bad actors use proxies to commit fraud, abuse platform limits, and circumvent bans.
+Proxies are used for a wide range of purposes: some entirely legitimate, others not. Businesses use proxies for network caching, content filtering, and centralized internet access. Individuals use proxies to bypass geographic restrictions, access research data at scale, or add a layer of privacy to their browsing. Automated systems use proxies to conduct web scraping, ad verification, price monitoring, and competitive intelligence gathering. And bad actors use proxies to commit fraud, abuse platform limits, and circumvent bans.
 
-For platforms that need to make trust decisions based on who is connecting — e-commerce sites, API providers, content platforms, ad networks — understanding whether traffic is coming through a proxy is an important input to risk management.
+For platforms that need to make trust decisions based on who is connecting (e-commerce sites, API providers, content platforms, ad networks) understanding whether traffic is coming through a proxy is an important input to risk management.
 
 ## Types of Proxies
 
@@ -21,11 +21,11 @@ Not all proxies are equal. They vary significantly in how detectable they are, a
 
 ### HTTP and HTTPS Proxies
 
-HTTP proxies operate at the application layer and handle web traffic only. They are the most common type and the easiest to detect, because they often modify HTTP headers in ways that reveal their presence. HTTPS proxies add encryption between the client and the proxy server, but the proxy still terminates the connection — the destination server communicates with the proxy, not with the original client.
+HTTP proxies operate at the application layer and handle web traffic only. They are the most common type and the easiest to detect, because they often modify HTTP headers in ways that reveal their presence. HTTPS proxies add encryption between the client and the proxy server, but the proxy still terminates the connection: the destination server communicates with the proxy, not with the original client.
 
 ### SOCKS Proxies
 
-SOCKS proxies operate at a lower level in the network stack (transport layer), making them more versatile than HTTP proxies. A SOCKS5 proxy, the current standard, supports any type of traffic — HTTP, HTTPS, FTP, and others — and handles UDP as well as TCP. SOCKS proxies do not rewrite HTTP headers, making them somewhat harder to detect than HTTP proxies.
+SOCKS proxies operate at a lower level in the network stack (transport layer), making them more versatile than HTTP proxies. A SOCKS5 proxy, the current standard, supports any type of traffic (HTTP, HTTPS, FTP, and others) and handles UDP as well as TCP. SOCKS proxies do not rewrite HTTP headers, making them somewhat harder to detect than HTTP proxies.
 
 ### Transparent Proxies
 
@@ -65,7 +65,7 @@ function hasProxyHeaders(headers) {
 }
 ```
 
-The presence of these headers does not always indicate malicious intent — legitimate load balancers and CDNs also set `X-Forwarded-For` — but they provide useful context when combined with other signals.
+The presence of these headers does not always indicate malicious intent (legitimate load balancers and CDNs also set `X-Forwarded-For`) but they provide useful context when combined with other signals.
 
 ### IP Database Lookup
 
@@ -88,7 +88,7 @@ async function detectProxy(ip) {
 }
 ```
 
-The response includes an `isProxy` flag, along with `isVPN`, `isTor`, and `isHosting` — giving you a complete security profile in one API call.
+The response includes an `isProxy` flag, along with `isVPN`, `isTor`, and `isHosting`, giving you a complete security profile in one API call.
 
 ### Port Scanning
 
@@ -104,7 +104,7 @@ This technique is probabilistic and requires baseline latency data from known re
 
 ### Geolocation Mismatch
 
-If the IP address geolocation places the user in one country, but other signals — language headers, timezone information, browser settings — suggest a different country, the mismatch may indicate proxy usage. A user who claims via `Accept-Language` to be a French speaker but whose IP address geolocates to the United States could be using a proxy to appear to be in the US.
+If the IP address geolocation places the user in one country, but other signals (language headers, timezone information, browser settings) suggest a different country, the mismatch may indicate proxy usage. A user who claims via `Accept-Language` to be a French speaker but whose IP address geolocates to the United States could be using a proxy to appear to be in the US.
 
 ### ASN and Organization Lookup
 
@@ -114,7 +114,7 @@ Every IP address belongs to an Autonomous System registered to an organization. 
 
 ### E-commerce and Payment Protection
 
-Preventing automated bots and scalpers from buying limited inventory — sneakers, concert tickets, gaming hardware — requires detecting and blocking traffic from automated proxy networks. Similarly, payment fraud teams use proxy detection as one signal in their transaction risk scoring.
+Preventing automated bots and scalpers from buying limited inventory (sneakers, concert tickets, gaming hardware) requires detecting and blocking traffic from automated proxy networks. Similarly, payment fraud teams use proxy detection as one signal in their transaction risk scoring.
 
 ### Content and Regional Licensing
 
@@ -126,7 +126,7 @@ Public APIs face abuse from scrapers and bots that rotate through proxy pools to
 
 ### Account Security and Fraud
 
-Account creation fraud, credential stuffing, and loyalty program abuse frequently use proxy networks to distribute requests across many IP addresses. Detecting proxy usage does not necessarily mean blocking the action — it means adjusting the risk score and potentially requiring additional verification.
+Account creation fraud, credential stuffing, and loyalty program abuse frequently use proxy networks to distribute requests across many IP addresses. Detecting proxy usage does not necessarily mean blocking the action: it means adjusting the risk score and potentially requiring additional verification.
 
 ## Response Handling and Confidence Scoring
 
@@ -139,13 +139,13 @@ async function handleRequest(ip, action) {
   const riskScore = calculateRisk(security);
 
   if (riskScore > 0.9) {
-    // High confidence proxy — block or require strong verification
+    // High confidence proxy: block or require strong verification
     return { action: 'block' };
   } else if (riskScore > 0.5) {
-    // Moderate risk — add friction (CAPTCHA, email verification)
+    // Moderate risk: add friction (CAPTCHA, email verification)
     return { action: 'challenge' };
   } else {
-    // Low risk — allow with monitoring
+    // Low risk: allow with monitoring
     return { action: 'allow' };
   }
 }

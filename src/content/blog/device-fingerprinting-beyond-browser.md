@@ -10,7 +10,7 @@ draft: false
 
 ## Introduction: The Fingerprint Is in the Hardware
 
-Browser fingerprinting is the well-known threat. Far fewer people know that the fingerprinting attack surface extends well beyond the browser — into your operating system, GPU, audio stack, battery sensor, and the firmware running on your hardware itself.
+Browser fingerprinting is the well-known threat. Far fewer people know that the fingerprinting attack surface extends well beyond the browser: into your operating system, GPU, audio stack, battery sensor, and the firmware running on your hardware itself.
 
 Where browser fingerprinting resets when you close a tab, device fingerprinting persists across sessions, reinstalls, and factory resets. It survives VPN connections, private browsing, and Tor. Understanding every layer is the only way to know which privacy measures actually move the needle.
 
@@ -18,16 +18,16 @@ This article covers every device fingerprinting vector in use today, ranked by p
 
 ## How Device Fingerprinting Differs from Browser Fingerprinting
 
-Browser fingerprinting operates within the web rendering context. It uses JavaScript APIs exposed by the browser — canvas rendering, WebGL, font lists, plugin enumerations. Resetting the browser or clearing data disrupts it.
+Browser fingerprinting operates within the web rendering context. It uses JavaScript APIs exposed by the browser: canvas rendering, WebGL, font lists, plugin enumerations. Resetting the browser or clearing data disrupts it.
 
 Device fingerprinting operates below the browser. It uses signals that originate in the operating system and hardware:
 
-- **Hardware characteristics** — GPU model, CPU instruction sets, screen resolution, battery sensor data
-- **OS-level signals** — Installed fonts at the system level, kernel version, device driver versions
-- **Peripheral fingerprints** — Webcam and microphone device IDs, connected USB device lists, Bluetooth MAC addresses
-- **Firmware-level data** — BIOS/UEFI versions, hardware UUIDs, ACPI tables
+- **Hardware characteristics**: GPU model, CPU instruction sets, screen resolution, battery sensor data
+- **OS-level signals**: Installed fonts at the system level, kernel version, device driver versions
+- **Peripheral fingerprints**: Webcam and microphone device IDs, connected USB device lists, Bluetooth MAC addresses
+- **Firmware-level data**: BIOS/UEFI versions, hardware UUIDs, ACPI tables
 
-These signals are not accessible to JavaScript in a properly sandboxed browser — but they are accessible to native applications, mobile apps, browser extensions, and in some cases, websites using clever side-channel techniques.
+These signals are not accessible to JavaScript in a properly sandboxed browser, but they are accessible to native applications, mobile apps, browser extensions, and in some cases, websites using clever side-channel techniques.
 
 ## The Hardware Vectors
 
@@ -217,8 +217,8 @@ For most users, this vector is not relevant to web privacy. It matters for high-
 
 Mobile devices carry persistent hardware identifiers that are accessible to applications:
 
-- IMEI (International Mobile Equipment Identity) — unique to the device hardware
-- Device serial number — assigned by the manufacturer
+- IMEI (International Mobile Equipment Identity): unique to the device hardware
+- Device serial number: assigned by the manufacturer
 - SIM card ICCID
 
 Apps with appropriate permissions can read these identifiers. Google and Apple have restricted access in recent OS versions, but some apps still obtain them.
@@ -243,7 +243,7 @@ Mobile device sensors have calibration data that varies by device due to manufac
 
 ## How Fingerprints Are Combined Across Layers
 
-The real tracking power comes from combining signals across layers. A single signal — your GPU model — might identify 1 in 1000 users. Combine it with:
+The real tracking power comes from combining signals across layers. A single signal (your GPU model) might identify 1 in 1000 users. Combine it with:
 
 - Installed system fonts
 - Screen resolution and color profile
@@ -272,14 +272,14 @@ This is why clearing cookies and using a VPN only partially disrupts tracking. T
 
 Use these tools to check your current device fingerprint:
 
-- **AmIUnique.org** — Comprehensive browser and device fingerprint analysis
-- **Cover Your Tracks (EFF)** — Shows your fingerprint's uniqueness and identifies active vectors
-- **PixelScan** — Tests screen fingerprinting and canvas fingerprinting
-- **Audio Fingerprint Test** — Specific test for the AudioContext fingerprint
+- **AmIUnique.org**: Comprehensive browser and device fingerprint analysis
+- **Cover Your Tracks (EFF)**: Shows your fingerprint's uniqueness and identifies active vectors
+- **PixelScan**: Tests screen fingerprinting and canvas fingerprinting
+- **Audio Fingerprint Test**: Specific test for the AudioContext fingerprint
 
 Run tests before and after applying privacy configurations to measure actual improvement.
 
-## Conclusion: You Cannot Hide Completely — But You Can Raise the Cost
+## Conclusion: You Cannot Hide Completely, But You Can Raise the Cost
 
 Device fingerprinting is pervasive because it operates below the layers most privacy tools target. VPNs do not stop it. Cookie deletion does not stop it. Incognito mode does not stop it.
 

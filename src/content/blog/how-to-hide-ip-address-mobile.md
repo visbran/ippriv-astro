@@ -11,7 +11,7 @@ tags: ["privacy", "mobile", "Android", "iOS", "IP address"]
 
 Your smartphone knows more about you than your computer does. It carries your location data, connects to multiple networks daily, and sends your IP address with every request you make. Whether you are on cellular data or Wi-Fi, your real IP address is visible to websites, apps, and network operators.
 
-Hiding your IP address on mobile is just as important as on a desktop — and in many ways more urgent, given how much mobile traffic bypasses traditional security tools. This guide covers the main methods available for Android and iOS, with practical steps you can apply today.
+Hiding your IP address on mobile is just as important as on a desktop, and in many ways more urgent, given how much mobile traffic bypasses traditional security tools. This guide covers the main methods available for Android and iOS, with practical steps you can apply today.
 
 ## Why Your Mobile IP Matters
 
@@ -66,7 +66,7 @@ On iOS:
 3. Scroll to **HTTP Proxy** and select **Manual**.
 4. Enter the proxy server address and port.
 
-Note that proxy configuration on iOS is network-wide and not enforced for all apps — many apps ignore system proxy settings.
+Note that proxy configuration on iOS is network-wide and not enforced for all apps: many apps ignore system proxy settings.
 
 ### 3. Use Tor on Mobile
 
@@ -80,7 +80,7 @@ Tor routes your traffic through multiple volunteer relays, making it difficult t
 
 **On iOS (Onion Browser):**
 1. Install Onion Browser from the App Store.
-2. Open the app — it automatically routes traffic through Tor.
+2. Open the app: it automatically routes traffic through Tor.
 3. Your IP will appear as one from the Tor exit node network.
 
 Tor is slower than VPN but offers stronger anonymity. It is best suited for situations where maximum privacy is required, not for everyday browsing.
@@ -102,13 +102,13 @@ Some mobile carriers use carrier-grade NAT (CGNAT), which means multiple users s
 
 You can check if you are behind CGNAT by comparing your apparent public IP across different devices on the same network. If they all show the same IP, you are likely behind CGNAT.
 
-CGNAT is not a privacy feature — the carrier still knows which user made which request. It merely complicates external tracking.
+CGNAT is not a privacy feature: the carrier still knows which user made which request. It merely complicates external tracking.
 
 ### 6. Disable Wi-Fi and Use a Different Network
 
 If you need a different IP urgently and do not have a VPN, connecting to a different Wi-Fi network gives you a different IP address. Coffee shops, libraries, and public hotspots each have their own IP allocations.
 
-Be aware of the risks of open Wi-Fi networks — they do not encrypt your traffic, and the network operator can see your activity. Combine this with HTTPS-only browsing or a VPN when on any public network.
+Be aware of the risks of open Wi-Fi networks: they do not encrypt your traffic, and the network operator can see your activity. Combine this with HTTPS-only browsing or a VPN when on any public network.
 
 ## Mobile-Specific Privacy Risks
 
@@ -161,8 +161,8 @@ Use a site that shows your ISP and approximate location. If the location shown s
 
 ## Conclusion
 
-Your mobile IP address is a persistent identifier that follows you across apps and websites. Hiding it requires choosing the right tool for your threat model — a VPN for convenience and broad protection, a proxy for targeted app routing, or Tor for maximum anonymity.
+Your mobile IP address is a persistent identifier that follows you across apps and websites. Hiding it requires choosing the right tool for your threat model: a VPN for convenience and broad protection, a proxy for targeted app routing, or Tor for maximum anonymity.
 
-Beyond hiding your IP, review app permissions, disable Wi-Fi when not needed, and be aware that GPS and location services can expose your real position in ways IP hiding cannot prevent. Privacy on mobile is layered — no single tool makes you anonymous, but combining good practices significantly reduces your attack surface.
+Beyond hiding your IP, review app permissions, disable Wi-Fi when not needed, and be aware that GPS and location services can expose your real position in ways IP hiding cannot prevent. Privacy on mobile is layered: no single tool makes you anonymous, but combining good practices significantly reduces your attack surface.
 
 Explore more privacy tools and guides at [ippriv.com](/).

@@ -10,15 +10,15 @@ draft: false
 
 ## Every Request Reveals Your IP Address
 
-Every time you visit a website, your browser sends an HTTP request to a web server. That request contains the information the server needs to respond: what page you are asking for, what type of browser you are using, what languages you prefer, and — unavoidably — your IP address.
+Every time you visit a website, your browser sends an HTTP request to a web server. That request contains the information the server needs to respond: what page you are asking for, what type of browser you are using, what languages you prefer, and (unavoidably) your IP address.
 
 Your IP address is not something you choose to share. It is a technical requirement of how the internet works. For data to be delivered to your device, the server must know where to send it. Your IP address is the return address on every request you make.
 
-This is not inherently sinister. It is simply how the protocol functions. But the fact that your IP address is transmitted with every request means it is also logged, processed, and potentially used in ways you may not be aware of. Understanding what websites know about your IP address — and what they can infer from it — is an important part of understanding your digital privacy.
+This is not inherently sinister. It is simply how the protocol functions. But the fact that your IP address is transmitted with every request means it is also logged, processed, and potentially used in ways you may not be aware of. Understanding what websites know about your IP address (and what they can infer from it) is an important part of understanding your digital privacy.
 
 ## What Web Servers Log
 
-Web servers keep access logs by default. Every major web server software — Apache, Nginx, Caddy, IIS — logs incoming requests automatically unless specifically configured not to. A standard web server log entry for a single page view looks something like this:
+Web servers keep access logs by default. Every major web server software (Apache, Nginx, Caddy, IIS) logs incoming requests automatically unless specifically configured not to. A standard web server log entry for a single page view looks something like this:
 
 ```
 203.0.113.45 - - [03/Mar/2025:14:22:31 +0000] "GET /about HTTP/1.1" 200 4823 "https://example.com/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
@@ -33,7 +33,7 @@ This single log line captures:
 - **The referring page** (where you came from)
 - **Your User-Agent string** (browser, operating system, device type)
 
-These logs are retained for varying periods — days, months, or years — depending on the operator's data retention policies and applicable legal requirements. Every website you visit generates log entries like this one. Even a single page view leaves a trace.
+These logs are retained for varying periods (days, months, or years) depending on the operator's data retention policies and applicable legal requirements. Every website you visit generates log entries like this one. Even a single page view leaves a trace.
 
 ## What Websites Can Infer from Your IP Address
 
@@ -41,11 +41,11 @@ An IP address alone carries more information than many people realize. Through I
 
 ### Geographic Location
 
-IP geolocation can identify the country associated with your IP address with 95–99% accuracy, the region or state with 55–80% accuracy, and the approximate city with 50–75% accuracy. This is why websites can automatically display content in your language, show local pricing, or redirect you to a regional version of the site — all based solely on your IP address.
+IP geolocation can identify the country associated with your IP address with 95–99% accuracy, the region or state with 55–80% accuracy, and the approximate city with 50–75% accuracy. This is why websites can automatically display content in your language, show local pricing, or redirect you to a regional version of the site: all based solely on your IP address.
 
 ### Internet Service Provider
 
-Your IP address is registered to your ISP or organization. A simple ip lookup reveals the name of your provider — Comcast, AT&T, BT, Deutsche Telekom, or whoever provides your internet connection. This tells websites something about your connection type and approximate location.
+Your IP address is registered to your ISP or organization. A simple ip lookup reveals the name of your provider: Comcast, AT&T, BT, Deutsche Telekom, or whoever provides your internet connection. This tells websites something about your connection type and approximate location.
 
 ### VPN and Proxy Status
 
@@ -53,7 +53,7 @@ Websites increasingly check whether the IP address making a request belongs to a
 
 ### Organization or Employer
 
-If you are connecting through a corporate network, your IP address may be registered to your employer's organization. This means that when you visit a website from your work computer on the company network, that website may be able to identify what company you work for — purely from your IP address.
+If you are connecting through a corporate network, your IP address may be registered to your employer's organization. This means that when you visit a website from your work computer on the company network, that website may be able to identify what company you work for: purely from your IP address.
 
 ### Connection Type
 
@@ -73,7 +73,7 @@ Beyond web server logs, many websites embed third-party analytics and advertisin
 
 ## Legal and GDPR Implications
 
-In many jurisdictions, an IP address is considered **personal data**. Under the European Union's General Data Protection Regulation (GDPR), IP addresses are explicitly treated as personal data when they can be linked to an identifiable individual — which, for ISP-assigned residential IPs, they typically can be.
+In many jurisdictions, an IP address is considered **personal data**. Under the European Union's General Data Protection Regulation (GDPR), IP addresses are explicitly treated as personal data when they can be linked to an identifiable individual, which, for ISP-assigned residential IPs, they typically can be.
 
 This has significant implications for website operators:
 
@@ -82,11 +82,11 @@ This has significant implications for website operators:
 - Users may have the right to request deletion of records associated with their IP address.
 - Transferring IP address logs to third parties (analytics providers, CDNs, fraud services) requires appropriate legal basis.
 
-For users, this means that in GDPR-covered regions, you have rights over IP-based data collected about you — including the right to know what is collected, the right to request deletion, and the right to object to certain types of processing.
+For users, this means that in GDPR-covered regions, you have rights over IP-based data collected about you: including the right to know what is collected, the right to request deletion, and the right to object to certain types of processing.
 
 Outside the EU, legal protections vary considerably. In the United States, there is no single comprehensive federal privacy law. Several states have enacted their own privacy legislation (California's CPRA being the most prominent), but protection is patchwork compared to GDPR.
 
-## What Your IP Address Reveals — Check It Yourself
+## What Your IP Address Reveals: Check It Yourself
 
 If you want to see exactly what information is publicly associated with your current IP address, use our [free IP lookup tool](/ip-lookup). The tool performs a live ip lookup and shows you:
 
@@ -96,13 +96,13 @@ If you want to see exactly what information is publicly associated with your cur
 - Whether your connection is flagged as a VPN, proxy, or hosting service
 - Connection type information
 
-This is the same category of information that every website you visit can access about you — instantly, without any action on your part. Seeing it for yourself is a useful way to understand your current digital footprint.
+This is the same category of information that every website you visit can access about you: instantly, without any action on your part. Seeing it for yourself is a useful way to understand your current digital footprint.
 
 ## How to Reduce Your IP Address Exposure
 
 While you cannot eliminate your IP address from internet traffic, you can take steps to limit how much information it reveals.
 
-**Use a VPN (Virtual Private Network).** A VPN routes your traffic through a server operated by the VPN provider. Websites see the VPN server's IP address instead of yours. See our full guide on [how to hide your IP address](/blog/hide-your-ip-address) for a comparison of all available methods. This obscures your true IP address and the location and ISP information associated with it. The effectiveness of this approach depends entirely on the trustworthiness of the VPN provider — your ISP no longer sees your browsing, but the VPN provider does.
+**Use a VPN (Virtual Private Network).** A VPN routes your traffic through a server operated by the VPN provider. Websites see the VPN server's IP address instead of yours. See our full guide on [how to hide your IP address](/blog/hide-your-ip-address) for a comparison of all available methods. This obscures your true IP address and the location and ISP information associated with it. The effectiveness of this approach depends entirely on the trustworthiness of the VPN provider: your ISP no longer sees your browsing, but the VPN provider does.
 
 **Use the Tor Browser.** Tor routes your traffic through multiple relays operated by volunteers worldwide before it reaches its destination. Each relay only knows the previous hop, not your original IP address. This provides strong IP address anonymization but comes with significant speed penalties. Tor is also actively blocked by some services.
 
@@ -112,4 +112,4 @@ While you cannot eliminate your IP address from internet traffic, you can take s
 
 **Limit third-party tracking.** While not strictly IP-based, using browser extensions that block tracking scripts reduces the amount of IP-correlated data collected about you across the web. Tools like uBlock Origin prevent many analytics and advertising scripts from executing, limiting the IP-based fingerprinting these services perform.
 
-Understanding that your IP address is transmitted with every request — and that it carries real information about your location, ISP, and identity — is the foundation of informed decisions about your online privacy.
+Understanding that your IP address is transmitted with every request (and that it carries real information about your location, ISP, and identity) is the foundation of informed decisions about your online privacy.

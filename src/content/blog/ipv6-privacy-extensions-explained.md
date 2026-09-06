@@ -10,18 +10,18 @@ draft: false
 
 ## Why Your IPv6 Address Is a Tracking Problem
 
-Every time you connect to the internet, your IP address is the primary identifier that links your activity to your location and your identity. Most users are aware that VPNs and proxies can mask their IPv4 address. Fewer realize that even when your IPv4 is hidden, your IPv6 address may be fully exposed — and unlike dynamic IPv4 addresses that change periodically, a native IPv6 address is tied directly to your device's hardware MAC address, making it a persistent identifier that follows you across every website you visit.
+Every time you connect to the internet, your IP address is the primary identifier that links your activity to your location and your identity. Most users are aware that VPNs and proxies can mask their IPv4 address. Fewer realize that even when your IPv4 is hidden, your IPv6 address may be fully exposed, and unlike dynamic IPv4 addresses that change periodically, a native IPv6 address is tied directly to your device's hardware MAC address, making it a persistent identifier that follows you across every website you visit.
 
-This is not a theoretical concern. In 2026, IPv6 adoption has crossed 50% globally. Most dual-stacked networks — connections that support both IPv4 and IPv6 simultaneously — leak IPv6 addresses even when a VPN is active. A 2024 study by the University of Chicago found that over 70% of VPN users had their real IPv6 address exposed despite having active VPN tunnels. Unless privacy extensions are explicitly enabled, your device generates an IPv6 address that is:
+This is not a theoretical concern. In 2026, IPv6 adoption has crossed 50% globally. Most dual-stacked networks (connections that support both IPv4 and IPv6 simultaneously) leak IPv6 addresses even when a VPN is active. A 2024 study by the University of Chicago found that over 70% of VPN users had their real IPv6 address exposed despite having active VPN tunnels. Unless privacy extensions are explicitly enabled, your device generates an IPv6 address that is:
 
-- **Derived from your MAC address** — making it globally unique and permanently tied to your hardware
-- **Persistent across sessions** — websites see the same IPv6 address every time you visit
-- **Linkable across websites** — the same IPv6 address acts as a supercookie across the entire web
-- **Visible even behind a VPN** — IPv6 traffic often bypasses VPN tunnels entirely on dual-stacked networks
+- **Derived from your MAC address**, making it globally unique and permanently tied to your hardware
+- **Persistent across sessions**: websites see the same IPv6 address every time you visit
+- **Linkable across websites**: the same IPv6 address acts as a supercookie across the entire web
+- **Visible even behind a VPN**: IPv6 traffic often bypasses VPN tunnels entirely on dual-stacked networks
 
 IPv6 privacy extensions solve this by generating temporary, random IPv6 addresses that rotate on a schedule, breaking the link between your device and your long-term identity.
 
-## How Standard IPv6 Addressing Works — and Why It Tracks You
+## How Standard IPv6 Addressing Works, and Why It Tracks You
 
 To understand why privacy extensions matter, you need to understand how standard IPv6 addresses are assigned.
 
@@ -51,9 +51,9 @@ IPv6 privacy extensions (defined in [RFC 4941](https://datatracker.ietf.org/doc/
 
 The system maintains two types of addresses simultaneously:
 
-1. **A stable address** — derived from the MAC address (eui-64), used for server-style inbound connections and network management. This address is typically not used for outbound client connections.
+1. **A stable address**: derived from the MAC address (eui-64), used for server-style inbound connections and network management. This address is typically not used for outbound client connections.
 
-2. **A temporary address** — randomly generated, rotated on a schedule (default: every 24 hours in most operating systems), used for all outbound client connections to external servers.
+2. **A temporary address**: randomly generated, rotated on a schedule (default: every 24 hours in most operating systems), used for all outbound client connections to external servers.
 
 The temporary address is what websites and services see when you browse. Because it changes regularly, long-term tracking based on IPv6 address becomes significantly harder.
 
@@ -64,7 +64,7 @@ The privacy extension algorithm generates addresses using the following process:
 1. Generate a random 64-bit value (the interface identifier)
 2. Apply the Universal/Local bit (set to 1 to indicate locally-assigned) per RFC 4291 requirements
 3. Apply a Solicted-Node Multicast prefix (ff02::1:ff00:0/104) using the last 24 bits of the generated address
-4. Combine with the network prefix received from the router (via SLAAC — Stateless Address Autoconfiguration)
+4. Combine with the network prefix received from the router (via SLAAC: Stateless Address Autoconfiguration)
 5. Perform Duplicate Address Detection (DAD) to ensure the address is not already in use on the network
 6. Assign the address a preferred lifetime (typically 86400 seconds / 24 hours) and a valid lifetime
 
@@ -261,7 +261,7 @@ If your Android device does not support privacy extensions and you need to preve
 echo 1 > /proc/sys/net/ipv6/conf/wlan0/disable_ipv6
 ```
 
-This is a blunt instrument — it disables all IPv6 connectivity — but it eliminates the tracking risk entirely at the cost of IPv6 functionality.
+This is a blunt instrument (it disables all IPv6 connectivity) but it eliminates the tracking risk entirely at the cost of IPv6 functionality.
 
 ## Testing Whether Privacy Extensions Are Active
 
@@ -291,7 +291,7 @@ Visit **https://test-ipv6.com** in your browser. The test reports:
 - Whether your IPv6 address appears to be a temporary (privacy extension) address or a MAC-derived address
 - Whether you have an IPv6 leak through your VPN
 
-A clean result shows your VPN's IPv6 address (or a privacy extension address from your ISP, if no VPN) — and the test explicitly labels temporary addresses as such.
+A clean result shows your VPN's IPv6 address (or a privacy extension address from your ISP, if no VPN), and the test explicitly labels temporary addresses as such.
 
 ### Method 3: Scripted Verification
 
@@ -347,7 +347,7 @@ def check_privacy_extensions():
         else:
             print("✅ IPv6 address does not appear to be MAC-derived.")
     else:
-        print("ℹ️  Addresses differ — this may indicate a VPN, proxy, or privacy extension in use.")
+        print("ℹ️  Addresses differ: this may indicate a VPN, proxy, or privacy extension in use.")
 
 if __name__ == "__main__":
     check_privacy_extensions()
@@ -355,7 +355,7 @@ if __name__ == "__main__":
 
 ## The VPN IPv6 Leak Problem
 
-Even with privacy extensions enabled, using a VPN on a dual-stacked network introduces a specific vulnerability: **IPv6 leak**. Standard VPN tunnels were designed for IPv4 and often do not carry IPv6 traffic at all, or carry it without encryption. On networks that advertise both IPv4 and IPv6 prefixes via SLAAC, the operating system may send IPv6 traffic directly to the ISP router — bypassing the VPN tunnel entirely.
+Even with privacy extensions enabled, using a VPN on a dual-stacked network introduces a specific vulnerability: **IPv6 leak**. Standard VPN tunnels were designed for IPv4 and often do not carry IPv6 traffic at all, or carry it without encryption. On networks that advertise both IPv4 and IPv6 prefixes via SLAAC, the operating system may send IPv6 traffic directly to the ISP router: bypassing the VPN tunnel entirely.
 
 This is distinct from the privacy extension issue but is compounded by it. A device with a MAC-derived IPv6 address, connected to a VPN that does not handle IPv6, will have both:
 
@@ -365,7 +365,7 @@ This is distinct from the privacy extension issue but is compounded by it. A dev
 **To fully close the IPv6 tracking vector when using a VPN:**
 
 1. **Enable privacy extensions** on your operating system (as described above)
-2. **Ensure your VPN handles IPv6** — either by tunneling it (IPv6-in-IPv4) or by blocking IPv6 at the tunnel interface
+2. **Ensure your VPN handles IPv6**: either by tunneling it (IPv6-in-IPv4) or by blocking IPv6 at the tunnel interface
 3. **Test for IPv6 leaks** at [test-ipv6.com](https://test-ipv6.com) with your VPN active
 4. **Consider VPN kill-switch configurations** that block all non-VPN traffic (including IPv6) if the tunnel drops
 
@@ -397,7 +397,7 @@ Privacy extensions significantly reduce IPv6-based tracking but are not a comple
 
 IPv6 privacy extensions are a powerful, built-in mechanism that every privacy-conscious internet user should understand and enable. By replacing MAC-derived IPv6 addresses with randomly generated, rotating temporary addresses, they break the persistent link between your device hardware and your online identity at the network layer.
 
-Unlike cookie-based or fingerprint-based tracking, IPv6 address tracking operates at the network level — making it invisible to browser-based privacy tools. Enabling privacy extensions closes a tracking vector that most users are completely unaware of.
+Unlike cookie-based or fingerprint-based tracking, IPv6 address tracking operates at the network level, making it invisible to browser-based privacy tools. Enabling privacy extensions closes a tracking vector that most users are completely unaware of.
 
 If you are concerned about IPv6-based tracking more broadly, also consider using IPPriv's [IP lookup tool](/ip-lookup) to see what information your current IPv6 address is exposing, and check our [VPN detection guide](/blog/vpn-detection-explained) for understanding how different network configurations affect your visibility online.
 

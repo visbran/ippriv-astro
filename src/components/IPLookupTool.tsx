@@ -137,7 +137,7 @@ export default function IPLookupTool() {
           IP Address Lookup
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Get instant IP address information — geolocation, ISP, DNS records, and security status for any IP.
+          Get instant IP address information: geolocation, ISP, DNS records, and security status for any IP.
         </p>
       </motion.div>
 

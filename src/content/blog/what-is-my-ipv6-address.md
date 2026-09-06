@@ -12,7 +12,7 @@ draft: false
 
 The internet is running out of IPv4 addresses. With over 4 billion possible IPv4 addresses, the world collectively assumed that would be enough. It wasn't. The explosion of smartphones, IoT devices, cloud services, and global connectivity has consumed the IPv4 address space to the point of exhaustion. Regional internet registries have been allocating from the final blocks for years, and network engineers have been compensating with NAT, carrier-grade NAT, and IPv6 transition technologies.
 
-IPv6 solves this with a vastly larger address space — 340 undecillion addresses, to be precise. But IPv6 is more than just "more addresses." It introduces a simplified header format, built-in security (IPsec), automatic address configuration (SLAAC), and hierarchical routing structures that improve global scalability.
+IPv6 solves this with a vastly larger address space: 340 undecillion addresses, to be precise. But IPv6 is more than just "more addresses." It introduces a simplified header format, built-in security (IPsec), automatic address configuration (SLAAC), and hierarchical routing structures that improve global scalability.
 
 This guide covers everything you need to know about identifying your IPv6 address, understanding how IPv6 addressing works, and building applications that handle both IPv4 and IPv6 correctly.
 
@@ -195,7 +195,7 @@ A global unicast IPv6 address is structured in a way that mirrors the hierarchic
 
 ### SLAAC: Stateless Address Autoconfiguration
 
-One of IPv6's most elegant features is SLAAC — the ability for devices to self-assign IPv6 addresses without a DHCP server.
+One of IPv6's most elegant features is SLAAC: the ability for devices to self-assign IPv6 addresses without a DHCP server.
 
 The process:
 
@@ -205,7 +205,7 @@ The process:
 4. The RA contains the network prefix (e.g., `2001:db8:85a3::/64`).
 5. The host combines this prefix with its interface identifier to form a global address.
 
-This means a device can get a routable IPv6 address the moment it connects to a network — no DHCP server required.
+This means a device can get a routable IPv6 address the moment it connects to a network: no DHCP server required.
 
 ## IPv6 vs IPv4: Key Differences for Developers
 
@@ -226,7 +226,7 @@ If you're building network applications, understanding these differences is esse
 
 ### Building Dual-Stack Applications
 
-Modern applications should support both IPv4 and IPv6 — a configuration called "dual-stack." Most operating systems and networks today operate in dual-stack mode, meaning a device may have both an IPv4 and IPv6 address simultaneously.
+Modern applications should support both IPv4 and IPv6: a configuration called "dual-stack." Most operating systems and networks today operate in dual-stack mode, meaning a device may have both an IPv4 and IPv6 address simultaneously.
 
 In Node.js, a dual-stack server looks like this:
 
@@ -339,6 +339,6 @@ ss -tulnp | grep -E ':80|:443'
 
 Finding and understanding your IPv6 address is the first step in building IPv6-aware applications. The internet is transitioning to IPv6, and while the deadline has been "imminent" for over two decades, real IPv6 adoption is now significant and growing. Major content providers, cloud platforms, and mobile networks carry substantial IPv6 traffic.
 
-The good news for developers: most of your existing code works with IPv6 without modification, as long as you're using hostname-based connections rather than hardcoded IPv4 addresses. The abstractions provided by operating systems, DNS, and programming languages handle the protocol differences in most cases. The cases where they don't — WebRTC leaks, address-family-specific socket bindings, DNS resolution edge cases — are exactly the situations where solid IPv6 knowledge makes the difference between a secure application and a privacy gap.
+The good news for developers: most of your existing code works with IPv6 without modification, as long as you're using hostname-based connections rather than hardcoded IPv4 addresses. The abstractions provided by operating systems, DNS, and programming languages handle the protocol differences in most cases. The cases where they don't (WebRTC leaks, address-family-specific socket bindings, DNS resolution edge cases) are exactly the situations where solid IPv6 knowledge makes the difference between a secure application and a privacy gap.
 
 To see what your IPv6 address looks like in the wild, [use the ippriv.com IP lookup tool](/ip-lookup). For a deeper dive into how IP addresses work across versions, read our guide on [IPv4 vs IPv6: A Developer Guide](/blog/ipv4-vs-ipv6). If you're building applications that need to classify or detect network types from IP addresses, explore the [IPPriv API documentation](/api-docs) for IPv6-enabled endpoints.

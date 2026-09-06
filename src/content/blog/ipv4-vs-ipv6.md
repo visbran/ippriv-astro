@@ -10,9 +10,9 @@ draft: false
 
 ## The IP Address Evolution
 
-The internet runs on Internet Protocol — the fundamental ruleset that allows devices to find each other and exchange data across global networks. At the heart of IP is the address: a numerical label assigned to every connected device, used to identify both the sender and destination of every packet traveling across the network.
+The internet runs on Internet Protocol: the fundamental ruleset that allows devices to find each other and exchange data across global networks. At the heart of IP is the address: a numerical label assigned to every connected device, used to identify both the sender and destination of every packet traveling across the network.
 
-For most of the internet's history, the world ran on IPv4. Today, the internet is mid-transition to IPv6. Understanding both — what they are, how they differ, and how to build applications that handle both correctly — is essential knowledge for any developer building anything that touches the network layer.
+For most of the internet's history, the world ran on IPv4. Today, the internet is mid-transition to IPv6. Understanding both (what they are, how they differ, and how to build applications that handle both correctly) is essential knowledge for any developer building anything that touches the network layer.
 
 ## IPv4: The Original Protocol
 
@@ -22,13 +22,13 @@ IPv4 was defined in 1981 and has been the foundation of internet addressing ever
 
 An IPv4 address consists of 32 bits, written as four groups of decimal numbers separated by dots: `192.168.1.1` or `203.0.113.42`.
 
-Each group (called an octet) represents 8 bits and can range from 0 to 255. The 32-bit address space provides approximately 4.3 billion unique addresses — a number that seemed enormous in 1981 and became severely inadequate by the 2010s.
+Each group (called an octet) represents 8 bits and can range from 0 to 255. The 32-bit address space provides approximately 4.3 billion unique addresses: a number that seemed enormous in 1981 and became severely inadequate by the 2010s.
 
 ### Address Space and Exhaustion
 
-The 4.3 billion address ceiling was a structural limitation that the internet community recognized decades before it became critical. IANA, the body responsible for global IP address allocation, issued the last blocks of unallocated IPv4 addresses in 2011. Regional registries followed over the next several years. Today, acquiring new IPv4 address space requires buying or leasing it from organizations that already hold allocations — a process that can cost thousands of dollars per address block.
+The 4.3 billion address ceiling was a structural limitation that the internet community recognized decades before it became critical. IANA, the body responsible for global IP address allocation, issued the last blocks of unallocated IPv4 addresses in 2011. Regional registries followed over the next several years. Today, acquiring new IPv4 address space requires buying or leasing it from organizations that already hold allocations: a process that can cost thousands of dollars per address block.
 
-The workarounds developed to cope with IPv4 exhaustion — Network Address Translation (NAT) and Carrier-Grade NAT (CGNAT) — allowed the internet to continue growing despite address scarcity. But they introduced complexity, broke end-to-end connectivity, and created challenges for IP lookup accuracy that persist today.
+The workarounds developed to cope with IPv4 exhaustion (Network Address Translation (NAT) and Carrier-Grade NAT (CGNAT)) allowed the internet to continue growing despite address scarcity. But they introduced complexity, broke end-to-end connectivity, and created challenges for IP lookup accuracy that persist today.
 
 ### Private Address Ranges
 
@@ -38,7 +38,7 @@ Not all IPv4 addresses route on the public internet. Three ranges are reserved f
 - `172.16.0.0` – `172.31.255.255` (172.16–31.x.x)
 - `192.168.0.0` – `192.168.255.255` (192.168.x.x)
 
-These addresses are invisible on the public internet. Your home router assigns private addresses to your devices (typically `192.168.x.x`) while presenting a single public IPv4 address to the outside world — the NAT mechanism that stretches the IPv4 address pool.
+These addresses are invisible on the public internet. Your home router assigns private addresses to your devices (typically `192.168.x.x`) while presenting a single public IPv4 address to the outside world: the NAT mechanism that stretches the IPv4 address pool.
 
 ## IPv6: The Successor Protocol
 
@@ -54,7 +54,7 @@ The `::` shorthand can appear only once in an address. `::1` is the IPv6 loopbac
 
 ### Address Space
 
-The 128-bit address space provides approximately 3.4 × 10³⁸ unique addresses — 340 undecillion. To put this in perspective: there are enough IPv6 addresses to assign billions of addresses to every atom on the surface of the Earth. IPv6 was not designed to run out. Every device can have a globally routable address, eliminating the need for NAT.
+The 128-bit address space provides approximately 3.4 × 10³⁸ unique addresses: 340 undecillion. To put this in perspective: there are enough IPv6 addresses to assign billions of addresses to every atom on the surface of the Earth. IPv6 was not designed to run out. Every device can have a globally routable address, eliminating the need for NAT.
 
 ### IPv6 Address Types
 
@@ -62,7 +62,7 @@ IPv6 defines several address categories that differ in scope and function:
 
 - **Global Unicast Addresses** (GUA): Routable on the public internet, equivalent to public IPv4 addresses. Begin with `2000::/3`.
 - **Link-Local Addresses**: Valid only on a single network segment. Begin with `fe80::/10`. Every IPv6 interface auto-configures a link-local address on startup.
-- **Loopback**: `::1` — identifies the local device, equivalent to `127.0.0.1`.
+- **Loopback**: `::1`, identifies the local device, equivalent to `127.0.0.1`.
 - **Unique Local Addresses** (ULA): Private addresses for internal network use, not routable on the public internet. Begin with `fc00::/7`. Roughly equivalent to private IPv4 ranges.
 - **Multicast**: Used for one-to-many communication. Begin with `ff00::/8`.
 
@@ -74,7 +74,7 @@ IPv4 headers contain 14 fields, several of which are optional and complicate rou
 
 ### No Broadcast
 
-IPv4 supports broadcast — sending a packet to all devices on a network segment — which routers must process and propagate. IPv6 eliminates broadcast entirely, replacing it with multicast (targeted group delivery) and anycast (delivery to the nearest member of a group). This reduces unnecessary network traffic and the amplification attacks that broadcast enables.
+IPv4 supports broadcast (sending a packet to all devices on a network segment) which routers must process and propagate. IPv6 eliminates broadcast entirely, replacing it with multicast (targeted group delivery) and anycast (delivery to the nearest member of a group). This reduces unnecessary network traffic and the amplification attacks that broadcast enables.
 
 ### Built-in Security
 
@@ -86,11 +86,11 @@ IPv6 devices can configure their own global addresses without a DHCP server, usi
 
 ## IPv6 Adoption and Current State
 
-IPv6 adoption is uneven globally. As of 2025, Google reports that roughly 40–45% of users accessing its services do so over IPv6. Adoption is highest in markets where ISPs exhausted IPv4 allocations earliest and rolled out IPv6 infrastructure aggressively — India, Germany, the United States, and Belgium consistently lead in adoption statistics.
+IPv6 adoption is uneven globally. As of 2025, Google reports that roughly 40–45% of users accessing its services do so over IPv6. Adoption is highest in markets where ISPs exhausted IPv4 allocations earliest and rolled out IPv6 infrastructure aggressively: India, Germany, the United States, and Belgium consistently lead in adoption statistics.
 
 Major cloud providers (AWS, Google Cloud, Azure), CDNs (Cloudflare, Fastly), and mobile carriers have all made significant IPv6 investments. Most mobile devices in developed markets receive IPv6 addresses from their carriers.
 
-The implication for developers: you cannot assume your users have IPv4-only connections, and you cannot assume they have IPv6 connectivity either. Dual-stack support — handling both protocols simultaneously — is the only correct posture for production applications in 2025.
+The implication for developers: you cannot assume your users have IPv4-only connections, and you cannot assume they have IPv6 connectivity either. Dual-stack support (handling both protocols simultaneously) is the only correct posture for production applications in 2025.
 
 ## Handling Both Versions in Your Application
 
@@ -196,4 +196,4 @@ In practice, the performance difference depends heavily on the specific network 
 
 ## Conclusion
 
-IPv6 adoption is growing, but IPv4 will remain relevant for years. Build applications that seamlessly support both protocols for maximum compatibility and future-proofing. Use our [IP lookup tool](/ip-lookup) to instantly see which version your current IP address is, or check the [IPPriv API documentation](/api-docs) — it supports both IPv4 and IPv6 lookups. For more context on IP addressing fundamentals, read our guide on [what is an IP address](/blog/what-is-an-ip-address).
+IPv6 adoption is growing, but IPv4 will remain relevant for years. Build applications that seamlessly support both protocols for maximum compatibility and future-proofing. Use our [IP lookup tool](/ip-lookup) to instantly see which version your current IP address is, or check the [IPPriv API documentation](/api-docs): it supports both IPv4 and IPv6 lookups. For more context on IP addressing fundamentals, read our guide on [what is an IP address](/blog/what-is-an-ip-address).

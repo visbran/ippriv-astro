@@ -10,7 +10,7 @@ draft: false
 
 ## Why Would You Want to Look Up an IP Address?
 
-An IP address lookup is the process of querying a database to retrieve detailed information associated with a specific IP address. People perform IP lookups for a wide range of reasons — from casual curiosity about where a connection is coming from, to serious professional use cases like fraud detection, network security, and application debugging.
+An IP address lookup is the process of querying a database to retrieve detailed information associated with a specific IP address. People perform IP lookups for a wide range of reasons: from casual curiosity about where a connection is coming from, to serious professional use cases like fraud detection, network security, and application debugging.
 
 Here are some of the most common reasons to look up an IP address:
 
@@ -113,7 +113,7 @@ lookup_ip('8.8.8.8')
 }
 ```
 
-The API is suitable for backend server use, where your server looks up the IP address of an incoming request and uses the data to make decisions — for example, blocking traffic from certain regions or flagging suspicious connections.
+The API is suitable for backend server use, where your server looks up the IP address of an incoming request and uses the data to make decisions: for example, blocking traffic from certain regions or flagging suspicious connections.
 
 ### Looking Up the Current User's IP
 
@@ -215,10 +215,10 @@ When an API integration is failing, knowing the geolocation and ISP of the IP ma
 
 ### Compliance Checks
 
-Applications that must comply with regional regulations — such as GDPR in Europe — use IP geolocation to determine which privacy rules apply to a given user.
+Applications that must comply with regional regulations (such as GDPR in Europe) use IP geolocation to determine which privacy rules apply to a given user.
 
 ## Conclusion
 
-Looking up an IP address is a quick and straightforward process that provides a surprising amount of useful information. Whether you use the IPPriv web tool at [ippriv.com/ip-lookup](https://ippriv.com/ip-lookup) for a one-off lookup, integrate the API into your application for automated checks, or use command-line tools for terminal-based workflows, the data you get — geolocation, ISP, ASN, VPN status, and more — is immediately actionable for security, debugging, and development purposes.
+Looking up an IP address is a quick and straightforward process that provides a surprising amount of useful information. Whether you use the IPPriv web tool at [ippriv.com/ip-lookup](https://ippriv.com/ip-lookup) for a one-off lookup, integrate the API into your application for automated checks, or use command-line tools for terminal-based workflows, the data you get (geolocation, ISP, ASN, VPN status, and more) is immediately actionable for security, debugging, and development purposes.
 
 The key takeaway is that an IP address is not just a number. It is a rich data point that, with the right lookup tools, tells you quite a lot about where a connection is coming from and whether it deserves trust. For a deeper understanding of what IP addresses can reveal, read our guide on [what does an IP address reveal](/blog/what-does-an-ip-address-reveal).

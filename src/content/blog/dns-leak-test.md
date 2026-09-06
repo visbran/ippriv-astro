@@ -8,15 +8,15 @@ tags: ['DNS', 'Privacy', 'VPN', 'Security', 'Network']
 draft: false
 ---
 
-When you use a VPN, you expect all your internet traffic to be tunneled through the VPN provider's servers—masking your real IP address and keeping your browsing private. But there's a critical flaw that can expose your DNS queries, betraying your activity even when the VPN connection appears secure. This phenomenon is called a **DNS leak**.
+When you use a VPN, you expect all your internet traffic to be tunneled through the VPN provider's servers: masking your real IP address and keeping your browsing private. But there's a critical flaw that can expose your DNS queries, betraying your activity even when the VPN connection appears secure. This phenomenon is called a **DNS leak**.
 
 In this guide, you'll learn what DNS leaks are, how they happen, how to test for them, and how to prevent them.
 
 ## What Is a DNS Leak?
 
-Every time you type a domain name like `google.com`, your browser needs to translate it into an IP address. This translation happens through the **Domain Name System (DNS)**—a distributed database that acts as the internet's phone book.
+Every time you type a domain name like `google.com`, your browser needs to translate it into an IP address. This translation happens through the **Domain Name System (DNS)**: a distributed database that acts as the internet's phone book.
 
-Normally, your device sends DNS requests to your **Internet Service Provider's (ISP)** DNS servers. When you connect to a VPN, these requests should be routed through the VPN tunnel to the provider's DNS servers instead. A **DNS leak** occurs when these requests bypass the VPN and are sent directly to your ISP's servers—leaking information about your browsing activity.
+Normally, your device sends DNS requests to your **Internet Service Provider's (ISP)** DNS servers. When you connect to a VPN, these requests should be routed through the VPN tunnel to the provider's DNS servers instead. A **DNS leak** occurs when these requests bypass the VPN and are sent directly to your ISP's servers: leaking information about your browsing activity.
 
 ### Why Does This Matter?
 
@@ -32,13 +32,13 @@ This defeats much of the purpose of using a VPN for privacy. For journalists, re
 
 DNS leaks typically occur due to:
 
-1. **IPv6 without VPN handling** — Many networks have IPv6 enabled. If your VPN doesn't handle IPv6 traffic, your device may fall back to making DNS requests over IPv6 directly to your ISP.
+1. **IPv6 without VPN handling**: Many networks have IPv6 enabled. If your VPN doesn't handle IPv6 traffic, your device may fall back to making DNS requests over IPv6 directly to your ISP.
 
-2. **Windows split tunneling** — Windows may send certain traffic (like local network devices or Microsoft services) outside the VPN tunnel.
+2. **Windows split tunneling**: Windows may send certain traffic (like local network devices or Microsoft services) outside the VPN tunnel.
 
-3. **Manual DNS settings** — If your network adapter has statically configured DNS servers pointing to your ISP, the VPN may not override them.
+3. **Manual DNS settings**: If your network adapter has statically configured DNS servers pointing to your ISP, the VPN may not override them.
 
-4. **VPN software bugs** — Some VPN clients have configuration issues that fail to properly route all DNS traffic.
+4. **VPN software bugs**: Some VPN clients have configuration issues that fail to properly route all DNS traffic.
 
 ## How to Run a DNS Leak Test
 
@@ -280,11 +280,11 @@ Even if you have nothing to hide, minimizing your digital footprint reduces atta
 
 ## DNS Leaks vs. WebRTC Leaks
 
-While DNS leaks expose your query history, **WebRTC leaks** expose your real IP address through STUN/TURN requests—even when your VPN is active. Both should be tested regularly:
+While DNS leaks expose your query history, **WebRTC leaks** expose your real IP address through STUN/TURN requests: even when your VPN is active. Both should be tested regularly:
 
-- [Browser Fingerprinting Protection](/blog/browser-fingerprinting-protection) — Learn how browsers can be used to track you beyond IP
-- [VPN Detection Explained](/blog/vpn-detection-explained) — Understand how websites identify VPN users
-- [IP Address Blacklist Check](/blog/ip-address-blacklist-check) — Check if your IP is flagged
+- [Browser Fingerprinting Protection](/blog/browser-fingerprinting-protection): Learn how browsers can be used to track you beyond IP
+- [VPN Detection Explained](/blog/vpn-detection-explained): Understand how websites identify VPN users
+- [IP Address Blacklist Check](/blog/ip-address-blacklist-check): Check if your IP is flagged
 
 ## Conclusion
 

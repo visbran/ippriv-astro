@@ -10,15 +10,15 @@ draft: false
 
 ## What Is a WebRTC IP Leak?
 
-WebRTC (Web Real-Time Communication) is a browser technology that enables direct peer-to-peer communication — video calls, voice chat, file sharing — without requiring plugins or external software. It is built into every modern browser: Chrome, Firefox, Safari, Edge, and Opera.
+WebRTC (Web Real-Time Communication) is a browser technology that enables direct peer-to-peer communication (video calls, voice chat, file sharing) without requiring plugins or external software. It is built into every modern browser: Chrome, Firefox, Safari, Edge, and Opera.
 
-The problem? WebRTC uses Interactive Connectivity Establishment (ICE) to discover the best path between peers. Part of this process involves gathering **candidate IP addresses** — including your local (private) IP and your **public IP address** — and sharing them with the remote peer. Even if you are connected through a VPN that hides your real IP from websites, WebRTC can **bypass the VPN tunnel entirely** and expose your actual IP address to the websites you visit.
+The problem? WebRTC uses Interactive Connectivity Establishment (ICE) to discover the best path between peers. Part of this process involves gathering **candidate IP addresses** (including your local (private) IP and your **public IP address**) and sharing them with the remote peer. Even if you are connected through a VPN that hides your real IP from websites, WebRTC can **bypass the VPN tunnel entirely** and expose your actual IP address to the websites you visit.
 
 This is called a **WebRTC IP leak**.
 
 ## Why WebRTC Leaks Are a Serious Privacy Threat
 
-Most users rely on VPNs to mask their IP address and maintain anonymity online. A WebRTC leak defeats this protection silently — there is no pop-up, no warning, and no indication in the browser that the leak is occurring. The user appears anonymous to the websites they visit, but their real IP is exposed in the WebRTC handshake.
+Most users rely on VPNs to mask their IP address and maintain anonymity online. A WebRTC leak defeats this protection silently: there is no pop-up, no warning, and no indication in the browser that the leak is occurring. The user appears anonymous to the websites they visit, but their real IP is exposed in the WebRTC handshake.
 
 The implications are significant:
 
@@ -34,7 +34,7 @@ The vulnerability has been documented since 2015, yet it remains present in brow
 Here is the technical sequence:
 
 1. Your browser connects to a VPN. Your external IP is now the VPN server's IP.
-2. You visit a website. The website cannot see your real IP — only the VPN's IP.
+2. You visit a website. The website cannot see your real IP: only the VPN's IP.
 3. The website includes JavaScript that initiates a WebRTC connection (STUN request).
 4. The browser sends a STUN (Session Traversal Utilities for NAT) request to a STUN server to determine the public IP.
 5. The response from the STUN server contains your **real public IP address**, which the JavaScript reads and can transmit to the website.
@@ -63,7 +63,7 @@ function getPublicIP() {
 }
 ```
 
-This is not hypothetical — this code pattern is actively used.
+This is not hypothetical: this code pattern is actively used.
 
 ## How to Test for a WebRTC IP Leak
 
@@ -74,7 +74,7 @@ Manual test steps:
 1. Disconnect from your VPN.
 2. Visit a site like `whatismyip.com` and note your IP.
 3. Connect to your VPN.
-4. Visit `whatismyip.com` again — it should show the VPN IP.
+4. Visit `whatismyip.com` again: it should show the VPN IP.
 5. Open the browser console (F12) and run the WebRTC detection code above.
 6. If the IP from step 5 matches your real IP from step 2, you have a WebRTC leak.
 
@@ -106,7 +106,7 @@ Brave blocks WebRTC leaks by default. You can verify in `Settings → Privacy an
 If you are building a real-time application:
 
 - Use **TURN servers** that relay all traffic through a TURN server, ensuring no direct peer IP is exposed.
-- Configure your STUN/TURN servers carefully — avoid exposing raw internal addresses.
+- Configure your STUN/TURN servers carefully: avoid exposing raw internal addresses.
 - Consider disabling WebRTC entirely if peer-to-peer communication is not required.
 - Implement WebRTC leak checks in your security testing pipeline.
 
@@ -127,6 +127,6 @@ If you rely on real-time communication, use a VPN with built-in WebRTC leak prot
 
 ## Conclusion
 
-WebRTC IP leaks are a silent but serious threat to anyone relying on a VPN for anonymity or privacy. The technology was designed for functionality, not for privacy by default. Understanding how the leak occurs and taking simple preventive steps closes a significant attack surface — one that most VPN users do not even know exists.
+WebRTC IP leaks are a silent but serious threat to anyone relying on a VPN for anonymity or privacy. The technology was designed for functionality, not for privacy by default. Understanding how the leak occurs and taking simple preventive steps closes a significant attack surface: one that most VPN users do not even know exists.
 
 Run a WebRTC leak test now to see if your current setup is exposing your real IP address.

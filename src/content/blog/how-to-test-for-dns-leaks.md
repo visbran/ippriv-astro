@@ -12,19 +12,19 @@ draft: false
 
 You have connected to a VPN. Your IP address is hidden, your traffic is encrypted, and your ISP cannot see which websites you visit. Or so you think.
 
-The reality is more nuanced. Even with a reputable VPN provider, a **DNS leak** can silently expose your browsing activity to your ISP or a third-party DNS resolver — defeating the entire purpose of using a VPN for privacy. DNS leaks are among the most common and overlooked privacy failures on the internet today.
+The reality is more nuanced. Even with a reputable VPN provider, a **DNS leak** can silently expose your browsing activity to your ISP or a third-party DNS resolver: defeating the entire purpose of using a VPN for privacy. DNS leaks are among the most common and overlooked privacy failures on the internet today.
 
-The dangerous part? There is no popup, no warning, and no error message. Your VPN appears to work normally while your DNS queries — and therefore your browsing history — leak in plain sight.
+The dangerous part? There is no popup, no warning, and no error message. Your VPN appears to work normally while your DNS queries (and therefore your browsing history) leak in plain sight.
 
 This guide covers what DNS leaks are, how to test for them, why they happen, and how to fix them on every major platform.
 
 ## What Is a DNS Leak?
 
-Every time you type a domain name like `example.com`, your browser needs to find the corresponding IP address. That process — translating human-readable names into machine-readable addresses — relies on the **Domain Name System (DNS)**.
+Every time you type a domain name like `example.com`, your browser needs to find the corresponding IP address. That process (translating human-readable names into machine-readable addresses) relies on the **Domain Name System (DNS)**.
 
 DNS is essentially the internet's phone book. When you visit a website, your device performs a DNS lookup to find the correct server address before making the connection.
 
-Normally, this lookup is handled by your **ISP's DNS servers** by default. Your ISP can see every domain you request, even if the actual traffic is encrypted. This is why privacy-conscious users route DNS through their VPN tunnel — to prevent the ISP from logging their browsing activity.
+Normally, this lookup is handled by your **ISP's DNS servers** by default. Your ISP can see every domain you request, even if the actual traffic is encrypted. This is why privacy-conscious users route DNS through their VPN tunnel: to prevent the ISP from logging their browsing activity.
 
 A **DNS leak** occurs when this lookup bypasses your VPN's encrypted tunnel and goes directly to your ISP's DNS servers (or another third-party resolver). Your IP address may stay hidden, but your DNS queries are exposed.
 
@@ -64,7 +64,7 @@ The easiest method uses an online DNS leak test.
 
 1. Disconnect your VPN and note the DNS servers shown (these should be your ISP's servers).
 2. Connect to your VPN.
-3. Visit a DNS leak test site — `ipleak.net` is reliable and shows real-time results.
+3. Visit a DNS leak test site: `ipleak.net` is reliable and shows real-time results.
 4. Click **"Immediate DNS leak test"** or let it run for 30 seconds.
 5. Check the results carefully.
 
@@ -123,9 +123,9 @@ Once you have identified a leak, fix it systematically. Here are the most effect
 
 Your first line of defense is proper VPN configuration.
 
-- **Enable the VPN's DNS leak protection** — most reputable VPN apps include a built-in option. Enable it in settings.
-- **Force all DNS traffic through the VPN tunnel** — some VPN clients call this "block IPv6 DNS" or "use VPN DNS only."
-- **Avoid split tunneling for DNS-critical applications** — if you exclude your browser from the tunnel for performance reasons, your DNS queries for those sessions will leak.
+- **Enable the VPN's DNS leak protection**: most reputable VPN apps include a built-in option. Enable it in settings.
+- **Force all DNS traffic through the VPN tunnel**: some VPN clients call this "block IPv6 DNS" or "use VPN DNS only."
+- **Avoid split tunneling for DNS-critical applications**: if you exclude your browser from the tunnel for performance reasons, your DNS queries for those sessions will leak.
 
 ### Fix 2: Set DNS Servers Manually at the OS Level
 
@@ -245,13 +245,13 @@ After applying any fix:
    - **macOS:** `sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder`
    - **Linux:** `sudo systemd-resolve --flush-caches`
 3. **Run the DNS leak test again** on `ipleak.net`.
-4. Confirm that only your VPN's DNS servers appear — not your ISP's.
+4. Confirm that only your VPN's DNS servers appear: not your ISP's.
 
 ## Common Misconceptions About DNS Leaks
 
 **"If my VPN has a no-logs policy, DNS leaks do not matter."**
 
-Wrong. A no-logs policy means your VPN provider does not store your DNS queries on their servers. But if those queries are leaking to your ISP in the first place, the no-logs policy is irrelevant — your ISP is logging them directly.
+Wrong. A no-logs policy means your VPN provider does not store your DNS queries on their servers. But if those queries are leaking to your ISP in the first place, the no-logs policy is irrelevant: your ISP is logging them directly.
 
 **"Using incognito mode hides DNS queries."**
 
@@ -259,7 +259,7 @@ Incognito mode only prevents local browsing history from being stored on your de
 
 **"Free VPNs do not have DNS leaks."**
 
-Free VPNs are among the worst offenders. Many lack the infrastructure to operate their own DNS servers and default to Google DNS or their ISP's DNS — completely defeating the privacy purpose. Always verify with a leak test regardless of what VPN you use.
+Free VPNs are among the worst offenders. Many lack the infrastructure to operate their own DNS servers and default to Google DNS or their ISP's DNS: completely defeating the privacy purpose. Always verify with a leak test regardless of what VPN you use.
 
 ## Summary: DNS Leak Checklist
 
@@ -272,4 +272,4 @@ Free VPNs are among the worst offenders. Many lack the infrastructure to operate
 - [ ] Use DNS-over-HTTPS or DNS-over-TLS for encrypted DNS resolution
 - [ ] Re-test after any network or VPN configuration change
 
-DNS leaks are silent but fixable. Run a test now — if your ISP's servers appear, you have a leak worth fixing before your next browsing session.
+DNS leaks are silent but fixable. Run a test now: if your ISP's servers appear, you have a leak worth fixing before your next browsing session.

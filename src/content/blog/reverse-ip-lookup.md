@@ -1,5 +1,5 @@
 ---
-title: 'Reverse IP Lookup — What It Is and How It Works'
+title: 'Reverse IP Lookup: What It Is and How It Works'
 description: 'Learn what a reverse IP lookup is, how PTR records work, and how to find the hostname associated with any IP address.'
 publishedAt: 2025-02-03
 author: 'Brandon Visca'
@@ -22,15 +22,15 @@ To understand reverse lookups, it helps to first understand how forward DNS look
 
 **Reverse lookup:** You provide an IP address (e.g., `93.184.216.34`) and DNS attempts to resolve it back to a hostname (e.g., `example.com`). This requires a special type of DNS record called a PTR record.
 
-The key distinction is that forward lookups are universal — every domain has A or AAAA records pointing to an IP address. Reverse lookups are optional. A server administrator has to deliberately configure a PTR record for reverse resolution to work, and many IP addresses have no PTR record at all.
+The key distinction is that forward lookups are universal: every domain has A or AAAA records pointing to an IP address. Reverse lookups are optional. A server administrator has to deliberately configure a PTR record for reverse resolution to work, and many IP addresses have no PTR record at all.
 
 ## PTR Records Explained
 
 PTR records (Pointer records) are the DNS resource records that make reverse lookups possible. They live in a special part of the DNS namespace designed specifically for reverse resolution.
 
-For IPv4 addresses, the reverse lookup zone is `in-addr.arpa`. To look up the hostname for the IP address `1.2.3.4`, the DNS system queries for `4.3.2.1.in-addr.arpa` — the octets are written in reverse order. For IPv6, the zone is `ip6.arpa`, and the address is similarly reversed and expanded.
+For IPv4 addresses, the reverse lookup zone is `in-addr.arpa`. To look up the hostname for the IP address `1.2.3.4`, the DNS system queries for `4.3.2.1.in-addr.arpa`: the octets are written in reverse order. For IPv6, the zone is `ip6.arpa`, and the address is similarly reversed and expanded.
 
-PTR records are typically managed by whoever controls the IP address block — usually the hosting provider or ISP — rather than the domain owner. This means that even if you own a domain and configure its A record to point to an IP address, you cannot set the PTR record yourself unless your hosting provider gives you that ability. This is an important limitation to keep in mind.
+PTR records are typically managed by whoever controls the IP address block (usually the hosting provider or ISP) rather than the domain owner. This means that even if you own a domain and configure its A record to point to an IP address, you cannot set the PTR record yourself unless your hosting provider gives you that ability. This is an important limitation to keep in mind.
 
 When a PTR record exists and is properly configured, a reverse lookup returns a hostname. When no PTR record exists, the lookup simply fails with an NXDOMAIN (non-existent domain) response.
 
@@ -72,7 +72,7 @@ If you prefer a web-based tool, [IPPriv](https://ippriv.com) makes reverse IP lo
 
 ### Spam and Email Filtering
 
-Email servers routinely perform reverse lookups on the IP addresses of incoming mail servers. A legitimate mail server should have a PTR record that matches its forward DNS entry — this is called a forward-confirmed reverse DNS (FCrDNS) check. If the sending IP address has no PTR record, or if the PTR record does not match the claimed hostname, spam filters are more likely to flag or reject the message.
+Email servers routinely perform reverse lookups on the IP addresses of incoming mail servers. A legitimate mail server should have a PTR record that matches its forward DNS entry: this is called a forward-confirmed reverse DNS (FCrDNS) check. If the sending IP address has no PTR record, or if the PTR record does not match the claimed hostname, spam filters are more likely to flag or reject the message.
 
 This is why organizations that run their own mail servers should always configure proper PTR records. Without them, even legitimate email can end up in spam folders.
 
@@ -92,11 +92,11 @@ Network engineers use reverse lookups to map IP addresses to hostnames when diag
 
 Reverse IP lookup is a useful tool, but it has real limitations you should understand before relying on it.
 
-**PTR records are optional.** Many IP addresses — particularly consumer broadband addresses, dynamic IP addresses, and some cloud instances — have no PTR record configured. A failed reverse lookup does not tell you much on its own.
+**PTR records are optional.** Many IP addresses (particularly consumer broadband addresses, dynamic IP addresses, and some cloud instances) have no PTR record configured. A failed reverse lookup does not tell you much on its own.
 
 **PTR records can be misleading.** Anyone with control over a PTR record can set it to almost any value. A malicious actor could configure a PTR record to return a hostname that appears legitimate. Always treat PTR record results as one data point rather than definitive proof of identity.
 
-**One IP, many domains.** On shared hosting platforms, a single IP address may host hundreds or thousands of different websites. A reverse lookup in this case returns the hostname of the hosting server, not of any specific website running on it. This is a fundamental limitation of the IP address system — the IP address maps to a server, not to every virtual host on that server.
+**One IP, many domains.** On shared hosting platforms, a single IP address may host hundreds or thousands of different websites. A reverse lookup in this case returns the hostname of the hosting server, not of any specific website running on it. This is a fundamental limitation of the IP address system: the IP address maps to a server, not to every virtual host on that server.
 
 **Dynamic IPs change.** If the IP address you are looking up belongs to a dynamic IP pool, the PTR record (if it exists) may describe the ISP's naming convention for dynamic addresses rather than a specific host. The address may be assigned to a completely different customer by the time you look it up.
 

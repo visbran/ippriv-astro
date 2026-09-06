@@ -1,6 +1,6 @@
 ---
 title: 'DNS over HTTPS vs DNS over TLS: Choosing Encrypted DNS in 2026'
-description: 'Compare DNS over HTTPS (DoH) and DNS over TLS (DoT) — how they work, performance differences, privacy implications, and which protocol best protects your DNS queries from interception.'
+description: 'Compare DNS over HTTPS (DoH) and DNS over TLS (DoT): how they work, performance differences, privacy implications, and which protocol best protects your DNS queries from interception.'
 publishedAt: 2026-07-11
 author: 'Brandon Visca'
 heroImage: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&h=600&fit=crop'
@@ -10,9 +10,9 @@ draft: false
 
 ## Introduction: Why Your DNS Queries Are a Privacy Problem
 
-Every time you type a website address into your browser, a DNS (Domain Name System) query leaves your device asking "what is the IP address for this domain?" This lookup traverses your network, passes through your ISP's servers, and may be logged, sold, or intercepted before reaching a DNS resolver. While your HTTPS traffic to that website may be encrypted, the DNS lookup itself is often sent in plain text — visible to your ISP, network administrator, and anyone monitoring your connection.
+Every time you type a website address into your browser, a DNS (Domain Name System) query leaves your device asking "what is the IP address for this domain?" This lookup traverses your network, passes through your ISP's servers, and may be logged, sold, or intercepted before reaching a DNS resolver. While your HTTPS traffic to that website may be encrypted, the DNS lookup itself is often sent in plain text: visible to your ISP, network administrator, and anyone monitoring your connection.
 
-In 2026, encrypted DNS protocols have moved from experimental to mainstream. Firefox, Chrome, and iOS all support encrypted DNS. Cloudflare, Google, and Quad9 offer public resolvers. But the two dominant standards — **DNS over HTTPS (DoH)** and **DNS over TLS (DoT)** — are not interchangeable, and the choice between them has real consequences for privacy, performance, and compatibility.
+In 2026, encrypted DNS protocols have moved from experimental to mainstream. Firefox, Chrome, and iOS all support encrypted DNS. Cloudflare, Google, and Quad9 offer public resolvers. But the two dominant standards (**DNS over HTTPS (DoH)** and **DNS over TLS (DoT)**) are not interchangeable, and the choice between them has real consequences for privacy, performance, and compatibility.
 
 This article breaks down how each protocol works, where they differ, and how to choose the right one for your setup.
 
@@ -20,7 +20,7 @@ This article breaks down how each protocol works, where they differ, and how to 
 
 DNS is the phonebook of the internet. When you visit `example.com`, your browser sends a DNS query to a resolver asking for that domain's IP address. The resolver responds, your browser connects, and the page loads.
 
-Standard DNS (port 53, UDP or TCP) transmits these queries in plain text. Anyone along the path — your ISP, a WiFi operator, a national firewall, or a man-in-the-middle attacker — can read, log, or manipulate them. This is not a theoretical vulnerability. ISPs in many countries are legally required to log DNS queries. Hotspot operators use DNS interception to redirect users to login pages. And state-level actors have used DNS manipulation for censorship and traffic hijacking.
+Standard DNS (port 53, UDP or TCP) transmits these queries in plain text. Anyone along the path (your ISP, a WiFi operator, a national firewall, or a man-in-the-middle attacker) can read, log, or manipulate them. This is not a theoretical vulnerability. ISPs in many countries are legally required to log DNS queries. Hotspot operators use DNS interception to redirect users to login pages. And state-level actors have used DNS manipulation for censorship and traffic hijacking.
 
 Encrypted DNS closes this gap by wrapping queries in TLS, preventing passive observation of what domains you are resolving.
 
@@ -49,7 +49,7 @@ On Android, you can enable DoT by navigating to Settings → Network & Internet 
 
 ## DNS over HTTPS (DoH): HTTP-Based Encryption
 
-DNS over HTTPS, defined in [RFC 8484](https://tools.ietf.org/html/rfc8484), sends DNS queries inside an HTTPS request. The DNS payload is encoded in a small HTTP POST or GET body, and the entire HTTP transaction — including the Host header indicating which DoH server you are connecting to — is encrypted with TLS.
+DNS over HTTPS, defined in [RFC 8484](https://tools.ietf.org/html/rfc8484), sends DNS queries inside an HTTPS request. The DNS payload is encoded in a small HTTP POST or GET body, and the entire HTTP transaction (including the Host header indicating which DoH server you are connecting to) is encrypted with TLS.
 
 **Key characteristics of DoH:**
 
@@ -85,7 +85,7 @@ Firefox ships with DoH enabled by default, routing DNS through Cloudflare (with 
 
 ## Privacy Implications: Which Is Better?
 
-Both DoT and DoH encrypt your DNS queries — a massive improvement over plain text. But they differ in what metadata remains visible.
+Both DoT and DoH encrypt your DNS queries: a massive improvement over plain text. But they differ in what metadata remains visible.
 
 ### What DoT Leaks
 
@@ -109,11 +109,11 @@ Both protocols share a fundamental trust assumption: **you are trusting the DoH/
 
 ## Performance: Is There a Real Difference?
 
-In practice, the latency difference between DoT and DoH is minimal for most users — typically within 5ms of each other and of unencrypted DNS on a fast connection. However, there are nuances:
+In practice, the latency difference between DoT and DoH is minimal for most users: typically within 5ms of each other and of unencrypted DNS on a fast connection. However, there are nuances:
 
 - **DoT** has slightly lower overhead because it skips the HTTP framing layer
 - **DoH** over HTTP/3 (using QUIC) can actually outperform DoT on high-latency connections due to QUIC's improved loss recovery
-- **Connection reuse** matters more than protocol choice — both protocols benefit from persistent connections that amortize handshake costs across many queries
+- **Connection reuse** matters more than protocol choice: both protocols benefit from persistent connections that amortize handshake costs across many queries
 - **Geographic proximity** to the resolver matters more than protocol choice. A DoH resolver in the same city will outperform a DoT resolver on another continent
 
 For most users, performance is not a deciding factor. The choice should be driven by blocking resistance and trust in the provider.
@@ -167,15 +167,15 @@ console.log(result.Answer?.[0]?.data); // IP address
 
 ### Certificate Validation
 
-Both DoT and DoH require valid TLS certificates. DoT relies on the resolver's hostname resolving via standard DNS first — creating a bootstrapping problem if that initial DNS lookup is intercepted. DoH avoids this by using standard HTTPS certificates verifiable through any HTTPS-capable network.
+Both DoT and DoH require valid TLS certificates. DoT relies on the resolver's hostname resolving via standard DNS first: creating a bootstrapping problem if that initial DNS lookup is intercepted. DoH avoids this by using standard HTTPS certificates verifiable through any HTTPS-capable network.
 
 ### Split Horizon and Corporate Networks
 
-If you use a corporate VPN that splits DNS traffic — resolving internal domains through an internal resolver and external domains through a public one — encrypted DNS can break this. DoH and DoT may bypass your VPN's DNS configuration and send all queries to the public resolver, making internal hostnames unresolvable. In corporate environments, consult your IT department before enabling encrypted DNS.
+If you use a corporate VPN that splits DNS traffic (resolving internal domains through an internal resolver and external domains through a public one) encrypted DNS can break this. DoH and DoT may bypass your VPN's DNS configuration and send all queries to the public resolver, making internal hostnames unresolvable. In corporate environments, consult your IT department before enabling encrypted DNS.
 
 ### Validation: DNSSEC Does Not Help Here
 
-DNSSEC validates that DNS responses have not been tampered with in transit — it does not encrypt them. DNSSEC-signed responses are still sent in plain text. Encrypted DNS (DoH/DoT) and DNSSEC are complementary but independent protections.
+DNSSEC validates that DNS responses have not been tampered with in transit: it does not encrypt them. DNSSEC-signed responses are still sent in plain text. Encrypted DNS (DoH/DoT) and DNSSEC are complementary but independent protections.
 
 ## How to Enable Encrypted DNS
 
@@ -211,13 +211,13 @@ upstream_recursive_servers:
 
 Emerging protocols push privacy even further. **Oblivious DNS over HTTPS (ODoH)**, specified in [RFC 9483](https://www.rfc-editor.org/rfc/rfc9483.html), adds a proxy relay between the client and the DoH resolver. The proxy sees the client's IP address but not the query. The resolver sees the query but not the client's IP address. Neither knows both.
 
-**Oblivious DoH** separates identity from query at the protocol level — a fundamentally different trust model than simply choosing a privacy-respecting resolver.
+**Oblivious DoH** separates identity from query at the protocol level: a fundamentally different trust model than simply choosing a privacy-respecting resolver.
 
 Cloudflare and Google both support ODoH in experimental deployments. Widespread adoption is still maturing, but ODoH represents the direction encrypted DNS is heading.
 
 ## Conclusion
 
-DNS over HTTPS and DNS over TLS both meaningfully improve on plain-text DNS by encrypting your queries and preventing passive surveillance. For most users, **DoH on port 443 is the better default** — it is harder to block, works in more environments, and benefits from ongoing work on ECH to hide even the server hostname.
+DNS over HTTPS and DNS over TLS both meaningfully improve on plain-text DNS by encrypting your queries and preventing passive surveillance. For most users, **DoH on port 443 is the better default**: it is harder to block, works in more environments, and benefits from ongoing work on ECH to hide even the server hostname.
 
 DoT remains valuable for OS-level enforcement on Android and Linux, where you want all applications to use encrypted DNS without per-app configuration.
 
@@ -227,6 +227,6 @@ Regardless of which protocol you choose, switching away from your ISP's default 
 
 **Related Articles**
 
-- [How ISPs Track You Via IP Address](/blog/how-isps-track-you-via-ip) — DNS logging is one of the ways your ISP monitors activity. Learn how it fits into broader ISP surveillance.
-- [DNS Leak Test: How to Check If Your VPN Is Leaking DNS](/blog/dns-leak-test) — If you use a VPN, a DNS leak undermines the privacy benefit. Learn how to detect and fix it.
-- [What Does an IP Address Reveal About You](/blog/what-does-an-ip-address-reveal) — DNS queries are tied to your IP address. Understand the full picture of what your connection exposes.
+- [How ISPs Track You Via IP Address](/blog/how-isps-track-you-via-ip): DNS logging is one of the ways your ISP monitors activity. Learn how it fits into broader ISP surveillance.
+- [DNS Leak Test: How to Check If Your VPN Is Leaking DNS](/blog/dns-leak-test): If you use a VPN, a DNS leak undermines the privacy benefit. Learn how to detect and fix it.
+- [What Does an IP Address Reveal About You](/blog/what-does-an-ip-address-reveal): DNS queries are tied to your IP address. Understand the full picture of what your connection exposes.

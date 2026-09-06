@@ -1,5 +1,5 @@
 ---
-title: 'Tor Exit Node Detection — How It Works and Why It Matters'
+title: 'Tor Exit Node Detection: How It Works and Why It Matters'
 description: 'Learn how Tor exit node detection works, why websites block Tor IPs, and how to check if an IP address belongs to the Tor network.'
 publishedAt: 2025-03-31
 author: 'Brandon Visca'
@@ -12,7 +12,7 @@ draft: false
 
 Tor (The Onion Router) is an anonymity network that routes internet traffic through a series of volunteer-operated servers around the world, encrypting the connection at each step. The purpose is to make it extremely difficult to trace a user's real IP address back to their online activity. For privacy advocates, journalists, whistleblowers, and activists operating under authoritarian regimes, Tor is an essential tool.
 
-For security engineers and developers, however, Tor presents a challenge. When a user connects through Tor, the IP address your server sees is not the user's real IP address — it belongs to a Tor exit node. Understanding how to detect Tor exit node IP addresses, and what to do when you find one, is an important part of building resilient applications.
+For security engineers and developers, however, Tor presents a challenge. When a user connects through Tor, the IP address your server sees is not the user's real IP address: it belongs to a Tor exit node. Understanding how to detect Tor exit node IP addresses, and what to do when you find one, is an important part of building resilient applications.
 
 ## How Tor Works: The Three Hops
 
@@ -20,17 +20,17 @@ Before exploring detection, it helps to understand the architecture. Tor routes 
 
 **Entry nodes (guards).** When a Tor user initiates a connection, their traffic first goes to an entry node (also called a guard node). The entry node knows the user's real IP address but does not know the final destination of their traffic.
 
-**Relay nodes (middle relays).** The traffic then passes through one or more middle relay nodes. These nodes know only the previous and next hops in the circuit — they cannot see the origin or destination.
+**Relay nodes (middle relays).** The traffic then passes through one or more middle relay nodes. These nodes know only the previous and next hops in the circuit: they cannot see the origin or destination.
 
 **Exit nodes.** The exit node is the final relay in the circuit. It decrypts the outermost layer of encryption and sends the request to the actual destination on the open internet. Critically, the exit node's IP address is what the destination server sees. It is the only part of the Tor circuit that is visible to external observers.
 
-This three-layer architecture is what gives Tor its "onion" metaphor — each layer of encryption is peeled away at each hop, like layers of an onion.
+This three-layer architecture is what gives Tor its "onion" metaphor: each layer of encryption is peeled away at each hop, like layers of an onion.
 
 ## Why Exit Nodes Are the Detectable Part
 
 Because exit nodes are the point where Tor traffic emerges onto the public internet, they are the only nodes whose IP addresses are visible to destination servers. Entry and relay nodes are not directly observable from the outside. Exit nodes, however, must make outbound connections on behalf of Tor users, which means their IP addresses appear in server logs, CDN access records, and security monitoring systems.
 
-There is also a practical factor that makes detection straightforward: the Tor Project itself publishes the list of active exit nodes. This is a deliberate design choice — the Tor Project maintains a public list of known exit node IP addresses that anyone can query. This allows websites to make informed decisions about Tor traffic, and it allows operators to signal that they are running legitimate Tor infrastructure.
+There is also a practical factor that makes detection straightforward: the Tor Project itself publishes the list of active exit nodes. This is a deliberate design choice: the Tor Project maintains a public list of known exit node IP addresses that anyone can query. This allows websites to make informed decisions about Tor traffic, and it allows operators to signal that they are running legitimate Tor infrastructure.
 
 ## How Tor Exit Node Detection Works
 
@@ -40,7 +40,7 @@ Several methods are used to identify Tor exit node IP addresses:
 
 **IP reputation databases.** Commercial threat intelligence providers and IP lookup services like IPPriv maintain continuously updated databases of Tor exit node IP addresses. You can [look up any IP address](/ip-lookup) to check its Tor status instantly. These databases aggregate the Tor Project's official list with additional intelligence about Tor-adjacent infrastructure and historically known exit IPs.
 
-**Behavioral analysis.** Tor traffic exhibits certain characteristics — unusual connection patterns, access from many different geographic Tor exit IPs over short periods, and common Tor browser fingerprints. These signals complement IP lookup when building a detection pipeline.
+**Behavioral analysis.** Tor traffic exhibits certain characteristics: unusual connection patterns, access from many different geographic Tor exit IPs over short periods, and common Tor browser fingerprints. These signals complement IP lookup when building a detection pipeline.
 
 **ASN and hosting analysis.** While exit nodes can run on residential connections, many are hosted on VPS and datacenter infrastructure. IP lookup data that reveals a hosting provider, combined with the absence of a residential ISP, increases the likelihood that the address is non-residential Tor infrastructure.
 
@@ -50,7 +50,7 @@ The reasons websites choose to block or challenge Tor traffic vary widely:
 
 **Fraud and abuse prevention.** Tor's anonymity makes it attractive to bad actors performing credential stuffing attacks, account creation fraud, carding, and other automated abuse. E-commerce platforms and financial services frequently block Tor to reduce fraud risk.
 
-**Compliance requirements.** Certain regulated industries — banking, healthcare, government — may be required to log the true identity or location of users. Tor connections make this compliance impossible, so access is restricted.
+**Compliance requirements.** Certain regulated industries (banking, healthcare, government) may be required to log the true identity or location of users. Tor connections make this compliance impossible, so access is restricted.
 
 **Content licensing and geo-enforcement.** Streaming services and media platforms use geographic licensing agreements. A user connecting through a Tor exit node in a different country can bypass these restrictions, which creates legal exposure for the platform.
 
@@ -103,4 +103,4 @@ If you are building an application that needs to handle Tor traffic, here are pr
 
 ## Conclusion
 
-Tor exit node detection works because exit node IP addresses are publicly documented and visible to destination servers. The Tor Project's own exit list, combined with commercial IP lookup databases, makes it reliable to identify when a connection is coming through the Tor network. Whether to block that traffic depends on your use case, risk tolerance, and the needs of your user base. With a tool like IPPriv, checking the `isTor` flag takes one API call — the policy decision is what requires careful thought. See the [IPPriv API documentation](/api-docs) for the full security endpoint reference, or read [how to hide your IP address](/blog/hide-your-ip-address) to understand Tor from the user's perspective.
+Tor exit node detection works because exit node IP addresses are publicly documented and visible to destination servers. The Tor Project's own exit list, combined with commercial IP lookup databases, makes it reliable to identify when a connection is coming through the Tor network. Whether to block that traffic depends on your use case, risk tolerance, and the needs of your user base. With a tool like IPPriv, checking the `isTor` flag takes one API call: the policy decision is what requires careful thought. See the [IPPriv API documentation](/api-docs) for the full security endpoint reference, or read [how to hide your IP address](/blog/hide-your-ip-address) to understand Tor from the user's perspective.

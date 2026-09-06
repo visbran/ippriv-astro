@@ -1,6 +1,6 @@
 ---
 title: 'How Search Engine Crawlers Identify You: AI Bots, User Agents, and IP Tracking'
-description: 'Search engines send bots to crawl your site — but did you know those crawlers carry identifiable fingerprints? Learn how Googlebot, AI Overview crawlers, and other search agents are identified, what IP ranges they come from, and how to verify, allow, or block them.'
+description: 'Search engines send bots to crawl your site, but did you know those crawlers carry identifiable fingerprints? Learn how Googlebot, AI Overview crawlers, and other search agents are identified, what IP ranges they come from, and how to verify, allow, or block them.'
 publishedAt: 2026-08-22
 author: 'Brandon Visca'
 heroImage: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=1200&h=600&fit=crop'
@@ -10,7 +10,7 @@ draft: false
 
 ## Introduction: Every Visit Is Not Human
 
-When you check your server logs, you will see visits from IP addresses you did not invite — Googlebot scanning your pages, AI crawlers indexing your content for training data, and search engine bots probing your site to understand its structure. These are not random intrusions. They are the machinery of search.
+When you check your server logs, you will see visits from IP addresses you did not invite: Googlebot scanning your pages, AI crawlers indexing your content for training data, and search engine bots probing your site to understand its structure. These are not random intrusions. They are the machinery of search.
 
 But here is what most site owners miss: these crawlers leave fingerprints. Their IP addresses, user agent strings, and crawling patterns reveal exactly who is visiting and why. Understanding these signals helps you distinguish legitimate search engine bots from scrapers, competitors, and malicious automation.
 
@@ -35,10 +35,10 @@ In 2026, crawling has grown more complex. Traditional crawlers like Googlebot no
 
 Googlebot is Google's primary crawler. It has two variants:
 
-- **Googlebot Desktop** — simulates a desktop browser (user agent includes "Desktop")
-- **Googlebot Smartphone** — simulates a mobile browser (user agent includes "Mobile")
+- **Googlebot Desktop**: simulates a desktop browser (user agent includes "Desktop")
+- **Googlebot Smartphone**: simulates a mobile browser (user agent includes "Mobile")
 
-Googlebot crawls at a rate determined by your site's crawl budget — the number of pages Google is willing to index based on your site's authority, update frequency, and server capacity. High-traffic sites with frequent updates get larger crawl budgets.
+Googlebot crawls at a rate determined by your site's crawl budget: the number of pages Google is willing to index based on your site's authority, update frequency, and server capacity. High-traffic sites with frequent updates get larger crawl budgets.
 
 Googlebot's IP ranges are well documented:
 
@@ -71,7 +71,7 @@ Yandex, Russia's dominant search engine, operates YandexBot for international cr
 
 ### DuckDuckBot
 
-DuckDuckBot is DuckDuckGo's crawler. DuckDuckGo distinguishes itself through a stronger privacy stance — it does not create persistent user profiles and does not use crawler data for advertising. However, DuckDuckBot still indexes pages to generate search results.
+DuckDuckBot is DuckDuckGo's crawler. DuckDuckGo distinguishes itself through a stronger privacy stance: it does not create persistent user profiles and does not use crawler data for advertising. However, DuckDuckBot still indexes pages to generate search results.
 
 ### AI-Specific Crawlers (2024–2026 Expansion)
 
@@ -144,10 +144,10 @@ When you analyze your server access logs, crawler visits are usually identifiabl
 
 ### Crawl Frequency and Timing
 
-- **High-frequency crawling** from a single IP — search engines distribute crawling across many IPs
-- **Off-hours crawling** — bots run continuously, unlike human visitors
-- **Systematic page ordering** — bots visit pages in numerical or alphabetical order; humans do not
-- **No session cookies** — bots do not maintain browser sessions
+- **High-frequency crawling** from a single IP: search engines distribute crawling across many IPs
+- **Off-hours crawling**: bots run continuously, unlike human visitors
+- **Systematic page ordering**: bots visit pages in numerical or alphabetical order; humans do not
+- **No session cookies**: bots do not maintain browser sessions
 
 ### Common Crawler Patterns in Logs
 
@@ -161,19 +161,19 @@ A typical Googlebot visit looks like this:
 
 Key indicators:
 
-- `200` status code — successful fetch
+- `200` status code: successful fetch
 - Full `User-Agent` string with bot identifier
-- `Accept-Ranges: bytes` header — indicates resumable downloads (bot behavior)
-- No referrer or a Google referrer — `https://www.google.com/`
+- `Accept-Ranges: bytes` header: indicates resumable downloads (bot behavior)
+- No referrer or a Google referrer: `https://www.google.com/`
 
 ### Unexpected Bots
 
 Your logs may also reveal unexpected visitors:
 
-- **Scrapers** — copying content for resale or spam sites
-- **Competitor monitoring bots** — tracking your pricing, inventory, or content changes
-- **AI training crawlers** — indexing your content for LLM training
-- **Vulnerability scanners** — probing for outdated software, exposed admin panels, or known CVEs
+- **Scrapers**: copying content for resale or spam sites
+- **Competitor monitoring bots**: tracking your pricing, inventory, or content changes
+- **AI training crawlers**: indexing your content for LLM training
+- **Vulnerability scanners**: probing for outdated software, exposed admin panels, or known CVEs
 
 Identifying unexpected bots allows you to block them via `robots.txt`, firewall rules, or `.htaccess` restrictions.
 
@@ -217,7 +217,7 @@ Disallow: /
 For non-compliant or malicious bots, use your server firewall or CDN to block by IP or IP range:
 
 ```bash
-# iptables example — block a specific IP range
+# iptables example: block a specific IP range
 iptables -A INPUT -s 43.128.0.0/16 -j DROP
 ```
 
@@ -324,9 +324,9 @@ Legitimate search engine crawlers are not a direct security risk. However, crawl
 
 ## Conclusion: Know Who Is Visiting
 
-Your server logs tell a story. Every IP, every user agent string, every request pattern is a data point about who is visiting your site and why. Search engines, AI training crawlers, scrapers, and malicious bots all leave distinct fingerprints — if you know how to read them.
+Your server logs tell a story. Every IP, every user agent string, every request pattern is a data point about who is visiting your site and why. Search engines, AI training crawlers, scrapers, and malicious bots all leave distinct fingerprints: if you know how to read them.
 
-The tools to identify, verify, allow, and block crawlers are freely available: reverse DNS, `robots.txt`, firewall rules, and log analysis. The strategic decisions — whether to allow AI training crawlers, how to balance visibility with content protection — are yours to make.
+The tools to identify, verify, allow, and block crawlers are freely available: reverse DNS, `robots.txt`, firewall rules, and log analysis. The strategic decisions (whether to allow AI training crawlers, how to balance visibility with content protection) are yours to make.
 
 Understanding crawler behavior is not just an SEO concern. It is a security practice, a business decision, and increasingly, a legal consideration as content ownership in the age of AI remains unsettled.
 

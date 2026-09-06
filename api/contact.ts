@@ -1,7 +1,7 @@
 import { Resend } from 'resend';
 
 // ---------------------------------------------------------------------------
-// Rate limiting (in-memory — resets on cold start, acceptable for a contact form)
+// Rate limiting (in-memory: resets on cold start, acceptable for a contact form)
 // For high-traffic production use, replace with Vercel KV or Upstash Redis.
 // ---------------------------------------------------------------------------
 const rateLimit = new Map<string, { count: number; resetAt: number }>();
@@ -28,7 +28,7 @@ function isRateLimited(ip: string): boolean {
 }
 
 // ---------------------------------------------------------------------------
-// HTML escaping — prevents XSS in the email body
+// HTML escaping: prevents XSS in the email body
 // ---------------------------------------------------------------------------
 function escapeHtml(str: string): string {
   return str
@@ -99,7 +99,7 @@ export default async function handler(req: any, res: any) {
 
   // Honeypot: bots fill hidden fields, real users don't
   if (honeypot) {
-    // Silently accept — don't reveal that we detected a bot
+    // Silently accept: don't reveal that we detected a bot
     return res.status(200).json({ success: true });
   }
 

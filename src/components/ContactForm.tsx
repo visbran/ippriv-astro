@@ -198,7 +198,7 @@ export default function ContactForm() {
             {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
           </div>
           
-          {/* Honeypot — invisible to humans, bots fill it in */}
+          {/* Honeypot: invisible to humans, bots fill it in */}
           <div className="absolute -top-96 left-0 h-0 w-0 overflow-hidden" aria-hidden="true">
             <label htmlFor="website">Website</label>
             <input
