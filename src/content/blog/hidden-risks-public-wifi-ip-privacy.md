@@ -1,7 +1,9 @@
 ---
 title: "The Hidden Risks of Public WiFi: How IP Leaks Compromise Your Privacy"
 description: "Public WiFi networks expose your real IP address to hackers, ISPs, and network administrators. Learn how IP leaks happen on shared networks and what you can do to stay invisible."
-date: "2026-07-18"
+publishedAt: 2026-07-18
+author: 'Brandon Visca'
+heroImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop'
 tags: ["privacy", "public-wifi", "ip-leak", "network-security", "vpn"]
 ---
 
