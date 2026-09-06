@@ -1,5 +1,5 @@
 ---
-title: 'The Hidden Cost of Free VPN Services: What You're Really Paying With'
+title: 'The Hidden Cost of Free VPN Services: What You''re Really Paying With'
 description: 'Free VPN services are not actually free. Discover how free providers monetize your data, bandwidth, and privacy, and what risks you take on every time you connect without paying.'
 publishedAt: 2026-08-15
 author: 'Brandon Visca'
