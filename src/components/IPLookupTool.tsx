@@ -217,7 +217,7 @@ export default function IPLookupTool() {
                     <LocationMap
                       lat={result.geo.lat}
                       lng={result.geo.lon}
-                      location={`${result.geo.city}, ${result.geo.country}`}
+                      location={[result.geo.city, result.geo.country].filter(Boolean).join(', ') || undefined}
                     />
                   </div>
                 </CardContent>

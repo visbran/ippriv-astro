@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { Copy, Check, MapPin, Globe, Loader2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import LocationMap from './LocationMap';
 import { useIPData } from '@/hooks/useIPData';
 
 const HeroSection = () => {
@@ -16,10 +15,14 @@ const HeroSection = () => {
   }, []);
 
   const handleCopy = () => {
-    if (!data?.ipv4) return;
-    navigator.clipboard.writeText(data.ipv4);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    if (!data?.ipv4 || !navigator.clipboard) return;
+    navigator.clipboard.writeText(data.ipv4).then(
+      () => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      },
+      (err) => console.error('Copy failed:', err),
+    );
   };
 
   return (
@@ -78,7 +81,7 @@ const HeroSection = () => {
               <button
                 onClick={handleCopy}
                 disabled={isLoading || !data}
-                className="p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-all duration-200 hover:scale-105 group disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-secondary hover:bg-secondary/80 transition-colors duration-200 group disabled:opacity-50 disabled:cursor-not-allowed"
                 aria-label="Copy IP address"
               >
                 {copied ? (
@@ -89,6 +92,10 @@ const HeroSection = () => {
               </button>
             </div>
             
+            <span className="sr-only" aria-live="polite">
+              {copied ? 'IP address copied to clipboard' : ''}
+            </span>
+
             {/* Loading State */}
             {isLoading && (
               <div className="flex flex-col items-center justify-center py-4">
@@ -117,7 +124,7 @@ const HeroSection = () => {
                   {data.ipv4}
                 </div>
 
-                <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground flex-wrap">
+                <div className="flex items-center justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground flex-wrap">
                   {locationString && (
                     <div className="flex items-center gap-1.5">
                       <MapPin className="w-4 h-4 text-primary" />
@@ -125,27 +132,15 @@ const HeroSection = () => {
                     </div>
                   )}
                   {data.isp && (
-                    <>
-                      <div className="w-1 h-1 rounded-full bg-border" />
-                      <div className="flex items-center gap-1.5">
-                        <Globe className="w-4 h-4 text-primary" />
-                        <span>{data.isp}</span>
-                      </div>
-                    </>
+                    <div className="flex items-center gap-1.5">
+                      <Globe className="w-4 h-4 text-primary" />
+                      <span>{data.isp}</span>
+                    </div>
                   )}
                 </div>
               </>
             )}
           </motion.div>
-
-          {/* Location Map */}
-          {data && !isLoading && (
-            <LocationMap
-              lat={data.lat}
-              lng={data.lon}
-              location={locationString || undefined}
-            />
-          )}
 
           {/* CTA Buttons */}
           <motion.div

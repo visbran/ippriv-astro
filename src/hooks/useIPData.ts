@@ -101,7 +101,7 @@ export function useIPData() {
     isLoading,
     error,
     // Helper computed values
-    locationString: data ? `${data.city}, ${data.country}` : null,
+    locationString: data ? [data.city, data.country].filter(Boolean).join(', ') || null : null,
     hasSecurityConcerns: data 
       ? data.isVPN || data.isProxy || data.isTor || data.isHosting
       : false,

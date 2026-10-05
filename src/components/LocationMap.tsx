@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { MapPin } from 'lucide-react';
 
 interface LocationMapProps {
   lat?: number;
@@ -7,95 +7,119 @@ interface LocationMapProps {
   location?: string;
 }
 
-const LocationMap = ({ lat = 44.8378, lng = -0.5792, location = "Bordeaux, France" }: LocationMapProps) => {
+// Tiles fail as a block (blocked provider, offline, CSP): after this many
+// errors with no successful tile, show the fallback instead of a grey box.
+const TILE_ERROR_THRESHOLD = 3;
+
+const LocationMap = ({ lat, lng, location }: LocationMapProps) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [status, setStatus] = useState<'loading' | 'ready' | 'failed'>('loading');
+
+  const hasCoords = typeof lat === 'number' && typeof lng === 'number' && Number.isFinite(lat) && Number.isFinite(lng);
 
   useEffect(() => {
     // Dynamically import Leaflet only on client side
-    if (typeof window === 'undefined' || !mapRef.current || mapInstanceRef.current) return;
+    if (typeof window === 'undefined' || !hasCoords || !mapRef.current || mapInstanceRef.current) return;
+
+    let cancelled = false;
 
     const initMap = async () => {
-      // Dynamic imports
       const L = (await import('leaflet')).default;
       await import('leaflet/dist/leaflet.css');
 
-      if (!mapRef.current) return;
+      if (cancelled || !mapRef.current) return;
 
-      // Initialize map
       const map = L.map(mapRef.current, {
         center: [lat, lng],
         zoom: 10,
         scrollWheelZoom: false,
         zoomControl: false,
-        attributionControl: false,
+        // The map is illustrative only: keep it out of the tab order
+        keyboard: false,
       });
+      map.attributionControl.setPrefix(false);
 
-      // Add tile layer
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      // OpenStreetMap tiles: no API key, attribution required by the tile usage policy
+      let tilesLoaded = 0;
+      let tileErrors = 0;
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-      }).addTo(map);
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>',
+      })
+        .on('tileload', () => {
+          tilesLoaded += 1;
+          if (!cancelled) setStatus('ready');
+        })
+        .on('tileerror', () => {
+          tileErrors += 1;
+          if (!cancelled && tilesLoaded === 0 && tileErrors >= TILE_ERROR_THRESHOLD) setStatus('failed');
+        })
+        .addTo(map);
 
-      // Custom marker
       const customIcon = L.divIcon({
         className: 'custom-marker',
         html: `
           <div class="relative flex items-center justify-center">
             <div class="w-4 h-4 bg-primary rounded-full border-2 border-white shadow-lg"></div>
-            <div class="absolute w-4 h-4 bg-primary/50 rounded-full animate-ping"></div>
           </div>
         `,
         iconSize: [16, 16],
         iconAnchor: [8, 8],
       });
 
-      L.marker([lat, lng], { icon: customIcon }).addTo(map);
+      L.marker([lat, lng], { icon: customIcon, keyboard: false }).addTo(map);
 
       mapInstanceRef.current = map;
-      setIsLoaded(true);
     };
 
-    initMap().catch(console.error);
+    initMap().catch((err) => {
+      console.error('LocationMap error:', err);
+      if (!cancelled) setStatus('failed');
+    });
 
     return () => {
+      cancelled = true;
       if (mapInstanceRef.current) {
         mapInstanceRef.current.remove();
         mapInstanceRef.current = null;
       }
     };
-  }, [lat, lng]);
+  }, [lat, lng, hasCoords]);
+
+  const showFallback = !hasCoords || status === 'failed';
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.5 }}
-      className="w-full max-w-md mx-auto mt-6 mb-10"
-    >
-      <div className="glass-card rounded-2xl overflow-hidden p-1">
-        <div className="relative rounded-xl overflow-hidden h-48 sm:h-56">
-          <div ref={mapRef} className="h-full w-full z-0" />
-          
-          {/* Loading state */}
-          {!isLoaded && (
-            <div className="absolute inset-0 flex items-center justify-center bg-card">
-              <div className="text-muted-foreground text-sm">Loading map...</div>
-            </div>
-          )}
-          
-          {/* Overlay gradient */}
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-background/20 to-transparent" />
-          
-          {/* Location label */}
-          <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-            <div className="px-3 py-1.5 rounded-lg bg-background/80 backdrop-blur-sm text-xs font-medium text-foreground">
-              📍 {location}
-            </div>
-          </div>
+    <div className="relative h-full min-h-48 w-full overflow-hidden">
+      {!showFallback && <div ref={mapRef} className="h-full w-full z-0" aria-hidden="true" />}
+
+      {status === 'loading' && !showFallback && (
+        <div className="absolute inset-0 flex items-center justify-center bg-card">
+          <p className="text-sm text-muted-foreground">Loading map...</p>
         </div>
-      </div>
-    </motion.div>
+      )}
+
+      {showFallback && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-card px-6 text-center">
+          <MapPin className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+          <p className="text-sm text-muted-foreground">
+            {hasCoords ? 'The map could not load.' : 'No coordinates for this IP address.'}
+          </p>
+          {hasCoords && (
+            <p className="text-xs text-muted-foreground tabular-nums">
+              {lat.toFixed(4)}, {lng.toFixed(4)}
+            </p>
+          )}
+        </div>
+      )}
+
+      {location && !showFallback && (
+        <div className="pointer-events-none absolute top-3 left-3 z-[400] flex max-w-[calc(100%-1.5rem)] items-center gap-1.5 rounded-lg bg-background/90 px-3 py-1.5 text-xs font-medium text-foreground">
+          <MapPin className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />
+          <span className="truncate">{location}</span>
+        </div>
+      )}
+    </div>
   );
 };
 
