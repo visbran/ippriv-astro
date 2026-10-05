@@ -20,9 +20,9 @@ A private IP address is used only inside a local network. It is not reachable fr
 
 The Internet Engineering Task Force (IETF) defined these ranges in RFC 1918. They are:
 
-- **10.0.0.0 to 10.255.255.255** (10.0.0.0/8) — the largest block, common in enterprise networks
-- **172.16.0.0 to 172.31.255.255** (172.16.0.0/12) — used in medium-sized networks
-- **192.168.0.0 to 192.168.255.255** (192.168.0.0/16) — the block almost every home router uses
+- **10.0.0.0 to 10.255.255.255** (10.0.0.0/8): the largest block, common in enterprise networks
+- **172.16.0.0 to 172.31.255.255** (172.16.0.0/12): used in medium-sized networks
+- **192.168.0.0 to 192.168.255.255** (192.168.0.0/16): the block almost every home router uses
 
 If you open your network settings and see an address like 192.168.1.45 or 10.0.0.23, that is your private IP. It identifies your device to your router and to other devices on your Wi-Fi network, but it means nothing to a server on the other side of the world.
 
