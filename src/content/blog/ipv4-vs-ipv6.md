@@ -34,9 +34,9 @@ The workarounds developed to cope with IPv4 exhaustion (Network Address Translat
 
 Not all IPv4 addresses route on the public internet. Three ranges are reserved for private network use:
 
-- `10.0.0.0` – `10.255.255.255` (10.x.x.x)
-- `172.16.0.0` – `172.31.255.255` (172.16–31.x.x)
-- `192.168.0.0` – `192.168.255.255` (192.168.x.x)
+- `10.0.0.0` to `10.255.255.255` (10.x.x.x)
+- `172.16.0.0` to `172.31.255.255` (172.16-31.x.x)
+- `192.168.0.0` to `192.168.255.255` (192.168.x.x)
 
 These addresses are invisible on the public internet. Your home router assigns private addresses to your devices (typically `192.168.x.x`) while presenting a single public IPv4 address to the outside world: the NAT mechanism that stretches the IPv4 address pool.
 
@@ -86,7 +86,7 @@ IPv6 devices can configure their own global addresses without a DHCP server, usi
 
 ## IPv6 Adoption and Current State
 
-IPv6 adoption is uneven globally. As of 2025, Google reports that roughly 40–45% of users accessing its services do so over IPv6. Adoption is highest in markets where ISPs exhausted IPv4 allocations earliest and rolled out IPv6 infrastructure aggressively: India, Germany, the United States, and Belgium consistently lead in adoption statistics.
+IPv6 adoption is uneven globally. As of 2025, Google reports that roughly 40 to 45% of users accessing its services do so over IPv6. Adoption is highest in markets where ISPs exhausted IPv4 allocations earliest and rolled out IPv6 infrastructure aggressively: India, Germany, the United States, and Belgium consistently lead in adoption statistics.
 
 Major cloud providers (AWS, Google Cloud, Azure), CDNs (Cloudflare, Fastly), and mobile carriers have all made significant IPv6 investments. Most mobile devices in developed markets receive IPv6 addresses from their carriers.
 
