@@ -41,7 +41,7 @@ An IP address alone carries more information than many people realize. Through I
 
 ### Geographic Location
 
-IP geolocation can identify the country associated with your IP address with 95–99% accuracy, the region or state with 55–80% accuracy, and the approximate city with 50–75% accuracy. This is why websites can automatically display content in your language, show local pricing, or redirect you to a regional version of the site: all based solely on your IP address.
+IP geolocation can identify the country associated with your IP address with 95-99% accuracy, the region or state with 55-80% accuracy, and the approximate city with 50-75% accuracy. This is why websites can automatically display content in your language, show local pricing, or redirect you to a regional version of the site: all based solely on your IP address.
 
 ### Internet Service Provider
 

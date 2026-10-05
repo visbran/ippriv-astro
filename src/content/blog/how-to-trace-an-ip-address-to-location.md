@@ -25,7 +25,7 @@ The key insight: IP geolocation estimates location based on allocation records, 
 
 Before writing code, it helps to understand what you are looking up.
 
-IPv4 addresses are 32-bit numbers written as four octets (0–255) separated by dots: `203.0.113.42`. IPv6 addresses are 128-bit numbers written in hexadecimal groups: `2001:db8::ff00:42:8329`.
+IPv4 addresses are 32-bit numbers written as four octets (0-255) separated by dots: `203.0.113.42`. IPv6 addresses are 128-bit numbers written in hexadecimal groups: `2001:db8::ff00:42:8329`.
 
 IP blocks are expressed using CIDR notation. For example, `203.0.113.0/24` represents all IPs from `203.0.113.0` to `203.0.113.255`. A geolocation database maps these blocks to coordinates and region data.
 

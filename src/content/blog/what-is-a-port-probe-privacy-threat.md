@@ -20,7 +20,7 @@ This article explains what port probes are, how they work, what they reveal abou
 
 A port is a virtual endpoint for network communication. When your device communicates with a remote server, data flows through a specific port. Think of an IP address as a building's street address and a port as the apartment number.
 
-There are 65,536 ports per IP address, numbered from 0 to 65535. They are grouped into well-known ports (0–1023, reserved for system services like HTTP and SSH), registered ports (1024–49151), and dynamic/private ports (49152–65535).
+There are 65,536 ports per IP address, numbered from 0 to 65535. They are grouped into well-known ports (0-1023, reserved for system services like HTTP and SSH), registered ports (1024-49151), and dynamic/private ports (49152-65535).
 
 When you browse the web, your machine typically opens a random high-numbered port for the return channel while the server communicates on port 443 or 80. But many applications open additional ports in the background: for file sharing, gaming, messaging, VPN clients, and more. Each of these is a potential information source for a curious observer.
 

@@ -60,12 +60,12 @@ The "benign" end of the spectrum: free VPNs that genuinely provide the service t
 
 Common limitations:
 
-- **Data caps**: free tiers capped at 500MB–5GB per month, forcing heavy users to upgrade
-- **Speed throttling**: free connections limited to 1–5 Mbps, making streaming unusable
+- **Data caps**: free tiers capped at 500MB-5GB per month, forcing heavy users to upgrade
+- **Speed throttling**: free connections limited to 1-5 Mbps, making streaming unusable
 - **Server restrictions**: only a handful of servers available to free users
 - **Ad injection**: ads injected into HTTP pages visited through the VPN
 - **Forced wait times**: mandatory ad viewing before connecting
-- **Session timeouts**: connections cut every 15–30 minutes
+- **Session timeouts**: connections cut every 15-30 minutes
 
 These providers still pose risks: ad injection requires intercepting your HTTP traffic, which means they have the technical capability to modify any unencrypted page you visit.
 
@@ -169,7 +169,7 @@ These are not perfect (the limitations exist to drive upgrades) but they do not 
 
 | Feature | Free VPN | Premium VPN |
 |---|---|---|
-| Monthly cost | $0 | $3–$12 |
+| Monthly cost | $0 | $3-$12 |
 | Data logging | Often yes | Usually no (audit-dependent) |
 | Malware risk | High | Low |
 | DNS leak protection | Usually absent | Standard |
@@ -180,7 +180,7 @@ These are not perfect (the limitations exist to drive upgrades) but they do not 
 | Support | None or automated | Human available |
 | IP pool size | Small (easily blocked) | Large (rotated regularly) |
 
-A premium VPN costs $3–$12/month. A data breach or identity theft incident costs thousands of dollars and countless hours to resolve. The annual cost of a quality VPN is less than a single hour of legal consultation.
+A premium VPN costs $3-$12/month. A data breach or identity theft incident costs thousands of dollars and countless hours to resolve. The annual cost of a quality VPN is less than a single hour of legal consultation.
 
 ## You Are the Product
 

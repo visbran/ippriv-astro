@@ -124,7 +124,7 @@ Companies that rely on web data (price monitoring, competitor analysis, ad verif
 
 | Factor | Datacenter IP | Residential IP |
 |---|---|---|
-| **Typical cost** | $1–$10/month per IP | $5–$50/month per GB of traffic |
+| **Typical cost** | $1-$10/month per IP | $5-$50/month per GB of traffic |
 | **IP rotation** | Easy and cheap | More expensive, often traffic-based |
 | **Availability** | Unlimited supply | Limited to available ISP connections |
 | **Detection rate** | High (well documented | Low) hard to distinguish from real users |

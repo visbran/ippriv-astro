@@ -35,11 +35,11 @@ The result is a database that associates millions of IP address ranges with geog
 
 IP geolocation accuracy varies significantly depending on how precisely you need to locate an IP address. Understanding these tiers helps set realistic expectations for any application you build.
 
-**Country level: 95–99% accurate.** Country-level accuracy is high because IP address blocks are allocated regionally and ISPs operate within national boundaries. Exceptions exist (multinational corporations, satellite internet providers, and large CDN operators may have IP ranges that cross borders) but for the vast majority of internet traffic, country detection is highly reliable.
+**Country level: 95-99% accurate.** Country-level accuracy is high because IP address blocks are allocated regionally and ISPs operate within national boundaries. Exceptions exist (multinational corporations, satellite internet providers, and large CDN operators may have IP ranges that cross borders) but for the vast majority of internet traffic, country detection is highly reliable.
 
-**Region or state level: 55–80% accurate.** Regional accuracy depends on how granular the ISP's data is. Large national ISPs often assign IP blocks to regional hubs rather than individual cities, so a customer in one city may be associated with the ISP's hub in a different city within the same region.
+**Region or state level: 55-80% accurate.** Regional accuracy depends on how granular the ISP's data is. Large national ISPs often assign IP blocks to regional hubs rather than individual cities, so a customer in one city may be associated with the ISP's hub in a different city within the same region.
 
-**City level: 50–75% accurate.** City-level geolocation is where the limitations become most visible. The city returned by an IP lookup is often the location of the ISP's nearest infrastructure node (a DHCP server, a regional gateway, or a network operations center) not the actual city where the customer lives. In dense urban areas this is often accurate. In rural areas, the discrepancy can be significant.
+**City level: 50-75% accurate.** City-level geolocation is where the limitations become most visible. The city returned by an IP lookup is often the location of the ISP's nearest infrastructure node (a DHCP server, a regional gateway, or a network operations center) not the actual city where the customer lives. In dense urban areas this is often accurate. In rural areas, the discrepancy can be significant.
 
 **Postal code and street level: unreliable.** Sub-city geolocation from an IP address alone is not reliable enough for production use. If you need precise location data, you should request it explicitly through the browser's Geolocation API, which uses GPS and Wi-Fi positioning.
 

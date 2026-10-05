@@ -130,10 +130,10 @@ Switching from Wi-Fi to your smartphone's mobile data connection changes your pu
 
 | Method | Speed | Privacy Level | Cost | Ease of Use |
 |--------|-------|--------------|------|-------------|
-| VPN | Fast | Good | $3–15/month | Easy |
+| VPN | Fast | Good | $3-15/month | Easy |
 | Tor | Slow | Excellent | Free | Moderate |
-| Proxy (HTTP/HTTPS) | Medium | Low | Free–moderate | Easy |
-| SOCKS5 Proxy | Medium | Low–moderate | Free–moderate | Moderate |
+| Proxy (HTTP/HTTPS) | Medium | Low | Free to moderate | Easy |
+| SOCKS5 Proxy | Medium | Low to moderate | Free to moderate | Moderate |
 | Mobile Data | Fast | Low | Included in plan | Easy |
 
 ## How to Verify Your IP Address Has Changed

@@ -116,7 +116,7 @@ A minimal logging policy for a privacy-first API:
 
 - Log truncated IP addresses (remove the last octet for IPv4, the last 80 bits for IPv6)
 - Log request paths and HTTP status codes, but not query parameters that may contain personal data
-- Enforce a short log retention period (7–30 days for operational logs; longer only for documented security or legal purposes)
+- Enforce a short log retention period (7-30 days for operational logs; longer only for documented security or legal purposes)
 - Exclude health check endpoints from logging entirely
 
 ```nginx

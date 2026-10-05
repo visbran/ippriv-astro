@@ -32,7 +32,7 @@ Each blacklist has its own criteria, scoring methodology, and removal process. G
 
 ### Email Deliverability Collapse
 
-The most immediate consequence for most users. If your IP is on Spamhaus or SORBS, major email providers will either block your messages entirely or route them to spam. Studies consistently show that 15–20% of legitimate email fails to reach the inbox due to blacklist entries.
+The most immediate consequence for most users. If your IP is on Spamhaus or SORBS, major email providers will either block your messages entirely or route them to spam. Studies consistently show that 15-20% of legitimate email fails to reach the inbox due to blacklist entries.
 
 ### API and Web Access Restrictions
 
@@ -260,15 +260,15 @@ Beyond binary blacklist status, IP reputation is a continuous score:
 | SORBS | https://www.sorbs.net/update/: automated |
 | Barracuda | Submit request via barracudacentral.org portal |
 | MXToolbox | Self-service for subscribers |
-| UCEPROTECT | Wait 7–7 days after fixing issue; automated |
+| UCEPROTECT | Wait 7 days after fixing issue; automated |
 
-Most reputable blacklists will remove your IP within 24–48 hours of confirming the issue is resolved. Some (like UCEPROTECT Level 1) are automatic after a waiting period.
+Most reputable blacklists will remove your IP within 24-48 hours of confirming the issue is resolved. Some (like UCEPROTECT Level 1) are automatic after a waiting period.
 
 ### Long-Term Reputation Management
 
 **Use dedicated IPs for email sending.** If you send marketing or transactional email, never share an IP with unknown senders. Most email platforms (SendGrid, Mailgun, Amazon SES) pool sending IPs and manage reputation for you, which is one reason to use them.
 
-**Warm up new sending IPs gradually.** If you acquire a new dedicated IP, ramp up sending volume over 4–6 weeks. Sudden high-volume sending from a cold IP is a major spam trigger.
+**Warm up new sending IPs gradually.** If you acquire a new dedicated IP, ramp up sending volume over 4-6 weeks. Sudden high-volume sending from a cold IP is a major spam trigger.
 
 **Monitor continuously.** Set up automated checks to alert you when your IP appears on a new blacklist. The script above can be scheduled via cron to run daily.
 

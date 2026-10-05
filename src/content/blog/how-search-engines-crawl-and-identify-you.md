@@ -73,7 +73,7 @@ Yandex, Russia's dominant search engine, operates YandexBot for international cr
 
 DuckDuckBot is DuckDuckGo's crawler. DuckDuckGo distinguishes itself through a stronger privacy stance: it does not create persistent user profiles and does not use crawler data for advertising. However, DuckDuckBot still indexes pages to generate search results.
 
-### AI-Specific Crawlers (2024–2026 Expansion)
+### AI-Specific Crawlers (2024-2026 Expansion)
 
 The explosion of generative AI has brought a new category of crawlers dedicated to collecting training data:
 
@@ -260,7 +260,7 @@ In practice, compliance varies. Google has been criticized for ignoring `noindex
 
 ### What Publishers Are Fighting Back Against
 
-In 2025–2026, a wave of publishers began fighting back against unauthorized AI training crawling:
+In 2025-2026, a wave of publishers began fighting back against unauthorized AI training crawling:
 
 - **The New York Times** filed a landmark copyright lawsuit against OpenAI and Microsoft over AI training on NYT content
 - **Condé Nast**, **The Atlantic**, and other major publishers began blocking AI crawlers en masse

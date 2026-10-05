@@ -74,7 +74,7 @@ The protocol has no concept of TCP transport: it runs exclusively over UDP. This
 
 ### Strengths
 
-- **Blazing fast**: Benchmarks consistently show WireGuard outperforming OpenVPN by 3–4x in throughput and with significantly lower latency
+- **Blazing fast**: Benchmarks consistently show WireGuard outperforming OpenVPN by 3-4x in throughput and with significantly lower latency
 - **Minimal attack surface**: The entire codebase is approximately 4,000 lines of code compared to OpenVPN's 600,000+ lines. Fewer lines means fewer bugs and a smaller attack surface
 - **Native kernel integration**: On Linux, WireGuard runs in kernel space, eliminating the context-switching penalty of user-space protocols
 - **Modern cryptography**: Uses only state-of-the-art, modern cipher suites, no legacy algorithms

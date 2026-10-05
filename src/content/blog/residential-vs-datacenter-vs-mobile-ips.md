@@ -40,8 +40,8 @@ Residential IPs are real IP addresses allocated to real consumers by real ISPs. 
 
 ### Disadvantages
 
-- **Expensive.** Residential proxies cost 5–20x more per GB than datacenter proxies.
-- **Slow.** Residential connections are typically consumer broadband: 10–100 Mbps, not gigabit.
+- **Expensive.** Residential proxies cost 5-20x more per GB than datacenter proxies.
+- **Slow.** Residential connections are typically consumer broadband: 10-100 Mbps, not gigabit.
 - **Ethical concerns.** Some residential proxy networks have faced scrutiny over whether they properly disclose data collection to end users.
 
 ### Best For
@@ -61,7 +61,7 @@ Datacenter IPs are allocated to servers, not to people. They're registered to cl
 ### Advantages
 
 - **Fast.** Datacenter servers run on 1 Gbps or 10 Gbps links. Latency is minimal.
-- **Cheap.** Datacenter proxies cost a fraction of residential proxies: often $2–10 per GB.
+- **Cheap.** Datacenter proxies cost a fraction of residential proxies: often $2-10 per GB.
 - **Predictable.** You get static IPs with consistent performance and full control.
 
 ### Disadvantages
@@ -91,7 +91,7 @@ Mobile IPs are assigned to devices on cellular networks. Because they're shared 
 
 ### Disadvantages
 
-- **Very expensive.** Mobile proxies are the premium tier: often $30–100+ per GB.
+- **Very expensive.** Mobile proxies are the premium tier: often $30-100+ per GB.
 - **Limited availability.** Mobile proxy networks are smaller and less globally distributed than residential networks.
 - **Slow by default.** Cellular latency and throughput vary widely depending on carrier and location.
 - **Carrier restrictions.** Some mobile carriers use transparent proxies that can interfere with requests.
@@ -107,8 +107,8 @@ Mobile IPs are assigned to devices on cellular networks. Because they're shared 
 
 | Attribute | Residential | Datacenter | Mobile |
 |---|---|---|---|
-| Cost per GB | $5–$30 | $2–$10 | $30–$100+ |
-| Speed | Medium (10–100 Mbps) | Fast (100 Mbps–10 Gbps) | Variable (1–100 Mbps) |
+| Cost per GB | $5-$30 | $2-$10 | $30-$100+ |
+| Speed | Medium (10-100 Mbps) | Fast (100 Mbps to 10 Gbps) | Variable (1-100 Mbps) |
 | Block rate | Low | High | Very Low |
 | Geo targeting | Precise (neighborhood level) | Coarse (city/region) | Precise (carrier + region) |
 | Availability | High | Very High | Low |

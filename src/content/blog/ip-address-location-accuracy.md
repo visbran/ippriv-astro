@@ -16,19 +16,19 @@ But how accurate is it, really? The honest answer is: it depends on what level o
 
 ## Accuracy by Geographic Level
 
-### Country-Level Accuracy: 95–99%
+### Country-Level Accuracy: 95-99%
 
 At the country level, IP geolocation is highly reliable. Most reputable IP geolocation databases achieve 95% to 99% accuracy when determining which country an IP address is associated with. For most practical applications (content licensing, basic fraud detection, language localization) this level of precision is more than sufficient.
 
 Country-level accuracy is high because IP address blocks are allocated through a hierarchical system managed by Regional Internet Registries (RIRs). Each RIR covers a specific part of the world: ARIN handles North America, RIPE NCC covers Europe and the Middle East, APNIC manages Asia-Pacific, and so on. When an ISP or organization receives an IP address block, the registration information includes the country of operation. This makes country-level attribution relatively straightforward.
 
-### Region/State-Level Accuracy: 55–80%
+### Region/State-Level Accuracy: 55-80%
 
 Step down to the region, state, or province level and accuracy drops noticeably. Geolocation databases typically achieve 55% to 80% accuracy at this level, depending on the country and the quality of the database being used.
 
 Regional accuracy is more variable because IP address blocks are not always neatly distributed by sub-national geography. An ISP headquartered in one city may serve customers across an entire country from the same address block. The registration data reflects where the ISP manages the block, not where each customer physically connects.
 
-### City-Level Accuracy: 50–75%
+### City-Level Accuracy: 50-75%
 
 At the city level, accuracy ranges from 50% to 75%: meaning that one in four to one in two lookups will point to the wrong city. This is the level where IP geolocation is most likely to mislead if treated as definitive.
 
@@ -99,7 +99,7 @@ When you perform an ip lookup and see location information, keep the following i
 
 **Country is almost certainly correct.** If the result says an IP address is in Germany, it almost certainly is in Germany. Act on country-level information with reasonable confidence.
 
-**City may be off by 50–200 km.** The city shown is the geolocation database's best estimate, not a verified location. For a residential connection, the city may be accurate or may point to the nearest major hub in the ISP's network.
+**City may be off by 50-200 km.** The city shown is the geolocation database's best estimate, not a verified location. For a residential connection, the city may be accurate or may point to the nearest major hub in the ISP's network.
 
 **Location flags VPNs and proxies.** If a lookup shows a city that seems inconsistent with other information you have, check whether the IP address is flagged as a VPN, proxy, or hosting provider. IPPriv surfaces this information alongside location data.
 

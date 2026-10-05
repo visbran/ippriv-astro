@@ -48,7 +48,7 @@ When you send traffic, it originates from your dedicated IP. When remote servers
 |---|---|---|
 | Exclusivity | One user only | Multiple users |
 | Reputation | Controlled by you | Affected by other users |
-| Cost | Higher ($5–$50/mo) | Lower or included |
+| Cost | Higher ($5-$50/mo) | Lower or included |
 | Consistency | Always the same address | May rotate or share |
 | Email deliverability | Predictable | Risk of neighbour spam |
 | VPN/script access | Easy to whitelist | Requires dynamic allowlists |
@@ -96,7 +96,7 @@ For production HTTPS servers, SSL certificates bound to a specific IP are increa
 
 Dedicated IPs are not without problems. Before committing, consider these:
 
-**Cost.** Residential dedicated IPs from VPN providers typically cost $5–$15/month extra. Datacenter dedicated IPs from cloud providers are $3–$8/month. Enterprise-grade IPs (clean voting history, never blacklisted) can run $50+/month.
+**Cost.** Residential dedicated IPs from VPN providers typically cost $5-$15/month extra. Datacenter dedicated IPs from cloud providers are $3-$8/month. Enterprise-grade IPs (clean voting history, never blacklisted) can run $50+/month.
 
 **Reputation liability.** On a shared IP, a neighbour's spam gets absorbed by the pool. With a dedicated IP, a single mistake (an accidentally open relay, a misconfigured newsletter script) can blacklist your IP and take time to delist.
 
@@ -115,7 +115,7 @@ Most commercial VPN services offer dedicated IPs as an add-on:
 3. Select your preferred region: not all providers offer all locations.
 4. The IP is provisioned and assigned to your account. Update any allowlists you control.
 
-Prices typically range from $5–$12/month added to a base subscription.
+Prices typically range from $5 to $12/month added to a base subscription.
 
 ### From a Cloud or Hosting Provider
 
@@ -127,7 +127,7 @@ For server and infrastructure use:
 
 ### From an ISP (Residential)
 
-For a true residential IP not associated with a datacenter, you need a business ISP connection or a static residential proxy service. These are more expensive ($30–$200+/month depending on provider and location) and require business verification in most jurisdictions.
+For a true residential IP not associated with a datacenter, you need a business ISP connection or a static residential proxy service. These are more expensive ($30-$200+/month depending on provider and location) and require business verification in most jurisdictions.
 
 ## Verifying Your Dedicated IP Is Working
 
@@ -152,7 +152,7 @@ host 203.0.113.42
 
 If you are running a mail server or any service where your IP reputation matters:
 
-- **Warm up gradually.** If sending email for the first time, start with low volume and increase over 4–6 weeks.
+- **Warm up gradually.** If sending email for the first time, start with low volume and increase over 4-6 weeks.
 - **Configure SPF, DKIM, and DMARC.** These authentication protocols are non-negotiable for deliverability.
 - **Monitor blacklists.** Set up automated checks against major lists (Spamhaus, SORBS, UCEPROTECT).
 - **Avoid open relays.** Your mail server must relay only for authorised sources.

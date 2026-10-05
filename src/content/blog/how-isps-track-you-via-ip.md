@@ -47,11 +47,11 @@ Data retention laws vary by country, but the general picture is sobering. In the
 
 | Region | Typical Retention Period | Legal Basis |
 |---|---|---|
-| United States | 6–24 months (varies by carrier) | No federal mandate; voluntary corporate policies |
-| European Union | 6–24 months (varies by country) | National implementations of retained directive |
+| United States | 6-24 months (varies by carrier) | No federal mandate; voluntary corporate policies |
+| European Union | 6-24 months (varies by country) | National implementations of retained directive |
 | United Kingdom | 12 months | Investigatory Powers Act 2016 |
 | Australia | 2 years | Telecommunications (Interception and Access) Act |
-| Canada | 6–12 months | CRTC guidelines; no mandatory federal law |
+| Canada | 6-12 months | CRTC guidelines; no mandatory federal law |
 
 Major US carriers including Comcast, AT&T, and Verizon have historically retained connection logs for 6 to 18 months. Some retain metadata longer for internal business purposes, such as network optimization and billing disputes.
 
@@ -135,11 +135,11 @@ ISP surveillance is not a static problem. Several developments are reshaping the
 
 | Data Type | Visible to ISP? | Encrypted? | Retention |
 |---|---|---|---|
-| Domain names you visit | Yes (DNS queries, SNI) | Partially | 6–24 months |
-| Destination IP addresses | Yes | No | 6–24 months |
+| Domain names you visit | Yes (DNS queries, SNI) | Partially | 6-24 months |
+| Destination IP addresses | Yes | No | 6-24 months |
 | Browsing content (HTTPS) | No | Yes | N/A |
-| Connection timestamps | Yes | N/A | 6–24 months |
-| Data volumes (upload/download) | Yes | N/A | 6–24 months |
+| Connection timestamps | Yes | N/A | 6-24 months |
+| Data volumes (upload/download) | Yes | N/A | 6-24 months |
 | Physical location | Yes (from IP assignment) | N/A | Indefinite |
 
 ## Reducing Your Exposure
