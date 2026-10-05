@@ -148,8 +148,8 @@ export default function APIDocsContent() {
                 <Zap className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <div className="text-2xl font-bold">~50ms</div>
-                <div className="text-sm text-muted-foreground">Response Time</div>
+                <div className="text-2xl font-bold">100 / hour</div>
+                <div className="text-sm text-muted-foreground">Requests per IP</div>
               </div>
             </div>
             <div className="flex items-center gap-4 p-6 rounded-xl bg-card border border-border">
