@@ -83,7 +83,7 @@ const HeroSection = () => {
                 aria-label="Copy IP address"
               >
                 {copied ? (
-                  <Check className="w-4 h-4 text-green-500" />
+                  <Check className="w-4 h-4 text-primary" />
                 ) : (
                   <Copy className="w-4 h-4 text-muted-foreground group-hover:text-foreground" />
                 )}
@@ -119,7 +119,7 @@ const HeroSection = () => {
             {ipStatus === 'ready' && ip && (
               <>
                 <div
-                  className={`mt-2 mb-5 font-mono font-semibold text-foreground break-words ${ip.includes(':') ? 'text-base sm:text-lg' : 'text-3xl sm:text-4xl'}`}
+                  className={`mt-2 mb-5 font-semibold tracking-tight tabular-nums text-foreground break-words ${ip.includes(':') ? 'text-base sm:text-lg' : 'text-3xl sm:text-4xl'}`}
                 >
                   {/* IPv6: only allow line breaks after a colon, never inside a group */}
                   {ip.split(':').map((group, i, all) => (

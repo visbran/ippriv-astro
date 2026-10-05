@@ -50,6 +50,8 @@ export interface SecurityResponse {
   isProxy: boolean;
   isTor: boolean;
   isHosting: boolean;
+  asn?: string;
+  org?: string;
 }
 
 /**

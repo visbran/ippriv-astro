@@ -3,8 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import HeroSection from '../components/HeroSection';
 import HomeReveals from '../components/HomeReveals.astro';
 import HomeFAQ from '../components/HomeFAQ.astro';
-import OrganizationSchema from '../components/OrganizationSchema.astro';
-import WebSiteSchema from '../components/WebSiteSchema.astro';
 import FAQSchema from '../components/FAQSchema.astro';
 
 const homeFAQs = [
@@ -44,8 +42,6 @@ const homeFAQs = [
   description="Free IP lookup tool. Instantly get information on any IP address: geolocation, ISP, VPN detection, and more. No account required."
   keywords="ip lookup, ip address, ip, ip address information, ip address lookup, free ip lookup, ip geolocation, VPN detection, proxy detection, ISP lookup"
 >
-  <OrganizationSchema />
-  <WebSiteSchema />
   <FAQSchema faqs={homeFAQs} />
   
   <HeroSection client:load />
