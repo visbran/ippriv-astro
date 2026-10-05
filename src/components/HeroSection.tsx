@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import { Copy, Check, Loader2, ArrowRight } from 'lucide-react';
-import { useState, useEffect, type ReactNode } from 'react';
+import { Copy, Check, Loader2, Search } from 'lucide-react';
+import { useState, type ReactNode } from 'react';
 import { useIPData, type IPErrorKind, type Privacy } from '@/hooks/useIPData';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -32,14 +32,7 @@ function privacyLabel(p: Privacy) {
 
 const HeroSection = () => {
   const [copied, setCopied] = useState(false);
-  const [isAtTop, setIsAtTop] = useState(true);
   const { ip, ipStatus, ipError, geoStatus, securityStatus, locationString, isp, privacy, retry } = useIPData();
-
-  useEffect(() => {
-    const onScroll = () => setIsAtTop(window.scrollY < 50);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   const handleCopy = () => {
     if (!ip || !navigator.clipboard) return;
@@ -53,15 +46,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-24 pb-24 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 geometric-pattern" />
-      <div className="absolute inset-0 grid-pattern opacity-40" />
-
-      {/* Gradient Orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse-soft" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: '1s' }} />
-
+    <section className="relative pt-24 pb-16 sm:pt-32 sm:pb-20">
       <div className="section-container relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <motion.h1
@@ -173,45 +158,45 @@ const HeroSection = () => {
             )}
           </motion.div>
 
-          {/* Actions */}
-          <motion.div
+          {/* Lookup any IP: plain GET form, works without JavaScript */}
+          <motion.form
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.15 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-3"
+            action="/ip-lookup"
+            method="get"
+            role="search"
+            className="max-w-md mx-auto text-left"
           >
-            <a
-              href="/ip-lookup"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-medium bg-primary text-primary-foreground rounded-xl hover:opacity-90 transition-opacity duration-200"
-            >
-              Look up an IP
-              <ArrowRight className="w-4 h-4" aria-hidden="true" />
-            </a>
-            <a
-              href="/api-docs"
-              className="inline-flex min-h-11 items-center px-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              API Docs
-            </a>
-          </motion.div>
+            <label htmlFor="home-lookup" className="block text-sm font-medium text-foreground mb-2">
+              Look up any IP address
+            </label>
+            <div className="flex gap-2">
+              <div className="relative flex-1 min-w-0">
+                <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+                <input
+                  id="home-lookup"
+                  name="ip"
+                  type="text"
+                  required
+                  autoComplete="off"
+                  autoCapitalize="off"
+                  spellCheck={false}
+                  placeholder="e.g. 8.8.8.8"
+                  className="h-14 w-full rounded-md border border-input bg-card pl-12 pr-3 text-base text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                />
+              </div>
+              <button
+                type="submit"
+                className="h-14 shrink-0 rounded-md bg-primary px-5 sm:px-6 text-base font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+              >
+                Look up
+              </button>
+            </div>
+          </motion.form>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isAtTop ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
-        className="hidden md:flex fixed bottom-8 left-1/2 -translate-x-1/2 pointer-events-none z-10"
-      >
-        <div className="w-6 h-10 rounded-full border-2 border-border flex items-start justify-center p-2">
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-1.5 h-1.5 rounded-full bg-primary"
-          />
-        </div>
-      </motion.div>
     </section>
   );
 };

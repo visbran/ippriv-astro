@@ -119,14 +119,6 @@
     }
   }
 
-  .gradient-text {
-    background-image: linear-gradient(to right, hsl(var(--primary)), hsl(var(--primary) / 0.7));
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-  }
-
   .glass-card {
     background-color: hsl(var(--card) / 0.8);
     backdrop-filter: blur(24px);
@@ -136,19 +128,6 @@
 
   .glass-card:hover {
     box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
-  }
-
-  .geometric-pattern {
-    background-image: 
-      radial-gradient(circle at 25% 25%, hsl(var(--primary) / 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, hsl(var(--primary) / 0.05) 0%, transparent 50%);
-  }
-
-  .grid-pattern {
-    background-size: 60px 60px;
-    background-image: 
-      linear-gradient(to right, hsl(var(--border) / 0.3) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--border) / 0.3) 1px, transparent 1px);
   }
 
   .animate-fade-in {

@@ -26,12 +26,6 @@ const Header = () => {
 
           {/* Nav Links */}
           <div className="hidden md:flex items-center gap-8">
-            <a href="/#features" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Features
-            </a>
-            <a href="/#how-it-works" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              How it Works
-            </a>
             <a href="/api-docs" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               API Docs
             </a>
@@ -44,7 +38,7 @@ const Header = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-all duration-200 hover:scale-105"
+              className="p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors duration-200"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? (
@@ -55,7 +49,7 @@ const Header = () => {
             </button>
             <a
               href="/ip-lookup"
-              className="hidden sm:inline-flex px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all duration-200 hover:scale-105"
+              className="hidden sm:inline-flex px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors duration-200"
             >
               Look up an IP
             </a>

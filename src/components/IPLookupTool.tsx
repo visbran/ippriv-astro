@@ -67,6 +67,14 @@ export default function IPLookupTool() {
       } catch (err) {
         console.error('Failed to decode shared data:', err);
       }
+      return;
+    }
+
+    // ?ip=8.8.8.8 (homepage lookup form): prefill and run the lookup
+    const ipParam = params.get('ip');
+    if (ipParam) {
+      setIpInput(ipParam);
+      handleLookup(ipParam);
     }
   }, []);
 
@@ -81,8 +89,8 @@ export default function IPLookupTool() {
     return ipv6Regex.test(ip);
   };
 
-  const handleLookup = async () => {
-    const trimmedIP = ipInput.trim();
+  const handleLookup = async (value: string = ipInput) => {
+    const trimmedIP = value.trim();
     
     if (!trimmedIP) {
       setError('Please enter an IP address');
@@ -161,7 +169,7 @@ export default function IPLookupTool() {
             />
           </div>
           <Button 
-            onClick={handleLookup} 
+            onClick={() => handleLookup()} 
             disabled={isLoading}
             className="h-14 px-8 text-lg"
           >

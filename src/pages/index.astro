@@ -1,9 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import HeroSection from '../components/HeroSection';
-import FeaturesSection from '../components/FeaturesSection';
-import HowItWorksSection from '../components/HowItWorksSection';
-import CTASection from '../components/CTASection';
+import HomeReveals from '../components/HomeReveals.astro';
+import HomeFAQ from '../components/HomeFAQ.astro';
 import OrganizationSchema from '../components/OrganizationSchema.astro';
 import WebSiteSchema from '../components/WebSiteSchema.astro';
 import FAQSchema from '../components/FAQSchema.astro';
@@ -31,7 +30,7 @@ const homeFAQs = [
   },
   {
     question: "How accurate is IP geolocation?",
-    answer: "Country-level accuracy is typically 95–99%, region/state-level is 55–80%, and city-level is 50–75%. Accuracy depends on how ISPs register their IP blocks in regional databases.",
+    answer: "Country-level accuracy is typically 95-99%, region/state-level is 55-80%, and city-level is 50-75%. Accuracy depends on how ISPs register their IP blocks in regional databases.",
   },
   {
     question: "Can I look up my own IP address with IPPriv?",
@@ -50,7 +49,6 @@ const homeFAQs = [
   <FAQSchema faqs={homeFAQs} />
   
   <HeroSection client:load />
-  <FeaturesSection client:visible />
-  <HowItWorksSection client:visible />
-  <CTASection client:visible />
+  <HomeReveals />
+  <HomeFAQ faqs={homeFAQs} />
 </Layout>
