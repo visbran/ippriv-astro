@@ -57,7 +57,7 @@ const Header = () => {
               href="/ip-lookup"
               className="hidden sm:inline-flex px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all duration-200 hover:scale-105"
             >
-              Get Started
+              Look up an IP
             </a>
           </div>
         </nav>

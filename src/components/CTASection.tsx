@@ -29,14 +29,14 @@ const CTASection = () => {
               href="/ip-lookup"
               className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-medium bg-primary text-primary-foreground rounded-xl hover:opacity-90 transition-all duration-200 hover:scale-105 hover:shadow-lg"
             >
-              Get Started
+              Look up an IP
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
               href="/api-docs"
               className="w-full sm:w-auto px-8 py-4 text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              View API Docs
+              API Docs
             </a>
           </div>
         </motion.div>
