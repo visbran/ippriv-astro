@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import HeroSection from '../components/HeroSection';
 import FeaturesSection from '../components/FeaturesSection';
 import HowItWorksSection from '../components/HowItWorksSection';
-import SocialProofSection from '../components/SocialProofSection';
 import CTASection from '../components/CTASection';
 import OrganizationSchema from '../components/OrganizationSchema.astro';
 import WebSiteSchema from '../components/WebSiteSchema.astro';
@@ -53,6 +52,5 @@ const homeFAQs = [
   <HeroSection client:load />
   <FeaturesSection client:visible />
   <HowItWorksSection client:visible />
-  <SocialProofSection client:visible />
   <CTASection client:visible />
 </Layout>
