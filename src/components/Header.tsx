@@ -30,7 +30,7 @@ const Header = ({ path = '' }: { path?: string }) => {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="fixed top-0 left-0 right-0 z-50 glass-card border-b"
+      className="fixed top-0 left-0 right-0 z-50 glass-card bg-background/90 border-b"
     >
       <div className="section-container">
         <nav className="flex items-center justify-between h-16" aria-label="Main">
