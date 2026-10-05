@@ -1,109 +1,109 @@
-import { useState, useEffect, useCallback } from 'react';
-import { API_CONFIG, apiFetch, RateLimitError } from '@/config/api';
-import type { IPResponse, GeoResponse, SecurityResponse } from '@/types/api';
-
-export type IPErrorKind = 'rate-limit' | 'timeout' | 'no-public-ip' | 'network';
-
-export type Privacy =
-  | { masked: false }
-  | { masked: true; via: 'Tor' | 'VPN' | 'Proxy' | 'Data center' };
-
-type Part<T> = { status: 'loading' } | { status: 'ready'; value: T } | { status: 'error' };
-
-export function classifyError(err: unknown): IPErrorKind {
-  if (err instanceof RateLimitError) return 'rate-limit';
-  if (err instanceof Error) {
-    if (err.name === 'AbortError') return 'timeout';
-    if (/\b429\b/.test(err.message)) return 'rate-limit';
-    if (err.message === 'no-public-ip') return 'no-public-ip';
-  }
-  return 'network';
-}
+import { useState, useEffect } from 'react';
+import { API_CONFIG, apiFetch } from '@/config/api';
+import type {
+  IPResponse,
+  GeoResponse,
+  DNSResponse,
+  SecurityResponse,
+  IPData,
+} from '@/types/api';
 
 /**
- * Detects the visitor's IP, then fills in location and VPN/proxy status.
- *
- * The IP renders as soon as /api/ip answers. Geo and security load in
- * parallel afterwards and fail independently, so one slow or broken
- * endpoint never hides the answer.
+ * Custom hook to fetch IP data from ippriv backend
+ * 
+ * Fetches IP, geolocation, DNS, and security data in sequence
+ * Returns combined data with loading and error states
  */
 export function useIPData() {
-  const [ip, setIp] = useState<Part<IPResponse>>({ status: 'loading' });
-  const [ipError, setIpError] = useState<IPErrorKind | null>(null);
-  const [geo, setGeo] = useState<Part<GeoResponse>>({ status: 'loading' });
-  const [security, setSecurity] = useState<Part<SecurityResponse>>({ status: 'loading' });
-  const [attempt, setAttempt] = useState(0);
+  const [data, setData] = useState<IPData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     let isMounted = true;
-    setIp({ status: 'loading' });
-    setIpError(null);
-    setGeo({ status: 'loading' });
-    setSecurity({ status: 'loading' });
 
-    const run = async () => {
-      let ipData: IPResponse;
+    const fetchIPData = async () => {
       try {
-        ipData = await apiFetch<IPResponse>(API_CONFIG.endpoints.ip);
-        const addr = ipData.ipv4;
-        if (!addr || addr === '::1' || addr === '127.0.0.1' || addr === 'Unknown') {
-          throw new Error('no-public-ip');
+        setIsLoading(true);
+        setError(null);
+
+        // Step 1: Get IP address
+        const ipData = await apiFetch<IPResponse>(API_CONFIG.endpoints.ip);
+        
+        if (!isMounted) return;
+        
+        const displayIP = ipData.ipv4;
+        if (!displayIP || displayIP === '::1' || displayIP === '127.0.0.1' || displayIP === 'Unknown') {
+          throw new Error('Unable to detect your public IP address');
         }
+
+        // Step 2: Fetch all data in parallel
+        const [geoData, dnsData, securityData] = await Promise.all([
+          apiFetch<GeoResponse>(API_CONFIG.endpoints.geo(displayIP)),
+          apiFetch<DNSResponse>(API_CONFIG.endpoints.dns(displayIP)),
+          apiFetch<SecurityResponse>(API_CONFIG.endpoints.security(displayIP)),
+        ]);
+
+        if (!isMounted) return;
+
+        // Combine all data
+        const combinedData: IPData = {
+          // IP
+          ipv4: displayIP,
+          ipv6: ipData.ipv6,
+          timestamp: ipData.timestamp,
+          
+          // Geo
+          country: geoData.country,
+          countryCode: geoData.countryCode,
+          region: geoData.region,
+          city: geoData.city,
+          lat: geoData.lat,
+          lon: geoData.lon,
+          timezone: geoData.timezone,
+          isp: geoData.isp,
+          
+          // DNS
+          hostname: dnsData.hostname,
+          ptrRecords: dnsData.ptrRecords,
+          
+          // Security
+          isVPN: securityData.isVPN,
+          isProxy: securityData.isProxy,
+          isTor: securityData.isTor,
+          isHosting: securityData.isHosting,
+        };
+
+        setData(combinedData);
       } catch (err) {
         if (!isMounted) return;
-        setIpError(classifyError(err));
-        setIp({ status: 'error' });
-        console.error('useIPData error:', err);
-        return;
+        
+        const error = err instanceof Error ? err : new Error('Failed to fetch IP data');
+        setError(error);
+        console.error('useIPData error:', error);
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
-      if (!isMounted) return;
-      setIp({ status: 'ready', value: ipData });
-
-      const addr = ipData.ipv4;
-      apiFetch<GeoResponse>(API_CONFIG.endpoints.geo(addr)).then(
-        (value) => isMounted && setGeo({ status: 'ready', value }),
-        () => isMounted && setGeo({ status: 'error' }),
-      );
-      apiFetch<SecurityResponse>(API_CONFIG.endpoints.security(addr)).then(
-        (value) => isMounted && setSecurity({ status: 'ready', value }),
-        () => isMounted && setSecurity({ status: 'error' }),
-      );
     };
 
-    run();
+    fetchIPData();
+
+    // Cleanup
     return () => {
       isMounted = false;
     };
-  }, [attempt]);
-
-  const retry = useCallback(() => setAttempt((n) => n + 1), []);
-
-  const g = geo.status === 'ready' ? geo.value : null;
-  const s = security.status === 'ready' ? security.value : null;
-
-  let privacy: Privacy | null = null;
-  if (s) {
-    if (s.isTor) privacy = { masked: true, via: 'Tor' };
-    else if (s.isVPN) privacy = { masked: true, via: 'VPN' };
-    else if (s.isProxy) privacy = { masked: true, via: 'Proxy' };
-    else if (s.isHosting) privacy = { masked: true, via: 'Data center' };
-    else privacy = { masked: false };
-  }
+  }, []); // Run once on mount
 
   return {
-    ip: ip.status === 'ready' ? ip.value.ipv4 : null,
-    // Second address on dual-stack connections (only when it differs from the primary)
-    ipv6:
-      ip.status === 'ready' && ip.value.ipv6 && ip.value.ipv6.includes(':') && ip.value.ipv6 !== ip.value.ipv4
-        ? ip.value.ipv6
-        : null,
-    ipStatus: ip.status,
-    ipError,
-    geoStatus: geo.status,
-    securityStatus: security.status,
-    locationString: g ? [g.city, g.country].filter(Boolean).join(', ') || null : null,
-    isp: g?.isp || null,
-    privacy,
-    retry,
+    data,
+    isLoading,
+    error,
+    // Helper computed values
+    locationString: data ? `${data.city}, ${data.country}` : null,
+    hasSecurityConcerns: data 
+      ? data.isVPN || data.isProxy || data.isTor || data.isHosting
+      : false,
   };
 }

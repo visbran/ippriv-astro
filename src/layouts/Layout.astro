@@ -76,14 +76,18 @@ const imageUrl = image.startsWith('http') ? image : new URL(image, Astro.site).t
     <meta name="revisit-after" content="7 days" />
     <meta name="rating" content="General" />
 
+    {/* Geo tags */}
+    <meta name="geo.region" content="FR" />
+    <meta name="geo.placename" content="Bordeaux" />
+
     {/* Mobile */}
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="IPPriv" />
 
     {/* Theme Color */}
-    <meta name="theme-color" content="#0066CC" />
-    <meta name="msapplication-TileColor" content="#0066CC" />
+    <meta name="theme-color" content="#0066FF" />
+    <meta name="msapplication-TileColor" content="#0066FF" />
 
     {/* Favicons */}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -95,6 +99,15 @@ const imageUrl = image.startsWith('http') ? image : new URL(image, Astro.site).t
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" /></noscript>
+
+    {/* Preload critical font file */}
+    <link
+      rel="preload"
+      as="font"
+      href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2"
+      type="font/woff2"
+      crossorigin
+    />
 
     {/* Plausible Analytics */}
     <script is:inline defer data-domain="ippriv.com" src="https://plausible.io/js/script.js"></script>
@@ -111,11 +124,10 @@ const imageUrl = image.startsWith('http') ? image : new URL(image, Astro.site).t
     
     {/* View Transitions */}
     <ViewTransitions />
-      <noscript><style>.js-only{display:none!important}.nojs-only{display:block!important}</style></noscript>
   </head>
 
   <body class="min-h-screen bg-background">
-    <Header client:idle path={Astro.url.pathname} />
+    <Header client:idle />
     <main>
       <slot />
     </main>

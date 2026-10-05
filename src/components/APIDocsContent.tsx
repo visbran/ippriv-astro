@@ -128,7 +128,7 @@ export default function APIDocsContent() {
               <Code className="w-4 h-4" />
               <span className="text-sm font-medium">API Documentation</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
               IPPriv API
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">

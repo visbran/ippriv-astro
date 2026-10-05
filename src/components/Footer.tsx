@@ -1,31 +1,4 @@
-import { Shield } from 'lucide-react';
-
-const GROUPS = [
-  {
-    title: 'Tools',
-    links: [
-      { href: '/ip-lookup', label: 'IP Lookup' },
-      { href: '/api-docs', label: 'API Docs' },
-      { href: '/blog', label: 'Blog' },
-    ],
-  },
-  {
-    title: 'IPPriv',
-    links: [
-      { href: '/about', label: 'About' },
-      { href: '/contact', label: 'Contact' },
-      { href: 'https://github.com/visbran', label: 'GitHub', external: true },
-    ],
-  },
-  {
-    title: 'Legal',
-    links: [
-      { href: '/privacy', label: 'Privacy policy' },
-      { href: '/terms', label: 'Terms' },
-      { href: '/legal', label: 'Legal notice' },
-    ],
-  },
-];
+import { Shield, Github } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -33,41 +6,60 @@ const Footer = () => {
   return (
     <footer className="py-12 border-t border-border">
       <div className="section-container">
-        <div className="grid gap-10 md:grid-cols-[1fr_auto]">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo & Copyright */}
-          <div className="flex flex-col gap-2">
-            <a href="/" className="flex w-fit items-center gap-2">
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <a href="/" className="flex items-center gap-2">
               <div className="p-1.5 rounded-lg bg-primary/10">
-                <Shield className="w-4 h-4 text-primary" aria-hidden="true" />
+                <Shield className="w-4 h-4 text-primary" />
               </div>
               <span className="text-sm font-medium text-foreground">IPPriv</span>
             </a>
             <p className="text-sm text-muted-foreground">
-              © {currentYear} IPPriv. Privacy-focused IP tools.
+              © {currentYear} IPPriv - Privacy-focused IP tools
             </p>
           </div>
 
-          {/* Link groups */}
-          <nav className="grid grid-cols-2 gap-x-12 gap-y-8 sm:grid-cols-3" aria-label="Footer navigation">
-            {GROUPS.map((group) => (
-              <div key={group.title}>
-                <h2 className="text-sm font-medium text-foreground">{group.title}</h2>
-                <ul className="mt-2">
-                  {group.links.map((link) => (
-                    <li key={link.href}>
-                      <a
-                        href={link.href}
-                        {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                        className="inline-flex min-h-11 sm:min-h-9 items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          {/* Links */}
+          <nav className="flex flex-wrap items-center justify-center gap-6 text-sm" aria-label="Footer navigation">
+            <a href="/ip-lookup" className="text-muted-foreground hover:text-foreground transition-colors">
+              IP Lookup
+            </a>
+            <a href="/about" className="text-muted-foreground hover:text-foreground transition-colors">
+              About
+            </a>
+            <a href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
+              Privacy Policy
+            </a>
+            <a href="/terms" className="text-muted-foreground hover:text-foreground transition-colors">
+              Terms
+            </a>
+            <a href="/legal" className="text-muted-foreground hover:text-foreground transition-colors">
+              Legal Notice
+            </a>
+            <a href="/api-docs" className="text-muted-foreground hover:text-foreground transition-colors">
+              API Docs
+            </a>
+            <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">
+              Blog
+            </a>
+            <a href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">
+              Contact
+            </a>
           </nav>
+
+          {/* Social Links */}
+          <div className="flex items-center gap-3">
+            <a
+              href="https://github.com/visbran"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors"
+              aria-label="GitHub"
+            >
+              <Github className="w-4 h-4 text-muted-foreground hover:text-foreground" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

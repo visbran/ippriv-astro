@@ -1,331 +1,190 @@
 import { motion } from 'framer-motion';
-import { Copy, Check, Loader2, Search } from 'lucide-react';
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
-import { useIPData, type IPErrorKind, type Privacy } from '@/hooks/useIPData';
-import { Skeleton } from '@/components/ui/skeleton';
-import { isValidIP } from '@/utils/security';
-
-const ERROR_MESSAGES: Record<IPErrorKind, string> = {
-  'rate-limit': 'Too many lookups from your network in the last hour. Wait a few minutes, then try again.',
-  timeout: 'The lookup service took too long to respond. Your connection may be slow or the service busy.',
-  'no-public-ip': 'Your connection did not report a public IP address.',
-  network: 'The lookup service could not be reached. Check your connection, or a content blocker may be stopping the request.',
-};
-
-function Row({ label, status, children }: { label: string; status: 'loading' | 'ready' | 'error'; children: ReactNode }) {
-  return (
-    <div className="flex items-baseline justify-between gap-4 px-5 py-3 sm:px-8">
-      <dt className="shrink-0 text-sm text-muted-foreground">{label}</dt>
-      <dd className="min-w-0 text-right text-sm font-medium text-foreground">
-        {status === 'loading' && (
-          <>
-            <Skeleton className="ml-auto h-4 w-32 bg-border" aria-hidden="true" />
-            <span className="sr-only">Loading</span>
-          </>
-        )}
-        {status === 'error' && <span className="font-normal text-muted-foreground">Unavailable</span>}
-        {status === 'ready' && children}
-      </dd>
-    </div>
-  );
-}
-
-function privacyLabel(p: Privacy) {
-  if (!p.masked) return 'None detected';
-  if (p.via === 'Data center') return 'Data center IP';
-  return `${p.via} detected`;
-}
-
-const linkClass = 'font-medium text-primary hover:underline underline-offset-4';
-
-/** Exposed / Masked verdict chip: the readout's anchor. */
-function VerdictChip({ privacy, checking }: { privacy: Privacy | null; checking: boolean }) {
-  if (checking) {
-    return (
-      <span className="inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1 text-sm font-medium text-muted-foreground">
-        <span className="h-2 w-2 rounded-full bg-border" aria-hidden="true" />
-        Checking
-      </span>
-    );
-  }
-  if (!privacy) return null;
-  return (
-    <span className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-sm font-medium text-accent-foreground">
-      <span
-        className={`h-2 w-2 rounded-full ${privacy.masked ? 'border-2 border-primary' : 'bg-primary'}`}
-        aria-hidden="true"
-      />
-      {privacy.masked ? 'Masked' : 'Exposed'}
-    </span>
-  );
-}
+import { Copy, Check, MapPin, Globe, Loader2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import LocationMap from './LocationMap';
+import { useIPData } from '@/hooks/useIPData';
 
 const HeroSection = () => {
-  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
-  const [formError, setFormError] = useState<string | null>(null);
-  const formRef = useRef<HTMLFormElement>(null);
-  const { ip, ipv6, ipStatus, ipError, geoStatus, securityStatus, locationString, isp, privacy, retry } = useIPData();
-  const copied = copyState === 'copied';
+  const [copied, setCopied] = useState(false);
+  const [isAtTop, setIsAtTop] = useState(true);
+  const { data, isLoading, error, locationString } = useIPData();
 
-  // With JavaScript we validate inline; without it the browser's `required` still applies
   useEffect(() => {
-    if (formRef.current) formRef.current.noValidate = true;
+    const onScroll = () => setIsAtTop(window.scrollY < 50);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const flashCopy = (state: 'copied' | 'failed') => {
-    setCopyState(state);
-    setTimeout(() => setCopyState('idle'), state === 'failed' ? 4000 : 2000);
-  };
-
   const handleCopy = () => {
-    if (!ip) return;
-    if (!navigator.clipboard) return flashCopy('failed');
-    navigator.clipboard.writeText(ip).then(
-      () => flashCopy('copied'),
-      (err) => {
-        console.error('Copy failed:', err);
-        flashCopy('failed');
-      },
-    );
-  };
-
-  const handleLookupSubmit = (e: FormEvent<HTMLFormElement>) => {
-    const field = e.currentTarget.elements.namedItem('ip') as HTMLInputElement;
-    const value = field.value.trim();
-    if (!value) {
-      e.preventDefault();
-      setFormError('Enter an IP address to look up.');
-      field.focus();
-    } else if (!isValidIP(value)) {
-      e.preventDefault();
-      setFormError('Enter a valid IPv4 or IPv6 address, like 8.8.8.8 or 2001:db8::1.');
-      field.focus();
-    } else {
-      field.value = value;
-    }
+    if (!data?.ipv4) return;
+    navigator.clipboard.writeText(data.ipv4);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <section className="relative overflow-x-clip pt-24 pb-16 sm:pt-32 sm:pb-20">
+    <section className="relative min-h-screen flex items-center justify-center pt-24 pb-24 overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 geometric-pattern" />
+      <div className="absolute inset-0 grid-pattern opacity-40" />
+      
+      {/* Gradient Orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse-soft" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: '1s' }} />
+
       <div className="section-container relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 12 }}
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="text-[1.75rem] sm:text-5xl lg:text-6xl font-bold text-foreground mb-3 sm:mb-4 tracking-tight text-balance"
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-8"
           >
-            What Is My IP Address?
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            Privacy-First IP Tools
+          </motion.div>
+
+          {/* Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 tracking-tight text-balance"
+          >
+            Free IP Lookup Tool.{' '}
+            <span className="gradient-text">Know Your IP Address.</span>
           </motion.h1>
 
+          {/* Subheadline */}
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.05 }}
-            className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 max-w-xl mx-auto text-balance"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
           >
-            Every website you visit sees this address. Here is what it reveals about you.
+            Instant IP address information: geolocation, ISP, VPN detection, and more. No tracking, no ads.
           </motion.p>
 
-          {/* IP readout. The tonal band behind it gives the glass something to frost. */}
-          <div className="relative isolate mx-auto mb-8 max-w-md">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute left-1/2 top-[30%] -z-10 h-28 w-screen -translate-x-1/2 border-y border-primary/20 bg-accent"
-            />
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="glass-card rounded-2xl text-left"
-            >
-              <div className="flex items-center justify-between gap-3 px-5 pt-5 sm:px-8 sm:pt-7">
-                {copyState === 'failed' ? (
-                  <span className="text-sm text-destructive">Couldn't copy. Select the address instead.</span>
-                ) : (
-                  <span className="text-sm text-muted-foreground">Your IP address</span>
-                )}
-                <div className="flex items-center gap-2">
-                  {ipStatus === 'ready' && (
-                    <VerdictChip privacy={privacy} checking={securityStatus === 'loading'} />
-                  )}
-                  <button
-                    onClick={handleCopy}
-                    disabled={!ip}
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-secondary hover:bg-secondary/80 transition-colors duration-200 group disabled:opacity-50 disabled:cursor-not-allowed"
-                    aria-label="Copy IP address"
-                  >
-                    {copied ? (
-                      <Check className="w-4 h-4 text-primary" />
-                    ) : (
-                      <Copy className="w-4 h-4 text-muted-foreground group-hover:text-foreground" />
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              <span className="sr-only" aria-live="polite">
-                {copied ? 'IP address copied to clipboard' : copyState === 'failed' ? "Couldn't copy the IP address" : ''}
-              </span>
-
-              {ipStatus === 'loading' && (
-                <>
-                  <div className="js-only flex items-center gap-3 px-5 pt-4 pb-6 sm:px-8" role="status">
-                    <Loader2 className="w-5 h-5 text-primary animate-spin" aria-hidden="true" />
-                    <p className="text-sm text-muted-foreground">Detecting your IP address...</p>
-                  </div>
-                  <p className="nojs-only px-5 pt-4 pb-6 text-sm text-muted-foreground sm:px-8">
-                    Detecting your IP address needs JavaScript. You can still look up any address with the form below.
-                  </p>
-                </>
-              )}
-
-              {ipStatus === 'error' && ipError && (
-                <div className="px-5 pt-3 pb-4 sm:px-8" role="alert">
-                  <p className="font-medium text-foreground">We couldn't detect your IP address.</p>
-                  <p className="mt-1 text-sm text-muted-foreground">{ERROR_MESSAGES[ipError]}</p>
-                  <div className="mt-2 flex flex-wrap items-center gap-x-5 text-sm font-medium">
-                    <button onClick={retry} className="inline-flex min-h-11 items-center text-primary hover:underline underline-offset-4">
-                      Try again
-                    </button>
-                    <a href="/ip-lookup" className="inline-flex min-h-11 items-center text-primary hover:underline underline-offset-4">
-                      Look up an IP by hand
-                    </a>
-                  </div>
-                </div>
-              )}
-
-              {ipStatus === 'ready' && ip && (
-                <>
-                  <div
-                    className={`px-5 pt-2 pb-5 sm:px-8 font-semibold tracking-tight tabular-nums text-foreground break-words ${ip.includes(':') ? 'text-lg sm:text-xl' : 'text-4xl sm:text-5xl'}`}
-                  >
-                    {/* IPv6: only allow line breaks after a colon, never inside a group */}
-                    {ip.split(':').map((group, i, all) => (
-                      <span key={i}>
-                        {group}
-                        {i < all.length - 1 && <>:<wbr /></>}
-                      </span>
-                    ))}
-                    {ipv6 && (
-                      <div className="mt-2 flex items-baseline gap-2 text-sm font-normal tracking-normal text-muted-foreground">
-                        <span className="shrink-0">IPv6</span>
-                        <span className="min-w-0 break-words font-medium text-foreground">
-                          {ipv6.split(':').map((group, i, all) => (
-                            <span key={i}>
-                              {group}
-                              {i < all.length - 1 && <>:<wbr /></>}
-                            </span>
-                          ))}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  <dl className="border-y border-border/60 divide-y divide-border/60">
-                    <Row
-                      label={privacy?.masked ? 'Apparent location' : 'Location'}
-                      status={geoStatus === 'ready' && !locationString ? 'error' : geoStatus}
-                    >
-                      {locationString}
-                    </Row>
-                    <Row label="Provider" status={geoStatus === 'ready' && !isp ? 'error' : geoStatus}>
-                      <span className="break-words">{isp}</span>
-                    </Row>
-                    <Row label="VPN / proxy" status={securityStatus}>
-                      {privacy && privacyLabel(privacy)}
-                    </Row>
-                  </dl>
-
-                  <div className="px-5 pt-4 pb-5 sm:px-8 sm:pb-7">
-                    {privacy && (
-                      <p className="text-sm text-muted-foreground">
-                        {privacy.masked ? (
-                          <>
-                            Sites see this connection's location and provider, not your own.{' '}
-                            <a href="/blog/browser-fingerprinting-how-websites-identify-you" className={linkClass}>
-                              What sites can still see
-                            </a>
-                          </>
-                        ) : (
-                          <>
-                            {geoStatus === 'ready' && locationString && isp
-                              ? 'Sites can see your real provider and approximate location.'
-                              : 'Sites can see this address and the network it belongs to.'}{' '}
-                            <a href="/blog/hide-your-ip-address" className={linkClass}>
-                              How to hide it
-                            </a>
-                          </>
-                        )}
-                      </p>
-                    )}
-                    <a
-                      href={`/ip-lookup?ip=${encodeURIComponent(ip)}`}
-                      className={`inline-flex min-h-11 items-center text-sm ${linkClass}`}
-                    >
-                      See full details for this IP
-                    </a>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      Lookups are logged to run the service and deleted after 30 days.{' '}
-                      <a href="/privacy" className="underline underline-offset-4 hover:text-foreground">
-                        Privacy policy
-                      </a>
-                    </p>
-                  </div>
-                </>
-              )}
-            </motion.div>
-          </div>
-
-          {/* Lookup any IP: plain GET form, works without JavaScript */}
-          <motion.form
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.15 }}
-            ref={formRef}
-            onSubmit={handleLookupSubmit}
-            action="/ip-lookup"
-            method="get"
-            role="search"
-            className="max-w-md mx-auto text-left"
+          {/* IP Display Card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="glass-card rounded-2xl p-6 sm:p-8 max-w-md mx-auto mb-10 transition-all duration-300"
           >
-            <label htmlFor="home-lookup" className="block text-sm font-medium text-foreground mb-2">
-              Look up any IP address
-            </label>
-            <div className="flex gap-2">
-              <div className="relative flex-1 min-w-0">
-                <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
-                <input
-                  id="home-lookup"
-                  name="ip"
-                  type="text"
-                  required
-                  autoComplete="off"
-                  autoCapitalize="off"
-                  spellCheck={false}
-                  placeholder="8.8.8.8 or 2001:db8::1"
-                  aria-invalid={formError ? true : undefined}
-                  aria-describedby={formError ? 'home-lookup-error' : undefined}
-                  onChange={() => formError && setFormError(null)}
-                  className="h-14 w-full rounded-md border border-input aria-[invalid=true]:border-destructive bg-card pl-12 pr-3 text-base text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                />
-              </div>
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-sm text-muted-foreground">Your IP Address</span>
               <button
-                type="submit"
-                className="h-14 shrink-0 rounded-md bg-primary px-5 sm:px-6 text-base font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+                onClick={handleCopy}
+                disabled={isLoading || !data}
+                className="p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-all duration-200 hover:scale-105 group disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Copy IP address"
               >
-                Look up
+                {copied ? (
+                  <Check className="w-4 h-4 text-green-500" />
+                ) : (
+                  <Copy className="w-4 h-4 text-muted-foreground group-hover:text-foreground" />
+                )}
               </button>
             </div>
-            {formError && (
-              <p id="home-lookup-error" role="alert" className="mt-2 text-sm text-destructive">
-                {formError}
-              </p>
+            
+            {/* Loading State */}
+            {isLoading && (
+              <div className="flex flex-col items-center justify-center py-4">
+                <Loader2 className="w-8 h-8 text-primary animate-spin mb-3" />
+                <p className="text-sm text-muted-foreground">Detecting your IP address...</p>
+              </div>
             )}
-          </motion.form>
+
+            {/* Error State */}
+            {error && !isLoading && (
+              <div className="py-4">
+                <p className="text-sm text-red-500 mb-2">Failed to fetch IP data</p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="text-sm text-primary hover:underline"
+                >
+                  Try again
+                </button>
+              </div>
+            )}
+
+            {/* Data Display */}
+            {data && !isLoading && !error && (
+              <>
+                <div className={`font-mono font-semibold text-foreground mb-4 break-all ${data.ipv4.includes(':') ? 'text-base sm:text-lg' : 'text-2xl sm:text-3xl'}`}>
+                  {data.ipv4}
+                </div>
+
+                <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground flex-wrap">
+                  {locationString && (
+                    <div className="flex items-center gap-1.5">
+                      <MapPin className="w-4 h-4 text-primary" />
+                      <span>{locationString}</span>
+                    </div>
+                  )}
+                  {data.isp && (
+                    <>
+                      <div className="w-1 h-1 rounded-full bg-border" />
+                      <div className="flex items-center gap-1.5">
+                        <Globe className="w-4 h-4 text-primary" />
+                        <span>{data.isp}</span>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </>
+            )}
+          </motion.div>
+
+          {/* Location Map */}
+          {data && !isLoading && (
+            <LocationMap
+              lat={data.lat}
+              lng={data.lon}
+              location={locationString || undefined}
+            />
+          )}
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <a
+              href="/ip-lookup"
+              className="w-full sm:w-auto px-8 py-4 text-base font-medium bg-primary text-primary-foreground rounded-xl hover:opacity-90 transition-all duration-200 hover:scale-105 hover:shadow-lg"
+            >
+              Try IP Lookup
+            </a>
+            <a
+              href="/api-docs"
+              className="w-full sm:w-auto px-8 py-4 text-base font-medium bg-secondary text-secondary-foreground rounded-xl hover:bg-secondary/80 transition-all duration-200 hover:scale-105"
+            >
+              View API Docs
+            </a>
+          </motion.div>
         </div>
       </div>
 
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isAtTop ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="hidden md:flex fixed bottom-8 left-1/2 -translate-x-1/2 pointer-events-none z-10"
+      >
+        <div className="w-6 h-10 rounded-full border-2 border-border flex items-start justify-center p-2">
+          <motion.div
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            className="w-1.5 h-1.5 rounded-full bg-primary"
+          />
+        </div>
+      </motion.div>
     </section>
   );
 };

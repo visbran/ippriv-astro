@@ -38,7 +38,9 @@ export interface SecurityResponse {
 export const isValidIP = (ip: string): boolean => {
   // IPv4 regex
   const ipv4Regex = /^(\d{1,3}\.){3}\d{1,3}$/;
-
+  // IPv6 regex (simplified)
+  const ipv6Regex = /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
+  
   if (ipv4Regex.test(ip)) {
     const parts = ip.split('.');
     return parts.every(part => {
@@ -46,19 +48,8 @@ export const isValidIP = (ip: string): boolean => {
       return num >= 0 && num <= 255;
     });
   }
-
-  return isValidIPv6(ip);
-};
-
-// IPv6, full or compressed ("2001:4860::8888", "::1"); "::" may appear once
-const isValidIPv6 = (ip: string): boolean => {
-  if (!/^[0-9a-fA-F:]+$/.test(ip)) return false;
-  const halves = ip.split('::');
-  if (halves.length > 2) return false;
-  const groupsOf = (s: string) => (s === '' ? [] : s.split(':'));
-  const groups = [...groupsOf(halves[0]), ...(halves.length === 2 ? groupsOf(halves[1]) : [])];
-  if (!groups.every((g) => /^[0-9a-fA-F]{1,4}$/.test(g))) return false;
-  return halves.length === 2 ? groups.length < 8 : groups.length === 8;
+  
+  return ipv6Regex.test(ip);
 };
 
 // Validate IP Response

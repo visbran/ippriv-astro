@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { isValidIP } from '@/utils/security';
 import { motion } from 'framer-motion';
 import { Search, MapPin, Globe, Shield, Server, AlertTriangle, CheckCircle, Loader2 } from 'lucide-react';
 import LocationMap from './LocationMap';
@@ -68,27 +67,30 @@ export default function IPLookupTool() {
       } catch (err) {
         console.error('Failed to decode shared data:', err);
       }
-      return;
-    }
-
-    // ?ip=8.8.8.8 (homepage lookup form): prefill and run the lookup
-    const ipParam = params.get('ip');
-    if (ipParam) {
-      setIpInput(ipParam);
-      handleLookup(ipParam);
     }
   }, []);
 
-  const handleLookup = async (value: string = ipInput) => {
-    const trimmedIP = value.trim();
+  const isValidIP = (ip: string) => {
+    const ipv4Regex = /^(\d{1,3}\.){3}\d{1,3}$/;
+    const ipv6Regex = /^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$/;
+    
+    if (ipv4Regex.test(ip)) {
+      const parts = ip.split('.').map(Number);
+      return parts.every(part => part >= 0 && part <= 255);
+    }
+    return ipv6Regex.test(ip);
+  };
+
+  const handleLookup = async () => {
+    const trimmedIP = ipInput.trim();
     
     if (!trimmedIP) {
-      setError('Enter an IP address to look up.');
+      setError('Please enter an IP address');
       return;
     }
 
     if (!isValidIP(trimmedIP)) {
-      setError('Enter a valid IPv4 or IPv6 address, like 8.8.8.8 or 2001:db8::1.');
+      setError('Please enter a valid IP address');
       return;
     }
 
@@ -151,30 +153,27 @@ export default function IPLookupTool() {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
               type="text"
-              placeholder="8.8.8.8 or 2001:db8::1"
-              aria-label="IP address to look up"
-              aria-invalid={error ? true : undefined}
-              aria-describedby={error ? 'lookup-error' : undefined}
+              placeholder="Enter IP address (e.g., 8.8.8.8)"
               value={ipInput}
-              onChange={(e) => { setIpInput(e.target.value); if (error) setError(null); }}
+              onChange={(e) => setIpInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              className="pl-12 h-14 text-lg bg-card border-border aria-[invalid=true]:border-destructive"
+              className="pl-12 h-14 text-lg bg-card border-border"
             />
           </div>
           <Button 
-            onClick={() => handleLookup()} 
+            onClick={handleLookup} 
             disabled={isLoading}
             className="h-14 px-8 text-lg"
           >
             {isLoading ? (
               <Loader2 className="h-5 w-5 animate-spin" />
             ) : (
-              'Look up'
+              'Lookup'
             )}
           </Button>
         </div>
         {error && (
-          <p id="lookup-error" role="alert" className="text-destructive mt-3 text-sm">{error}</p>
+          <p className="text-destructive mt-3 text-sm">{error}</p>
         )}
       </motion.div>
 
@@ -218,7 +217,7 @@ export default function IPLookupTool() {
                     <LocationMap
                       lat={result.geo.lat}
                       lng={result.geo.lon}
-                      location={[result.geo.city, result.geo.country].filter(Boolean).join(', ') || undefined}
+                      location={`${result.geo.city}, ${result.geo.country}`}
                     />
                   </div>
                 </CardContent>
@@ -313,7 +312,7 @@ export default function IPLookupTool() {
       )}
 
       {/* Empty State */}
-      {!result && !isLoading && !error && (
+      {!result && !isLoading && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
