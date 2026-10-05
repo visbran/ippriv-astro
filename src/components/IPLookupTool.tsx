@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { isValidIP } from '@/utils/security';
 import { motion } from 'framer-motion';
 import { Search, MapPin, Globe, Shield, Server, AlertTriangle, CheckCircle, Loader2 } from 'lucide-react';
 import LocationMap from './LocationMap';
@@ -78,27 +79,16 @@ export default function IPLookupTool() {
     }
   }, []);
 
-  const isValidIP = (ip: string) => {
-    const ipv4Regex = /^(\d{1,3}\.){3}\d{1,3}$/;
-    const ipv6Regex = /^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$/;
-    
-    if (ipv4Regex.test(ip)) {
-      const parts = ip.split('.').map(Number);
-      return parts.every(part => part >= 0 && part <= 255);
-    }
-    return ipv6Regex.test(ip);
-  };
-
   const handleLookup = async (value: string = ipInput) => {
     const trimmedIP = value.trim();
     
     if (!trimmedIP) {
-      setError('Please enter an IP address');
+      setError('Enter an IP address to look up.');
       return;
     }
 
     if (!isValidIP(trimmedIP)) {
-      setError('Please enter a valid IP address');
+      setError('Enter a valid IPv4 or IPv6 address, like 8.8.8.8 or 2001:db8::1.');
       return;
     }
 
@@ -161,11 +151,14 @@ export default function IPLookupTool() {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
               type="text"
-              placeholder="Enter IP address (e.g., 8.8.8.8)"
+              placeholder="8.8.8.8 or 2001:db8::1"
+              aria-label="IP address to look up"
+              aria-invalid={error ? true : undefined}
+              aria-describedby={error ? 'lookup-error' : undefined}
               value={ipInput}
-              onChange={(e) => setIpInput(e.target.value)}
+              onChange={(e) => { setIpInput(e.target.value); if (error) setError(null); }}
               onKeyPress={handleKeyPress}
-              className="pl-12 h-14 text-lg bg-card border-border"
+              className="pl-12 h-14 text-lg bg-card border-border aria-[invalid=true]:border-destructive"
             />
           </div>
           <Button 
@@ -176,12 +169,12 @@ export default function IPLookupTool() {
             {isLoading ? (
               <Loader2 className="h-5 w-5 animate-spin" />
             ) : (
-              'Lookup'
+              'Look up'
             )}
           </Button>
         </div>
         {error && (
-          <p className="text-destructive mt-3 text-sm">{error}</p>
+          <p id="lookup-error" role="alert" className="text-destructive mt-3 text-sm">{error}</p>
         )}
       </motion.div>
 
@@ -320,7 +313,7 @@ export default function IPLookupTool() {
       )}
 
       {/* Empty State */}
-      {!result && !isLoading && (
+      {!result && !isLoading && !error && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

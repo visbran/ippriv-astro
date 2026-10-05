@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { Copy, Check, Loader2, Search } from 'lucide-react';
-import { useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { useIPData, type IPErrorKind, type Privacy } from '@/hooks/useIPData';
 import { Skeleton } from '@/components/ui/skeleton';
+import { isValidIP } from '@/utils/security';
 
 const ERROR_MESSAGES: Record<IPErrorKind, string> = {
   'rate-limit': 'Too many lookups from your network in the last hour. Wait a few minutes, then try again.',
@@ -60,18 +61,48 @@ function VerdictChip({ privacy, checking }: { privacy: Privacy | null; checking:
 }
 
 const HeroSection = () => {
-  const [copied, setCopied] = useState(false);
-  const { ip, ipStatus, ipError, geoStatus, securityStatus, locationString, isp, privacy, retry } = useIPData();
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
+  const [formError, setFormError] = useState<string | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const { ip, ipv6, ipStatus, ipError, geoStatus, securityStatus, locationString, isp, privacy, retry } = useIPData();
+  const copied = copyState === 'copied';
+
+  // With JavaScript we validate inline; without it the browser's `required` still applies
+  useEffect(() => {
+    if (formRef.current) formRef.current.noValidate = true;
+  }, []);
+
+  const flashCopy = (state: 'copied' | 'failed') => {
+    setCopyState(state);
+    setTimeout(() => setCopyState('idle'), state === 'failed' ? 4000 : 2000);
+  };
 
   const handleCopy = () => {
-    if (!ip || !navigator.clipboard) return;
+    if (!ip) return;
+    if (!navigator.clipboard) return flashCopy('failed');
     navigator.clipboard.writeText(ip).then(
-      () => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
+      () => flashCopy('copied'),
+      (err) => {
+        console.error('Copy failed:', err);
+        flashCopy('failed');
       },
-      (err) => console.error('Copy failed:', err),
     );
+  };
+
+  const handleLookupSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const field = e.currentTarget.elements.namedItem('ip') as HTMLInputElement;
+    const value = field.value.trim();
+    if (!value) {
+      e.preventDefault();
+      setFormError('Enter an IP address to look up.');
+      field.focus();
+    } else if (!isValidIP(value)) {
+      e.preventDefault();
+      setFormError('Enter a valid IPv4 or IPv6 address, like 8.8.8.8 or 2001:db8::1.');
+      field.focus();
+    } else {
+      field.value = value;
+    }
   };
 
   return (
@@ -109,7 +140,11 @@ const HeroSection = () => {
               className="glass-card rounded-2xl text-left"
             >
               <div className="flex items-center justify-between gap-3 px-5 pt-5 sm:px-8 sm:pt-7">
-                <span className="text-sm text-muted-foreground">Your IP address</span>
+                {copyState === 'failed' ? (
+                  <span className="text-sm text-destructive">Couldn't copy. Select the address instead.</span>
+                ) : (
+                  <span className="text-sm text-muted-foreground">Your IP address</span>
+                )}
                 <div className="flex items-center gap-2">
                   {ipStatus === 'ready' && (
                     <VerdictChip privacy={privacy} checking={securityStatus === 'loading'} />
@@ -130,14 +165,19 @@ const HeroSection = () => {
               </div>
 
               <span className="sr-only" aria-live="polite">
-                {copied ? 'IP address copied to clipboard' : ''}
+                {copied ? 'IP address copied to clipboard' : copyState === 'failed' ? "Couldn't copy the IP address" : ''}
               </span>
 
               {ipStatus === 'loading' && (
-                <div className="flex items-center gap-3 px-5 pt-4 pb-6 sm:px-8" role="status">
-                  <Loader2 className="w-5 h-5 text-primary animate-spin" aria-hidden="true" />
-                  <p className="text-sm text-muted-foreground">Detecting your IP address...</p>
-                </div>
+                <>
+                  <div className="js-only flex items-center gap-3 px-5 pt-4 pb-6 sm:px-8" role="status">
+                    <Loader2 className="w-5 h-5 text-primary animate-spin" aria-hidden="true" />
+                    <p className="text-sm text-muted-foreground">Detecting your IP address...</p>
+                  </div>
+                  <p className="nojs-only px-5 pt-4 pb-6 text-sm text-muted-foreground sm:px-8">
+                    Detecting your IP address needs JavaScript. You can still look up any address with the form below.
+                  </p>
+                </>
               )}
 
               {ipStatus === 'error' && ipError && (
@@ -167,6 +207,19 @@ const HeroSection = () => {
                         {i < all.length - 1 && <>:<wbr /></>}
                       </span>
                     ))}
+                    {ipv6 && (
+                      <div className="mt-2 flex items-baseline gap-2 text-sm font-normal tracking-normal text-muted-foreground">
+                        <span className="shrink-0">IPv6</span>
+                        <span className="min-w-0 break-words font-medium text-foreground">
+                          {ipv6.split(':').map((group, i, all) => (
+                            <span key={i}>
+                              {group}
+                              {i < all.length - 1 && <>:<wbr /></>}
+                            </span>
+                          ))}
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   <dl className="border-y border-border/60 divide-y divide-border/60">
@@ -206,7 +259,13 @@ const HeroSection = () => {
                         )}
                       </p>
                     )}
-                    <p className={`text-xs text-muted-foreground ${privacy ? 'mt-3' : ''}`}>
+                    <a
+                      href={`/ip-lookup?ip=${encodeURIComponent(ip)}`}
+                      className={`inline-flex min-h-11 items-center text-sm ${linkClass}`}
+                    >
+                      See full details for this IP
+                    </a>
+                    <p className="mt-1 text-xs text-muted-foreground">
                       Lookups are logged to run the service and deleted after 30 days.{' '}
                       <a href="/privacy" className="underline underline-offset-4 hover:text-foreground">
                         Privacy policy
@@ -223,6 +282,8 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.15 }}
+            ref={formRef}
+            onSubmit={handleLookupSubmit}
             action="/ip-lookup"
             method="get"
             role="search"
@@ -242,8 +303,11 @@ const HeroSection = () => {
                   autoComplete="off"
                   autoCapitalize="off"
                   spellCheck={false}
-                  placeholder="e.g. 8.8.8.8"
-                  className="h-14 w-full rounded-md border border-input bg-card pl-12 pr-3 text-base text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  placeholder="8.8.8.8 or 2001:db8::1"
+                  aria-invalid={formError ? true : undefined}
+                  aria-describedby={formError ? 'home-lookup-error' : undefined}
+                  onChange={() => formError && setFormError(null)}
+                  className="h-14 w-full rounded-md border border-input aria-[invalid=true]:border-destructive bg-card pl-12 pr-3 text-base text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 />
               </div>
               <button
@@ -253,6 +317,11 @@ const HeroSection = () => {
                 Look up
               </button>
             </div>
+            {formError && (
+              <p id="home-lookup-error" role="alert" className="mt-2 text-sm text-destructive">
+                {formError}
+              </p>
+            )}
           </motion.form>
         </div>
       </div>

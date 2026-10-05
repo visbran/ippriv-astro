@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Moon, Sun, Shield, Menu } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAutoTheme } from '@/hooks/useAutoTheme';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
@@ -10,16 +10,20 @@ const NAV = [
   { href: '/api-docs', label: 'API Docs' },
 ];
 
-const Header = () => {
+const MORE = [
+  { href: '/about', label: 'About' },
+  { href: '/privacy', label: 'Privacy policy' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const Header = ({ path = '' }: { path?: string }) => {
   const { theme, toggleTheme } = useAutoTheme();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [path, setPath] = useState('');
 
-  useEffect(() => {
-    setPath(window.location.pathname);
-  }, []);
-
-  const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`);
+  const norm = path.replace(/\/$/, '') || '/';
+  const isCurrent = (href: string) => norm === href || norm.startsWith(`${href}/`);
+  // The homepage has its own lookup form right under the readout
+  const showCta = norm !== '/';
 
   return (
     <motion.header
@@ -67,12 +71,14 @@ const Header = () => {
                 <Moon className="w-4 h-4 text-foreground" aria-hidden="true" />
               )}
             </button>
-            <a
-              href="/ip-lookup"
-              className="hidden md:inline-flex h-11 items-center px-4 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200"
-            >
-              Look up an IP
-            </a>
+            {showCta && (
+              <a
+                href="/ip-lookup"
+                className="hidden md:inline-flex h-11 items-center px-4 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200"
+              >
+                Look up an IP
+              </a>
+            )}
 
             {/* Mobile menu */}
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
@@ -94,6 +100,19 @@ const Header = () => {
                       aria-current={isCurrent(l.href) ? 'page' : undefined}
                       onClick={() => setMenuOpen(false)}
                       className="flex min-h-12 items-center rounded-lg px-3 text-base text-foreground hover:bg-secondary aria-[current=page]:bg-accent aria-[current=page]:text-accent-foreground aria-[current=page]:font-medium transition-colors"
+                    >
+                      {l.label}
+                    </a>
+                  ))}
+                </nav>
+                <nav aria-label="More" className="mx-3 flex flex-col border-t border-border px-0 py-3">
+                  {MORE.map((l) => (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      aria-current={isCurrent(l.href) ? 'page' : undefined}
+                      onClick={() => setMenuOpen(false)}
+                      className="flex min-h-11 items-center rounded-lg px-3 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground aria-[current=page]:text-foreground aria-[current=page]:font-medium transition-colors"
                     >
                       {l.label}
                     </a>

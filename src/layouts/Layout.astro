@@ -124,10 +124,11 @@ const imageUrl = image.startsWith('http') ? image : new URL(image, Astro.site).t
     
     {/* View Transitions */}
     <ViewTransitions />
+      <noscript><style>.js-only{display:none!important}.nojs-only{display:block!important}</style></noscript>
   </head>
 
   <body class="min-h-screen bg-background">
-    <Header client:idle />
+    <Header client:idle path={Astro.url.pathname} />
     <main>
       <slot />
     </main>

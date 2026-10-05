@@ -92,6 +92,11 @@ export function useIPData() {
 
   return {
     ip: ip.status === 'ready' ? ip.value.ipv4 : null,
+    // Second address on dual-stack connections (only when it differs from the primary)
+    ipv6:
+      ip.status === 'ready' && ip.value.ipv6 && ip.value.ipv6.includes(':') && ip.value.ipv6 !== ip.value.ipv4
+        ? ip.value.ipv6
+        : null,
     ipStatus: ip.status,
     ipError,
     geoStatus: geo.status,

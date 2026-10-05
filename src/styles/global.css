@@ -25,7 +25,7 @@
     --accent: 210 100% 96%;
     --accent-foreground: 210 100% 40%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 72% 47%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 0 0% 90%;
@@ -59,8 +59,9 @@
     --accent: 217 91% 15%;
     --accent-foreground: 217 91% 70%;
 
-    --destructive: 0 62.8% 50%;
-    --destructive-foreground: 0 0% 100%;
+    /* Lifted for text on Void (5.5:1); labels on red fills use Void, like primary */
+    --destructive: 0 84% 62%;
+    --destructive-foreground: 0 0% 4%;
 
     --border: 0 0% 16%;
     --input: 0 0% 16%;
@@ -80,6 +81,11 @@
   :focus-visible {
     outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
+  }
+
+  /* No-JS fallbacks: Layout's <noscript> style flips these */
+  .nojs-only {
+    display: none;
   }
 
   ::selection {
