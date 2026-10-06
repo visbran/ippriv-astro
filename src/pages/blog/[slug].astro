@@ -111,7 +111,9 @@ const breadcrumbSchemaItems = [
             </h1>
 
             <p class="mt-5 text-sm text-muted-foreground">
-              By {post.data.author}
+              By {post.data.author === 'Brandon Visca'
+                ? <a href="/about#author" class="text-foreground hover:text-primary underline-offset-4 hover:underline">{post.data.author}</a>
+                : post.data.author}
               <span aria-hidden="true"> · </span>
               <time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt)}</time>
               {updatedAt && (
@@ -137,7 +139,7 @@ const breadcrumbSchemaItems = [
 
           {showToc && (
             <details class="toc-mobile group mt-8 rounded-lg border border-border bg-card lg:hidden">
-              <summary class="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm font-medium text-foreground">
+              <summary class="[&::-webkit-details-marker]:hidden flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm font-medium text-foreground">
                 On this page
                 <span class="text-muted-foreground transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
               </summary>
@@ -207,8 +209,3 @@ const breadcrumbSchemaItems = [
   </div>
 </Layout>
 
-<style>
-  .toc-mobile summary::-webkit-details-marker {
-    display: none;
-  }
-</style>

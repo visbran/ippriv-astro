@@ -1,18 +1,20 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Code, Copy, Check, Terminal, Globe, Shield, Zap } from 'lucide-react';
+import { Copy, Check } from 'lucide-react';
+
+const BASE_URL = 'https://api.ippriv.com';
 
 const endpoints = [
   {
-    method: 'GET',
+    id: 'ip',
     path: '/api/ip',
-    description: 'Detect client IP address',
-    response: { ipv4: '5.50.177.22', timestamp: '2025-12-29T13:27:40.560Z' }
+    description: "Returns the caller's public IP address.",
+    response: { ipv4: '5.50.177.22', timestamp: '2026-10-06T13:27:40.560Z' },
   },
   {
-    method: 'GET',
+    id: 'geo',
     path: '/api/geo/:ip',
-    description: 'Get geolocation information for an IP address',
+    description: 'Geolocation and ISP for an IPv4 or IPv6 address.',
+    tryIp: '8.8.8.8',
     response: {
       ip: '8.8.8.8',
       country: 'United States',
@@ -22,90 +24,131 @@ const endpoints = [
       lat: 39.03,
       lon: -77.5,
       timezone: 'America/New_York',
-      isp: 'Google LLC'
-    }
+      isp: 'Google LLC',
+    },
   },
   {
-    method: 'GET',
+    id: 'dns',
     path: '/api/dns/:ip',
-    description: 'Get DNS information (hostname, PTR records)',
-    response: { ip: '1.1.1.1', hostname: 'one.one.one.one', ptrRecords: ['one.one.one.one'] }
+    description: 'Reverse DNS: hostname and PTR records.',
+    tryIp: '1.1.1.1',
+    response: { ip: '1.1.1.1', hostname: 'one.one.one.one', ptrRecords: ['one.one.one.one'] },
   },
   {
-    method: 'GET',
+    id: 'security',
     path: '/api/security/:ip',
-    description: 'Check security status (VPN, Proxy, Tor, Hosting detection)',
+    description: 'VPN, proxy, Tor and hosting detection, with ASN and organization.',
+    tryIp: '8.8.8.8',
     response: {
-      ip: '5.50.177.22',
+      ip: '8.8.8.8',
       isVPN: false,
-      isProxy: false,
+      isProxy: true,
       isTor: false,
-      isHosting: false,
-      asn: 'AS5410 Bouygues Telecom SA',
-      org: 'Bouygues Telecom SA'
-    }
+      isHosting: true,
+      asn: 'AS15169 Google LLC',
+      org: 'Google Public DNS',
+    },
   },
   {
-    method: 'GET',
+    id: 'headers',
     path: '/api/headers',
-    description: 'Get HTTP headers of the request',
+    description: 'HTTP headers of your request, as the API received them.',
     response: {
       'user-agent': 'Mozilla/5.0...',
       'accept-language': 'en-US,en;q=0.9',
-      'cf-connecting-ip': '5.50.177.22'
-    }
-  }
+      'cf-connecting-ip': '5.50.177.22',
+    },
+  },
 ];
 
-const codeExamples = {
-  curl: `# Get your IP
-curl https://api.ippriv.com/api/ip
+const examples = [
+  {
+    id: 'curl',
+    label: 'cURL',
+    code: `# Your IP
+curl ${BASE_URL}/api/ip
 
-# Get geolocation
-curl https://api.ippriv.com/api/geo/8.8.8.8
+# Geolocation
+curl ${BASE_URL}/api/geo/8.8.8.8
 
-# Get DNS info
-curl https://api.ippriv.com/api/dns/1.1.1.1
+# Reverse DNS
+curl ${BASE_URL}/api/dns/1.1.1.1
 
-# Security check
-curl https://api.ippriv.com/api/security/5.50.177.22`,
-  
-  javascript: `// Using fetch
-const getIPInfo = async () => {
-  const ipRes = await fetch('https://api.ippriv.com/api/ip');
-  const { ipv4 } = await ipRes.json();
-  
-  const geoRes = await fetch(\`https://api.ippriv.com/api/geo/\${ipv4}\`);
-  const geo = await geoRes.json();
-  
-  const secRes = await fetch(\`https://api.ippriv.com/api/security/\${ipv4}\`);
-  const security = await secRes.json();
-  
+# VPN, proxy and Tor detection
+curl ${BASE_URL}/api/security/8.8.8.8`,
+  },
+  {
+    id: 'javascript',
+    label: 'JavaScript',
+    code: `const BASE = '${BASE_URL}';
+
+async function getIPInfo() {
+  const { ipv4 } = await fetch(\`\${BASE}/api/ip\`).then((r) => r.json());
+
+  const [geo, security] = await Promise.all([
+    fetch(\`\${BASE}/api/geo/\${ipv4}\`).then((r) => r.json()),
+    fetch(\`\${BASE}/api/security/\${ipv4}\`).then((r) => r.json()),
+  ]);
+
   return { ipv4, geo, security };
-};
+}
 
-getIPInfo().then(data => console.log(data));`,
-  
-  python: `import requests
+getIPInfo().then(console.log);`,
+  },
+  {
+    id: 'python',
+    label: 'Python',
+    code: `import requests
 
-response = requests.get('https://api.ippriv.com/api/ip')
-ip_data = response.json()
-ipv4 = ip_data['ipv4']
+BASE = "${BASE_URL}"
 
-geo_response = requests.get(f'https://api.ippriv.com/api/geo/{ipv4}')
-geo = geo_response.json()
-
-sec_response = requests.get(f'https://api.ippriv.com/api/security/{ipv4}')
-security = sec_response.json()
+ipv4 = requests.get(f"{BASE}/api/ip").json()["ipv4"]
+geo = requests.get(f"{BASE}/api/geo/{ipv4}").json()
+security = requests.get(f"{BASE}/api/security/{ipv4}").json()
 
 print(f"IP: {ipv4}")
 print(f"Location: {geo['city']}, {geo['country']}")
 print(f"ISP: {geo['isp']}")
-print(f"VPN: {security['isVPN']}")`
-};
+print(f"VPN: {security['isVPN']}")`,
+  },
+];
+
+const statuses = [
+  { code: '200', text: 'Success' },
+  { code: '400', text: 'Missing or invalid IP address' },
+  { code: '429', text: 'Rate limit exceeded (see Retry-After)' },
+  { code: '500', text: 'Upstream or server error' },
+];
+
+const nav = [
+  { href: '#getting-started', label: 'Getting started' },
+  { href: '#rate-limits', label: 'Rate limits' },
+  ...endpoints.map((e) => ({ href: `#endpoint-${e.id}`, label: e.path })),
+  { href: '#examples', label: 'Code examples' },
+  { href: '#errors', label: 'Errors' },
+];
+
+function CodeBlock({ code, id, copied, onCopy }: { code: string; id: string; copied: boolean; onCopy: (code: string, id: string) => void }) {
+  return (
+    <div className="relative rounded-lg border border-border bg-[hsl(222_18%_7%)]">
+      <button
+        type="button"
+        onClick={() => onCopy(code, id)}
+        aria-label="Copy code"
+        className="absolute right-2 top-2 rounded-md p-2 text-[hsl(218_11%_60%)] hover:bg-white/10 hover:text-white transition-colors"
+      >
+        {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+      </button>
+      <pre className="overflow-x-auto p-4 pr-12 font-mono text-[13px] leading-relaxed text-[hsl(214_20%_85%)]">
+        <code>{code}</code>
+      </pre>
+    </div>
+  );
+}
 
 export default function APIDocsContent() {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const [tab, setTab] = useState(examples[0].id);
 
   const copyCode = (code: string, id: string) => {
     navigator.clipboard.writeText(code);
@@ -113,255 +156,144 @@ export default function APIDocsContent() {
     setTimeout(() => setCopiedCode(null), 2000);
   };
 
+  const active = examples.find((e) => e.id === tab) ?? examples[0];
+
   return (
-    <div className="bg-gradient-to-b from-background via-background to-muted/30">
-      <section className="relative pt-32 pb-20 px-4">
-        <div className="container max-w-6xl mx-auto">
-          {/* Hero */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-16"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6">
-              <Code className="w-4 h-4" />
-              <span className="text-sm font-medium">API Documentation</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
-              IPPriv API
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Free, fast, and privacy-focused IP geolocation API. No authentication required.
+    <div className="section-container pb-20">
+      <dl className="mt-8 grid max-w-3xl grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-4">
+        {[
+          ['Auth', 'No API key'],
+          ['Limit', '100 req / hour / IP'],
+          ['Format', 'JSON over HTTPS'],
+          ['CORS', 'All origins'],
+        ].map(([k, v]) => (
+          <div key={k} className="bg-card px-4 py-3">
+            <dt className="text-xs text-muted-foreground">{k}</dt>
+            <dd className="mt-0.5 text-sm font-medium text-foreground">{v}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <div className="mt-14 grid gap-12 lg:grid-cols-[13rem_minmax(0,1fr)]">
+        <nav aria-label="API documentation" className="hidden lg:block">
+          <ul className="sticky top-24 space-y-1 border-l border-border">
+            {nav.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className={`-ml-px block border-l border-transparent py-1 pl-3 text-sm text-muted-foreground hover:border-foreground/40 hover:text-foreground transition-colors ${
+                    item.label.startsWith('/') ? 'font-mono text-[13px]' : ''
+                  }`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="min-w-0 max-w-3xl space-y-16">
+          <section id="getting-started" className="scroll-mt-24">
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground">Getting started</h2>
+            <p className="mt-3 text-foreground/85 leading-relaxed">
+              Send a GET request. No key, no signup. CORS is open, so you can call the API straight from the browser.
             </p>
-          </motion.div>
+            <div className="mt-5">
+              <CodeBlock code={`curl ${BASE_URL}/api/geo/8.8.8.8`} id="quick" copied={copiedCode === 'quick'} onCopy={copyCode} />
+            </div>
+          </section>
 
-          {/* Quick Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20"
-          >
-            <div className="flex items-center gap-4 p-6 rounded-xl bg-card border border-border">
-              <div className="p-3 rounded-lg bg-primary/10">
-                <Zap className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold">100 / hour</div>
-                <div className="text-sm text-muted-foreground">Requests per IP</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 p-6 rounded-xl bg-card border border-border">
-              <div className="p-3 rounded-lg bg-primary/10">
-                <Shield className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold">100%</div>
-                <div className="text-sm text-muted-foreground">Uptime SLA</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 p-6 rounded-xl bg-card border border-border">
-              <div className="p-3 rounded-lg bg-primary/10">
-                <Globe className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold">Free</div>
-                <div className="text-sm text-muted-foreground">No API Key Required</div>
-              </div>
-            </div>
-          </motion.div>
+          <section id="rate-limits" className="scroll-mt-24">
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground">Rate limits</h2>
+            <p className="mt-3 text-foreground/85 leading-relaxed">
+              100 requests per hour per IP address, over a sliding window. Every response carries the current state:
+            </p>
+            <ul className="mt-4 space-y-2 text-sm">
+              <li><code className="font-mono text-[13px] text-foreground">X-RateLimit-Limit</code> <span className="text-muted-foreground">requests allowed per window</span></li>
+              <li><code className="font-mono text-[13px] text-foreground">X-RateLimit-Remaining</code> <span className="text-muted-foreground">requests left</span></li>
+              <li><code className="font-mono text-[13px] text-foreground">X-RateLimit-Reset</code> <span className="text-muted-foreground">Unix time when the window frees up</span></li>
+            </ul>
+            <p className="mt-4 text-foreground/85 leading-relaxed">
+              Above the limit, the API answers <code className="font-mono text-[13px]">429</code> with a{' '}
+              <code className="font-mono text-[13px]">Retry-After</code> header in seconds.
+            </p>
+          </section>
 
-          {/* Getting Started */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mb-20"
-          >
-            <h2 className="text-3xl font-bold mb-6">Getting Started</h2>
-            <div className="p-6 rounded-xl bg-card border border-border">
-              <h3 className="text-xl font-semibold mb-4">Base URL</h3>
-              <code className="block px-4 py-3 rounded-lg bg-muted text-foreground font-mono text-sm">
-                https://api.ippriv.com
-              </code>
-              
-              <h3 className="text-xl font-semibold mb-4 mt-8">Authentication</h3>
-              <p className="text-muted-foreground">
-                No authentication required. All endpoints are publicly accessible.
-              </p>
-              
-              <h3 className="text-xl font-semibold mb-4 mt-8">Rate Limiting</h3>
-              <p className="text-muted-foreground">
-                <strong>100 requests per hour</strong> per IP address.
-              </p>
-              
-              <h3 className="text-xl font-semibold mb-4 mt-8">CORS</h3>
-              <p className="text-muted-foreground">
-                CORS enabled for all origins. Call the API directly from frontend.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Endpoints */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mb-20"
-          >
-            <h2 className="text-3xl font-bold mb-6">Endpoints</h2>
-            <div className="space-y-6">
-              {endpoints.map((endpoint, index) => (
-                <div key={index} className="p-6 rounded-xl bg-card border border-border">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 rounded-lg bg-primary/10 text-primary font-mono text-sm font-bold">
-                      {endpoint.method}
-                    </span>
-                    <code className="text-lg font-mono">{endpoint.path}</code>
+          <section aria-labelledby="endpoints-heading">
+            <h2 id="endpoints-heading" className="text-2xl font-semibold tracking-tight text-foreground">Endpoints</h2>
+            <div className="mt-6 space-y-10">
+              {endpoints.map((endpoint) => (
+                <article key={endpoint.id} id={`endpoint-${endpoint.id}`} className="scroll-mt-24">
+                  <h3 className="flex flex-wrap items-center gap-2.5">
+                    <span className="rounded-md bg-accent px-2 py-0.5 font-mono text-xs font-semibold text-accent-foreground">GET</span>
+                    <code className="font-mono text-base text-foreground">{endpoint.path}</code>
+                  </h3>
+                  <p className="mt-2 text-foreground/85">
+                    {endpoint.description}
+                    {endpoint.tryIp && (
+                      <>
+                        {' '}
+                        <a href={`/ip-lookup?ip=${endpoint.tryIp}`} className="text-primary underline underline-offset-4">
+                          Try {endpoint.tryIp} in the lookup tool
+                        </a>
+                      </>
+                    )}
+                  </p>
+                  <div className="mt-3">
+                    <CodeBlock
+                      code={JSON.stringify(endpoint.response, null, 2)}
+                      id={endpoint.id}
+                      copied={copiedCode === endpoint.id}
+                      onCopy={copyCode}
+                    />
                   </div>
-                  <p className="text-muted-foreground mb-4">{endpoint.description}</p>
-                  
-                  <div className="relative">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-muted-foreground">Response Example</span>
-                      <button
-                        onClick={() => copyCode(JSON.stringify(endpoint.response, null, 2), `endpoint-${index}`)}
-                        className="p-2 rounded-lg hover:bg-muted transition-colors"
-                      >
-                        {copiedCode === `endpoint-${index}` ? (
-                          <Check className="w-4 h-4 text-green-500" />
-                        ) : (
-                          <Copy className="w-4 h-4 text-muted-foreground" />
-                        )}
-                      </button>
-                    </div>
-                    <pre className="p-4 rounded-lg bg-muted text-foreground font-mono text-sm overflow-x-auto">
-{JSON.stringify(endpoint.response, null, 2)}
-                    </pre>
-                  </div>
-                </div>
+                </article>
               ))}
             </div>
-          </motion.div>
+          </section>
 
-          {/* Code Examples */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mb-20"
-          >
-            <h2 className="text-3xl font-bold mb-6">Code Examples</h2>
-            
-            {/* cURL */}
-            <div className="mb-6 p-6 rounded-xl bg-card border border-border">
-              <div className="flex items-center gap-2 mb-4">
-                <Terminal className="w-5 h-5 text-primary" />
-                <h3 className="text-xl font-semibold">cURL</h3>
-              </div>
-              <div className="relative">
+          <section id="examples" className="scroll-mt-24">
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground">Code examples</h2>
+            <div role="tablist" aria-label="Language" className="mt-5 flex gap-1 border-b border-border">
+              {examples.map((e) => (
                 <button
-                  onClick={() => copyCode(codeExamples.curl, 'curl')}
-                  className="absolute top-2 right-2 p-2 rounded-lg hover:bg-muted/50 transition-colors"
+                  key={e.id}
+                  type="button"
+                  role="tab"
+                  id={`tab-${e.id}`}
+                  aria-selected={tab === e.id}
+                  aria-controls="example-panel"
+                  onClick={() => setTab(e.id)}
+                  className={`-mb-px border-b-2 px-3 py-2 text-sm font-medium transition-colors ${
+                    tab === e.id ? 'border-primary text-foreground' : 'border-transparent text-muted-foreground hover:text-foreground'
+                  }`}
                 >
-                  {copiedCode === 'curl' ? (
-                    <Check className="w-4 h-4 text-green-500" />
-                  ) : (
-                    <Copy className="w-4 h-4 text-muted-foreground" />
-                  )}
+                  {e.label}
                 </button>
-                <pre className="p-4 rounded-lg bg-muted text-foreground font-mono text-sm overflow-x-auto">
-{codeExamples.curl}
-                </pre>
-              </div>
+              ))}
             </div>
+            <div id="example-panel" role="tabpanel" aria-labelledby={`tab-${active.id}`} className="mt-4">
+              <CodeBlock code={active.code} id={`ex-${active.id}`} copied={copiedCode === `ex-${active.id}`} onCopy={copyCode} />
+            </div>
+          </section>
 
-            {/* JavaScript */}
-            <div className="mb-6 p-6 rounded-xl bg-card border border-border">
-              <div className="flex items-center gap-2 mb-4">
-                <Code className="w-5 h-5 text-primary" />
-                <h3 className="text-xl font-semibold">JavaScript</h3>
-              </div>
-              <div className="relative">
-                <button
-                  onClick={() => copyCode(codeExamples.javascript, 'javascript')}
-                  className="absolute top-2 right-2 p-2 rounded-lg hover:bg-muted/50 transition-colors"
-                >
-                  {copiedCode === 'javascript' ? (
-                    <Check className="w-4 h-4 text-green-500" />
-                  ) : (
-                    <Copy className="w-4 h-4 text-muted-foreground" />
-                  )}
-                </button>
-                <pre className="p-4 rounded-lg bg-muted text-foreground font-mono text-sm overflow-x-auto">
-{codeExamples.javascript}
-                </pre>
-              </div>
+          <section id="errors" className="scroll-mt-24">
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground">Errors</h2>
+            <p className="mt-3 text-foreground/85 leading-relaxed">Errors use standard HTTP status codes and a JSON body:</p>
+            <div className="mt-4">
+              <CodeBlock code={`{\n  "error": "IP address is required"\n}`} id="err" copied={copiedCode === 'err'} onCopy={copyCode} />
             </div>
-
-            {/* Python */}
-            <div className="p-6 rounded-xl bg-card border border-border">
-              <div className="flex items-center gap-2 mb-4">
-                <Code className="w-5 h-5 text-primary" />
-                <h3 className="text-xl font-semibold">Python</h3>
-              </div>
-              <div className="relative">
-                <button
-                  onClick={() => copyCode(codeExamples.python, 'python')}
-                  className="absolute top-2 right-2 p-2 rounded-lg hover:bg-muted/50 transition-colors"
-                >
-                  {copiedCode === 'python' ? (
-                    <Check className="w-4 h-4 text-green-500" />
-                  ) : (
-                    <Copy className="w-4 h-4 text-muted-foreground" />
-                  )}
-                </button>
-                <pre className="p-4 rounded-lg bg-muted text-foreground font-mono text-sm overflow-x-auto">
-{codeExamples.python}
-                </pre>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Error Handling */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            <h2 className="text-3xl font-bold mb-6">Error Handling</h2>
-            <div className="p-6 rounded-xl bg-card border border-border">
-              <p className="text-muted-foreground mb-4">
-                The API uses standard HTTP status codes. Errors return JSON:
-              </p>
-              <pre className="p-4 rounded-lg bg-muted text-foreground font-mono text-sm overflow-x-auto mb-6">
-{`{
-  "error": "Invalid IP address format"
-}`}
-              </pre>
-              <div className="space-y-2">
-                <div className="flex items-center gap-3">
-                  <code className="px-2 py-1 rounded bg-green-500/10 text-green-500 font-mono text-sm">200</code>
-                  <span className="text-sm text-muted-foreground">Success</span>
+            <dl className="mt-5 divide-y divide-border rounded-lg border border-border">
+              {statuses.map((s) => (
+                <div key={s.code} className="flex gap-4 px-4 py-2.5 text-sm">
+                  <dt className="w-10 font-mono text-foreground">{s.code}</dt>
+                  <dd className="text-muted-foreground">{s.text}</dd>
                 </div>
-                <div className="flex items-center gap-3">
-                  <code className="px-2 py-1 rounded bg-yellow-500/10 text-yellow-500 font-mono text-sm">400</code>
-                  <span className="text-sm text-muted-foreground">Bad Request (invalid IP format)</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <code className="px-2 py-1 rounded bg-orange-500/10 text-orange-500 font-mono text-sm">429</code>
-                  <span className="text-sm text-muted-foreground">Rate Limit Exceeded</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <code className="px-2 py-1 rounded bg-red-500/10 text-red-500 font-mono text-sm">500</code>
-                  <span className="text-sm text-muted-foreground">Internal Server Error</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+              ))}
+            </dl>
+          </section>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

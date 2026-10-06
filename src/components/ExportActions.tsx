@@ -33,6 +33,10 @@ export default function ExportActions({ ip, geo, dns, security }: ExportActionsP
     URL.revokeObjectURL(url);
   };
 
+  // Quote every field so values with commas (ISP names, PTR lists) stay in one column
+  const cell = (value: unknown) => `"${String(value ?? 'N/A').replace(/"/g, '""')}"`;
+  const row = (...values: unknown[]) => values.map(cell).join(',') + '\n';
+
   // Export CSV
   const exportCSV = () => {
     let csv = '';
@@ -45,7 +49,7 @@ export default function ExportActions({ ip, geo, dns, security }: ExportActionsP
     csv += `GEOLOCATION\n`;
     if (geo) {
       csv += `IP,Country,Country Code,Region,City,Latitude,Longitude,Timezone,ISP\n`;
-      csv += `${ip},${geo.country},${geo.countryCode},${geo.region},${geo.city},${geo.lat},${geo.lon},${geo.timezone},${geo.isp || 'N/A'}\n`;
+      csv += row(ip, geo.country, geo.countryCode, geo.region, geo.city, geo.lat, geo.lon, geo.timezone, geo.isp);
     } else {
       csv += `No geolocation data available\n`;
     }
@@ -55,7 +59,7 @@ export default function ExportActions({ ip, geo, dns, security }: ExportActionsP
     csv += `DNS INFORMATION\n`;
     if (dns) {
       csv += `Hostname,PTR Records\n`;
-      csv += `${dns.hostname || 'N/A'},${dns.ptrRecords?.join('; ') || 'N/A'}\n`;
+      csv += row(dns.hostname || 'N/A', dns.ptrRecords?.join('; ') || 'N/A');
     } else {
       csv += `No DNS data available\n`;
     }
@@ -65,7 +69,7 @@ export default function ExportActions({ ip, geo, dns, security }: ExportActionsP
     csv += `SECURITY STATUS\n`;
     if (security) {
       csv += `VPN,Proxy,Tor,Hosting/Datacenter,ASN,Organization\n`;
-      csv += `${security.isVPN},${security.isProxy},${security.isTor},${security.isHosting},${security.asn || 'N/A'},${security.org || 'N/A'}\n`;
+      csv += row(security.isVPN, security.isProxy, security.isTor, security.isHosting, security.asn, security.org);
     } else {
       csv += `No security data available\n`;
     }
@@ -81,79 +85,32 @@ export default function ExportActions({ ip, geo, dns, security }: ExportActionsP
     URL.revokeObjectURL(url);
   };
 
-  // Generate shareable link
+  // Share a plain ?ip= link: the result is looked up live, nothing is embedded in the URL
   const shareLink = () => {
-    const data = {
-      ip,
-      geo: geo ? {
-        country: geo.country,
-        city: geo.city,
-        lat: geo.lat,
-        lon: geo.lon,
-        isp: geo.isp
-      } : null,
-      security: security ? {
-        isVPN: security.isVPN,
-        isProxy: security.isProxy,
-        isTor: security.isTor,
-        isHosting: security.isHosting
-      } : null
-    };
-
-    // Encode data to base64
-    const encoded = btoa(JSON.stringify(data));
-    const shareUrl = `${window.location.origin}/ip-lookup?share=${encoded}`;
-
-    // Copy to clipboard
+    const shareUrl = `${window.location.origin}/ip-lookup?ip=${encodeURIComponent(ip)}`;
     navigator.clipboard.writeText(shareUrl).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
   };
 
+  const button =
+    'inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-2 text-xs font-medium text-foreground hover:bg-secondary transition-colors';
+
   return (
-    <div className="flex flex-wrap gap-3 justify-center">
-      {/* Export JSON Button */}
-      <button
-        onClick={exportJSON}
-        className="group relative px-6 py-3 rounded-xl bg-card/80 backdrop-blur-sm border border-border/50 
-                   hover:border-primary/50 hover:bg-card hover:shadow-lg transition-all duration-300
-                   flex items-center gap-2.5 text-sm font-medium text-foreground"
-      >
-        <Download className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
-        <span>Export JSON</span>
+    <>
+      <button type="button" onClick={shareLink} className={button}>
+        {copied ? <Check className="h-3.5 w-3.5 text-primary" /> : <Link2 className="h-3.5 w-3.5" />}
+        {copied ? 'Link copied' : 'Share link'}
       </button>
-
-      {/* Export CSV Button */}
-      <button
-        onClick={exportCSV}
-        className="group relative px-6 py-3 rounded-xl bg-card/80 backdrop-blur-sm border border-border/50 
-                   hover:border-primary/50 hover:bg-card hover:shadow-lg transition-all duration-300
-                   flex items-center gap-2.5 text-sm font-medium text-foreground"
-      >
-        <Download className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
-        <span>Export CSV</span>
+      <button type="button" onClick={exportJSON} className={button}>
+        <Download className="h-3.5 w-3.5" />
+        JSON
       </button>
-
-      {/* Share Link Button */}
-      <button
-        onClick={shareLink}
-        className="group relative px-6 py-3 rounded-xl bg-card/80 backdrop-blur-sm border border-border/50 
-                   hover:border-primary/50 hover:bg-card hover:shadow-lg transition-all duration-300
-                   flex items-center gap-2.5 text-sm font-medium text-foreground"
-      >
-        {copied ? (
-          <>
-            <Check className="h-4 w-4 text-green-500 animate-scale-in" />
-            <span className="text-green-600 dark:text-green-400">Link Copied!</span>
-          </>
-        ) : (
-          <>
-            <Link2 className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
-            <span>Share Link</span>
-          </>
-        )}
+      <button type="button" onClick={exportCSV} className={button}>
+        <Download className="h-3.5 w-3.5" />
+        CSV
       </button>
-    </div>
+    </>
   );
 }
