@@ -86,28 +86,30 @@ const imageUrl = image.startsWith('http') ? image : new URL(image, Astro.site).t
     <meta name="apple-mobile-web-app-title" content="IPPriv" />
 
     {/* Theme Color */}
-    <meta name="theme-color" content="#0066FF" />
-    <meta name="msapplication-TileColor" content="#0066FF" />
+    <meta name="theme-color" content="#0b7a6f" />
+    <meta name="msapplication-TileColor" content="#0b7a6f" />
 
     {/* Favicons */}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    {/* Fonts: non-blocking load */}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" /></noscript>
-
-    {/* Preload critical font file */}
-    <link
-      rel="preload"
-      as="font"
-      href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2"
-      type="font/woff2"
-      crossorigin
-    />
+    {/* Theme: resolve before first paint (same rules as useAutoTheme) */}
+    <script is:inline>
+      (function () {
+        function apply() {
+          try {
+            var saved = localStorage.getItem('ippriv-theme');
+            var manual = localStorage.getItem('ippriv-theme-manual') === 'true';
+            var hour = new Date().getHours();
+            var theme = saved && manual ? saved : (hour >= 6 && hour < 18 ? 'light' : 'dark');
+            document.documentElement.classList.toggle('dark', theme === 'dark');
+          } catch (e) {}
+        }
+        apply();
+        document.addEventListener('astro:after-swap', apply);
+      })();
+    </script>
 
     {/* Plausible Analytics */}
     <script is:inline defer data-domain="ippriv.com" src="https://plausible.io/js/script.js"></script>

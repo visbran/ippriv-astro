@@ -1,0 +1,38 @@
+---
+interface Props {
+  faqs: { question: string; answer: string }[];
+}
+
+const { faqs } = Astro.props;
+---
+
+<section id="faq" class="py-20 md:py-28 border-t border-border scroll-mt-16">
+  <div class="section-container">
+    <div class="max-w-3xl">
+      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-foreground">
+        Frequently Asked Questions
+      </h2>
+
+      <div class="mt-10 border-t border-border">
+        {faqs.map((faq) => (
+          <details class="faq-item group border-b border-border">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left text-base font-medium text-foreground hover:text-primary transition-colors">
+              {faq.question}
+              <span
+                class="relative h-3 w-3 shrink-0 text-muted-foreground before:absolute before:inset-x-0 before:top-1/2 before:h-px before:-translate-y-1/2 before:bg-current after:absolute after:inset-y-0 after:left-1/2 after:w-px after:-translate-x-1/2 after:bg-current after:transition-transform group-open:after:scale-y-0"
+                aria-hidden="true"
+              ></span>
+            </summary>
+            <p class="pb-6 pr-10 text-muted-foreground leading-relaxed max-w-[65ch]">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+</style>
