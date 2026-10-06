@@ -5,9 +5,11 @@ interface LocationMapProps {
   lat?: number;
   lng?: number;
   location?: string;
+  /** Fill the parent with no card, label or entry animation. */
+  embedded?: boolean;
 }
 
-const LocationMap = ({ lat = 44.8378, lng = -0.5792, location = "Bordeaux, France" }: LocationMapProps) => {
+const LocationMap = ({ lat = 44.8378, lng = -0.5792, location = "Bordeaux, France", embedded = false }: LocationMapProps) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -29,13 +31,16 @@ const LocationMap = ({ lat = 44.8378, lng = -0.5792, location = "Bordeaux, Franc
         zoom: 10,
         scrollWheelZoom: false,
         zoomControl: false,
-        attributionControl: false,
+        attributionControl: true,
       });
 
       // Add tile layer
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      // CARTO basemaps now require an API key; OSM tiles need visible attribution.
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }).addTo(map);
+      map.attributionControl.setPrefix(false);
 
       // Custom marker
       const customIcon = L.divIcon({
@@ -43,7 +48,7 @@ const LocationMap = ({ lat = 44.8378, lng = -0.5792, location = "Bordeaux, Franc
         html: `
           <div class="relative flex items-center justify-center">
             <div class="w-4 h-4 bg-primary rounded-full border-2 border-white shadow-lg"></div>
-            <div class="absolute w-4 h-4 bg-primary/50 rounded-full animate-ping"></div>
+            <div class="absolute w-4 h-4 bg-primary/50 rounded-full motion-safe:animate-ping"></div>
           </div>
         `,
         iconSize: [16, 16],
@@ -65,6 +70,15 @@ const LocationMap = ({ lat = 44.8378, lng = -0.5792, location = "Bordeaux, Franc
       }
     };
   }, [lat, lng]);
+
+  if (embedded) {
+    return (
+      <div className="relative h-full w-full">
+        <div ref={mapRef} className="h-full w-full z-0" aria-label={`Map centered on ${location}`} role="img" />
+        {!isLoaded && <div className="absolute inset-0 bg-muted animate-pulse" />}
+      </div>
+    );
+  }
 
   return (
     <motion.div
