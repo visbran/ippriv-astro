@@ -3,15 +3,16 @@ import Layout from '../layouts/Layout.astro';
 import IPLookupTool from '../components/IPLookupTool';
 import FAQSchema from '../components/FAQSchema.astro';
 import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
+import FAQSection from '../components/FAQSection.astro';
 
 const ipLookupFAQs = [
   {
     question: "How do I look up an IP address?",
-    answer: "Enter any IPv4 or IPv6 address in the search field and click Look Up. IPPriv will instantly return the geolocation, ISP, DNS hostname, and security status for that IP.",
+    answer: "Enter any IPv4 or IPv6 address in the search field and click Look up. IPPriv will instantly return the geolocation, ISP, DNS hostname, and security status for that IP.",
   },
   {
     question: "How accurate is IP geolocation?",
-    answer: "IP geolocation accuracy varies by level: country-level is typically 95–99% accurate, region/state-level around 55–80%, and city-level around 50–75%. Results depend on how ISPs register their IP blocks.",
+    answer: "IP geolocation accuracy varies by level: country-level is typically 95-99% accurate, region/state-level around 55-80%, and city-level around 50-75%. Results depend on how ISPs register their IP blocks.",
   },
   {
     question: "What is a reverse DNS lookup?",
@@ -23,7 +24,7 @@ const ipLookupFAQs = [
   },
   {
     question: "Can I look up my own IP address?",
-    answer: "Yes. Open the IP Lookup tool without entering any IP address and IPPriv will automatically detect and display information about your current public IP address.",
+    answer: "Yes. When you open the IP Lookup tool, IPPriv automatically detects your current public IP address and shows its location, ISP and VPN or proxy status.",
   },
   {
     question: "What is the difference between IPv4 and IPv6?",
@@ -43,59 +44,44 @@ const ipLookupFAQs = [
     { name: 'IP Lookup', url: 'https://www.ippriv.com/ip-lookup/' },
   ]} />
 
-  <div class="pt-24 pb-16">
+  <div class="pt-28 pb-16 md:pt-32">
     <IPLookupTool client:load />
   </div>
 
-  <!-- Static content for SEO -->
-  <section class="py-16 bg-secondary/30">
-    <div class="container mx-auto px-4 max-w-4xl space-y-12">
-
-      <div>
-        <h2 class="text-2xl font-bold text-foreground mb-4">What is an IP Lookup?</h2>
-        <p class="text-muted-foreground leading-relaxed">
-          An IP lookup is a query that retrieves information associated with a specific IP address.
-          Every device connected to the internet has a public IP address: a unique identifier that
-          reveals details about its network, location, and ISP. With IPPriv's free IP lookup tool,
-          you can instantly access this information for any IPv4 or IPv6 address, with no account required.
-        </p>
+  <section class="py-16 md:py-20 border-t border-border">
+    <div class="section-container">
+      <div class="max-w-3xl content-body">
+        <section>
+          <h2>What is an IP Lookup?</h2>
+          <p>
+            An IP lookup is a query that retrieves information associated with a specific IP address. Every device
+            connected to the internet has a public IP address: a unique identifier that reveals details about its
+            network, location, and ISP. With IPPriv's free IP lookup tool, you can instantly access this information
+            for any IPv4 or IPv6 address, with no account required.
+          </p>
+        </section>
+        <section>
+          <h2>What IP Address Information Can You Find?</h2>
+          <p>A single IP lookup can return a wide range of information about an IP address:</p>
+          <ul>
+            <li><strong>Geolocation</strong>: country, region, city, latitude and longitude</li>
+            <li><strong>Network information</strong>: ISP, organization, ASN and timezone</li>
+            <li><strong>DNS records</strong>: hostname and PTR records via reverse DNS lookup</li>
+            <li><strong>Privacy signals</strong>: VPN, proxy, Tor exit node, or hosting/datacenter detection</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Why Use a Free IP Lookup Tool?</h2>
+          <p>
+            IP address information is essential for developers debugging network issues, security analysts
+            investigating suspicious traffic, and businesses verifying user locations. IPPriv provides real-time IP
+            lookup data through a clean interface and a <a href="/api-docs">free API</a>: no API key, no account,
+            and 100 requests per hour per IP.
+          </p>
+        </section>
       </div>
-
-      <div>
-        <h2 class="text-2xl font-bold text-foreground mb-4">What IP Address Information Can You Find?</h2>
-        <p class="text-muted-foreground leading-relaxed mb-4">
-          A single IP lookup can return a wide range of information about an IP address:
-        </p>
-        <ul class="space-y-2 text-muted-foreground list-disc list-inside leading-relaxed">
-          <li><strong class="text-foreground">Geolocation</strong>: country, region, city, latitude and longitude</li>
-          <li><strong class="text-foreground">Network information</strong>: ISP, organization, and timezone</li>
-          <li><strong class="text-foreground">DNS records</strong>: hostname and PTR records via reverse DNS lookup</li>
-          <li><strong class="text-foreground">Security status</strong>: VPN, proxy, Tor exit node, or hosting/datacenter detection</li>
-        </ul>
-      </div>
-
-      <div>
-        <h2 class="text-2xl font-bold text-foreground mb-4">Why Use a Free IP Lookup Tool?</h2>
-        <p class="text-muted-foreground leading-relaxed">
-          IP address information is essential for developers debugging network issues, security analysts
-          investigating suspicious traffic, and businesses verifying user locations. IPPriv provides
-          accurate, real-time IP lookup data through a clean interface and a free API: no API key,
-          no rate limits on basic usage, and no data logging.
-        </p>
-      </div>
-
-      <div>
-        <h2 class="text-2xl font-bold text-foreground mb-6">Frequently Asked Questions</h2>
-        <div class="space-y-6">
-          {ipLookupFAQs.map((faq) => (
-            <div>
-              <h3 class="font-semibold text-foreground mb-2">{faq.question}</h3>
-              <p class="text-muted-foreground leading-relaxed">{faq.answer}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
     </div>
   </section>
+
+  <FAQSection faqs={ipLookupFAQs} />
 </Layout>

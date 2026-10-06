@@ -1,116 +1,123 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import LegalPage from '../components/LegalPage.astro';
 ---
 
 <Layout
-  title="Privacy Policy - IPPriv | How We Protect Your Data"
-  description="Read IPPriv's privacy policy. Learn how we collect, use, and protect your data. Committed to transparency and user privacy."
-  keywords="privacy policy, data protection, IPPriv privacy, user data, GDPR compliance"
+  title="Privacy Policy - IPPriv | How We Handle Your Data"
+  description="What data IPPriv processes when you use the site, the IP lookup tool, the API or the contact form, which providers are involved, and your rights."
+  keywords="privacy policy, data protection, IPPriv privacy, GDPR"
   type="article"
 >
-  <div class="pt-24 pb-16">
-    <div class="container mx-auto px-4 max-w-4xl">
-      <article class="animate-fade-in">
-        <header class="text-center mb-12">
-          <h1 class="text-4xl md:text-5xl font-bold mb-6 gradient-text">
-            Privacy Policy
-          </h1>
-          <p class="text-muted-foreground">Last updated: December 2024</p>
-        </header>
+  <LegalPage title="Privacy Policy" updated="October 6, 2026">
+    <section>
+      <h2>1. Who is responsible</h2>
+      <p>
+        The data controller for www.ippriv.com and api.ippriv.com is <strong>LMF Solutions</strong> (SASU),
+        60 Rue François 1er, 75008 Paris, France, SIRET 991 974 130 00015, represented by its President,
+        Brandon Visca. Full details are in the <a href="/legal">Legal Notice</a>.
+      </p>
+      <p>
+        For any question about this policy or to exercise your rights, use the <a href="/contact?subject=Privacy%20request">contact form</a>.
+      </p>
+    </section>
 
-        <div class="prose prose-lg dark:prose-invert max-w-none space-y-8">
-          <section>
-            <h2 class="text-2xl font-semibold mb-4 text-foreground">1. Introduction</h2>
-            <p class="text-muted-foreground leading-relaxed">
-              IPPriv ("we," "our," or "us") is committed to protecting your privacy. 
-              This Privacy Policy explains how we collect, use, disclose, and safeguard 
-              your information when you use our website and services.
-            </p>
-          </section>
+    <section>
+      <h2>2. What we do not do</h2>
+      <ul>
+        <li>No user accounts, no payments, no advertising.</li>
+        <li>No cookies. The site only stores your light or dark theme choice in your browser (localStorage).</li>
+        <li>We do not sell or share personal data for marketing.</li>
+      </ul>
+    </section>
 
-          <section>
-            <h2 class="text-2xl font-semibold mb-4 text-foreground">2. Information We Collect</h2>
-            <h3 class="text-xl font-medium mb-2 text-foreground">2.1 Automatically Collected Information</h3>
-            <p class="text-muted-foreground leading-relaxed mb-4">
-              When you access our services, we may automatically collect:
-            </p>
-            <ul class="list-disc list-inside text-muted-foreground space-y-2 ml-4">
-              <li>IP address (for the purpose of providing our services)</li>
-              <li>Browser type and version</li>
-              <li>Operating system</li>
-              <li>Access times and dates</li>
-              <li>Pages viewed</li>
-            </ul>
+    <section>
+      <h2>3. Data we process</h2>
 
-            <h3 class="text-xl font-medium mb-2 mt-6 text-foreground">2.2 Information You Provide</h3>
-            <p class="text-muted-foreground leading-relaxed">
-              When you contact us or use certain features, you may provide:
-            </p>
-            <ul class="list-disc list-inside text-muted-foreground space-y-2 ml-4">
-              <li>Name and email address</li>
-              <li>Account credentials</li>
-              <li>Payment information (processed securely by third-party providers)</li>
-            </ul>
-          </section>
+      <h3>3.1 Browsing the site</h3>
+      <p>
+        Our host, Vercel, processes technical request data (IP address, user agent, requested URL, time) to
+        deliver pages and protect the service. Audience measurement uses Plausible Analytics, which does not use
+        cookies and does not store IP addresses or build profiles.
+      </p>
 
-          <section>
-            <h2 class="text-2xl font-semibold mb-4 text-foreground">3. How We Use Your Information</h2>
-            <p class="text-muted-foreground leading-relaxed">
-              We use the collected information to:
-            </p>
-            <ul class="list-disc list-inside text-muted-foreground space-y-2 ml-4">
-              <li>Provide and maintain our services</li>
-              <li>Improve and personalize user experience</li>
-              <li>Process transactions</li>
-              <li>Send administrative information</li>
-              <li>Respond to inquiries and support requests</li>
-              <li>Monitor and analyze usage patterns</li>
-            </ul>
-          </section>
+      <h3>3.2 The IP lookup tool and the homepage readout</h3>
+      <p>
+        To show your own IP address, your browser calls our API, which sees your IP address. When you or the page
+        look up an IP address (yours or one you enter), that IP is sent to the geolocation, reputation and DNS
+        providers listed below to build the result. Results are not stored by us.
+      </p>
+      <p>
+        The location map loads tiles from OpenStreetMap servers, which receive your IP address as part of each
+        tile request.
+      </p>
 
-          <section>
-            <h2 class="text-2xl font-semibold mb-4 text-foreground">4. Data Retention</h2>
-            <p class="text-muted-foreground leading-relaxed">
-              We retain your information only for as long as necessary to fulfill the 
-              purposes outlined in this policy. API request logs are automatically 
-              deleted after 30 days unless required for legal purposes.
-            </p>
-          </section>
+      <h3>3.3 The API</h3>
+      <p>
+        To enforce the limit of 100 requests per hour, the API keeps a counter keyed by the caller's IP address for
+        a sliding window of one hour. Request logs record the method, path, status and time. Because the path
+        contains the IP address being looked up, logs can include it. They are deleted after 30 days at most.
+      </p>
 
-          <section>
-            <h2 class="text-2xl font-semibold mb-4 text-foreground">5. Data Security</h2>
-            <p class="text-muted-foreground leading-relaxed">
-              We implement industry-standard security measures including encryption, 
-              secure servers, and regular security audits to protect your data from 
-              unauthorized access, alteration, or disclosure.
-            </p>
-          </section>
+      <h3>3.4 The contact form</h3>
+      <p>
+        We receive your name, email address, subject and message so we can reply. The message is sent by email
+        through Resend and kept for up to 12 months after the conversation ends, then deleted.
+      </p>
+    </section>
 
-          <section>
-            <h2 class="text-2xl font-semibold mb-4 text-foreground">6. Your Rights</h2>
-            <p class="text-muted-foreground leading-relaxed">
-              Depending on your location, you may have the right to:
-            </p>
-            <ul class="list-disc list-inside text-muted-foreground space-y-2 ml-4">
-              <li>Access your personal data</li>
-              <li>Correct inaccurate data</li>
-              <li>Request deletion of your data</li>
-              <li>Object to processing</li>
-              <li>Data portability</li>
-            </ul>
-          </section>
+    <section>
+      <h2>4. Purposes and legal bases</h2>
+      <ul>
+        <li><strong>Providing the site, the tool and the API</strong>: our legitimate interest in operating the service you request.</li>
+        <li><strong>Security, abuse prevention and rate limiting</strong>: legitimate interest.</li>
+        <li><strong>Audience statistics</strong> (anonymous, no cookies): legitimate interest.</li>
+        <li><strong>Answering your messages</strong>: legitimate interest, or steps taken at your request.</li>
+      </ul>
+    </section>
 
-          <section>
-            <h2 class="text-2xl font-semibold mb-4 text-foreground">7. Contact Us</h2>
-            <p class="text-muted-foreground leading-relaxed">
-              If you have questions about this Privacy Policy, please contact us at{" "}
-              <a href="mailto:privacy@ippriv.com" class="text-primary hover:underline">
-                privacy@ippriv.com
-              </a>
-            </p>
-          </section>
-        </div>
-      </article>
-    </div>
-  </div>
+    <section>
+      <h2>5. Providers</h2>
+      <p>These providers process data on our behalf or receive it to deliver the service:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Provider</th><th>Role</th><th>Data</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Vercel Inc. (US)</td><td>Website hosting</td><td>Technical request data</td></tr>
+            <tr><td>Cloudflare Inc. (US)</td><td>API hosting, DNS resolution</td><td>Caller IP, looked-up IP</td></tr>
+            <tr><td>Upstash Inc. (US)</td><td>Rate-limit counters</td><td>Caller IP, one hour</td></tr>
+            <tr><td>ip-api.com, ipapi.co</td><td>Geolocation data</td><td>Looked-up IP</td></tr>
+            <tr><td>IPQualityScore (US)</td><td>VPN, proxy and Tor detection</td><td>Looked-up IP</td></tr>
+            <tr><td>Google LLC (US)</td><td>Fallback DNS resolution</td><td>Looked-up IP</td></tr>
+            <tr><td>OpenStreetMap Foundation (UK)</td><td>Map tiles</td><td>Visitor IP</td></tr>
+            <tr><td>Plausible Insights OÜ (EU)</td><td>Anonymous statistics</td><td>No personal data stored</td></tr>
+            <tr><td>Resend Inc. (US)</td><td>Contact form email delivery</td><td>Form content</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Some providers are located outside the European Union. Where required, transfers rely on the EU-US Data
+        Privacy Framework or the European Commission's Standard Contractual Clauses.
+      </p>
+    </section>
+
+    <section>
+      <h2>6. Your rights</h2>
+      <p>
+        Under the GDPR and French law, you can request access to, correction or deletion of your data, object to
+        or restrict its processing, and ask for portability. Use the <a href="/contact?subject=Privacy%20request">contact form</a>; we answer
+        within one month. You can also lodge a complaint with the CNIL (www.cnil.fr).
+      </p>
+    </section>
+
+    <section>
+      <h2>7. Changes</h2>
+      <p>
+        We update this policy when the service or its providers change. The date at the top shows the latest
+        version.
+      </p>
+    </section>
+  </LegalPage>
 </Layout>

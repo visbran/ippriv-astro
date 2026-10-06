@@ -16,7 +16,7 @@ const { faqs } = Astro.props;
       <div class="mt-10 border-t border-border">
         {faqs.map((faq) => (
           <details class="faq-item group border-b border-border">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left text-base font-medium text-foreground hover:text-primary transition-colors">
+            <summary class="[&::-webkit-details-marker]:hidden flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left text-base font-medium text-foreground hover:text-primary transition-colors">
               {faq.question}
               <span
                 class="relative h-3 w-3 shrink-0 text-muted-foreground before:absolute before:inset-x-0 before:top-1/2 before:h-px before:-translate-y-1/2 before:bg-current after:absolute after:inset-y-0 after:left-1/2 after:w-px after:-translate-x-1/2 after:bg-current after:transition-transform group-open:after:scale-y-0"
@@ -31,8 +31,3 @@ const { faqs } = Astro.props;
   </div>
 </section>
 
-<style>
-  .faq-item summary::-webkit-details-marker {
-    display: none;
-  }
-</style>

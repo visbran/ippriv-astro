@@ -1,10 +1,9 @@
-import { useRef, useState } from 'react';
-import { Send, Mail, MessageSquare } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
 
 interface ContactFormData {
   name: string;
@@ -14,7 +13,13 @@ interface ContactFormData {
 }
 
 export default function ContactForm() {
-  const { toast } = useToast();
+  const [status, setStatus] = useState<{ kind: 'ok' | 'error'; text: string } | null>(null);
+
+  // Optional subject prefill, e.g. /contact?subject=Privacy%20request from the legal pages
+  useEffect(() => {
+    const subject = new URLSearchParams(window.location.search).get('subject');
+    if (subject) setFormData((d) => ({ ...d, subject: subject.slice(0, 120) }));
+  }, []);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const honeypotRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState<ContactFormData>({
@@ -74,6 +79,7 @@ export default function ContactForm() {
     }
 
     setIsSubmitting(true);
+    setStatus(null);
 
     try {
       const response = await fetch('/api/contact', {
@@ -88,25 +94,14 @@ export default function ContactForm() {
       const data = await response.json();
 
       if (!response.ok) {
-        toast({
-          title: 'Error',
-          description: data.error || 'Failed to send message. Please try again.',
-          variant: 'destructive',
-        });
+        setStatus({ kind: 'error', text: data.error || 'Your message could not be sent. Please try again.' });
         return;
       }
 
-      toast({
-        title: 'Message sent!',
-        description: "We'll get back to you as soon as possible.",
-      });
+      setStatus({ kind: 'ok', text: 'Message sent. We usually reply within a few business days.' });
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch {
-      toast({
-        title: 'Error',
-        description: 'Network error. Please check your connection and try again.',
-        variant: 'destructive',
-      });
+      setStatus({ kind: 'error', text: 'Network error. Check your connection and try again.' });
     } finally {
       setIsSubmitting(false);
     }
@@ -114,34 +109,18 @@ export default function ContactForm() {
 
   return (
     <div>
-      {/* Contact Cards */}
-      <div className="grid md:grid-cols-3 gap-8 mb-12">
-        <div className="glass-card p-6 rounded-2xl text-center">
-          <Mail className="w-10 h-10 text-primary mx-auto mb-4" />
-          <h2 className="font-semibold mb-2">Email Us</h2>
-          <a href="mailto:support@ippriv.com" className="text-muted-foreground hover:text-primary transition-colors">
-            support@ippriv.com
-          </a>
-        </div>
-        <div className="glass-card p-6 rounded-2xl text-center">
-          <MessageSquare className="w-10 h-10 text-primary mx-auto mb-4" />
-          <h2 className="font-semibold mb-2">API Support</h2>
-          <a href="mailto:api@ippriv.com" className="text-muted-foreground hover:text-primary transition-colors">
-            api@ippriv.com
-          </a>
-        </div>
-        <div className="glass-card p-6 rounded-2xl text-center">
-          <Send className="w-10 h-10 text-primary mx-auto mb-4" />
-          <h2 className="font-semibold mb-2">Business</h2>
-          <a href="mailto:business@ippriv.com" className="text-muted-foreground hover:text-primary transition-colors">
-            business@ippriv.com
-          </a>
-        </div>
-      </div>
-
       {/* Contact Form */}
-      <div className="glass-card p-8 rounded-2xl">
-        <h2 className="text-2xl font-semibold mb-6 text-center">Send us a Message</h2>
+      <div className="rounded-lg border border-border bg-card p-6 sm:p-8">
+        {status && (
+          <div
+            role="status"
+            className={`mb-6 rounded-md px-4 py-3 text-sm ${
+              status.kind === 'ok' ? 'bg-accent text-accent-foreground' : 'bg-destructive/10 text-destructive'
+            }`}
+          >
+            {status.text}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="relative space-y-6">
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
