@@ -129,8 +129,14 @@ const imageUrl = image.startsWith('http') ? image : new URL(image, Astro.site).t
   </head>
 
   <body class="min-h-screen bg-background">
-    <Header client:idle />
-    <main>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[60] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
+    >
+      Skip to content
+    </a>
+    <Header client:idle currentPath={Astro.url.pathname} />
+    <main id="main" tabindex="-1" class="focus:outline-none">
       <slot />
     </main>
     <Footer />

@@ -9,8 +9,17 @@ import LegalPage from '../components/LegalPage.astro';
   keywords="legal notice, mentions légales, IPPriv legal, LMF Solutions"
   type="article"
 >
-  <LegalPage title="Legal Notice" updated="October 6, 2026">
-    <section>
+  <LegalPage title="Legal Notice" updated="October 6, 2026" toc={[
+    { id: 'publisher', label: '1. Publisher' },
+    { id: 'publication-director', label: '2. Publication director' },
+    { id: 'hosting', label: '3. Hosting' },
+    { id: 'intellectual-property', label: '4. Intellectual property' },
+    { id: 'personal-data-and-privacy', label: '5. Personal data & privacy' },
+    { id: 'cookies', label: '6. Cookies' },
+    { id: 'limitation-of-liability', label: '7. Limitation of liability' },
+    { id: 'applicable-law', label: '8. Applicable law' },
+  ]}>
+    <section id="publisher">
       <h2>1. Publisher</h2>
       <p>This website (<strong>www.ippriv.com</strong>) is published by:</p>
       <ul class="plain">
@@ -23,15 +32,15 @@ import LegalPage from '../components/LegalPage.astro';
       </ul>
     </section>
 
-    <section>
-      <h2>2. Publication Director</h2>
+    <section id="publication-director">
+      <h2>2. Publication director</h2>
       <p>
         The publication director is <strong>Brandon Visca</strong>, acting in his capacity as President of LMF
         Solutions.
       </p>
     </section>
 
-    <section>
+    <section id="hosting">
       <h2>3. Hosting</h2>
       <p>The website is hosted by:</p>
       <ul class="plain">
@@ -42,8 +51,8 @@ import LegalPage from '../components/LegalPage.astro';
       <p>The API (api.ippriv.com) runs on Cloudflare Workers, operated by Cloudflare Inc., San Francisco, United States.</p>
     </section>
 
-    <section>
-      <h2>4. Intellectual Property</h2>
+    <section id="intellectual-property">
+      <h2>4. Intellectual property</h2>
       <p>
         All content published on this website (including but not limited to text, graphics, logos, icons, and code)
         is the exclusive property of LMF Solutions or its content suppliers and is protected by French and
@@ -55,8 +64,8 @@ import LegalPage from '../components/LegalPage.astro';
       </p>
     </section>
 
-    <section>
-      <h2>5. Personal Data &amp; Privacy</h2>
+    <section id="personal-data-and-privacy">
+      <h2>5. Personal data &amp; privacy</h2>
       <p>
         The collection and processing of personal data on this website are governed by our
         <a href="/privacy">Privacy Policy</a>, in compliance with the General Data Protection Regulation (GDPR) and
@@ -68,7 +77,7 @@ import LegalPage from '../components/LegalPage.astro';
       </p>
     </section>
 
-    <section>
+    <section id="cookies">
       <h2>6. Cookies</h2>
       <p>
         This website does not use cookies. Audience measurement relies on Plausible Analytics, which works without
@@ -78,8 +87,8 @@ import LegalPage from '../components/LegalPage.astro';
       <p>For more information, please refer to our <a href="/privacy">Privacy Policy</a>.</p>
     </section>
 
-    <section>
-      <h2>7. Limitation of Liability</h2>
+    <section id="limitation-of-liability">
+      <h2>7. Limitation of liability</h2>
       <p>
         LMF Solutions makes every effort to ensure that the information published on this website is accurate and up
         to date. However, we cannot guarantee the completeness or accuracy of the content and shall not be liable for
@@ -88,8 +97,8 @@ import LegalPage from '../components/LegalPage.astro';
       <p>LMF Solutions reserves the right to modify the content of this website at any time and without prior notice.</p>
     </section>
 
-    <section>
-      <h2>8. Applicable Law</h2>
+    <section id="applicable-law">
+      <h2>8. Applicable law</h2>
       <p>
         This legal notice is governed by French law. Any dispute relating to the use of this website shall be subject
         to the exclusive jurisdiction of the competent courts of Paris, France.

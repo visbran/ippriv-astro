@@ -10,15 +10,39 @@ import ContactForm from '../components/ContactForm';
 >
   <div class="pt-28 pb-20 md:pt-32">
     <div class="section-container">
-      <div class="max-w-2xl">
-        <header class="mb-10">
-          <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">Contact</h1>
-          <p class="mt-4 text-lg text-muted-foreground leading-relaxed">
-            Questions about the tool, the API, your data or a partnership: send a message and we reply by email.
-          </p>
-        </header>
+      <header class="max-w-2xl mb-10">
+        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">Contact</h1>
+        <p class="mt-4 text-lg text-muted-foreground leading-relaxed">
+          Questions about the tool, the API, your data or a partnership: send a message and we reply by email.
+        </p>
+      </header>
 
+      <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-14">
         <ContactForm client:load />
+
+        <aside class="lg:pt-2" aria-labelledby="before-heading">
+          <h2 id="before-heading" class="text-sm font-medium text-foreground">Before you write</h2>
+          <ul class="mt-4 space-y-5 text-sm">
+            <li>
+              <p class="font-medium text-foreground">API limits or errors</p>
+              <p class="mt-1 text-muted-foreground leading-relaxed">
+                Rate limits, headers and status codes are in the <a href="/api-docs#rate-limits" class="text-primary underline underline-offset-4">API docs</a>.
+              </p>
+            </li>
+            <li>
+              <p class="font-medium text-foreground">A result looks wrong</p>
+              <p class="mt-1 text-muted-foreground leading-relaxed">
+                IP data is an estimate. Include the IP address and what you expected, and we will check the source.
+              </p>
+            </li>
+            <li>
+              <p class="font-medium text-foreground">Your personal data</p>
+              <p class="mt-1 text-muted-foreground leading-relaxed">
+                Access or deletion requests: <a href="/contact?subject=Privacy%20request" class="text-primary underline underline-offset-4">start a privacy request</a>. See the <a href="/privacy" class="text-primary underline underline-offset-4">privacy policy</a> for what we keep.
+              </p>
+            </li>
+          </ul>
+        </aside>
       </div>
     </div>
   </div>
