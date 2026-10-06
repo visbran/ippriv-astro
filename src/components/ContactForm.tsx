@@ -30,6 +30,11 @@ export default function ContactForm() {
   });
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
 
+  const a11y = (field: keyof ContactFormData) => ({
+    'aria-invalid': Boolean(errors[field]),
+    'aria-describedby': errors[field] ? `${field}-error` : undefined,
+  });
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -42,33 +47,36 @@ export default function ContactForm() {
     const newErrors: Partial<Record<keyof ContactFormData, string>> = {};
     
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = 'Enter your name.';
     } else if (formData.name.trim().length > 100) {
-      newErrors.name = 'Name must be less than 100 characters';
+      newErrors.name = 'Keep your name under 100 characters.';
     }
     
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = 'Enter your email address so we can reply.';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Invalid email address';
+      newErrors.email = 'Enter a valid email address, like name@example.com.';
     }
     
     if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
+      newErrors.subject = 'Add a short subject.';
     } else if (formData.subject.trim().length > 200) {
-      newErrors.subject = 'Subject must be less than 200 characters';
+      newErrors.subject = 'Keep the subject under 200 characters.';
     }
     
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
+      newErrors.message = 'Write your message.';
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
+      newErrors.message = 'Add a little more detail (10 characters minimum).';
     } else if (formData.message.trim().length > 2000) {
-      newErrors.message = 'Message must be less than 2000 characters';
+      newErrors.message = 'Keep the message under 2000 characters.';
     }
     
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    // Move focus to the first field that needs fixing
+    const firstInvalid = (['name', 'email', 'subject', 'message'] as const).find((f) => newErrors[f]);
+    if (firstInvalid) document.getElementById(firstInvalid)?.focus();
+    return !firstInvalid;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -121,32 +129,38 @@ export default function ContactForm() {
             {status.text}
           </div>
         )}
-        <form onSubmit={handleSubmit} className="relative space-y-6">
+        <form onSubmit={handleSubmit} className="relative space-y-6" noValidate>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="name">Name</Label>
               <Input
                 id="name"
+                {...a11y("name")}
+                autoComplete="name"
+                maxLength={100}
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Your name"
                 className={errors.name ? 'border-destructive' : ''}
               />
-              {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
+              {errors.name && <p id="name-error" className="text-sm text-destructive">{errors.name}</p>}
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
+                {...a11y("email")}
+                autoComplete="email"
+                maxLength={254}
                 name="email"
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="your@email.com"
+                placeholder="name@example.com"
                 className={errors.email ? 'border-destructive' : ''}
               />
-              {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
+              {errors.email && <p id="email-error" className="text-sm text-destructive">{errors.email}</p>}
             </div>
           </div>
           
@@ -154,27 +168,40 @@ export default function ContactForm() {
             <Label htmlFor="subject">Subject</Label>
             <Input
               id="subject"
+              {...a11y("subject")}
+              maxLength={200}
               name="subject"
               value={formData.subject}
               onChange={handleChange}
               placeholder="What's this about?"
               className={errors.subject ? 'border-destructive' : ''}
             />
-            {errors.subject && <p className="text-sm text-destructive">{errors.subject}</p>}
+            {errors.subject && <p id="subject-error" className="text-sm text-destructive">{errors.subject}</p>}
           </div>
           
           <div className="space-y-2">
             <Label htmlFor="message">Message</Label>
             <Textarea
               id="message"
+              {...a11y("message")}
+              maxLength={2000}
               name="message"
               value={formData.message}
               onChange={handleChange}
-              placeholder="Tell us how we can help..."
+              placeholder="What do you need help with?"
               rows={6}
               className={errors.message ? 'border-destructive' : ''}
             />
-            {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
+            <div className="flex justify-between gap-4">
+              {errors.message ? (
+                <p id="message-error" className="text-sm text-destructive">{errors.message}</p>
+              ) : (
+                <span />
+              )}
+              <span className="text-xs text-muted-foreground tabular-nums" aria-hidden="true">
+                {formData.message.length}/2000
+              </span>
+            </div>
           </div>
           
           {/* Honeypot: invisible to humans, bots fill it in */}
@@ -196,7 +223,7 @@ export default function ContactForm() {
             ) : (
               <>
                 <Send className="w-4 h-4 mr-2" />
-                Send Message
+                Send message
               </>
             )}
           </Button>

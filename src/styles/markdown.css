@@ -25,6 +25,15 @@
   @apply text-foreground/85;
 }
 
+/* Justify article paragraphs from 640px up (ragged-right on phones) */
+@media (min-width: 640px) {
+  .prose p {
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+}
+
 /* Links */
 .prose a {
   @apply text-primary font-medium;

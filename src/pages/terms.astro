@@ -9,8 +9,17 @@ import LegalPage from '../components/LegalPage.astro';
   keywords="terms of service, IPPriv terms, API terms, acceptable use"
   type="article"
 >
-  <LegalPage title="Terms of Service" updated="October 6, 2026">
-    <section>
+  <LegalPage title="Terms of Service" updated="October 6, 2026" toc={[
+    { id: 'agreement', label: '1. Agreement' },
+    { id: 'the-service', label: '2. The service' },
+    { id: 'api-use', label: '3. API use' },
+    { id: 'accuracy-of-results', label: '4. Accuracy of results' },
+    { id: 'intellectual-property', label: '5. Intellectual property' },
+    { id: 'warranty-and-liability', label: '6. Warranty and liability' },
+    { id: 'changes-and-applicable-law', label: '7. Changes and applicable law' },
+    { id: 'contact', label: '8. Contact' },
+  ]}>
+    <section id="agreement">
       <h2>1. Agreement</h2>
       <p>
         These terms govern your use of www.ippriv.com and api.ippriv.com, operated by LMF Solutions (see the
@@ -18,7 +27,7 @@ import LegalPage from '../components/LegalPage.astro';
       </p>
     </section>
 
-    <section>
+    <section id="the-service">
       <h2>2. The service</h2>
       <p>
         IPPriv provides free IP lookup, geolocation, reverse DNS and VPN, proxy and Tor detection, through the
@@ -27,7 +36,7 @@ import LegalPage from '../components/LegalPage.astro';
       </p>
     </section>
 
-    <section>
+    <section id="api-use">
       <h2>3. API use</h2>
       <h3>3.1 Rate limit</h3>
       <p>
@@ -45,7 +54,7 @@ import LegalPage from '../components/LegalPage.astro';
       </ul>
     </section>
 
-    <section>
+    <section id="accuracy-of-results">
       <h2>4. Accuracy of results</h2>
       <p>
         IP data comes from third-party sources and is an estimate. Location is often accurate at country level and
@@ -54,7 +63,7 @@ import LegalPage from '../components/LegalPage.astro';
       </p>
     </section>
 
-    <section>
+    <section id="intellectual-property">
       <h2>5. Intellectual property</h2>
       <p>
         The site's content, design and code belong to LMF Solutions or its licensors. API responses may be used in
@@ -62,7 +71,7 @@ import LegalPage from '../components/LegalPage.astro';
       </p>
     </section>
 
-    <section>
+    <section id="warranty-and-liability">
       <h2>6. Warranty and liability</h2>
       <p>
         The service is provided "as is", without warranty of availability, accuracy or fitness for a particular
@@ -71,7 +80,7 @@ import LegalPage from '../components/LegalPage.astro';
       </p>
     </section>
 
-    <section>
+    <section id="changes-and-applicable-law">
       <h2>7. Changes and applicable law</h2>
       <p>
         We may update these terms; the date at the top shows the latest version. These terms are governed by French
@@ -79,7 +88,7 @@ import LegalPage from '../components/LegalPage.astro';
       </p>
     </section>
 
-    <section>
+    <section id="contact">
       <h2>8. Contact</h2>
       <p>Questions about these terms: use the <a href="/contact">contact form</a>.</p>
     </section>

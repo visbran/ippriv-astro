@@ -9,7 +9,14 @@ const navLinks = [
   { href: '/blog', label: 'Blog' },
 ];
 
-const Header = () => {
+interface HeaderProps {
+  currentPath?: string;
+}
+
+const isCurrent = (href: string, path = '') =>
+  !href.startsWith('/#') && (path === href || path.startsWith(`${href}/`));
+
+const Header = ({ currentPath = '' }: HeaderProps) => {
   const { theme, toggleTheme } = useAutoTheme();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -27,7 +34,12 @@ const Header = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                aria-current={isCurrent(link.href, currentPath) ? 'page' : undefined}
+                className={`text-sm transition-colors ${
+                  isCurrent(link.href, currentPath)
+                    ? 'text-foreground font-medium'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
               >
                 {link.label}
               </a>
@@ -67,7 +79,10 @@ const Header = () => {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="py-2.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                aria-current={isCurrent(link.href, currentPath) ? 'page' : undefined}
+                className={`py-2.5 text-sm transition-colors ${
+                  isCurrent(link.href, currentPath) ? 'text-foreground font-medium' : 'text-muted-foreground hover:text-foreground'
+                }`}
               >
                 {link.label}
               </a>
