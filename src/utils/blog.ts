@@ -1,4 +1,5 @@
 import type { CollectionEntry } from 'astro:content';
+import { topicsForTags, type TopicSlug } from './topics';
 
 export function calculateReadingTime(content: string): number {
   const wordsPerMinute = 200;
@@ -10,25 +11,6 @@ export interface TOCItem {
   id: string;
   title: string;
   level: number;
-}
-
-export function extractTableOfContents(content: string): TOCItem[] {
-  const headingRegex = /^(#{2,3})\s+(.+)$/gm;
-  const toc: TOCItem[] = [];
-  let match;
-
-  while ((match = headingRegex.exec(content)) !== null) {
-    const level = match[1].length;
-    const title = match[2].trim();
-    const id = title
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-');
-
-    toc.push({ id, title, level });
-  }
-
-  return toc;
 }
 
 export function formatDate(date: Date): string {
@@ -56,6 +38,7 @@ export interface PostSummary {
   description: string;
   heroImage: string;
   tags: string[];
+  topics: TopicSlug[];
   publishedAt: Date;
   readingTime: number;
 }
@@ -67,6 +50,7 @@ export function toPostSummary(post: CollectionEntry<'blog'>): PostSummary {
     description: post.data.description,
     heroImage: post.data.heroImage,
     tags: post.data.tags,
+    topics: topicsForTags(post.data.tags),
     publishedAt: post.data.publishedAt,
     readingTime: calculateReadingTime(post.body),
   };

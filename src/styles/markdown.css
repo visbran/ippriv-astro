@@ -5,13 +5,12 @@
 
 /* Headings */
 .prose h2 {
-  @apply text-3xl font-bold mt-12 mb-6 scroll-mt-24;
+  @apply text-2xl md:text-[1.75rem] font-semibold tracking-tight leading-tight mt-14 mb-5 scroll-mt-24;
   @apply text-foreground;
-  @apply border-b border-border/50 pb-3;
 }
 
 .prose h3 {
-  @apply text-2xl font-semibold mt-10 mb-4 scroll-mt-24;
+  @apply text-xl font-semibold tracking-tight mt-10 mb-3 scroll-mt-24;
   @apply text-foreground;
 }
 
@@ -22,8 +21,8 @@
 
 /* Paragraphs */
 .prose p {
-  @apply text-base leading-relaxed mb-6;
-  @apply text-muted-foreground;
+  @apply text-[1.0625rem] leading-[1.75] mb-6;
+  @apply text-foreground/85;
 }
 
 /* Links */
@@ -45,7 +44,7 @@
 .prose pre {
   @apply bg-muted/40;
   @apply m-0 p-0;
-  @apply rounded-xl border border-border shadow-sm;
+  @apply rounded-lg border border-border;
   @apply overflow-hidden;
   @apply my-6;
 }
@@ -157,7 +156,7 @@
 }
 
 .prose li {
-  @apply text-muted-foreground leading-relaxed;
+  @apply text-foreground/85 text-[1.0625rem] leading-[1.75];
   @apply pl-2;
 }
 

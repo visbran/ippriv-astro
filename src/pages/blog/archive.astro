@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import ArchiveList from '../../components/blog/ArchiveList';
-import { Archive } from 'lucide-react';
 import { groupPostsByMonth } from '../../utils/blogHelpers';
 
 // Get all blog posts
@@ -27,38 +26,20 @@ const totalPosts = posts.length;
   description="Browse all IPPriv blog articles organized by date. Find insights on IP geolocation, security, privacy, and API development."
   keywords="blog archive, IP articles, geolocation tutorials, API guides"
 >
-  <div class="pt-24 pb-16">
+  <div class="pt-28 pb-20 md:pt-32">
     <div class="section-container">
-      {/* Header */}
-      <div class="text-center mb-12">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full 
-                    bg-accent/50 text-accent-foreground text-sm mb-6">
-          <Archive className="w-4 h-4" />
-          <span>Article Archive</span>
-        </div>
-        
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+      <header class="mb-10 max-w-2xl">
+        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
           Blog Archive
         </h1>
-        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Browse all {totalPosts} articles organized by date
+        <p class="mt-4 text-lg text-muted-foreground leading-relaxed">
+          All {totalPosts} articles, newest first. <a href="/blog" class="underline underline-offset-4 hover:text-foreground">Search and filter by topic</a> on the blog.
         </p>
-      </div>
+      </header>
 
       {/* Archive Timeline */}
       <ArchiveList groups={archiveGroups} />
 
-      {/* Back to Blog */}
-      <div class="text-center mt-12">
-        <a 
-          href="/blog"
-          class="inline-flex items-center gap-2 px-8 py-3 rounded-xl 
-                 bg-primary text-primary-foreground font-medium
-                 hover:bg-primary/90 transition-all duration-300 hover:shadow-lg"
-        >
-          View All Articles
-        </a>
-      </div>
     </div>
   </div>
 </Layout>

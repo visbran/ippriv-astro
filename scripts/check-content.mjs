@@ -27,3 +27,25 @@ if (hits.length) {
   process.exit(1);
 }
 console.log('✔ content check: no em/en dash');
+
+// Warns (does not fail) when a blog tag has no topic in src/utils/topics.ts,
+// so the blog filter does not silently drop it. Map new tags there.
+const topicsSrc = readFileSync('src/utils/topics.ts', 'utf8');
+const known = new Set([...topicsSrc.matchAll(/^\s+'([^']+)': '/gm)].map((m) => m[1]));
+const ignored = topicsSrc.match(/IGNORED_TAGS = new Set\(\[([^\]]*)\]/)?.[1] ?? '';
+for (const m of ignored.matchAll(/'([^']+)'/g)) known.add(m[1]);
+
+const unmapped = new Map();
+for (const file of walk('src/content/blog')) {
+  const tags = readFileSync(file, 'utf8').match(/^tags:\s*\[([^\]]*)\]/m)?.[1] ?? '';
+  for (const raw of tags.split(',')) {
+    const tag = raw.trim().replace(/^['"]|['"]$/g, '').toLowerCase();
+    if (tag && !known.has(tag)) unmapped.set(tag, file);
+  }
+}
+if (unmapped.size) {
+  console.warn(`\n⚠ ${unmapped.size} blog tag(s) without a topic (add them to TAG_TO_TOPIC in src/utils/topics.ts):`);
+  for (const [tag, file] of unmapped) console.warn(`  "${tag}" (${file})`);
+} else {
+  console.log('✔ content check: every blog tag maps to a topic');
+}
