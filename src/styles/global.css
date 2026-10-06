@@ -223,6 +223,14 @@
     max-width: 68ch;
     text-wrap: pretty;
   }
+  /* Justify long-form paragraphs from 640px up; narrow columns keep ragged-right */
+  @media (min-width: 640px) {
+    .content-body p {
+      text-align: justify;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+    }
+  }
   .content-body section + section {
     margin-top: 2.5rem;
   }
