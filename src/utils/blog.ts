@@ -45,3 +45,29 @@ export function formatDateShort(date: Date): string {
     month: 'short',
   }).format(date);
 }
+
+/**
+ * Card-level fields only. Passed to client islands instead of full
+ * collection entries so article bodies are not serialized into the HTML.
+ */
+export interface PostSummary {
+  slug: string;
+  title: string;
+  description: string;
+  heroImage: string;
+  tags: string[];
+  publishedAt: Date;
+  readingTime: number;
+}
+
+export function toPostSummary(post: CollectionEntry<'blog'>): PostSummary {
+  return {
+    slug: post.slug,
+    title: post.data.title,
+    description: post.data.description,
+    heroImage: post.data.heroImage,
+    tags: post.data.tags,
+    publishedAt: post.data.publishedAt,
+    readingTime: calculateReadingTime(post.body),
+  };
+}

@@ -32,7 +32,9 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <img
                     src={post.data.heroImage}
-                    alt={post.data.title}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-500 
                                group-hover:scale-105"
                   />

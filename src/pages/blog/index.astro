@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import BlogList from '../../components/blog/BlogList';
 import BreadcrumbSchema from '../../components/BreadcrumbSchema.astro';
 import { BookOpen } from 'lucide-react';
-import { calculateReadingTime } from '../../utils/blog';
+import { toPostSummary } from '../../utils/blog';
 import { getAllTags } from '../../utils/blogHelpers';
 
 // Get all blog posts
@@ -17,10 +17,8 @@ const posts = allPosts.sort((a, b) =>
   b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
 );
 
-// Calculate reading times
-const readingTimes = Object.fromEntries(
-  posts.map(post => [post.slug, calculateReadingTime(post.body)])
-);
+// Card fields only: full entries would serialize every article body into the page
+const summaries = posts.map(toPostSummary);
 
 // Get all tags with counts
 const tags = getAllTags(posts);
@@ -35,7 +33,7 @@ const tags = getAllTags(posts);
     { name: 'Home', url: 'https://www.ippriv.com/' },
     { name: 'Blog', url: 'https://www.ippriv.com/blog/' },
   ]} />
-  <main class="pt-24 pb-16">
+  <div class="pt-24 pb-16">
     <div class="section-container">
       {/* Header */}
       <div class="text-center mb-12">
@@ -56,10 +54,9 @@ const tags = getAllTags(posts);
       {/* Blog List with Search & Filters */}
       <BlogList 
         client:load
-        posts={posts}
+        posts={summaries}
         tags={tags}
-        readingTimes={readingTimes}
       />
     </div>
-  </main>
+  </div>
 </Layout>

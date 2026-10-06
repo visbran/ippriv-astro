@@ -1,18 +1,17 @@
 import { Clock, Calendar, ArrowRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import type { CollectionEntry } from 'astro:content';
+import type { PostSummary } from '@/utils/blog';
 
 interface BlogCardProps {
-  post: CollectionEntry<'blog'>;
-  readingTime: number;
+  post: PostSummary;
 }
 
-export default function BlogCard({ post, readingTime }: BlogCardProps) {
+export default function BlogCard({ post }: BlogCardProps) {
   const formattedDate = new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-  }).format(post.data.publishedAt);
+  }).format(post.publishedAt);
 
   return (
     <article className="group glass-card rounded-xl overflow-hidden hover:border-primary/30 
@@ -21,8 +20,8 @@ export default function BlogCard({ post, readingTime }: BlogCardProps) {
         {/* Hero Image */}
         <div className="relative aspect-[16/9] overflow-hidden">
           <img
-            src={post.data.heroImage}
-            alt={post.data.title}
+            src={post.heroImage}
+            alt=""
             width="800"
             height="450"
             loading="lazy"
@@ -38,7 +37,7 @@ export default function BlogCard({ post, readingTime }: BlogCardProps) {
         <div className="p-6 flex-1 flex flex-col">
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-3">
-            {post.data.tags.slice(0, 3).map(tag => (
+            {post.tags.slice(0, 3).map(tag => (
               <Badge 
                 key={tag} 
                 variant="secondary" 
@@ -52,12 +51,12 @@ export default function BlogCard({ post, readingTime }: BlogCardProps) {
           {/* Title */}
           <h2 className="text-xl font-semibold mb-2 group-hover:text-primary 
                          transition-colors line-clamp-2 flex-1">
-            {post.data.title}
+            {post.title}
           </h2>
           
           {/* Description */}
           <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-            {post.data.description}
+            {post.description}
           </p>
           
           {/* Meta */}
@@ -69,7 +68,7 @@ export default function BlogCard({ post, readingTime }: BlogCardProps) {
               </span>
               <span className="flex items-center gap-1">
                 <Clock className="w-4 h-4" />
-                {readingTime} min read
+                {post.readingTime} min read
               </span>
             </div>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

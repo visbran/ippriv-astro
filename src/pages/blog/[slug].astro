@@ -80,7 +80,7 @@ const breadcrumbSchemaItems = [
   />
   <BreadcrumbSchema slot="head" items={breadcrumbSchemaItems} />
 
-  <main class="pt-24 pb-16">
+  <div class="pt-24 pb-16">
     {/* Hero Image */}
     <div class="relative h-[300px] md:h-[400px] lg:h-[500px] w-full overflow-hidden">
       <img
@@ -98,7 +98,7 @@ const breadcrumbSchemaItems = [
     <div class="section-container -mt-32 relative z-10">
       {/* Breadcrumbs */}
       <div class="mb-6">
-        <Breadcrumbs client:load items={breadcrumbItems} />
+        <Breadcrumbs items={breadcrumbItems} />
       </div>
       
       <div class="flex flex-col lg:flex-row gap-8">
@@ -108,7 +108,7 @@ const breadcrumbSchemaItems = [
             {/* Tags */}
             <div class="flex flex-wrap gap-2 mb-4">
               {post.data.tags.map((tag: string) => (
-                <a href={`/blog?tag=${tag}`}>
+                <a href={`/blog?tag=${encodeURIComponent(tag)}`}>
                   <Badge 
                     variant="secondary" 
                     className="capitalize hover:bg-primary hover:text-primary-foreground transition-colors"
@@ -163,7 +163,7 @@ const breadcrumbSchemaItems = [
           </div>
 
           {/* Related Posts */}
-          <RelatedPosts client:load posts={relatedPosts} />
+          <RelatedPosts posts={relatedPosts} />
         </article>
 
         {/* Sidebar */}
@@ -172,5 +172,5 @@ const breadcrumbSchemaItems = [
         </aside>
       </div>
     </div>
-  </main>
+  </div>
 </Layout>
