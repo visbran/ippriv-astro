@@ -1,53 +1,44 @@
-import { Badge } from '@/components/ui/badge';
-import { X } from 'lucide-react';
-
-interface TagCount {
-  tag: string;
-  count: number;
-}
+import { badgeVariants } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
+import type { TopicCount, TopicSlug } from '@/utils/topics';
 
 interface TagFilterProps {
-  tags: TagCount[];
-  selectedTag: string | null;
-  onTagSelect: (tag: string | null) => void;
+  topics: TopicCount[];
+  selectedTopic: TopicSlug | null;
+  onSelect: (topic: TopicSlug | null) => void;
 }
 
-export default function TagFilter({ tags, selectedTag, onTagSelect }: TagFilterProps) {
+const chip = (active: boolean) =>
+  cn(
+    badgeVariants({ variant: active ? 'default' : 'outline' }),
+    'cursor-pointer rounded-md px-3 py-1 text-sm font-medium gap-1.5 transition-colors',
+    active ? '' : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
+  );
+
+export default function TagFilter({ topics, selectedTopic, onSelect }: TagFilterProps) {
   return (
-    <div className="flex flex-wrap items-center gap-2 mb-8">
-      <span className="text-sm text-muted-foreground font-medium">Filter by tag:</span>
-      
-      <Badge
-        variant={selectedTag === null ? 'default' : 'outline'}
-        className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
-        onClick={() => onTagSelect(null)}
+    <div className="flex flex-wrap items-center gap-2 mb-8" role="group" aria-label="Filter by topic">
+      <button
+        type="button"
+        className={chip(selectedTopic === null)}
+        aria-pressed={selectedTopic === null}
+        onClick={() => onSelect(null)}
       >
         All
-      </Badge>
-      
-      {tags.map(({ tag, count }) => (
-        <Badge
-          key={tag}
-          variant={selectedTag === tag ? 'default' : 'outline'}
-          className="cursor-pointer capitalize hover:bg-primary hover:text-primary-foreground 
-                     transition-colors gap-1.5"
-          onClick={() => onTagSelect(tag)}
-        >
-          {tag}
-          <span className="text-xs opacity-70">({count})</span>
-        </Badge>
-      ))}
-      
-      {selectedTag && (
+      </button>
+
+      {topics.map(({ slug, label, count }) => (
         <button
-          onClick={() => onTagSelect(null)}
-          className="ml-2 text-sm text-muted-foreground hover:text-foreground flex items-center gap-1
-                     transition-colors"
+          type="button"
+          key={slug}
+          className={chip(selectedTopic === slug)}
+          aria-pressed={selectedTopic === slug}
+          onClick={() => onSelect(selectedTopic === slug ? null : slug)}
         >
-          <X className="w-3 h-3" />
-          Clear filter
+          {label}
+          <span className="text-xs opacity-70">{count}</span>
         </button>
-      )}
+      ))}
     </div>
   );
 }

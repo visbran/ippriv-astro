@@ -3,7 +3,7 @@ title: 'X-Forwarded-For and Reverse Proxy Headers Explained'
 description: 'Learn how X-Forwarded-For and related headers preserve client IP addresses through proxies, CDNs, and load balancers. Essential for developers.'
 publishedAt: 2026-09-19
 author: 'Brandon Visca'
-heroImage: 'https://images.unsplash.com/photo-1558494949-ef526b0042a0?w=1200&h=600&fit=crop'
+heroImage: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&h=600&fit=crop'
 tags: ['ip address', 'proxy', 'security', 'networking']
 draft: false
 ---

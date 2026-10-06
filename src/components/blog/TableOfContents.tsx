@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { List } from 'lucide-react';
 import type { TOCItem } from '@/utils/blog';
 
 interface TableOfContentsProps {
@@ -11,17 +10,15 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveId(entry.target.id);
         });
       },
-      { rootMargin: '-80px 0px -80% 0px' }
+      { rootMargin: '-80px 0px -75% 0px' }
     );
 
-    items.forEach(item => {
+    items.forEach((item) => {
       const element = document.getElementById(item.id);
       if (element) observer.observe(element);
     });
@@ -32,46 +29,40 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
   if (items.length === 0) return null;
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
     const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+    if (!element) return;
+    e.preventDefault();
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    element.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    window.history.replaceState(window.history.state, '', `#${id}`);
+    setActiveId(id);
   };
 
   return (
-    <nav className="glass-card rounded-xl p-5 sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto">
-      <div className="flex items-center gap-2 mb-4 text-foreground font-semibold">
-        <List className="w-4 h-4" />
-        <span>Table of Contents</span>
-      </div>
-      
-      <ul className="space-y-2">
-        {items.map(item => (
-          <li 
-            key={item.id}
-            style={{ paddingLeft: `${(item.level - 2) * 12}px` }}
-          >
-            <a
-              href={`#${item.id}`}
-              onClick={(e) => handleClick(e, item.id)}
-              className={`block text-sm py-1 transition-colors duration-200 hover:text-primary
-                ${activeId === item.id 
-                  ? 'text-primary font-medium' 
-                  : 'text-muted-foreground'
+    <nav aria-label="On this page" className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto">
+      <p className="mb-3 text-sm font-medium text-foreground">On this page</p>
+      <ul className="border-l border-border">
+        {items.map((item) => {
+          const active = activeId === item.id;
+          return (
+            <li key={item.id}>
+              <a
+                href={`#${item.id}`}
+                onClick={(e) => handleClick(e, item.id)}
+                aria-current={active ? 'location' : undefined}
+                className={`-ml-px block border-l py-1.5 text-sm leading-snug transition-colors ${
+                  item.level === 3 ? 'pl-6' : 'pl-3'
+                } ${
+                  active
+                    ? 'border-primary text-foreground font-medium'
+                    : 'border-transparent text-muted-foreground hover:text-foreground'
                 }`}
-            >
-              {item.title}
-            </a>
-          </li>
-        ))}
+              >
+                {item.title}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );

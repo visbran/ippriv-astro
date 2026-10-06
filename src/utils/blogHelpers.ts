@@ -114,23 +114,3 @@ export function groupPostsByMonth(
     return b.month - a.month;
   });
 }
-
-// Get all unique tags with counts
-export interface TagCount {
-  tag: string;
-  count: number;
-}
-
-export function getAllTags(posts: CollectionEntry<'blog'>[]): TagCount[] {
-  const tagCounts = new Map<string, number>();
-  
-  posts.forEach(post => {
-    post.data.tags.forEach(tag => {
-      tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
-    });
-  });
-  
-  return Array.from(tagCounts.entries())
-    .map(([tag, count]) => ({ tag, count }))
-    .sort((a, b) => b.count - a.count);
-}

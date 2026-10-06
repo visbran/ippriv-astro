@@ -1,81 +1,68 @@
-import { Clock, Calendar, ArrowRight } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import type { CollectionEntry } from 'astro:content';
+import type { PostSummary } from '@/utils/blog';
+import { topicLabel } from '@/utils/topics';
+import { cn } from '@/lib/utils';
 
 interface BlogCardProps {
-  post: CollectionEntry<'blog'>;
-  readingTime: number;
+  post: PostSummary;
+  /** Larger horizontal layout for the latest article. */
+  featured?: boolean;
+  /** Image loading hint: eager for above-the-fold cards. */
+  eager?: boolean;
 }
 
-export default function BlogCard({ post, readingTime }: BlogCardProps) {
-  const formattedDate = new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }).format(post.data.publishedAt);
+// Cards render at most ~800px wide: ask Unsplash for a smaller crop.
+const cardImage = (url: string) =>
+  url.includes('images.unsplash.com') ? url.replace('w=1200', 'w=800').replace('h=600', 'h=450') : url;
+
+const dateFormat = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+export default function BlogCard({ post, featured = false, eager = false }: BlogCardProps) {
+  const topic = post.topics[0];
 
   return (
-    <article className="group glass-card rounded-xl overflow-hidden hover:border-primary/30 
-                        transition-all duration-300 h-full flex flex-col">
-      <a href={`/blog/${post.slug}`} className="block flex-1 flex flex-col">
-        {/* Hero Image */}
-        <div className="relative aspect-[16/9] overflow-hidden">
-          <img
-            src={post.data.heroImage}
-            alt={post.data.title}
-            width="800"
-            height="450"
-            loading="lazy"
-            decoding="async"
-            className="w-full h-full object-cover transition-transform duration-500
-                       group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent 
-                          opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </div>
-        
-        {/* Content */}
-        <div className="p-6 flex-1 flex flex-col">
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-3">
-            {post.data.tags.slice(0, 3).map(tag => (
-              <Badge 
-                key={tag} 
-                variant="secondary" 
-                className="text-xs font-medium capitalize"
-              >
-                {tag}
-              </Badge>
-            ))}
-          </div>
-          
-          {/* Title */}
-          <h2 className="text-xl font-semibold mb-2 group-hover:text-primary 
-                         transition-colors line-clamp-2 flex-1">
-            {post.data.title}
-          </h2>
-          
-          {/* Description */}
-          <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-            {post.data.description}
-          </p>
-          
-          {/* Meta */}
-          <div className="flex items-center justify-between text-sm text-muted-foreground mt-auto">
-            <div className="flex items-center gap-4">
-              <span className="flex items-center gap-1">
-                <Calendar className="w-4 h-4" />
-                {formattedDate}
-              </span>
-              <span className="flex items-center gap-1">
-                <Clock className="w-4 h-4" />
-                {readingTime} min read
-              </span>
-            </div>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </div>
-        </div>
-      </a>
+    <article
+      className={cn(
+        'group relative h-full rounded-lg border border-border bg-card overflow-hidden transition-colors hover:border-foreground/20',
+        featured ? 'grid md:grid-cols-[1.15fr_1fr]' : 'flex flex-col'
+      )}
+    >
+      <div className={cn('overflow-hidden bg-muted', featured ? 'aspect-[16/9] md:aspect-auto md:min-h-[300px]' : 'aspect-[16/9]')}>
+        <img
+          src={cardImage(post.heroImage)}
+          alt=""
+          width="800"
+          height="450"
+          loading={eager ? 'eager' : 'lazy'}
+          decoding="async"
+          className="h-full w-full object-cover"
+        />
+      </div>
+
+      <div className={cn('flex flex-1 flex-col', featured ? 'p-6 sm:p-8 md:justify-center' : 'p-5')}>
+        {topic && <p className="text-xs font-medium text-primary">{topicLabel(topic)}</p>}
+
+        <h2
+          className={cn(
+            'mt-2 font-semibold tracking-tight text-foreground text-balance',
+            featured ? 'text-2xl md:text-3xl' : 'text-lg leading-snug line-clamp-3'
+          )}
+        >
+          {/* Stretched link: the whole card is clickable, one tab stop */}
+          <a href={`/blog/${post.slug}`} className="after:absolute after:inset-0 focus-visible:outline-none">
+            {post.title}
+          </a>
+        </h2>
+
+        <p className={cn('mt-2 text-muted-foreground leading-relaxed', featured ? 'text-base line-clamp-3' : 'text-sm line-clamp-2')}>
+          {post.description}
+        </p>
+
+        <p className="mt-auto pt-4 text-xs text-muted-foreground">
+          <time dateTime={post.publishedAt.toISOString()}>{dateFormat.format(post.publishedAt)}</time>
+          <span aria-hidden="true"> · </span>
+          {post.readingTime} min read
+        </p>
+      </div>
     </article>
   );
 }

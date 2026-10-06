@@ -8,52 +8,57 @@ import TableOfContents from '../../components/blog/TableOfContents';
 import RelatedPosts from '../../components/blog/RelatedPosts';
 import Breadcrumbs from '../../components/blog/Breadcrumbs';
 import CodeCopyButtons from '../../components/blog/CodeCopyButtons';
-import { Badge } from '../../components/ui/badge';
-import { Clock, Calendar, User, ArrowLeft } from 'lucide-react';
-import { calculateReadingTime, formatDate, extractTableOfContents } from '../../utils/blog';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { calculateReadingTime, formatDate, toPostSummary, type TOCItem } from '../../utils/blog';
 import { getRelatedPosts } from '../../utils/blogHelpers';
+import { topicsForTags, topicLabel } from '../../utils/topics';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true;
-  });
-  return posts.map(post => ({
+  const posts = (
+    await getCollection('blog', ({ data }) => {
+      return import.meta.env.PROD ? data.draft !== true : true;
+    })
+  ).sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+
+  return posts.map((post, i) => ({
     params: { slug: post.slug },
-    props: { post },
+    props: { post, allPosts: posts, newer: posts[i - 1], older: posts[i + 1] },
   }));
 }
 
 interface Props {
   post: CollectionEntry<'blog'>;
+  allPosts: CollectionEntry<'blog'>[];
+  newer?: CollectionEntry<'blog'>;
+  older?: CollectionEntry<'blog'>;
 }
 
-const { post } = Astro.props;
-const { Content } = await post.render();
+const { post, allPosts, newer, older } = Astro.props;
+const { Content, headings } = await post.render();
 
-// Get all posts for related posts
-const allPosts = await getCollection('blog', ({ data }) => {
-  return import.meta.env.PROD ? data.draft !== true : true;
-});
-const relatedPosts = getRelatedPosts(post, allPosts, 3);
-
-// Calculate reading time and TOC
+const relatedPosts = getRelatedPosts(post, allPosts, 3).map(toPostSummary);
 const readingTime = calculateReadingTime(post.body);
-const tocItems = extractTableOfContents(post.body);
+const topics = topicsForTags(post.data.tags).slice(0, 3);
 
-// Current URL
+// Use the ids Astro generated for the rendered headings so every anchor resolves
+const tocItems: TOCItem[] = headings
+  .filter((h) => h.depth === 2 || h.depth === 3)
+  .map((h) => ({ id: h.slug, title: h.text, level: h.depth }));
+const showToc = tocItems.length >= 3;
+
+const updatedAt =
+  post.data.updatedAt && post.data.updatedAt.getTime() > post.data.publishedAt.getTime()
+    ? post.data.updatedAt
+    : undefined;
+
 const currentUrl = `https://www.ippriv.com/blog/${post.slug}`;
 
-// Breadcrumbs data
-const breadcrumbItems = [
-  { label: 'Blog', href: '/blog' },
-  { label: post.data.title }
-];
+const breadcrumbItems = [{ label: 'Blog', href: '/blog' }, { label: post.data.title }];
 
-// Breadcrumb schema items
 const breadcrumbSchemaItems = [
   { name: 'Home', url: 'https://www.ippriv.com' },
   { name: 'Blog', url: 'https://www.ippriv.com/blog' },
-  { name: post.data.title, url: currentUrl }
+  { name: post.data.title, url: currentUrl },
 ];
 ---
 
@@ -67,7 +72,6 @@ const breadcrumbSchemaItems = [
   imageHeight={600}
   type="article"
 >
-  <!-- Structured Data -->
   <ArticleSchema
     slot="head"
     title={post.data.title}
@@ -80,97 +84,131 @@ const breadcrumbSchemaItems = [
   />
   <BreadcrumbSchema slot="head" items={breadcrumbSchemaItems} />
 
-  <main class="pt-24 pb-16">
-    {/* Hero Image */}
-    <div class="relative h-[300px] md:h-[400px] lg:h-[500px] w-full overflow-hidden">
-      <img
-        src={post.data.heroImage}
-        alt={post.data.title}
-        width="1200"
-        height="600"
-        fetchpriority="high"
-        decoding="async"
-        class="w-full h-full object-cover"
-      />
-      <div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-    </div>
+  <div class="pt-24 pb-20 md:pt-28">
+    <div class="section-container">
+      <Breadcrumbs items={breadcrumbItems} />
 
-    <div class="section-container -mt-32 relative z-10">
-      {/* Breadcrumbs */}
-      <div class="mb-6">
-        <Breadcrumbs client:load items={breadcrumbItems} />
-      </div>
-      
-      <div class="flex flex-col lg:flex-row gap-8">
-        {/* Main Content */}
-        <article class="flex-1 min-w-0">
-          <div class="glass-card rounded-xl p-6 md:p-8 lg:p-10">
-            {/* Tags */}
-            <div class="flex flex-wrap gap-2 mb-4">
-              {post.data.tags.map((tag: string) => (
-                <a href={`/blog?tag=${tag}`}>
-                  <Badge 
-                    variant="secondary" 
-                    className="capitalize hover:bg-primary hover:text-primary-foreground transition-colors"
-                  >
-                    {tag}
-                  </Badge>
-                </a>
-              ))}
-            </div>
+      <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_16rem]">
+        <article class="min-w-0 max-w-3xl">
+          <header>
+            {topics.length > 0 && (
+              <ul class="flex flex-wrap gap-2" aria-label="Topics">
+                {topics.map((topic) => (
+                  <li>
+                    <a
+                      href={`/blog?tag=${topic}`}
+                      class="inline-flex px-2.5 py-1 rounded-md border border-border text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                    >
+                      {topicLabel(topic)}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
 
-            {/* Title */}
-            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+            <h1 class="mt-5 text-3xl md:text-4xl lg:text-[2.75rem] font-semibold tracking-tight leading-[1.1] text-foreground text-balance">
               {post.data.title}
             </h1>
 
-            {/* Meta */}
-            <div class="flex flex-wrap items-center gap-3 text-sm text-muted-foreground mb-8 pb-6 border-b border-border">
-              <div class="flex items-center gap-1.5">
-                <User class="w-3.5 h-3.5" />
-                <span>{post.data.author}</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <Calendar class="w-3.5 h-3.5" />
-                <span>{formatDate(post.data.publishedAt)}</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <Clock class="w-3.5 h-3.5" />
-                <span>{readingTime} min read</span>
-              </div>
-            </div>
+            <p class="mt-5 text-sm text-muted-foreground">
+              By {post.data.author}
+              <span aria-hidden="true"> · </span>
+              <time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt)}</time>
+              {updatedAt && (
+                <>
+                  <span aria-hidden="true"> · </span>
+                  Updated <time datetime={updatedAt.toISOString()}>{formatDate(updatedAt)}</time>
+                </>
+              )}
+              <span aria-hidden="true"> · </span>
+              {readingTime} min read
+            </p>
+          </header>
 
-            {/* Content with prose styles */}
-            <div class="prose">
-              <Content />
-            </div>
+          <img
+            src={post.data.heroImage}
+            alt=""
+            width="1200"
+            height="600"
+            fetchpriority="high"
+            decoding="async"
+            class="mt-8 w-full aspect-[2/1] rounded-lg object-cover bg-muted"
+          />
 
-            {/* Code Copy Buttons */}
-            <CodeCopyButtons client:load />
+          {showToc && (
+            <details class="toc-mobile group mt-8 rounded-lg border border-border bg-card lg:hidden">
+              <summary class="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm font-medium text-foreground">
+                On this page
+                <span class="text-muted-foreground transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
+              </summary>
+              <ul class="border-t border-border px-4 py-3 space-y-1">
+                {tocItems.map((item) => (
+                  <li class={item.level === 3 ? 'pl-4' : ''}>
+                    <a href={`#${item.id}`} class="block py-1 text-sm text-muted-foreground hover:text-foreground">
+                      {item.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
 
-            {/* Back to Blog */}
-            <div class="mt-12 pt-8 border-t border-border">
-              <a 
-                href="/blog"
-                class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-card/80 backdrop-blur-sm 
-                       border border-border/50 hover:border-primary/50 hover:bg-card hover:shadow-lg 
-                       transition-all duration-300 text-foreground font-medium"
-              >
-                <ArrowLeft class="w-4 h-4" />
-                Back to Blog
-              </a>
-            </div>
+          <div class="prose mt-10">
+            <Content />
           </div>
 
-          {/* Related Posts */}
-          <RelatedPosts client:load posts={relatedPosts} />
+          <CodeCopyButtons client:idle />
+
+          <aside class="mt-14 rounded-lg border border-border bg-card p-6 sm:p-8 sm:flex sm:items-center sm:justify-between sm:gap-8">
+            <div>
+              <p class="text-lg font-semibold tracking-tight text-foreground">See what your IP address reveals</p>
+              <p class="mt-1 text-sm text-muted-foreground">Location, ISP and VPN or proxy status, with no account.</p>
+            </div>
+            <a
+              href="/ip-lookup"
+              class="mt-4 sm:mt-0 inline-flex shrink-0 items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90 active:translate-y-px transition-colors whitespace-nowrap"
+            >
+              Try IP Lookup
+              <ArrowRight class="w-4 h-4" />
+            </a>
+          </aside>
+
+          {(newer || older) && (
+            <nav class="mt-12 grid gap-4 sm:grid-cols-2" aria-label="More articles">
+              {older ? (
+                <a href={`/blog/${older.slug}`} class="group rounded-lg border border-border p-5 hover:border-foreground/20 transition-colors">
+                  <span class="flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <ArrowLeft class="w-3.5 h-3.5" /> Previous article
+                  </span>
+                  <span class="mt-2 block font-medium text-foreground line-clamp-2">{older.data.title}</span>
+                </a>
+              ) : <span class="hidden sm:block" />}
+              {newer && (
+                <a href={`/blog/${newer.slug}`} class="group rounded-lg border border-border p-5 text-right hover:border-foreground/20 transition-colors">
+                  <span class="flex items-center justify-end gap-1.5 text-xs text-muted-foreground">
+                    Next article <ArrowRight class="w-3.5 h-3.5" />
+                  </span>
+                  <span class="mt-2 block font-medium text-foreground line-clamp-2">{newer.data.title}</span>
+                </a>
+              )}
+            </nav>
+          )}
+
+          <RelatedPosts posts={relatedPosts} />
         </article>
 
-        {/* Sidebar */}
-        <aside class="w-full lg:w-72 shrink-0">
-          <TableOfContents client:load items={tocItems} />
-        </aside>
+        {showToc && (
+          <aside class="hidden lg:block">
+            <TableOfContents client:idle items={tocItems} />
+          </aside>
+        )}
       </div>
     </div>
-  </main>
+  </div>
 </Layout>
+
+<style>
+  .toc-mobile summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

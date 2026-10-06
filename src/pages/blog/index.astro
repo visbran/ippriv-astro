@@ -3,9 +3,8 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import BlogList from '../../components/blog/BlogList';
 import BreadcrumbSchema from '../../components/BreadcrumbSchema.astro';
-import { BookOpen } from 'lucide-react';
-import { calculateReadingTime } from '../../utils/blog';
-import { getAllTags } from '../../utils/blogHelpers';
+import { toPostSummary } from '../../utils/blog';
+import { countTopics } from '../../utils/topics';
 
 // Get all blog posts
 const allPosts = await getCollection('blog', ({ data }) => {
@@ -17,13 +16,11 @@ const posts = allPosts.sort((a, b) =>
   b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
 );
 
-// Calculate reading times
-const readingTimes = Object.fromEntries(
-  posts.map(post => [post.slug, calculateReadingTime(post.body)])
-);
+// Card fields only: full entries would serialize every article body into the page
+const summaries = posts.map(toPostSummary);
 
-// Get all tags with counts
-const tags = getAllTags(posts);
+// Topic counts for the filter (raw tags are normalized into topics)
+const topics = countTopics(summaries.map((s) => s.topics));
 ---
 
 <Layout
@@ -35,31 +32,28 @@ const tags = getAllTags(posts);
     { name: 'Home', url: 'https://www.ippriv.com/' },
     { name: 'Blog', url: 'https://www.ippriv.com/blog/' },
   ]} />
-  <main class="pt-24 pb-16">
+  <div class="pt-28 pb-20 md:pt-32">
     <div class="section-container">
-      {/* Header */}
-      <div class="text-center mb-12">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full
-                    bg-accent/50 text-accent-foreground text-sm mb-6">
-          <BookOpen className="w-4 h-4" />
-          <span>Insights & Tutorials</span>
+      <header class="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div class="max-w-2xl">
+          <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
+            IP Lookup & Privacy Blog
+          </h1>
+          <p class="mt-4 text-lg text-muted-foreground leading-relaxed">
+            Guides on IP geolocation, VPN detection, API security, and privacy-first development.
+          </p>
         </div>
-
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">
-          IP Lookup & Privacy Blog
-        </h1>
-        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Expert guides on IP geolocation, VPN detection, API security, and privacy-first development.
-        </p>
-      </div>
+        <a href="/blog/archive" class="text-sm font-medium text-muted-foreground hover:text-foreground underline underline-offset-4 md:shrink-0">
+          Browse the archive
+        </a>
+      </header>
 
       {/* Blog List with Search & Filters */}
       <BlogList 
         client:load
-        posts={posts}
-        tags={tags}
-        readingTimes={readingTimes}
+        posts={summaries}
+        topics={topics}
       />
     </div>
-  </main>
+  </div>
 </Layout>
